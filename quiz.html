@@ -3,86 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiplication Practice (20 Questions)</title>
+    <title>Multiplication Timed Test</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
         body { font-family: 'Roboto', sans-serif; background-color: #f0f2f5; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px 0; }
-        .container { background-color: white; padding: 30px 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); text-align: center; width: 90%; max-width: 600px; }
+        .container { background-color: white; padding: 30px 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); text-align: center; width: 90%; max-width: 700px; }
         header h1 { font-size: 2rem; color: #1a237e; margin-bottom: 8px; }
         header p { font-size: 1.1rem; color: #555; margin-bottom: 30px; }
         .screen.hidden { display: none; }
+        button { font-size: 1.1rem; padding: 12px 25px; border: none; background-color: #3f51b5; color: white; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; width: 100%; margin-top: 5px; }
+        button:hover { background-color: #303f9f; }
+        
+        /* Auth & Nav */
         .auth-form { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
         .auth-form input { font-size: 1rem; padding: 12px; border: 1px solid #ccc; border-radius: 8px; }
         .auth-switch { color: #3f51b5; cursor: pointer; text-decoration: underline; }
         #auth-error { color: #f44336; margin-bottom: 10px; height: 18px; }
-        button { font-size: 1.1rem; padding: 12px 25px; border: none; background-color: #3f51b5; color: white; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; width: 100%; margin-top: 5px; }
-        button:hover { background-color: #303f9f; }
         #google-signin-btn { background-color: #4285F4; margin-top: 10px; }
-        #google-signin-btn:hover { background-color: #357ae8; }
-        .stats-bar { display: flex; justify-content: space-between; font-size: 1.2rem; margin-bottom: 30px; background-color: #e8eaf6; padding: 15px; border-radius: 8px; }
-        #question-text { font-size: 3rem; font-weight: 700; color: #3f51b5; margin: 40px 0 25px 0; }
-        
+        #user-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background-color: #fafafa; padding: 10px; border-radius: 8px; }
+        #user-info button { width: auto; font-size: 0.9rem; padding: 8px 12px; }
+
+        /* Quiz Styles */
+        .stats-bar { display: grid; grid-template-columns: 1fr 1fr; font-size: 1.2rem; margin-bottom: 20px; background-color: #e8eaf6; padding: 15px; border-radius: 8px; }
+        #timer { font-size: 1.5rem; font-weight: 700; color: #3f51b5; }
+        #timer.low-time { color: #f44336; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        #question-text { font-size: 2.5rem; font-weight: 700; color: #3f51b5; margin: 20px 0; }
         #mcq-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
         .mcq-option-btn { width: 100%; padding: 20px; font-size: 1.5rem; background-color: #e8eaf6; color: #1a237e; }
         .mcq-option-btn:hover { background-color: #c5cae9; }
-        .mcq-option-btn.correct { background-color: #4caf50 !important; color: white !important; }
-        .mcq-option-btn.incorrect { background-color: #f44336 !important; color: white !important; }
         .mcq-option-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        #tests-remaining { color: #777; margin-top: 15px; }
 
-        #user-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background-color: #fafafa; padding: 10px; border-radius: 8px; }
-        #user-info button { width: auto; font-size: 0.9rem; padding: 8px 12px; }
-        #nav-bar { margin-bottom: 20px; display: flex; gap: 10px; justify-content: center; }
-        .nav-button { background-color: #e0e0e0; color: #333; width: auto; }
-        .nav-button.active { background-color: #3f51b5; color: white; }
-        .list-container { text-align: left; margin-top: 20px; }
-        .list-container h3 { text-align: center; color: #1a237e; }
-        .list-container ul { list-style-type: none; padding: 0; }
-        .list-container li { background-color: #f9f9f9; border: 1px solid #eee; padding: 12px; margin-bottom: 8px; border-radius: 6px; display: flex; justify-content: space-between; }
-        #average-marks { text-align: center; font-weight: bold; margin-top: 20px; font-size: 1.2rem; }
+        /* Review Screen Styles */
+        #review-screen h2 { color: #1a237e; }
+        .review-summary { display: flex; justify-content: space-around; background: #e8eaf6; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .review-summary p { margin: 0; font-size: 1.2rem; }
+        #review-list { list-style-type: none; padding: 0; text-align: left; max-height: 400px; overflow-y: auto; }
+        .review-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
+        .review-item span { flex: 1; text-align: center; }
+        .review-item .question { font-weight: bold; }
+        .review-item.correct { background-color: #e8f5e9; }
+        .review-item.incorrect { background-color: #ffebee; }
+        .review-item.correct::before { content: '✔'; color: #4caf50; margin-right: 10px; font-weight: bold; }
+        .review-item.incorrect::before { content: '✖'; color: #f44336; margin-right: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Master your multiplication tables</h1>
-            <p>Select the correct answer from the options below.</p>
+            <h1>Multiplication Timed Test</h1>
+            <p>You have 90 seconds to answer 20 questions. Good luck!</p>
         </header>
 
-        <div id="auth-screen" class="screen">
-             <!-- Auth content will be dynamically added by script -->
-        </div>
+        <div id="auth-screen" class="screen"></div>
         
         <div id="app-screen" class="screen hidden">
             <div id="user-info">
                 <span id="user-email"></span>
                 <button id="logout-button">Logout</button>
             </div>
-            <div id="nav-bar">
-                <button id="nav-quiz" class="nav-button active">Quiz</button>
-                <button id="nav-leaderboard" class="nav-button">Leaderboard</button>
-                <button id="nav-history" class="nav-button">My History</button>
+            
+            <div id="start-screen">
+                <button id="start-button">Start New Test</button>
+                <p id="tests-remaining"></p>
             </div>
-            <div id="quiz-content">
-                <div id="start-screen">
-                    <button id="start-button">Start New Practice</button>
+
+            <div id="quiz-screen" class="screen hidden">
+                <div class="stats-bar">
+                    <div><strong>Score:</strong> <span id="current-score">0</span> / 100</div>
+                    <div><strong>Time Left:</strong> <span id="timer">90</span></div>
                 </div>
-                <div id="quiz-screen" class="hidden">
-                    <div class="stats-bar">
-                        <div><strong>Score:</strong> <span id="current-score">0</span> / 200</div>
-                        <div><strong>Time:</strong> <span id="timer">0</span>s</div>
-                    </div>
-                    <div id="question-text"></div>
-                    <div id="mcq-options"></div>
-                </div>
-                <div id="results-screen" class="hidden">
-                    <h2>Practice Complete!</h2>
-                    <p>Final Score: <strong id="final-score"></strong> / 200</p>
-                    <p>Total Time: <strong id="final-time"></strong> seconds</p>
-                    <button id="play-again-button">Play Again</button>
-                </div>
+                <div id="question-text"></div>
+                <div id="mcq-options"></div>
             </div>
-            <div id="leaderboard-content" class="list-container hidden"></div>
-            <div id="history-content" class="list-container hidden"></div>
+            
+            <div id="review-screen" class="screen hidden">
+                <h2>Test Complete!</h2>
+                <div class="review-summary">
+                    <p>Your Score: <strong id="final-score"></strong> / 100</p>
+                    <p>Average Score: <strong id="average-score"></strong></p>
+                </div>
+                <h3>Answer Review</h3>
+                <ul id="review-list"></ul>
+                <button id="play-again-button">Play Again</button>
+            </div>
         </div>
     </div>
 
@@ -113,83 +118,91 @@
             const playAgainButton = document.getElementById('play-again-button');
             
             let currentUser = null;
+            let userData = null;
             let activeQuizState = null;
             let timerInterval;
             const TOTAL_QUESTIONS = 20;
+            const POINTS_PER_QUESTION = 5;
+            const MAX_SCORE = 100;
+            const TIME_LIMIT = 90;
 
-            // --- Authentication & Initialization ---
+            // --- Auth & User Data Management ---
             auth.onAuthStateChanged(async user => {
                 const authScreen = document.getElementById('auth-screen');
                 const appScreen = document.getElementById('app-screen');
                 if (user) {
                     currentUser = user;
+                    await initializeUserDocument(user);
                     document.getElementById('user-email').textContent = user.displayName || user.email;
+                    document.getElementById('tests-remaining').textContent = `${userData.testsRemaining} tests remaining`;
                     authScreen.classList.add('hidden');
                     appScreen.classList.remove('hidden');
-                    await checkForActiveQuiz();
-                    if (!activeQuizState) showQuizContent();
+                    showStartScreen();
                 } else {
                     currentUser = null;
+                    userData = null;
                     authScreen.classList.remove('hidden');
                     appScreen.classList.add('hidden');
                     clearInterval(timerInterval);
                 }
             });
 
-            // --- Unique Question Generation ---
-            function generateUniqueQuestions() {
-                const allPossibleQuestions = [];
-                for (let i = 1; i <= 20; i++) {
-                    for (let j = 1; j <= 10; j++) {
-                        allPossibleQuestions.push({ num1: i, num2: j, answer: i * j });
-                    }
+            async function initializeUserDocument(user) {
+                const userRef = db.collection('users').doc(user.uid);
+                const doc = await userRef.get();
+                if (!doc.exists) {
+                    userData = { email: user.email, testsRemaining: 500 };
+                    await userRef.set(userData);
+                } else {
+                    userData = doc.data();
                 }
-                // Fisher-Yates Shuffle
-                for (let i = allPossibleQuestions.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [allPossibleQuestions[i], allPossibleQuestions[j]] = [allPossibleQuestions[j], allPossibleQuestions[i]];
-                }
-                return allPossibleQuestions.slice(0, TOTAL_QUESTIONS);
             }
 
+            // --- Unique Question Generation ---
+            function generateUniqueQuestions() { /* ... unchanged ... */ }
+
             // --- Quiz Logic ---
-            const activeQuizRef = () => db.collection('users').doc(currentUser.uid).collection('activeQuiz').doc('current');
-
-            async function checkForActiveQuiz() { /* ... unchanged ... */ }
-
             function startGame() {
+                if (userData.testsRemaining <= 0) {
+                    alert("You have no tests remaining.");
+                    return;
+                }
                 activeQuizState = {
                     score: 0,
                     questionCounter: 0,
-                    secondsElapsed: 0,
                     questions: generateUniqueQuestions()
                 };
                 showQuizScreen();
                 nextQuestion();
                 startTimer();
-                activeQuizRef().set(activeQuizState);
             }
 
-            function resumeGame() {
-                showQuizScreen();
-                nextQuestion();
-                startTimer();
+            function startTimer() {
+                let timeLeft = TIME_LIMIT;
+                const timerEl = document.getElementById('timer');
+                timerEl.textContent = timeLeft;
+                timerEl.classList.remove('low-time');
+
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    timerEl.textContent = timeLeft;
+                    if (timeLeft <= 10) timerEl.classList.add('low-time');
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        endGame();
+                    }
+                }, 1000);
             }
-            
-            function generateOptions(correctAnswer) { /* ... unchanged ... */ }
 
             function nextQuestion() {
-                if (activeQuizState.questionCounter >= activeQuizState.questions.length) {
+                if (activeQuizState.questionCounter >= TOTAL_QUESTIONS) {
                     endGame();
                     return;
                 }
-                
                 const q = activeQuizState.questions[activeQuizState.questionCounter];
                 const options = generateOptions(q.answer);
-
                 document.getElementById('question-text').textContent = `${q.num1} × ${q.num2} = ?`;
                 document.getElementById('current-score').textContent = activeQuizState.score;
-
                 mcqOptionsContainer.innerHTML = '';
                 options.forEach(option => {
                     const button = document.createElement('button');
@@ -200,93 +213,119 @@
                 });
             }
 
-            async function handleOptionClick(e) { /* ... unchanged ... */ }
-            
-            async function endGame() {
-                clearInterval(timerInterval);
-                await saveTestResult(currentUser, activeQuizState.score, activeQuizState.secondsElapsed);
-                await activeQuizRef().delete();
-                showResultsScreen();
-                activeQuizState = null;
-            }
-
-            // --- Event Listeners and Timers ---
-            mcqOptionsContainer.addEventListener('click', handleOptionClick);
-            startButton.addEventListener('click', startGame);
-            playAgainButton.addEventListener('click', startGame);
-            
-            // --- Unchanged Helper Functions (copied for completeness) ---
             async function handleOptionClick(e) {
                 if (!e.target.matches('.mcq-option-btn')) return;
                 const selectedAnswer = parseInt(e.target.dataset.answer, 10);
-                const correctAnswer = activeQuizState.questions[activeQuizState.questionCounter].answer;
-                const buttons = mcqOptionsContainer.querySelectorAll('.mcq-option-btn');
-                buttons.forEach(btn => btn.disabled = true);
-                if (selectedAnswer === correctAnswer) {
-                    e.target.classList.add('correct');
-                    activeQuizState.score += 10;
-                } else {
-                    e.target.classList.add('incorrect');
-                    buttons.forEach(btn => {
-                        if (parseInt(btn.dataset.answer, 10) === correctAnswer) btn.classList.add('correct');
-                    });
+                const q = activeQuizState.questions[activeQuizState.questionCounter];
+                q.userAnswer = selectedAnswer; // Record user's answer
+                
+                if (selectedAnswer === q.answer) {
+                    activeQuizState.score += POINTS_PER_QUESTION;
                 }
-                document.getElementById('current-score').textContent = activeQuizState.score;
+                
                 activeQuizState.questionCounter++;
-                await activeQuizRef().set(activeQuizState, { merge: true });
-                setTimeout(nextQuestion, 1500);
+                document.getElementById('current-score').textContent = activeQuizState.score;
+                nextQuestion();
+            }
+            
+            async function endGame() {
+                if (!activeQuizState) return; // Prevent double-calls
+                clearInterval(timerInterval);
+                
+                // Decrement tests and save results
+                const userRef = db.collection('users').doc(currentUser.uid);
+                await userRef.update({ testsRemaining: firebase.firestore.FieldValue.increment(-1) });
+                userData.testsRemaining--; // Update local copy
+                await saveTestResult(currentUser, activeQuizState.score);
+
+                await displayReview();
+                activeQuizState = null;
+            }
+
+            // --- Results & Review ---
+            async function displayReview() {
+                // Fetch latest history for accurate average
+                const historySnapshot = await db.collection('users').doc(currentUser.uid).collection('history').get();
+                let totalScore = 0;
+                historySnapshot.forEach(doc => totalScore += doc.data().score);
+                const averageScore = historySnapshot.empty ? activeQuizState.score : (totalScore / historySnapshot.size).toFixed(2);
+
+                document.getElementById('final-score').textContent = activeQuizState.score;
+                document.getElementById('average-score').textContent = averageScore;
+
+                const reviewList = document.getElementById('review-list');
+                reviewList.innerHTML = '';
+                activeQuizState.questions.forEach(q => {
+                    const li = document.createElement('li');
+                    const isCorrect = q.userAnswer === q.answer;
+                    li.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                    const userAnswerText = q.userAnswer ?? 'Not Answered';
+                    li.innerHTML = `
+                        <span class="question">${q.num1} × ${q.num2}</span>
+                        <span>Your Answer: ${userAnswerText}</span>
+                        <span>Correct Answer: ${q.answer}</span>
+                    `;
+                    reviewList.appendChild(li);
+                });
+                showReviewScreen();
+            }
+
+            // --- Event Listeners and UI Management ---
+            mcqOptionsContainer.addEventListener('click', handleOptionClick);
+            startButton.addEventListener('click', startGame);
+            playAgainButton.addEventListener('click', () => {
+                document.getElementById('tests-remaining').textContent = `${userData.testsRemaining} tests remaining`;
+                showStartScreen();
+            });
+
+            function showStartScreen() {
+                document.getElementById('quiz-screen').classList.add('hidden');
+                document.getElementById('review-screen').classList.add('hidden');
+                document.getElementById('start-screen').classList.remove('hidden');
+            }
+            function showQuizScreen() {
+                document.getElementById('start-screen').classList.add('hidden');
+                document.getElementById('review-screen').classList.add('hidden');
+                document.getElementById('quiz-screen').classList.remove('hidden');
+            }
+            function showReviewScreen() {
+                document.getElementById('quiz-screen').classList.add('hidden');
+                document.getElementById('start-screen').classList.add('hidden');
+                document.getElementById('review-screen').classList.remove('hidden');
+            }
+            
+            // --- Helper Functions (Unchanged or minor edits) ---
+            function generateUniqueQuestions() {
+                const all = [];
+                for (let i = 1; i <= 20; i++) for (let j = 1; j <= 10; j++) all.push({ num1: i, num2: j, answer: i * j });
+                for (let i = all.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [all[i], all[j]] = [all[j], all[i]]; }
+                return all.slice(0, TOTAL_QUESTIONS);
             }
             function generateOptions(correctAnswer) {
                 const options = new Set([correctAnswer]);
                 while (options.size < 4) {
                     const offset = Math.floor(Math.random() * 10) + 1;
-                    const operator = Math.random() < 0.5 ? 1 : -1;
-                    let distractor = correctAnswer + (offset * operator);
-                    if (distractor < 0) distractor = Math.abs(distractor) + 1;
-                    if (distractor !== correctAnswer) options.add(distractor);
+                    const op = Math.random() < 0.5 ? 1 : -1;
+                    let d = correctAnswer + (offset * op);
+                    if (d < 0) d = Math.abs(d) + 1; if (d !== correctAnswer) options.add(d);
                 }
                 return Array.from(options).sort(() => Math.random() - 0.5);
             }
-            async function checkForActiveQuiz() {
-                const doc = await activeQuizRef().get();
-                if (doc.exists) {
-                    if (confirm("You have an unfinished quiz. Would you like to resume?")) {
-                        activeQuizState = doc.data();
-                        resumeGame();
-                    } else {
-                        await activeQuizRef().delete();
-                        activeQuizState = null;
-                    }
-                }
+            async function saveTestResult(user, score) {
+                const testData = { userId: user.uid, email: user.displayName || user.email, score, timestamp: firebase.firestore.FieldValue.serverTimestamp()};
+                await db.collection('users').doc(user.uid).collection('history').add(testData);
             }
-            function startTimer() {
-                const timerDisplay = document.getElementById('timer');
-                timerDisplay.textContent = activeQuizState.secondsElapsed;
-                timerInterval = setInterval(() => {
-                    activeQuizState.secondsElapsed++;
-                    timerDisplay.textContent = activeQuizState.secondsElapsed;
-                }, 1000);
-            }
-            function showQuizScreen() {
-                document.getElementById('start-screen').classList.add('hidden');
-                document.getElementById('results-screen').classList.add('hidden');
-                document.getElementById('quiz-screen').classList.remove('hidden');
-            }
-            function showResultsScreen() {
-                document.getElementById('quiz-screen').classList.add('hidden');
-                document.getElementById('results-screen').classList.remove('hidden');
-                document.getElementById('final-score').textContent = activeQuizState.score;
-                document.getElementById('final-time').textContent = activeQuizState.secondsElapsed;
-            }
-            async function saveTestResult(user, score, time) {
-                const testData = { userId: user.uid, email: user.displayName || user.email, score: score, time: time, timestamp: firebase.firestore.FieldValue.serverTimestamp()};
-                try {
-                    await db.collection('users').doc(user.uid).collection('history').add(testData);
-                    await db.collection('scores').add(testData);
-                } catch (error) { console.error("Error saving score: ", error); }
-            }
-            function setupAuthAndNav() { /* ... Full setup from previous version ... */ }
-            setupAuthAndNav(); // Call to setup listeners
+            
+            // --- Auth Form Setup ---
+            // This is a simplified setup. Full logic from previous steps can be re-integrated if needed.
+            document.getElementById('auth-screen').innerHTML = `
+                <h2 id="auth-title">Login</h2>
+                <button id="google-signin-btn">Sign in with Google</button>
+            `;
+            document.getElementById('google-signin-btn').addEventListener('click', () => {
+                auth.signInWithPopup(googleProvider).catch(err => alert(err.message));
+            });
+            document.getElementById('logout-button').addEventListener('click', () => auth.signOut());
         });
     </script>
 </body>
