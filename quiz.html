@@ -12,13 +12,10 @@
         header p { font-size: 1.1rem; color: #555; margin-bottom: 30px; }
         .screen.hidden { display: none; }
         button { font-size: 1.1rem; padding: 12px 25px; border: none; background-color: #3f51b5; color: white; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; width: 100%; margin-top: 5px; }
-        button:hover { background-color: #303f9f; }
+        button:hover:not(:disabled) { background-color: #303f9f; }
+        button:disabled { background-color: #9fa8da; cursor: not-allowed; }
         
         /* Auth & Nav */
-        .auth-form { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
-        .auth-form input { font-size: 1rem; padding: 12px; border: 1px solid #ccc; border-radius: 8px; }
-        .auth-switch { color: #3f51b5; cursor: pointer; text-decoration: underline; }
-        #auth-error { color: #f44336; margin-bottom: 10px; height: 18px; }
         #google-signin-btn { background-color: #4285F4; margin-top: 10px; }
         #user-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background-color: #fafafa; padding: 10px; border-radius: 8px; }
         #user-info button { width: auto; font-size: 0.9rem; padding: 8px 12px; }
@@ -31,22 +28,21 @@
         #question-text { font-size: 2.5rem; font-weight: 700; color: #3f51b5; margin: 20px 0; }
         #mcq-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
         .mcq-option-btn { width: 100%; padding: 20px; font-size: 1.5rem; background-color: #e8eaf6; color: #1a237e; }
-        .mcq-option-btn:hover { background-color: #c5cae9; }
-        .mcq-option-btn:disabled { cursor: not-allowed; opacity: 0.7; }
-        #tests-remaining { color: #777; margin-top: 15px; }
+        #tests-remaining { color: #777; margin-top: 15px; font-size: 1rem; }
 
         /* Review Screen Styles */
         #review-screen h2 { color: #1a237e; }
         .review-summary { display: flex; justify-content: space-around; background: #e8eaf6; padding: 15px; border-radius: 8px; margin: 20px 0; }
         .review-summary p { margin: 0; font-size: 1.2rem; }
-        #review-list { list-style-type: none; padding: 0; text-align: left; max-height: 400px; overflow-y: auto; }
-        .review-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
-        .review-item span { flex: 1; text-align: center; }
+        #review-list { list-style-type: none; padding: 0; text-align: left; max-height: 400px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; margin-top: 15px; }
+        .review-item { display: grid; grid-template-columns: auto 1fr 1fr 1fr; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid #eee; }
+        .review-item:last-child { border-bottom: none; }
         .review-item .question { font-weight: bold; }
         .review-item.correct { background-color: #e8f5e9; }
         .review-item.incorrect { background-color: #ffebee; }
-        .review-item.correct::before { content: '✔'; color: #4caf50; margin-right: 10px; font-weight: bold; }
-        .review-item.incorrect::before { content: '✖'; color: #f44336; margin-right: 10px; font-weight: bold; }
+        .review-item-status { font-size: 1.5rem; }
+        .review-item.correct .review-item-status { color: #4caf50; }
+        .review-item.incorrect .review-item-status { color: #f44336; }
     </style>
 </head>
 <body>
@@ -56,7 +52,11 @@
             <p>You have 90 seconds to answer 20 questions. Good luck!</p>
         </header>
 
-        <div id="auth-screen" class="screen"></div>
+        <div id="auth-screen" class="screen">
+            <h2>Welcome</h2>
+            <p>Please sign in to start the test.</p>
+            <button id="google-signin-btn">Sign in with Google</button>
+        </div>
         
         <div id="app-screen" class="screen hidden">
             <div id="user-info">
@@ -64,7 +64,7 @@
                 <button id="logout-button">Logout</button>
             </div>
             
-            <div id="start-screen">
+            <div id="start-screen" class="screen">
                 <button id="start-button">Start New Test</button>
                 <p id="tests-remaining"></p>
             </div>
@@ -86,7 +86,7 @@
                 </div>
                 <h3>Answer Review</h3>
                 <ul id="review-list"></ul>
-                <button id="play-again-button">Play Again</button>
+                <button id="play-again-button">Take Another Test</button>
             </div>
         </div>
     </div>
@@ -97,6 +97,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
     <script>
+        // --- Firebase Configuration ---
         const firebaseConfig = {
             apiKey: "AIzaSyC9O1-QzrMD8c6bkifwMlzneLTU8eB4PH8",
             authDomain: "login-coc.firebaseapp.com",
@@ -106,35 +107,37 @@
             appId: "1:793350174008:web:47f655787f71f4e852bdcd",
             measurementId: "G-9F5XW0QKCV"
         };
-
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
         const googleProvider = new firebase.auth.GoogleAuthProvider();
 
         document.addEventListener('DOMContentLoaded', () => {
-            const mcqOptionsContainer = document.getElementById('mcq-options');
+            // --- DOM Elements ---
+            const authScreen = document.getElementById('auth-screen');
+            const appScreen = document.getElementById('app-screen');
+            const googleSignInBtn = document.getElementById('google-signin-btn');
+            const logoutButton = document.getElementById('logout-button');
             const startButton = document.getElementById('start-button');
             const playAgainButton = document.getElementById('play-again-button');
-            
+            const mcqOptionsContainer = document.getElementById('mcq-options');
+
+            // --- App State ---
             let currentUser = null;
             let userData = null;
             let activeQuizState = null;
             let timerInterval;
             const TOTAL_QUESTIONS = 20;
             const POINTS_PER_QUESTION = 5;
-            const MAX_SCORE = 100;
             const TIME_LIMIT = 90;
 
-            // --- Auth & User Data Management ---
+            // --- Authentication & User Data ---
             auth.onAuthStateChanged(async user => {
-                const authScreen = document.getElementById('auth-screen');
-                const appScreen = document.getElementById('app-screen');
                 if (user) {
                     currentUser = user;
                     await initializeUserDocument(user);
                     document.getElementById('user-email').textContent = user.displayName || user.email;
-                    document.getElementById('tests-remaining').textContent = `${userData.testsRemaining} tests remaining`;
+                    updateTestsRemainingUI();
                     authScreen.classList.add('hidden');
                     appScreen.classList.remove('hidden');
                     showStartScreen();
@@ -147,6 +150,9 @@
                 }
             });
 
+            googleSignInBtn.addEventListener('click', () => auth.signInWithPopup(googleProvider).catch(err => alert(err.message)));
+            logoutButton.addEventListener('click', () => auth.signOut());
+
             async function initializeUserDocument(user) {
                 const userRef = db.collection('users').doc(user.uid);
                 const doc = await userRef.get();
@@ -158,8 +164,19 @@
                 }
             }
 
+            function updateTestsRemainingUI() {
+                const testsLeft = userData?.testsRemaining ?? 0;
+                document.getElementById('tests-remaining').textContent = `${testsLeft} tests remaining`;
+                startButton.disabled = testsLeft <= 0;
+            }
+            
             // --- Unique Question Generation ---
-            function generateUniqueQuestions() { /* ... unchanged ... */ }
+            function generateUniqueQuestions() {
+                const all = [];
+                for (let i = 1; i <= 20; i++) for (let j = 1; j <= 10; j++) all.push({ num1: i, num2: j, answer: i * j });
+                for (let i = all.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [all[i], all[j]] = [all[j], all[i]]; }
+                return all.slice(0, TOTAL_QUESTIONS);
+            }
 
             // --- Quiz Logic ---
             function startGame() {
@@ -188,13 +205,13 @@
                     timerEl.textContent = timeLeft;
                     if (timeLeft <= 10) timerEl.classList.add('low-time');
                     if (timeLeft <= 0) {
-                        clearInterval(timerInterval);
                         endGame();
                     }
                 }, 1000);
             }
 
             function nextQuestion() {
+                if (!activeQuizState) return; // Game ended
                 if (activeQuizState.questionCounter >= TOTAL_QUESTIONS) {
                     endGame();
                     return;
@@ -213,54 +230,52 @@
                 });
             }
 
-            async function handleOptionClick(e) {
+            function handleOptionClick(e) {
                 if (!e.target.matches('.mcq-option-btn')) return;
                 const selectedAnswer = parseInt(e.target.dataset.answer, 10);
                 const q = activeQuizState.questions[activeQuizState.questionCounter];
                 q.userAnswer = selectedAnswer; // Record user's answer
-                
                 if (selectedAnswer === q.answer) {
                     activeQuizState.score += POINTS_PER_QUESTION;
                 }
-                
                 activeQuizState.questionCounter++;
-                document.getElementById('current-score').textContent = activeQuizState.score;
                 nextQuestion();
             }
             
             async function endGame() {
-                if (!activeQuizState) return; // Prevent double-calls
+                if (!activeQuizState) return; // Prevent multiple calls
                 clearInterval(timerInterval);
-                
-                // Decrement tests and save results
+                const finalState = activeQuizState; // Capture state before reset
+                activeQuizState = null; // Mark game as ended immediately
+
+                // Decrement tests and save results to Firestore
                 const userRef = db.collection('users').doc(currentUser.uid);
                 await userRef.update({ testsRemaining: firebase.firestore.FieldValue.increment(-1) });
                 userData.testsRemaining--; // Update local copy
-                await saveTestResult(currentUser, activeQuizState.score);
+                await saveTestResult(currentUser, finalState.score);
 
-                await displayReview();
-                activeQuizState = null;
+                await displayReview(finalState);
             }
 
             // --- Results & Review ---
-            async function displayReview() {
-                // Fetch latest history for accurate average
+            async function displayReview(finalState) {
                 const historySnapshot = await db.collection('users').doc(currentUser.uid).collection('history').get();
                 let totalScore = 0;
                 historySnapshot.forEach(doc => totalScore += doc.data().score);
-                const averageScore = historySnapshot.empty ? activeQuizState.score : (totalScore / historySnapshot.size).toFixed(2);
+                const averageScore = historySnapshot.empty ? finalState.score : (totalScore / historySnapshot.size).toFixed(1);
 
-                document.getElementById('final-score').textContent = activeQuizState.score;
+                document.getElementById('final-score').textContent = finalState.score;
                 document.getElementById('average-score').textContent = averageScore;
 
                 const reviewList = document.getElementById('review-list');
                 reviewList.innerHTML = '';
-                activeQuizState.questions.forEach(q => {
+                finalState.questions.forEach(q => {
                     const li = document.createElement('li');
                     const isCorrect = q.userAnswer === q.answer;
                     li.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
                     const userAnswerText = q.userAnswer ?? 'Not Answered';
                     li.innerHTML = `
+                        <span class="review-item-status">${isCorrect ? '✔' : '✖'}</span>
                         <span class="question">${q.num1} × ${q.num2}</span>
                         <span>Your Answer: ${userAnswerText}</span>
                         <span>Correct Answer: ${q.answer}</span>
@@ -274,7 +289,7 @@
             mcqOptionsContainer.addEventListener('click', handleOptionClick);
             startButton.addEventListener('click', startGame);
             playAgainButton.addEventListener('click', () => {
-                document.getElementById('tests-remaining').textContent = `${userData.testsRemaining} tests remaining`;
+                updateTestsRemainingUI();
                 showStartScreen();
             });
 
@@ -294,20 +309,14 @@
                 document.getElementById('review-screen').classList.remove('hidden');
             }
             
-            // --- Helper Functions (Unchanged or minor edits) ---
-            function generateUniqueQuestions() {
-                const all = [];
-                for (let i = 1; i <= 20; i++) for (let j = 1; j <= 10; j++) all.push({ num1: i, num2: j, answer: i * j });
-                for (let i = all.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [all[i], all[j]] = [all[j], all[i]]; }
-                return all.slice(0, TOTAL_QUESTIONS);
-            }
+            // --- Helper Functions ---
             function generateOptions(correctAnswer) {
                 const options = new Set([correctAnswer]);
                 while (options.size < 4) {
                     const offset = Math.floor(Math.random() * 10) + 1;
                     const op = Math.random() < 0.5 ? 1 : -1;
                     let d = correctAnswer + (offset * op);
-                    if (d < 0) d = Math.abs(d) + 1; if (d !== correctAnswer) options.add(d);
+                    if (d < 0) d = Math.abs(d) + 1; if (d !== correctAnswer && d > 0) options.add(d);
                 }
                 return Array.from(options).sort(() => Math.random() - 0.5);
             }
@@ -315,17 +324,6 @@
                 const testData = { userId: user.uid, email: user.displayName || user.email, score, timestamp: firebase.firestore.FieldValue.serverTimestamp()};
                 await db.collection('users').doc(user.uid).collection('history').add(testData);
             }
-            
-            // --- Auth Form Setup ---
-            // This is a simplified setup. Full logic from previous steps can be re-integrated if needed.
-            document.getElementById('auth-screen').innerHTML = `
-                <h2 id="auth-title">Login</h2>
-                <button id="google-signin-btn">Sign in with Google</button>
-            `;
-            document.getElementById('google-signin-btn').addEventListener('click', () => {
-                auth.signInWithPopup(googleProvider).catch(err => alert(err.message));
-            });
-            document.getElementById('logout-button').addEventListener('click', () => auth.signOut());
         });
     </script>
 </body>
