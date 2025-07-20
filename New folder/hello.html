@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz - Multiplication Tables</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <div class="app-title">
+                <h2>Math Quiz</h2>
+                <p>Master your multiplication tables</p>
+            </div>
+            
+            <!-- Google Sign-In Button -->
+            <div class="google-signin-container">
+                <button id="googleSignInBtn">
+                    <img src="https://www.google.com/favicon.ico" alt="Google logo">
+                    Sign in with Google
+                </button>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <header>
+                <h1>Math Quiz</h1>
+                <div class="theme-toggle">
+                    <span id="theme-label">Dark</span>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </header>
+
+            <div class="user-info">
+                <div>
+                    <h2 id="welcome-user">Welcome!</h2>
+                    <p>Practice multiplication tables up to 20×10</p>
+                </div>
+                <button class="logout-btn" id="logout-btn">Logout</button>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Tests Completed</h3>
+                    <p id="tests-completed">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Score</h3>
+                    <p id="average-score">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Highest Score</h3>
+                    <p id="highest-score">0</p>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
+            </div>
+            <p style="text-align: center; font-size: 0.9rem; color: var(--text-color); opacity: 0.7;">
+                <span id="tests-remaining">500</span> tests remaining
+            </p>
+            
+            <div class="btn-group">
+                <button id="start-btn" class="btn">
+                    <span>✏️</span> Start New Quiz
+                </button>
+                <button id="history-btn" class="btn btn-secondary">
+                    <span>📋</span> View History
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <h2 class="quiz-title">Multiplication Quiz</h2>
+                <div id="timer" class="timer">
+                    <span>⏱️</span> 01:00
+                </div>
+            </div>
+            
+            <div id="questions-container" class="questions-container">
+                <!-- Questions will be inserted here -->
+            </div>
+            
+            <button id="submit-btn" class="btn">
+                Submit Quiz
+            </button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-header">
+                <h2>Quiz Results</h2>
+                <div class="score-display" id="final-score">0</div>
+                <p>out of 100 points</p>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="score-progress" style="width: 0%"></div>
+                </div>
+                
+                <p>Time taken: <span id="time-taken">0</span> seconds</p>
+            </div>
+            
+            <div id="answers-review" class="answers-review">
+                <!-- Answers review will be inserted here -->
+            </div>
+            
+            <div class="btn-group">
+                <button id="restart-btn" class="btn">
+                    <span>🔄</span> Try Again
+                </button>
+                <button id="back-to-home-btn" class="btn btn-secondary">
+                    <span>🏠</span> Back to Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" id="close-history-btn">&times;</button>
+            <h2>Quiz History</h2>
+            <div id="history-list" class="history-list">
+                <!-- History items will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
