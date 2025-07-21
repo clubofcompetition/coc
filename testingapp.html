@@ -561,7 +561,8 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js ";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js ";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js ";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js "; 
 
        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -576,8 +577,9 @@ const firebaseConfig = {
 };
 
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
+	const auth = getAuth(app);
+	const db = getFirestore(app);  // Initialize Firestore
+	const provider = new GoogleAuthProvider();
 
         document.addEventListener('DOMContentLoaded', () => {
             const loginScreen = document.getElementById('login-screen');
@@ -626,29 +628,37 @@ const firebaseConfig = {
             function init() {
                 loadState();
                 setupEventListeners();
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        const userId = user.uid;
-                        const userData = loadUserData(userId) || {
-                            displayName: user.displayName,
-                            email: user.email,
-                            photoURL: user.photoURL,
-                            history: []
-                        };
-                        appState.currentUser = {
-                            uid: userId,
-                            ...userData
-                        };
-                        saveUserData(userId, userData);
-                        saveState();
-                        welcomeUserEl.textContent = `Welcome, ${user.displayName || 'User'}!`;
-                        showStartScreen();
-                    } else {
-                        appState.currentUser = null;
-                        saveState();
-                        showLoginScreen();
-                    }
-                });
+              onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const userId = user.uid;
+        const userRef = doc(db, "users", userId);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+            await setDoc(userRef, {
+                displayName: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+                history: []
+            });
+        }
+
+        const userData = (await getDoc(userRef)).data();
+
+        appState.currentUser = {
+            uid: userId,
+            ...userData
+        };
+
+        saveState();
+        welcomeUserEl.textContent = `Welcome, ${user.displayName || 'User'}!`;
+        showStartScreen();
+    } else {
+        appState.currentUser = null;
+        saveState();
+        showLoginScreen();
+    }
+});
                 if (localStorage.getItem('darkMode') === 'true') {
                     document.body.classList.add('dark-mode');
                     darkModeToggle.checked = true;
@@ -861,33 +871,41 @@ const firebaseConfig = {
                 timerEl.textContent = `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
 
-            function submitQuiz(isTimeUp = false) {
-                if (appState.quizState.timerInterval) clearInterval(appState.quizState.timerInterval);
-                appState.quizState.endTime = new Date();
-                appState.quizState.score = 0;
-                appState.quizState.questions.forEach((question, index) => {
-                    if (appState.quizState.userAnswers[index] === question.answer) {
-                        appState.quizState.score += 5;
-                    }
-                });
-                const timeTaken = Math.floor((appState.quizState.endTime - appState.quizState.startTime) / 1000);
-                if (!appState.currentUser.history) appState.currentUser.history = [];
-                appState.currentUser.history.push({
-                    score: appState.quizState.score,
-                    timeTaken: timeTaken,
-                    date: new Date().toISOString(),
-                    isTimeUp: isTimeUp
-                });
-                saveUserData(appState.currentUser.uid, {
-                    displayName: appState.currentUser.displayName,
-                    email: appState.currentUser.email,
-                    photoURL: appState.currentUser.photoURL,
-                    history: appState.currentUser.history
-                });
-                saveState();
-                showResults(isTimeUp, timeTaken);
-            }
+async function submitQuiz(isTimeUp = false) {
+    if (appState.quizState.timerInterval) {
+        clearInterval(appState.quizState.timerInterval);
+        appState.quizState.timerInterval = null;
+    }
 
+    appState.quizState.endTime = new Date();
+    appState.quizState.score = 0;
+    appState.quizState.questions.forEach((question, index) => {
+        if (appState.quizState.userAnswers[index] === question.answer) {
+            appState.quizState.score += 5;
+        }
+    });
+
+    const timeTaken = Math.floor((appState.quizState.endTime - appState.quizState.startTime) / 1000);
+
+    const quizData = {
+        score: appState.quizState.score,
+        timeTaken: timeTaken,
+        date: new Date().toISOString(),
+        isTimeUp: isTimeUp
+    };
+
+    const userId = appState.currentUser.uid;
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, {
+        history: arrayUnion(quizData)
+    });
+
+    const userSnap = await getDoc(userRef);
+    appState.currentUser = userSnap.data();
+    saveState();
+
+    showResults(isTimeUp, timeTaken);
+}
             function showResults(isTimeUp, timeTaken) {
                 quizScreen.classList.remove('active');
                 resultsScreen.classList.add('active');
