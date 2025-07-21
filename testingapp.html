@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz - Multiplication Tables</title>
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #4caf50;
+            --accent-color: #ff5252;
+            --background-color: #f5f7ff;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+        .dark-mode {
+            --primary-color: #6d8bff;
+            --secondary-color: #66bb6a;
+            --accent-color: #ff6b6b;
+            --background-color: #1a1a2e;
+            --card-color: #16213e;
+            --text-color: #e6e6e6;
+            --border-color: #2d3748;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .screen {
+            display: none;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #login-screen {
+            max-width: 400px;
+            margin: 40px auto;
+        }
+        .app-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .app-title h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        .app-title p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        .google-signin-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        #googleSignInBtn {
+            background-color: white;
+            color: #757575;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #googleSignInBtn:hover {
+            background-color: #f7f7f7;
+        }
+        #googleSignInBtn img {
+            width: 18px;
+            height: 18px;
+        }
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .welcome-message h2 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            padding: 5px;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background-color: var(--background-color);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .stat-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .stat-card p {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            transition: width 0.5s ease;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-secondary {
+            background-color: #5f6368;
+        }
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .quiz-title {
+            color: var(--primary-color);
+        }
+        .timer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .timer.warning {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .questions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .question-card {
+            background-color: var(--background-color);
+            border-radius: 10px;
+            padding: 18px;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.2s ease;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+        }
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-color);
+            min-width: 60px;
+            justify-content: center;
+        }
+        .option:hover {
+            background-color: rgba(74, 107, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+        .option.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .option.correct {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        .option.incorrect {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+        .results-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .results-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 15px 0;
+        }
+        .answers-review {
+            margin-top: 25px;
+        }
+        .answer-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .answer-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .correct {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        .incorrect {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 25px;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            background: none;
+            border: none;
+        }
+        .history-list {
+            margin-top: 15px;
+        }
+        .history-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        .history-item h3 {
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        .history-item p {
+            margin: 3px 0;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .app-title h2 {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 400px) {
+            .btn {
+                width: 100%;
+            }
+            .options {
+                flex-direction: column;
+            }
+            .option {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <div class="app-title">
+                <h2>Math Quiz</h2>
+                <p>Master your multiplication tables</p>
+            </div>
+            <div class="google-signin-container">
+                <button id="googleSignInBtn">
+                    <img src="https://www.google.com/favicon.ico " alt="Google logo">
+                    Sign in with Google
+                </button>
+            </div>
+        </div>
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <header>
+                <h1>Math Quiz</h1>
+                <div class="theme-toggle">
+                    <span id="theme-label">Dark</span>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </header>
+            <div class="user-info">
+                <div>
+                    <h2 id="welcome-user">Welcome!</h2>
+                    <p>Practice multiplication tables up to 20×10</p>
+                </div>
+                <button class="logout-btn" id="logout-btn">Logout</button>
+            </div>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Tests Completed</h3>
+                    <p id="tests-completed">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Score</h3>
+                    <p id="average-score">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Highest Score</h3>
+                    <p id="highest-score">0</p>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
+            </div>
+            <p style="text-align: center; font-size: 0.9rem; color: var(--text-color); opacity: 0.7;">
+                <span id="tests-remaining">500</span> tests remaining
+            </p>
+            <div class="btn-group">
+                <button id="start-btn" class="btn">
+                    <span>✏️</span> Start New Quiz
+                </button>
+                <button id="history-btn" class="btn btn-secondary">
+                    <span>📋</span> View History
+                </button>
+            </div>
+        </div>
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <h2 class="quiz-title">Multiplication Quiz</h2>
+                <div id="timer" class="timer">
+                    <span>⏱️</span> 01:00
+                </div>
+            </div>
+            <div id="questions-container" class="questions-container">
+                <!-- Questions will be inserted here -->
+            </div>
+            <button id="submit-btn" class="btn">
+                Submit Quiz
+            </button>
+        </div>
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-header">
+                <h2>Quiz Results</h2>
+                <div class="score-display" id="final-score">0</div>
+                <p>out of 100 points</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="score-progress" style="width: 0%"></div>
+                </div>
+                <p>Time taken: <span id="time-taken">0</span> seconds</p>
+            </div>
+            <div id="answers-review" class="answers-review">
+                <!-- Answers review will be inserted here -->
+            </div>
+            <div class="btn-group">
+                <button id="restart-btn" class="btn">
+                    <span>🔄</span> Try Again
+                </button>
+                <button id="back-to-home-btn" class="btn btn-secondary">
+                    <span>🏠</span> Back to Home
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- History Modal -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" id="close-history-btn">&times;</button>
+            <h2>Quiz History</h2>
+            <div id="history-list" class="history-list">
+                <!-- History items will be inserted here -->
+            </div>
+        </div>
+    </div>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js ";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js ";
+
+       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC9O1-QzrMD8c6bkifwMlzneLTU8eB4PH8",
+  authDomain: "login-coc.firebaseapp.com",
+  databaseURL: "https://login-coc-default-rtdb.firebaseio.com",
+  projectId: "login-coc",
+  storageBucket: "login-coc.firebasestorage.app",
+  messagingSenderId: "793350174008",
+  appId: "1:793350174008:web:47f655787f71f4e852bdcd",
+  measurementId: "G-9F5XW0QKCV"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginScreen = document.getElementById('login-screen');
+            const startScreen = document.getElementById('start-screen');
+            const quizScreen = document.getElementById('quiz-screen');
+            const resultsScreen = document.getElementById('results-screen');
+            const googleSignInBtn = document.getElementById('googleSignInBtn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const welcomeUserEl = document.getElementById('welcome-user');
+            const startBtn = document.getElementById('start-btn');
+            const historyBtn = document.getElementById('history-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const backToHomeBtn = document.getElementById('back-to-home-btn');
+            const questionsContainer = document.getElementById('questions-container');
+            const timerEl = document.getElementById('timer');
+            const finalScoreEl = document.getElementById('final-score');
+            const timeTakenEl = document.getElementById('time-taken');
+            const scoreProgress = document.getElementById('score-progress');
+            const answersReviewEl = document.getElementById('answers-review');
+            const testsCompletedEl = document.getElementById('tests-completed');
+            const averageScoreEl = document.getElementById('average-score');
+            const highestScoreEl = document.getElementById('highest-score');
+            const testsProgress = document.getElementById('tests-progress');
+            const testsRemainingEl = document.getElementById('tests-remaining');
+            const historyModal = document.getElementById('history-modal');
+            const closeHistoryBtn = document.getElementById('close-history-btn');
+            const historyListEl = document.getElementById('history-list');
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const themeLabel = document.getElementById('theme-label');
+
+            const MAX_TESTS = 500;
+            let appState = {
+                currentUser: null,
+                quizState: {
+                    questions: [],
+                    userAnswers: {},
+                    score: 0,
+                    timeLeft: 60,
+                    timerInterval: null,
+                    startTime: null,
+                    endTime: null
+                }
+            };
+
+            function init() {
+                loadState();
+                setupEventListeners();
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        const userId = user.uid;
+                        const userData = loadUserData(userId) || {
+                            displayName: user.displayName,
+                            email: user.email,
+                            photoURL: user.photoURL,
+                            history: []
+                        };
+                        appState.currentUser = {
+                            uid: userId,
+                            ...userData
+                        };
+                        saveUserData(userId, userData);
+                        saveState();
+                        welcomeUserEl.textContent = `Welcome, ${user.displayName || 'User'}!`;
+                        showStartScreen();
+                    } else {
+                        appState.currentUser = null;
+                        saveState();
+                        showLoginScreen();
+                    }
+                });
+                if (localStorage.getItem('darkMode') === 'true') {
+                    document.body.classList.add('dark-mode');
+                    darkModeToggle.checked = true;
+                    themeLabel.textContent = 'Light';
+                } else {
+                    themeLabel.textContent = 'Dark';
+                }
+            }
+
+            function loadUserData(userId) {
+                const userData = localStorage.getItem(`user_${userId}`);
+                return userData ? JSON.parse(userData) : null;
+            }
+
+            function saveUserData(userId, data) {
+                localStorage.setItem(`user_${userId}`, JSON.stringify(data));
+            }
+
+            function loadState() {
+                const savedState = localStorage.getItem('mathQuizApp');
+                if (savedState) {
+                    appState = JSON.parse(savedState);
+                }
+            }
+
+            function saveState() {
+                localStorage.setItem('mathQuizApp', JSON.stringify(appState));
+                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+            }
+
+            function setupEventListeners() {
+                googleSignInBtn.addEventListener('click', signInWithGoogle);
+                logoutBtn.addEventListener('click', signOutUser);
+                startBtn.addEventListener('click', startQuiz);
+                historyBtn.addEventListener('click', showHistory);
+                submitBtn.addEventListener('click', submitQuiz);
+                restartBtn.addEventListener('click', startQuiz);
+                backToHomeBtn.addEventListener('click', () => {
+                    resultsScreen.classList.remove('active');
+                    startScreen.classList.add('active');
+                });
+                closeHistoryBtn.addEventListener('click', () => historyModal.style.display = 'none');
+                darkModeToggle.addEventListener('change', toggleDarkMode);
+                window.addEventListener('click', (e) => {
+                    if (e.target === historyModal) historyModal.style.display = 'none';
+                });
+            }
+
+            function signInWithGoogle() {
+                signInWithPopup(auth, provider)
+                    .catch((error) => {
+                        console.error('Error signing in with Google:', error);
+                        alert('Error signing in with Google. Please try again.');
+                    });
+            }
+
+            function signOutUser() {
+                signOut(auth)
+                    .then(() => {
+                        appState.currentUser = null;
+                        saveState();
+                        showLoginScreen();
+                    })
+                    .catch((error) => {
+                        console.error('Error signing out:', error);
+                    });
+            }
+
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                themeLabel.textContent = isDarkMode ? 'Light' : 'Dark';
+                saveState();
+            }
+
+            function showLoginScreen() {
+                loginScreen.classList.add('active');
+                startScreen.classList.remove('active');
+                quizScreen.classList.remove('active');
+                resultsScreen.classList.remove('active');
+            }
+
+            function showStartScreen() {
+                loginScreen.classList.remove('active');
+                startScreen.classList.add('active');
+                quizScreen.classList.remove('active');
+                resultsScreen.classList.remove('active');
+                updateStatsUI();
+            }
+
+            function updateStatsUI() {
+                const currentUser = appState.currentUser;
+                const history = currentUser?.history || [];
+                const testsTaken = history.length;
+                const testsRemaining = MAX_TESTS - testsTaken;
+                testsCompletedEl.textContent = testsTaken;
+                testsRemainingEl.textContent = testsRemaining;
+                const progressPercentage = (testsTaken / MAX_TESTS) * 100;
+                testsProgress.style.width = `${progressPercentage}%`;
+                if (testsTaken >= MAX_TESTS) {
+                    startBtn.disabled = true;
+                    startBtn.innerHTML = '<span>⛔</span> Test Limit Reached';
+                } else {
+                    startBtn.disabled = false;
+                    startBtn.innerHTML = '<span>✏️</span> Start New Quiz';
+                }
+                if (testsTaken > 0) {
+                    const totalScore = history.reduce((sum, test) => sum + test.score, 0);
+                    const averageScore = Math.round(totalScore / testsTaken);
+                    const highestScore = Math.max(...history.map(test => test.score));
+                    averageScoreEl.textContent = averageScore;
+                    highestScoreEl.textContent = highestScore;
+                } else {
+                    averageScoreEl.textContent = '0';
+                    highestScoreEl.textContent = '0';
+                }
+            }
+
+            function startQuiz() {
+                if (appState.currentUser?.history?.length >= MAX_TESTS) {
+                    alert('You have reached the maximum limit of 500 tests.');
+                    return;
+                }
+                appState.quizState = {
+                    questions: generateQuestions(),
+                    userAnswers: {},
+                    score: 0,
+                    timeLeft: 60,
+                    timerInterval: null,
+                    startTime: null,
+                    endTime: null
+                };
+                startScreen.classList.remove('active');
+                quizScreen.classList.add('active');
+                resultsScreen.classList.remove('active');
+                displayQuestions();
+                startTimer();
+            }
+
+            function generateQuestions() {
+                const questions = [];
+                for (let i = 0; i < 20; i++) {
+                    const num1 = Math.floor(Math.random() * 20) + 1;
+                    const num2 = Math.floor(Math.random() * 10) + 1;
+                    const answer = num1 * num2;
+                    const options = generateOptions(answer);
+                    questions.push({ text: `${num1} × ${num2} = ?`, answer, options });
+                }
+                return questions;
+            }
+
+            function generateOptions(correctAnswer) {
+                const options = [correctAnswer];
+                while (options.length < 4) {
+                    const offset = Math.floor(Math.random() * 5) + 1;
+                    const direction = Math.random() < 0.5 ? -1 : 1;
+                    let wrongAnswer = correctAnswer + (offset * direction);
+                    if (wrongAnswer <= 0) wrongAnswer = correctAnswer + offset;
+                    if (!options.includes(wrongAnswer)) options.push(wrongAnswer);
+                }
+                return options.sort(() => Math.random() - 0.5);
+            }
+
+            function displayQuestions() {
+                questionsContainer.innerHTML = '';
+                appState.quizState.questions.forEach((question, index) => {
+                    const questionCard = document.createElement('div');
+                    questionCard.className = 'question-card';
+                    const questionText = document.createElement('div');
+                    questionText.className = 'question-text';
+                    questionText.textContent = `${index + 1}. ${question.text}`;
+                    const optionsContainer = document.createElement('div');
+                    optionsContainer.className = 'options';
+                    question.options.forEach(option => {
+                        const optionElement = document.createElement('div');
+                        optionElement.className = 'option';
+                        optionElement.textContent = option;
+                        if (appState.quizState.userAnswers[index] === option) {
+                            optionElement.classList.add('selected');
+                        }
+                        optionElement.addEventListener('click', () => {
+                            optionsContainer.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                            optionElement.classList.add('selected');
+                            appState.quizState.userAnswers[index] = option;
+                        });
+                        optionsContainer.appendChild(optionElement);
+                    });
+                    questionCard.appendChild(questionText);
+                    questionCard.appendChild(optionsContainer);
+                    questionsContainer.appendChild(questionCard);
+                });
+            }
+
+            function startTimer() {
+                if (appState.quizState.timerInterval) clearInterval(appState.quizState.timerInterval);
+                appState.quizState.startTime = new Date();
+                appState.quizState.timeLeft = 60;
+                updateTimerDisplay();
+                appState.quizState.timerInterval = setInterval(() => {
+                    appState.quizState.timeLeft--;
+                    updateTimerDisplay();
+                    if (appState.quizState.timeLeft <= 10) timerEl.classList.add('warning');
+                    if (appState.quizState.timeLeft <= 0) submitQuiz(true);
+                }, 1000);
+            }
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(appState.quizState.timeLeft / 60);
+                const seconds = appState.quizState.timeLeft % 60;
+                timerEl.textContent = `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            function submitQuiz(isTimeUp = false) {
+                if (appState.quizState.timerInterval) clearInterval(appState.quizState.timerInterval);
+                appState.quizState.endTime = new Date();
+                appState.quizState.score = 0;
+                appState.quizState.questions.forEach((question, index) => {
+                    if (appState.quizState.userAnswers[index] === question.answer) {
+                        appState.quizState.score += 5;
+                    }
+                });
+                const timeTaken = Math.floor((appState.quizState.endTime - appState.quizState.startTime) / 1000);
+                if (!appState.currentUser.history) appState.currentUser.history = [];
+                appState.currentUser.history.push({
+                    score: appState.quizState.score,
+                    timeTaken: timeTaken,
+                    date: new Date().toISOString(),
+                    isTimeUp: isTimeUp
+                });
+                saveUserData(appState.currentUser.uid, {
+                    displayName: appState.currentUser.displayName,
+                    email: appState.currentUser.email,
+                    photoURL: appState.currentUser.photoURL,
+                    history: appState.currentUser.history
+                });
+                saveState();
+                showResults(isTimeUp, timeTaken);
+            }
+
+            function showResults(isTimeUp, timeTaken) {
+                quizScreen.classList.remove('active');
+                resultsScreen.classList.add('active');
+                finalScoreEl.textContent = appState.quizState.score;
+                timeTakenEl.textContent = timeTaken;
+                scoreProgress.style.width = `${appState.quizState.score}%`;
+                answersReviewEl.innerHTML = '';
+                appState.quizState.questions.forEach((question, index) => {
+                    const userAnswer = appState.quizState.userAnswers[index];
+                    const isCorrect = userAnswer === question.answer;
+                    const answerItem = document.createElement('div');
+                    answerItem.className = 'answer-item';
+                    const questionText = document.createElement('p');
+                    questionText.innerHTML = `<strong>Question ${index + 1}:</strong> ${question.text}`;
+                    const userAnswerText = document.createElement('p');
+                    userAnswerText.className = isCorrect ? 'correct' : 'incorrect';
+                    userAnswerText.textContent = `Your answer: ${userAnswer !== undefined ? userAnswer : 'Not answered'} (${isCorrect ? '✓ Correct' : '✗ Incorrect'})`;
+                    answerItem.appendChild(questionText);
+                    answerItem.appendChild(userAnswerText);
+                    if (!isCorrect) {
+                        const correctAnswerText = document.createElement('p');
+                        correctAnswerText.className = 'correct';
+                        correctAnswerText.textContent = `Correct answer: ${question.answer}`;
+                        answerItem.appendChild(correctAnswerText);
+                    }
+                    answersReviewEl.appendChild(answerItem);
+                });
+                updateStatsUI();
+            }
+
+            function showHistory() {
+                historyModal.style.display = 'flex';
+                historyListEl.innerHTML = '';
+                const history = appState.currentUser?.history || [];
+                if (history.length === 0) {
+                    historyListEl.innerHTML = '<p>No quiz history yet.</p>';
+                    return;
+                }
+                history.slice().reverse().forEach((test, index) => {
+                    const testDate = new Date(test.date);
+                    const dateStr = testDate.toLocaleDateString();
+                    const timeStr = testDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    const testItem = document.createElement('div');
+                    testItem.className = 'history-item';
+                    testItem.innerHTML = `
+                        <h3>Test ${history.length - index}</h3>
+                        <p>Score: <strong>${test.score}/100</strong></p>
+                        <p>Time: <strong>${test.timeTaken}s</strong></p>
+                        <p>Date: <strong>${dateStr} at ${timeStr}</strong></p>
+                        ${test.isTimeUp ? '<p>⏰ Time expired</p>' : ''}
+                    `;
+                    historyListEl.appendChild(testItem);
+                });
+            }
+
+            init();
+        });
+    </script>
+</body>
+</html>
