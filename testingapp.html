@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +61,11 @@
       display: inline-block;
       width: 50px;
       height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
     .slider {
       position: absolute;
@@ -547,14 +551,17 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js ";
     import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js ";
 
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC9O1-QzrMD8c6bkifwMlzneLTU8eB4PH8",
+  authDomain: "login-coc.firebaseapp.com",
+  databaseURL: "https://login-coc-default-rtdb.firebaseio.com",
+  projectId: "login-coc",
+  storageBucket: "login-coc.firebasestorage.app",
+  messagingSenderId: "793350174008",
+  appId: "1:793350174008:web:47f655787f71f4e852bdcd",
+  measurementId: "G-9F5XW0QKCV"
+};
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -625,8 +632,7 @@
                 displayName: user.displayName,
                 email: user.email,
                 photoURL: user.photoURL,
-                history: [],
-                darkMode: false
+                history: []
               });
             }
 
@@ -667,16 +673,7 @@
           startScreen.classList.add('active');
         });
         closeHistoryBtn.addEventListener('click', () => historyModal.style.display = 'none');
-        darkModeToggle.addEventListener('change', async () => {
-          document.body.classList.toggle('dark-mode');
-          const isDarkMode = document.body.classList.contains('dark-mode');
-          themeLabel.textContent = isDarkMode ? 'Light' : 'Dark';
-          if (appState.currentUser?.uid) {
-            const userRef = doc(db, "users", appState.currentUser.uid);
-            await updateDoc(userRef, { darkMode: isDarkMode });
-          }
-          saveState();
-        });
+        darkModeToggle.addEventListener('change', toggleDarkMode);
         window.addEventListener('click', (e) => {
           if (e.target === historyModal) historyModal.style.display = 'none';
         });
@@ -855,9 +852,9 @@
         const timeTaken = Math.floor((appState.quizState.endTime - appState.quizState.startTime) / 1000);
         const quizData = {
           score: appState.quizState.score,
-          timeTaken,
+          timeTaken: timeTaken,
           date: new Date().toISOString(),
-          isTimeUp
+          isTimeUp: isTimeUp
         };
         const userId = appState.currentUser.uid;
         const userRef = doc(db, "users", userId);
@@ -927,20 +924,28 @@
         });
       }
 
+      function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        themeLabel.textContent = isDarkMode ? 'Light' : 'Dark';
+        localStorage.setItem('darkMode', isDarkMode);
+        if (appState.currentUser?.uid) {
+          const userRef = doc(db, "users", appState.currentUser.uid);
+          updateDoc(userRef, { darkMode: isDarkMode });
+        }
+      }
+
       function applySavedTheme() {
         const darkMode = localStorage.getItem('darkMode') === 'true';
         if (darkMode) {
           document.body.classList.add('dark-mode');
           darkModeToggle.checked = true;
           themeLabel.textContent = 'Light';
-        } else {
-          themeLabel.textContent = 'Dark';
         }
       }
 
       function saveState() {
         localStorage.setItem('mathQuizApp', JSON.stringify(appState));
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
       }
 
       function loadState() {
