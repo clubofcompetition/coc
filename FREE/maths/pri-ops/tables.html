@@ -27,6 +27,10 @@
       --warning: #f59e0b; /* Amber */
       --danger: #ef4444; /* Red */
 
+      /* Custom Orange for Start Button */
+      --orange-btn: #f97316; /* Orange 500 */
+      --orange-btn-dark: #ea580c; /* Orange 600 */
+
       /* Light Mode Palette */
       --bg-body: #f9fafb; /* Lighter background for the entire body */
       --bg-content: #ffffff; /* White background for main content areas/cards */
@@ -266,6 +270,17 @@
 
     .btn-primary:hover {
       background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* New Orange button style */
+    .btn-orange {
+      background-color: var(--orange-btn);
+      color: white;
+    }
+
+    .btn-orange:hover {
+      background-color: var(--orange-btn-dark);
       transform: translateY(-1px);
     }
 
@@ -1234,7 +1249,7 @@
         <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Practice multiplication tables up to 20×10</p>
 
         <div class="action-buttons">
-          <button id="start-btn" class="btn btn-primary btn-lg">
+          <button id="start-btn" class="btn btn-orange btn-lg">
             <i class="fas fa-play"></i>
             Start New Test
           </button>
@@ -1846,6 +1861,31 @@
 
       async function submitQuiz(isTimeUp = false) {
         stopTimer();
+        // Disable submit button to prevent multiple submissions
+        submitBtn.disabled = true;
+
+        // Apply correct/incorrect styling to options on the quiz screen
+        appState.quizState.questions.forEach((question, index) => {
+          const userAnswer = appState.quizState.userAnswers[index];
+          const questionCard = questionsContainer.children[index];
+          const options = questionCard.querySelectorAll('.option');
+
+          options.forEach(optionEl => {
+            optionEl.classList.add('disabled'); // Disable all options
+            const optionValue = Number(optionEl.dataset.option);
+
+            // Remove selected class if it's not the correct answer for visual clarity
+            if (optionEl.classList.contains('selected') && optionValue !== question.answer) {
+                optionEl.classList.remove('selected');
+            }
+
+            if (optionValue === question.answer) {
+              optionEl.classList.add('correct'); // Always highlight the correct answer
+            } else if (optionValue === userAnswer) {
+              optionEl.classList.add('incorrect'); // Highlight user's incorrect choice
+            }
+          });
+        });
 
         // Recalculate score
         let score = 0;
@@ -1885,7 +1925,11 @@
         }
 
         clearQuizStateLocally();
-        showResults(timeTaken);
+        // Delay showing results to allow user to see the corrected colors on quiz screen briefly
+        setTimeout(() => {
+            showResults(timeTaken);
+            submitBtn.disabled = false; // Re-enable for next quiz if needed
+        }, 1500); // 1.5 second delay
       }
 
       function showResults(timeTaken) {
