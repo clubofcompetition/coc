@@ -395,8 +395,15 @@
     .combined-score-card {
         display: flex;
         flex-direction: column; /* Stack on mobile */
-        justify-content: space-around;
-        gap: 0.75rem; /* Space between the two scores */
+        gap: 1rem; /* Space between sections on mobile */
+        padding: 1.5rem; /* Larger padding for combined card */
+    }
+
+    .combined-score-stats,
+    .combined-quick-actions {
+        display: flex;
+        flex-direction: column; /* Stack items within each section */
+        gap: 0.75rem;
     }
 
     .combined-score-item {
@@ -408,6 +415,13 @@
 
     .combined-score-item h3 {
         margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    .combined-score-item p {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
     }
 
     /* Button Group inside Stat Card */
@@ -841,6 +855,7 @@
       flex-direction: row; /* Changed to row for mobile */
       gap: 0.75rem; /* Reduced gap for mobile */
       margin-top: 1.5rem;
+      margin-bottom: 1.5rem; /* Added margin-bottom */
       justify-content: space-between; /* Distribute items */
       align-items: center;
     }
@@ -899,7 +914,7 @@
       }
 
       .stats-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns for tablets */
+        grid-template-columns: repeat(1, 1fr); /* Single column for combined card on tablets */
         gap: 1.5rem;
       }
 
@@ -949,6 +964,14 @@
       .combined-score-card {
           flex-direction: column; /* Remain column on tablets for 3 items */
           padding: 1rem; /* Adjust padding for more items */
+      }
+      .combined-score-stats {
+          flex-direction: column; /* Stack score items */
+          gap: 0.75rem;
+      }
+      .combined-quick-actions {
+          flex-direction: column; /* Stack quick action items */
+          gap: 0.75rem;
       }
       .combined-score-item {
           flex-direction: row; /* Make items row inside the card */
@@ -1014,7 +1037,7 @@
       }
 
       .stats-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns now that metrics are combined */
+        grid-template-columns: repeat(1, 1fr); /* Still single column for the large combined card */
         gap: 2rem;
       }
 
@@ -1069,11 +1092,30 @@
       /* Combined Score Card Styling for Desktops */
       .combined-score-card {
           flex-direction: row; /* Side-by-side for 3 items on desktops */
-          flex-wrap: wrap; /* Allow wrapping */
+          flex-wrap: nowrap; /* Prevent wrapping for top level sections */
           justify-content: space-around; /* Distribute items */
-          gap: 1rem; /* Adjust gap */
-          padding: 1.5rem; /* Adjust padding */
+          gap: 1.5rem; /* Adjust gap */
+          padding: 1.5rem 2rem; /* Adjust padding for combined card */
       }
+      .combined-score-stats {
+          flex-direction: row; /* Display stats in a row */
+          flex-wrap: wrap; /* Allow wrapping */
+          justify-content: space-around;
+          gap: 1rem;
+          flex: 2; /* Take up more space */
+          align-items: center; /* Vertically align */
+      }
+      .combined-quick-actions {
+          flex: 1; /* Take up less space */
+          flex-direction: column; /* Stack title and buttons */
+          gap: 0.75rem;
+          text-align: center; /* Center quick actions */
+          justify-content: center; /* Vertically center content */
+      }
+      .combined-quick-actions h3 {
+          margin-bottom: 0.5rem; /* Space between title and buttons */
+      }
+
       .combined-score-item {
           flex: 1 1 auto; /* Allow items to grow/shrink */
           min-width: 120px; /* Ensure minimum width */
@@ -1107,10 +1149,10 @@
       <div class="card glassy-card">
         <div class="logo">
           <i class="fas fa-graduation-cap"></i>
-          <h4>Club Of Competition</h4>
+          <h2>Club Of Competition</h2>
         </div>
         <div class="welcome-section">
-          <h3>Master Your Multiplication Tables</h3>
+          <h2>Master Your Multiplication Tables</h2>
           <p>Challenge yourself and improve your math skills</p>
         </div>
 
@@ -1191,32 +1233,41 @@
 
         <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Practice multiplication tables up to 20×10</p>
 
+        <div class="action-buttons">
+          <button id="start-btn" class="btn btn-primary btn-lg">
+            <i class="fas fa-play"></i>
+            Start New Test
+          </button>
+        </div>
+
         <div class="stats-grid">
           <div class="stat-card combined-score-card">
-            <div class="combined-score-item">
-                <h4>Tests Completed</h4>
-                <p id="tests-completed">0</p>
+            <div class="combined-score-stats">
+                <div class="combined-score-item">
+                    <h3>Tests Completed</h3>
+                    <p id="tests-completed">0</p>
+                </div>
+                <div class="combined-score-item">
+                    <h3>Average Score</h3>
+                    <p id="average-score">0</p>
+                </div>
+                <div class="combined-score-item">
+                    <h3>Highest Score</h3>
+                    <p id="highest-score">0</p>
+                </div>
             </div>
-            <div class="combined-score-item">
-                <h4>Average Score</h4>
-                <p id="average-score">0</p>
-            </div>
-            <div class="combined-score-item">
-                <h4>Highest Score</h4>
-                <p id="highest-score">0</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <h3>Quick Actions</h3>
-            <div class="button-group">
-                <button id="history-btn" class="btn btn-secondary">
-                  <i class="fas fa-history"></i>
-                  History
-                </button>
-                <button id="leaderboard-btn" class="btn btn-secondary">
-                  <i class="fas fa-trophy"></i>
-                  Leaderboard
-                </button>
+            <div class="combined-quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="button-group">
+                    <button id="history-btn" class="btn btn-secondary">
+                      <i class="fas fa-history"></i>
+                      History
+                    </button>
+                    <button id="leaderboard-btn" class="btn btn-secondary">
+                      <i class="fas fa-trophy"></i>
+                      Leaderboard
+                    </button>
+                </div>
             </div>
           </div>
         </div>
@@ -1229,13 +1280,6 @@
           <div class="progress-container">
             <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
           </div>
-        </div>
-
-        <div class="action-buttons">
-          <button id="start-btn" class="btn btn-primary btn-lg">
-            <i class="fas fa-play"></i>
-            Start New Test
-          </button>
         </div>
       </div>
     </div>
@@ -1668,21 +1712,21 @@
         const history = appState.currentUser.history || [];
         const testsTaken = history.length;
         testsCompletedEl.textContent = testsTaken;
+        averageScoreEl.textContent = '0'; // Default
+        highestScoreEl.textContent = '0'; // Default
+
+        if (testsTaken > 0) {
+            const totalScore = history.reduce((sum, test) => sum + test.score, 0);
+            averageScoreEl.textContent = Math.round(totalScore / testsTaken);
+            highestScoreEl.textContent = Math.max(...history.map(test => test.score));
+        }
+
         testsRemainingEl.textContent = Math.max(0, MAX_TESTS - testsTaken);
         testsProgress.style.width = `${(testsTaken / MAX_TESTS) * 100}%`;
         startBtn.disabled = testsTaken >= MAX_TESTS;
         startBtn.innerHTML = testsTaken >= MAX_TESTS ?
           '<i class="fas fa-times-circle"></i> Test Limit Reached' :
           '<i class="fas fa-play"></i> Start New Test';
-
-        if (testsTaken > 0) {
-          const totalScore = history.reduce((sum, test) => sum + test.score, 0);
-          averageScoreEl.textContent = Math.round(totalScore / testsTaken);
-          highestScoreEl.textContent = Math.max(...history.map(test => test.score));
-        } else {
-          averageScoreEl.textContent = '0';
-          highestScoreEl.textContent = '0';
-        }
       }
 
       function startQuiz() {
