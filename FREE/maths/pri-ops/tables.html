@@ -3,70 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Math Quiz - Multiplication Tables</title>
+  <title>Club Of Competition - Multiplication Tables</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9F5XW0QKCV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9F5XW0QKCV');
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #4a6bff;
-      --secondary-color: #4caf50;
-      --accent-color: #ff5252;
-      --background-color: #f5f7ff;
-      --card-color: #ffffff;
-      --text-color: #333333;
-      --border-color: #e0e0e0;
+      /* Base Colors - Adjusted for better neutrality */
+      --primary: #6366f1; /* Indigo */
+      --primary-light: #818cf8;
+      --primary-dark: #4f46e5;
+
+      --secondary: #8b5cf6; /* Violet */
+      --accent: #ec4899; /* Pink */
+
+      --success: #10b981; /* Green */
+      --warning: #f59e0b; /* Amber */
+      --danger: #ef4444; /* Red */
+
+      /* Light Mode Palette */
+      --bg-body: #f9fafb; /* Lighter background for the entire body */
+      --bg-content: #ffffff; /* White background for main content areas/cards */
+
+      --card-bg: #ffffff; /* Default card background */
+      --card-border: #e5e7eb; /* Subtle border for cards */
+
+      --text-primary: #111827; /* Darkest text for headings, main content */
+      --text-secondary: #374151; /* Slightly lighter for paragraphs, labels */
+      --text-placeholder: #6b7280; /* Placeholder text */
+
+      --input-bg: #ffffff;
+      --input-border: #d1d5db;
+
+      --button-secondary-bg: #e5e7eb;
+      --button-secondary-text: #374151;
+
+      --separator-line: #e5e7eb; /* For borders, dividers */
+
+      /* Grays for various shades in light mode */
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --radius-sm: 0.375rem;
+      --radius: 0.5rem;
+      --radius-lg: 0.75rem;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .dark-mode {
-      --primary-color: #6d8bff;
-      --secondary-color: #66bb6a;
-      --accent-color: #ff6b6b;
-      --background-color: #1a1a2e;
-      --card-color: #16213e;
-      --text-color: #e6e6e6;
-      --border-color: #2d3748;
+      /* Dark Mode Palette */
+      --bg-body: #0f172a; /* Deep blue-gray for the body background */
+      --bg-content: #1e293b; /* Slightly lighter dark for main content areas/cards */
+
+      --card-bg: #1e293b; /* Card background */
+      --card-border: #334155; /* Darker subtle border for cards */
+
+      --text-primary: #e2e8f0; /* Light text for headings, main content */
+      --text-secondary: #cbd5e1; /* Slightly darker light for paragraphs, labels */
+      --text-placeholder: #64748b; /* Placeholder text */
+
+      --input-bg: #1f2937;
+      --input-border: #475569;
+
+      --button-secondary-bg: #334155;
+      --button-secondary-text: #e2e8f0;
+
+      --separator-line: #334155; /* For borders, dividers */
+
+      /* Grays for various shades in dark mode (reversed perception) */
+      --gray-50: #1f2937;
+      --gray-100: #334155;
+      --gray-200: #475569;
+      --gray-300: #64748b;
+      --gray-400: #94a3b8;
+      --gray-500: #cbd5e1;
+      --gray-600: #e2e8f0;
+      --gray-700: #f1f5f9;
+      --gray-800: #f8fafc;
+      --gray-900: #ffffff; /* White for strongest highlights if needed */
     }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-body); /* Changed to bg-body */
+      color: var(--text-secondary); /* Default text color */
       line-height: 1.6;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 20%);
+      min-height: 100vh;
+      padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px)
+                env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
     }
+
     .container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 1.5rem; /* Base padding for all devices, adjusted below */
     }
-    header {
+
+    .app-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--separator-line); /* Changed to separator-line */
     }
-    h1 {
-      color: var(--primary-color);
-      font-size: 2rem;
-      font-weight: 600;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
     }
+
+    .logo i {
+      font-size: 1.8rem;
+    }
+
     .theme-toggle {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 0.5rem;
     }
+
     .switch {
       position: relative;
       display: inline-block;
       width: 50px;
       height: 24px;
     }
+
     .switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
+
     .slider {
       position: absolute;
       cursor: pointer;
@@ -74,309 +174,487 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #ccc;
+      background-color: var(--gray-400); /* Adjusted for better contrast */
       transition: .4s;
       border-radius: 24px;
     }
+
     .slider:before {
       position: absolute;
       content: "";
-      height: 16px;
-      width: 16px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white; /* Slider knob remains white */
       transition: .4s;
       border-radius: 50%;
     }
+
     input:checked + .slider {
-      background-color: var(--primary-color);
+      background-color: var(--primary);
     }
+
     input:checked + .slider:before {
       transform: translateX(26px);
     }
+
     .screen {
       display: none;
-      background-color: var(--card-color);
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
     .screen.active {
       display: block;
       animation: fadeIn 0.4s ease-out;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    #login-screen {
-      max-width: 400px;
-      margin: 40px auto;
+
+    .card {
+      background-color: var(--card-bg); /* Changed to card-bg */
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+      border: 1px solid var(--card-border); /* Added card border */
     }
-    .app-title {
-      text-align: center;
-      margin-bottom: 30px;
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
     }
-    .app-title h2 {
-      color: var(--primary-color);
-      margin-bottom: 10px;
-      font-size: 1.8rem;
+
+    /* Glassy Card for Login/Signup */
+    .glassy-card {
+      background-color: rgba(255, 255, 255, 0.15); /* Slightly more opaque white */
+      backdrop-filter: blur(10px); /* Glass effect */
+      -webkit-backdrop-filter: blur(10px); /* Safari support */
+      border: 1px solid rgba(255, 255, 255, 0.3); /* Slightly stronger border */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+      color: var(--text-primary); /* Ensure text is readable over the glassy background */
     }
-    .app-title p {
-      color: var(--text-color);
-      opacity: 0.8;
+
+    .dark-mode .glassy-card {
+      background-color: rgba(30, 41, 59, 0.6); /* Darker transparent background */
+      border: 1px solid rgba(71, 85, 105, 0.4); /* Dark mode subtle border */
+      color: var(--text-primary); /* Ensure text is readable */
     }
-    .google-signin-container {
-      display: flex;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      margin: 20px 0;
-    }
-    #googleSignInBtn {
-      background-color: white;
-      color: #757575;
-      border: 1px solid #dcdcdc;
-      border-radius: 4px;
-      padding: 10px 16px;
-      font-size: 14px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    #googleSignInBtn:hover {
-      background-color: #f7f7f7;
-    }
-    #googleSignInBtn.loading {
-      opacity: 0.7;
-      pointer-events: none;
-    }
-    .user-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .welcome-message h2 {
-      color: var(--primary-color);
-      margin-bottom: 5px;
-    }
-    .logout-btn {
-      background: none;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
       border: none;
-      color: var(--accent-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white; /* Primary buttons should always have white text */
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--button-secondary-bg); /* Changed to variable */
+      color: var(--button-secondary-text); /* Changed to variable */
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--gray-300); /* Darker on hover for light mode */
+      transform: translateY(-1px);
+    }
+    .dark-mode .btn-secondary:hover {
+      background-color: var(--gray-200); /* Lighter on hover for dark mode */
+    }
+
+    .btn-lg {
+      padding: 0.875rem 2rem;
+      font-size: 1.1rem;
+    }
+
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+    }
+
+    .auth-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .auth-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--input-border); /* Consistent with input borders */
+      background-color: var(--input-bg); /* Consistent with input backgrounds */
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .auth-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-control {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--input-border); /* Changed to input-border */
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: var(--input-bg); /* Changed to input-bg */
+      color: var(--text-primary); /* Ensure input text color is primary */
+    }
+
+    .form-control::placeholder {
+        color: var(--text-placeholder); /* Placeholder color */
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .link {
+      color: var(--primary);
+      text-decoration: none;
       cursor: pointer;
       font-size: 0.9rem;
-      text-decoration: underline;
-      padding: 5px;
-    }
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-    .stat-card {
-      background-color: var(--background-color);
-      border-radius: 10px;
-      padding: 15px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
     }
+
+    .link:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+      color: white; /* Stat cards should always have white text for contrast */
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
     .stat-card h3 {
-      color: var(--primary-color);
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-      font-weight: 500;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
     }
+
     .stat-card p {
-      font-size: 1.4rem;
-      font-weight: 600;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
     }
+
+    /* Combined Score Card Styling */
+    .combined-score-card {
+        display: flex;
+        flex-direction: column; /* Stack on mobile */
+        justify-content: space-around;
+        gap: 0.75rem; /* Space between the two scores */
+    }
+
+    .combined-score-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .combined-score-item h3 {
+        margin-bottom: 0.25rem;
+    }
+
+    /* Button Group inside Stat Card */
+    .stat-card .button-group {
+        display: flex;
+        flex-direction: column; /* Stack buttons on mobile */
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .stat-card .button-group .btn {
+        width: 100%; /* Full width for buttons in the group */
+    }
+
+
     .progress-container {
       width: 100%;
       height: 8px;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: var(--gray-200); /* Adjusted for consistency */
       border-radius: 4px;
-      margin: 15px 0;
       overflow: hidden;
+      margin: 1rem 0 1.5rem;
     }
+
     .progress-bar {
       height: 100%;
       border-radius: 4px;
-      background-color: var(--primary-color);
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       transition: width 0.5s ease;
     }
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 25px;
-    }
-    .btn {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-    .btn:active {
-      transform: translateY(0);
-    }
-    .btn:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-      transform: none;
-    }
-    .btn-secondary {
-      background-color: #5f6368;
-    }
+
     .quiz-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 25px;
+      margin-bottom: 1.5rem;
     }
-    .quiz-title {
-      color: var(--primary-color);
-    }
+
     .timer {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
       display: flex;
       align-items: center;
-      gap: 5px;
-      /* --- FIXED TIMER --- */
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--warning), #d97706);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow);
       position: fixed;
-      top: 20px;
-      right: 30px;
-      z-index: 100;
+      top: 1.25rem;
+      right: 1.5rem;
+      z-index: 1000;
     }
+
     .timer.warning {
       animation: pulse 1s infinite;
     }
+
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+
     .questions-container {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      margin-bottom: 25px;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
     }
+
     .question-card {
-      background-color: var(--background-color);
-      border-radius: 10px;
-      padding: 18px;
-      border-left: 4px solid var(--primary-color);
-      transition: transform 0.2s ease;
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--card-border); /* Consistent card border */
+      transition: var(--transition);
     }
+
     .question-card:hover {
       transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
     }
+
     .question-text {
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 1.25rem;
       font-size: 1.1rem;
-    }
-    .options {
+      color: var(--text-primary); /* Question text is primary */
       display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 5px 0;
+      align-items: center;
+      gap: 0.5rem;
     }
+
+    .question-text i {
+      color: var(--primary);
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 0.75rem;
+    }
+
     .option {
-      min-width: 60px;
-      padding: 10px 15px;
-      text-align: center;
-      background-color: var(--card-color);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
+      padding: 1rem;
+      border: 2px solid var(--input-border); /* Options use input border */
+      border-radius: var(--radius);
       cursor: pointer;
-      flex-shrink: 0;
-      transition: all 0.2s ease;
+      text-align: center;
+      font-weight: 500;
+      transition: var(--transition);
+      background-color: var(--input-bg); /* Options use input background */
+      color: var(--text-primary); /* Option text is primary */
     }
+
     .option:hover:not(.disabled) {
-      background-color: rgba(74, 107, 255, 0.1);
-      border-color: var(--primary-color);
+      border-color: var(--primary);
+      background-color: rgba(99, 102, 241, 0.08); /* Slightly stronger hover */
+      transform: translateY(-1px);
     }
+    .dark-mode .option:hover:not(.disabled) {
+      background-color: rgba(99, 102, 241, 0.15); /* Stronger hover for dark mode */
+    }
+
     .option.selected {
-      background-color: var(--primary-color);
-      color: white;
-      border-color: var(--primary-color);
+      border-color: #007bff; /* Use a solid blue color */
+      background-color: #007bff; /* Solid blue background */
+      color: white; /* White text for better contrast on blue */
     }
+    .dark-mode .option.selected {
+      background-color: #007bff; /* Solid blue background for dark mode as well */
+      color: white; /* White text for dark mode */
+    }
+
     .option.correct {
-      background-color: var(--secondary-color);
-      color: white;
-      border-color: var(--secondary-color);
+      border-color: var(--success);
+      background-color: rgba(16, 185, 129, 0.15); /* More visible correct state */
+      color: var(--success);
     }
+    .dark-mode .option.correct {
+      background-color: rgba(16, 185, 129, 0.25);
+    }
+
     .option.incorrect {
-      background-color: var(--accent-color);
-      color: white;
-      border-color: var(--accent-color);
+      border-color: var(--danger);
+      background-color: rgba(239, 68, 68, 0.15); /* More visible incorrect state */
+      color: var(--danger);
     }
+    .dark-mode .option.incorrect {
+      background-color: rgba(239, 68, 68, 0.25);
+    }
+
     .option.disabled {
-        cursor: not-allowed;
-        opacity: 0.7;
+      cursor: not-allowed;
+      opacity: 0.6;
     }
+
+    .submit-btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
     .results-header {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 2rem;
     }
-    .results-header h2 {
-      color: var(--primary-color);
-      margin-bottom: 15px;
-    }
+
     .score-display {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      margin: 15px 0;
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0.5rem 0;
     }
+
     .answers-review {
-      margin-top: 25px;
+      margin-top: 2rem;
     }
+
     .answer-item {
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border); /* Consistent card border */
+      margin-bottom: 1rem;
+      transition: var(--transition);
+      background-color: var(--bg-content); /* Use bg-content for nested cards */
     }
-    .answer-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
+
+    .answer-item:hover {
+      border-color: var(--primary);
+      transform: translateX(5px);
     }
-    .correct {
-      color: var(--secondary-color);
+
+    .answer-item h4 {
+      margin-bottom: 0.75rem;
+      color: var(--text-primary); /* Answer text is primary */
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .answer-item.correct h4 {
+      color: var(--success);
+    }
+
+    .answer-item.incorrect h4 {
+      color: var(--danger);
+    }
+
+    .answer-feedback {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
       font-weight: 500;
+      color: var(--text-secondary); /* Feedback text is secondary */
     }
-    .incorrect {
-      color: var(--accent-color);
-      font-weight: 500;
+
+    .answer-feedback.correct {
+      color: var(--success);
     }
+
+    .answer-feedback.incorrect {
+      color: var(--danger);
+    }
+
+    .correct-answer {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background-color: rgba(16, 185, 129, 0.1); /* Lighter background for correct */
+      border-radius: var(--radius);
+      margin-top: 0.75rem;
+      border-left: 4px solid var(--success);
+      color: var(--success); /* Text for correct answer */
+    }
+    .dark-mode .correct-answer {
+      background-color: rgba(16, 185, 129, 0.2);
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -384,270 +662,704 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for better blur effect */
       z-index: 1000;
       justify-content: center;
       align-items: center;
+      backdrop-filter: blur(8px); /* Stronger blur for modal */
+      -webkit-backdrop-filter: blur(8px);
     }
+
     .modal-content {
-      background-color: var(--card-color);
-      border-radius: 12px;
+      background-color: var(--bg-content); /* Consistent with content background */
+      border-radius: var(--radius-lg);
       width: 90%;
-      max-width: 500px;
-      max-height: 80vh;
+      max-width: 500px; /* Default max-width for smaller screens */
+      max-height: 90vh;
       overflow-y: auto;
-      padding: 25px;
+      padding: 2rem;
       position: relative;
-      animation: modalFadeIn 0.3s ease;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--card-border); /* Consistent card border */
+      color: var(--text-secondary); /* Modal text is secondary */
     }
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: translateY(-15px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .modal-content h2 {
+      color: var(--text-primary); /* Modal headings are primary */
     }
+
     .close-btn {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 1rem;
+      right: 1rem;
       font-size: 1.5rem;
       cursor: pointer;
-      color: var(--text-color);
+      color: var(--text-secondary); /* Close button uses secondary text */
       background: none;
       border: none;
-    }
-    .history-list {
-      margin-top: 15px;
-    }
-    .history-item {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-    .history-item:last-child {
-      border-bottom: none;
-    }
-    .history-item h3 {
-      margin-bottom: 5px;
-      color: var(--primary-color);
-    }
-    .history-item p {
-      margin: 3px 0;
-      font-size: 0.9rem;
-    }
-    .sync-status {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      background-color: var(--card-color);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 5px;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .close-btn:hover {
+      background-color: var(--gray-200); /* Darken background on hover in light mode */
+      color: var(--primary);
+    }
+    .dark-mode .close-btn:hover {
+      background-color: var(--gray-700); /* Lighten background on hover in dark mode */
+    }
+
+    .history-item, .leaderboard-item {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--separator-line); /* Consistent separator */
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+      background-color: var(--card-bg); /* Consistent card background */
+    }
+
+    .history-item:last-child, .leaderboard-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .history-item h3, .leaderboard-item h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-item h3 i, .leaderboard-item h3 i {
+      font-size: 1.1rem;
+    }
+
+    .leaderboard-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.25rem;
+        background-color: var(--card-bg); /* Consistent card background */
+        border: 1px solid var(--card-border); /* Consistent card border */
+        margin-bottom: 0.5rem;
+        border-radius: var(--radius);
+        color: var(--text-primary); /* Default leaderboard item text */
+    }
+
+    .leaderboard-item span:first-child {
+        font-weight: 600;
+        color: var(--text-primary); /* User name is primary text */
+    }
+
+    .leaderboard-item span:last-child {
+        font-weight: 700;
+        color: var(--primary); /* Score is primary color */
+    }
+
+    /* Podium Colors for Leaderboard */
+    .leaderboard-item:nth-child(1) {
+        background: linear-gradient(to right, #FFD700, #FFEA00); /* Gold */
+        color: #333; /* Darker text for gold background */
+        border-color: #FFD700;
+    }
+    .leaderboard-item:nth-child(1) span {
+        color: #333; /* Darker text for gold background */
+    }
+
+    .leaderboard-item:nth-child(2) {
+        background: linear-gradient(to right, #C0C0C0, #E0E0E0); /* Silver */
+        color: #333; /* Darker text for silver background */
+        border-color: #C0C0C0;
+    }
+    .leaderboard-item:nth-child(2) span {
+        color: #333; /* Darker text for silver background */
+    }
+
+    .leaderboard-item:nth-child(3) {
+        background: linear-gradient(to right, #CD7F32, #E69138); /* Bronze */
+        color: #333; /* Darker text for bronze background */
+        border-color: #CD7F32;
+    }
+    .leaderboard-item:nth-child(3) span {
+        color: #333; /* Darker text for bronze background */
+    }
+
+
+    .sync-status {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      background-color: var(--card-bg); /* Sync status uses card background */
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       z-index: 1001;
+      border: 1px solid var(--card-border); /* Sync status uses card border */
+      color: var(--text-secondary); /* Sync status text is secondary */
     }
+
     .sync-status.syncing {
-      color: #ff9800;
+      color: var(--warning);
     }
+
     .sync-status.synced {
-      color: var(--secondary-color);
+      color: var(--success);
     }
+
     .sync-status.error {
-      color: var(--accent-color);
+      color: var(--danger);
     }
-    @media (max-width: 600px) {
+
+    .welcome-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .welcome-section h2 {
+      font-size: 1.8rem;
+      color: var(--text-primary); /* Welcome heading is primary text */
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-section p {
+      color: var(--text-secondary); /* Welcome paragraph is secondary text */
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    .action-buttons {
+      display: flex; /* Changed to flex for mobile */
+      flex-direction: row; /* Changed to row for mobile */
+      gap: 0.75rem; /* Reduced gap for mobile */
+      margin-top: 1.5rem;
+      justify-content: space-between; /* Distribute items */
+      align-items: center;
+    }
+
+    .action-buttons .btn-primary {
+      flex: 0 0 65%; /* 65% width for start button on mobile */
+      max-width: 65%;
+    }
+
+    .action-buttons .btn-secondary {
+      flex: 0 0 32%; /* 32% width for leaderboard button on mobile (leaving room for gap) */
+      max-width: 32%;
+    }
+
+    /* ------------------------------------- */
+    /* RESPONSIVE DESIGN - MEDIA QUERIES   */
+    /* ------------------------------------- */
+
+    /* Mobile-first: Styles above are for screens up to 480px (small phones) */
+
+    /* Small tablets and large phones (portrait) - 481px to 768px */
+    @media (min-width: 481px) and (max-width: 768px) {
       .container {
-        padding: 15px;
+        padding: 1.5rem; /* Slightly more padding than mobile */
       }
-      .stats-container {
-        grid-template-columns: 1fr 1fr;
+
+      .app-header {
+        flex-direction: row; /* Horizontal layout for header */
+        align-items: center;
+        gap: 0; /* Reset gap */
       }
-      .app-title h2 {
-        font-size: 1.5rem;
+
+      .logo {
+        font-size: 1.6rem;
       }
-      .quiz-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+      .logo i {
+        font-size: 2rem;
       }
+
+      .card {
+        padding: 2rem; /* Consistent padding */
+      }
+
+      /* Auth Screens */
+      #login-screen .card,
+      #signup-screen .card {
+          max-width: 400px; /* Constrain width for a better look */
+          margin: 2rem auto; /* Center the card */
+      }
+
+      .welcome-section h2 {
+        font-size: 2rem;
+      }
+      .welcome-section p {
+        font-size: 1.2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for tablets */
+        gap: 1.5rem;
+      }
+
+      .stat-card p {
+        font-size: 2rem; /* Larger stats */
+      }
+
+      .options {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust options grid */
+        gap: 1rem;
+      }
+
+      .option {
+        padding: 1.2rem; /* Slightly larger options */
+        font-size: 1.1rem;
+      }
+
+      .score-display {
+        font-size: 3rem; /* Slightly smaller score display than desktop */
+      }
+
+      .modal-content {
+        max-width: 600px; /* Larger modals for tablets */
+        padding: 2.5rem;
+      }
+
       .timer {
-        top: 15px;
-        right: 15px;
+        top: 1.5rem;
+        right: 2rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 1.05rem;
+      }
+
+      /* Tablet specific adjustments for action buttons */
+      .action-buttons {
+        flex-direction: row; /* Keep row for tablets */
+        gap: 1rem;
+        justify-content: center; /* Center them on tablet */
+      }
+      .action-buttons .btn-primary,
+      .action-buttons .btn-secondary {
+        flex: 1 1 auto; /* Allow them to grow, but respect max-width */
+        max-width: 250px; /* Set a max-width for tablet buttons */
+      }
+
+      /* Combined Score Card Styling for Tablets */
+      .combined-score-card {
+          flex-direction: column; /* Remain column on tablets for 3 items */
+          padding: 1rem; /* Adjust padding for more items */
+      }
+      .combined-score-item {
+          flex-direction: row; /* Make items row inside the card */
+          justify-content: space-between; /* Space out title and value */
+          width: 100%; /* Take full width */
+      }
+      .combined-score-item h3 {
+          margin-bottom: 0;
+          font-size: 0.9rem; /* Smaller title */
+      }
+      .combined-score-item p {
+          font-size: 1.5rem; /* Smaller value */
+      }
+      /* Button Group inside Stat Card for Tablets */
+      .stat-card .button-group {
+          flex-direction: row; /* Side-by-side on tablets */
+          justify-content: center; /* Center the buttons */
+          flex-wrap: wrap; /* Allow wrapping if space is tight */
+      }
+
+      .stat-card .button-group .btn {
+          width: auto; /* Allow natural width */
+          flex: 1 1 48%; /* Roughly half width, considering gap */
+          max-width: 150px; /* Max width for each button */
       }
     }
-    @media (max-width: 400px) {
-      .btn {
-        width: 100%;
+
+    /* Desktops and larger tablets (landscape) - 769px and up */
+    @media (min-width: 769px) {
+      .container {
+        padding: 2rem; /* More generous padding */
       }
+
+      .app-header {
+        flex-direction: row; /* Horizontal layout for header */
+        align-items: center;
+        gap: 0; /* Reset gap */
+      }
+
+      .logo {
+        font-size: 1.8rem;
+      }
+      .logo i {
+        font-size: 2.2rem;
+      }
+
+      .card {
+        padding: 2.5rem; /* Larger padding for cards */
+      }
+
+      /* Auth Screens */
+      #login-screen .card,
+      #signup-screen .card {
+          max-width: 450px; /* Optimal width for forms */
+          margin: 3rem auto; /* Center the card more prominently */
+      }
+
+      .welcome-section h2 {
+        font-size: 2.2rem;
+      }
+      .welcome-section p {
+        font-size: 1.3rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns now that metrics are combined */
+        gap: 2rem;
+      }
+
+      .stat-card h3 {
+        font-size: 1rem;
+      }
+      .stat-card p {
+        font-size: 2.2rem; /* Larger stats */
+      }
+
       .options {
-        flex-wrap: nowrap;
-        overflow-x: auto;
+        grid-template-columns: repeat(4, 1fr); /* Four columns for quiz options */
+        gap: 1rem;
       }
+
       .option {
-        min-width: 80px;
-        flex-shrink: 0;
+        padding: 1.2rem;
+        font-size: 1.1rem;
+      }
+
+      .score-display {
+        font-size: 4rem; /* Largest score display */
+      }
+
+      .modal-content {
+        max-width: 700px; /* Even larger modals for desktops */
+        padding: 3rem;
+      }
+
+      .timer {
+        top: 2rem;
+        right: 2.5rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .action-buttons {
+        flex-direction: row; /* Horizontal buttons on desktop */
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .action-buttons .btn {
+        width: auto; /* Allow buttons to take natural width */
+        min-width: 200px; /* Ensure a minimum width */
+      }
+
+      .btn-lg {
+          padding: 1rem 2.5rem;
+          font-size: 1.2rem;
+      }
+
+      /* Combined Score Card Styling for Desktops */
+      .combined-score-card {
+          flex-direction: row; /* Side-by-side for 3 items on desktops */
+          flex-wrap: wrap; /* Allow wrapping */
+          justify-content: space-around; /* Distribute items */
+          gap: 1rem; /* Adjust gap */
+          padding: 1.5rem; /* Adjust padding */
+      }
+      .combined-score-item {
+          flex: 1 1 auto; /* Allow items to grow/shrink */
+          min-width: 120px; /* Ensure minimum width */
+          flex-direction: column; /* Stack title and value */
+      }
+      .combined-score-item h3 {
+          font-size: 1rem; /* Restore normal title size */
+      }
+      .combined-score-item p {
+          font-size: 1.75rem; /* Restore normal value size */
+      }
+
+
+      /* Button Group inside Stat Card for Desktops */
+      .stat-card .button-group {
+          flex-direction: row; /* Side-by-side on desktops */
+          justify-content: center;
+          gap: 1rem; /* Adjust gap between buttons */
+      }
+
+      .stat-card .button-group .btn {
+          width: auto; /* Allow natural width */
+          flex: 1; /* Allow buttons to share space */
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Login Screen -->
     <div id="login-screen" class="screen active">
-      <div class="app-title">
-        <h1>Club of Competition</h1>
-		 
-        <p>Master your multiplication tables</p>
-      </div>
-      <div class="google-signin-container">
-        <button id="googleSignInBtn">
-          <img src="https://www.google.com/favicon.ico" alt="Google logo" />
-          Sign in with Google
-        </button>
+      <div class="card glassy-card">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <h4>Club Of Competition</h4>
+        </div>
+        <div class="welcome-section">
+          <h3>Master Your Multiplication Tables</h3>
+          <p>Challenge yourself and improve your math skills</p>
+        </div>
+
+        <div class="auth-container">
+          <button id="googleSignInBtn" class="auth-btn">
+            <i class="fab fa-google"></i>
+            Sign in with Google
+          </button>
+
+          <div style="position: relative; text-align: center; margin: 1.5rem 0;">
+            <span style="background: var(--bg-body); padding: 0 1rem; color: var(--text-secondary);">or continue with email</span>
+            <div style="position: absolute; top: 50%; width: 100%; height: 1px; background-color: var(--separator-line); z-index: -1;"></div>
+          </div>
+
+          <div class="form-group">
+            <input type="email" id="email" placeholder="Email" class="form-control">
+            <input type="password" id="password" placeholder="Password" class="form-control">
+            <button id="signInBtn" class="btn btn-primary">Sign In</button>
+            <a href="#" id="showSignUpBtn" class="btn btn-secondary">Create Account</a> <a href="#" id="forgotPassword" class="link">Forgot password?</a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Start Screen -->
+    <div id="signup-screen" class="screen">
+        <div class="card glassy-card">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h2>Club Of Competition</h2>
+            </div>
+            <div class="welcome-section">
+                <h2>Create Your Account</h2>
+                <p>Start mastering maths Tables today!</p>
+            </div>
+
+            <div class="auth-container">
+                <button id="googleSignUpBtn" class="auth-btn">
+                    <i class="fab fa-google"></i>
+                    Sign up with Google
+                </button>
+
+                <div style="position: relative; text-align: center; margin: 1.5rem 0;">
+                    <span style="background: var(--bg-body); padding: 0 1rem; color: var(--text-secondary);">or sign up with email</span>
+                    <div style="position: absolute; top: 50%; width: 100%; height: 1px; background-color: var(--separator-line); z-index: -1;"></div>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="signup-email" placeholder="Email" class="form-control">
+                    <input type="password" id="signup-password" placeholder="Password" class="form-control">
+                    <input type="password" id="signup-confirm-password" placeholder="Confirm Password" class="form-control">
+                    <button id="signUpBtn" class="btn btn-primary">Create Account</button>
+                    <a href="#" id="backToSignInBtn" class="link">Already have an account? Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="start-screen" class="screen">
-      <header>
-	   <h1>Club of Competition</h1>
-         <div class="theme-toggle">
-          <span id="theme-label">Dark</span>
+      <div class="app-header">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <h3>Club Of Competition</h3>
+        </div>
+        <div class="theme-toggle">
+          <span id="theme-label">🌙</span>
           <label class="switch">
-            <input type="checkbox" id="darkModeToggle" />
+            <input type="checkbox" id="darkModeToggle">
             <span class="slider"></span>
           </label>
         </div>
-      </header>
-      <div class="user-info">
-        <div>
-          <h2 id="welcome-user">Welcome!</h2>
-          <p>Practice multiplication tables up to 20×10</p>
-        </div>
-        <button class="logout-btn" id="logout-btn">Logout</button>
       </div>
-      <div class="stats-container">
-        <div class="stat-card">
-          <h3>Tests Completed</h3>
-          <p id="tests-completed">0</p>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h2 id="welcome-user" style="color: var(--text-primary);">Welcome, User!</h2>
+          <button class="btn btn-secondary" id="logout-btn">Logout</button>
         </div>
-        <div class="stat-card">
-          <h3>Average Score</h3>
-          <p id="average-score">0</p>
+
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Practice multiplication tables up to 20×10</p>
+
+        <div class="stats-grid">
+          <div class="stat-card combined-score-card">
+            <div class="combined-score-item">
+                <h4>Tests Completed</h4>
+                <p id="tests-completed">0</p>
+            </div>
+            <div class="combined-score-item">
+                <h4>Average Score</h4>
+                <p id="average-score">0</p>
+            </div>
+            <div class="combined-score-item">
+                <h4>Highest Score</h4>
+                <p id="highest-score">0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <h3>Quick Actions</h3>
+            <div class="button-group">
+                <button id="history-btn" class="btn btn-secondary">
+                  <i class="fas fa-history"></i>
+                  History
+                </button>
+                <button id="leaderboard-btn" class="btn btn-secondary">
+                  <i class="fas fa-trophy"></i>
+                  Leaderboard
+                </button>
+            </div>
+          </div>
         </div>
-        <div class="stat-card">
-          <h3>Highest Score</h3>
-          <p id="highest-score">0</p>
+
+        <div style="margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="color: var(--text-secondary);">Progress</span>
+            <span id="tests-remaining" style="color: var(--text-secondary);">500</span>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
+          </div>
         </div>
-      </div>
-      <div class="progress-container">
-        <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
-      </div>
-      <p style="text-align: center; font-size: 0.9rem; color: var(--text-color); opacity: 0.7;">
-        <span id="tests-remaining">500</span> tests remaining
-      </p>
-      <div class="btn-group">
-        <button id="start-btn" class="btn">Start New Test</button>
-        <button id="history-btn" class="btn btn-secondary">View History</button>
+
+        <div class="action-buttons">
+          <button id="start-btn" class="btn btn-primary btn-lg">
+            <i class="fas fa-play"></i>
+            Start New Test
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Quiz Screen -->
     <div id="quiz-screen" class="screen">
-      <div class="quiz-header">
-        <h2 class="quiz-title">COC - Practice Test for tables</h2>
-        <!-- Timer is now positioned via CSS -->
-      </div>
-      <div id="timer" class="timer">⏱️ 01:00</div>
-      <div id="questions-container" class="questions-container"></div>
-      <button id="submit-btn" class="btn">Submit </button>
-    </div>
-
-    <!-- Results Screen -->
-    <div id="results-screen" class="screen">
-      <div class="results-header">
-        <h2>Test Results</h2>
-        <div class="score-display" id="final-score">0</div>
-        <p>out of 100 points</p>
-        <div class="progress-container">
-          <div class="progress-bar" id="score-progress" style="width: 0%"></div>
+      <div class="app-header">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <h2>Club Of Competition</h2>
         </div>
-        <p>Time taken: <span id="time-taken">0</span> seconds</p>
+        <div id="timer" class="timer">⏱️ 01:00</div>
       </div>
-      <div id="answers-review" class="answers-review"></div>
-      <div class="btn-group">
-        <!-- <button id="restart-btn" class="btn">New Test</button>-->
-        <button id="back-to-home-btn" class="btn btn-secondary">Back to Home</button>
+
+      <div class="card">
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Multiplication Tables Challenge</h2>
+        <div id="questions-container" class="questions-container"></div>
+
+        <div class="submit-btn-container">
+          <button id="submit-btn" class="btn btn-primary btn-lg">
+            <i class="fas fa-check-circle"></i>
+            Submit Test
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- History Modal -->
+  <div id="results-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-results-btn">&times;</button>
+      <div class="results-header">
+        <h2><i class="fas fa-award"></i> Test Results</h2>
+        <div class="score-display" id="final-score">0</div>
+        <p style="color: var(--text-secondary);">out of 100 points</p>
+        <div class="progress-container">
+          <div class="progress-bar" id="score-progress" style="width: 0%"></div>
+        </div>
+        <p style="color: var(--text-secondary);">Time taken: <span id="time-taken">0</span> seconds</p>
+      </div>
+      <div id="answers-review" class="answers-review"></div>
+      <div style="display: flex; justify-content: center; margin-top: 2rem;">
+        <button id="back-to-home-btn" class="btn btn-primary">Back to Home</button>
+      </div>
+    </div>
+  </div>
+
   <div id="history-modal" class="modal">
     <div class="modal-content">
       <button class="close-btn" id="close-history-btn">&times;</button>
-      <h2>Test History</h2>
+      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-history"></i> Test History</h2>
       <div id="history-list" class="history-list"></div>
     </div>
   </div>
 
-  <!-- Sync Status Indicator -->
+  <div id="leaderboard-modal" class="modal"> <div class="modal-content">
+      <button class="close-btn" id="close-leaderboard-btn">&times;</button>
+      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-trophy"></i> Leaderboard (Top 10)</h2>
+      <div id="leaderboard-list" class="leaderboard-list"></div>
+    </div>
+  </div>
+
   <div id="sync-status" class="sync-status">
-    <span id="sync-icon">↻</span>
+    <i class="fas fa-sync-alt"></i>
     <span id="sync-text">Syncing...</span>
   </div>
 
-  <!-- Firebase SDK -->
   <script type="module">
-    // Import Firebase modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { 
-      getAuth, 
-      GoogleAuthProvider, 
-      signInWithPopup, 
-      signOut, 
-      onAuthStateChanged 
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup,
+      signOut,
+      onAuthStateChanged,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { 
+    import {
       getFirestore,
       doc,
       setDoc,
       onSnapshot,
       getDoc,
-      updateDoc
+      updateDoc,
+      collection,
+      query,
+      orderBy,
+      limit,
+      getDocs
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // IMPORTANT: Replace with your web app's Firebase configuration
-   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyC9O1-QzrMD8c6bkifwMlzneLTU8eB4PH8",
-  authDomain: "login-coc.firebaseapp.com",
-  databaseURL: "https://login-coc-default-rtdb.firebaseio.com",
-  projectId: "login-coc",
-  storageBucket: "login-coc.firebasestorage.app",
-  messagingSenderId: "793350174008",
-  appId: "1:793350174008:web:47f655787f71f4e852bdcd",
-  measurementId: "G-9F5XW0QKCV"
-};
-    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyC9O1-QzrMD8c6bkifwMlzneLTU8eB4PH8",
+      authDomain: "login-coc.firebaseapp.com",
+      databaseURL: "https://login-coc-default-rtdb.firebaseio.com",
+      projectId: "login-coc",
+      storageBucket: "login-coc.firebaseastorage.app",
+      messagingSenderId: "793350174008",
+      appId: "1:793350174008:web:47f655787f71f4e852bdcd",
+      measurementId: "G-9F5XW0QKCV"
+    };
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app); // Initialize Firestore
+    const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
     document.addEventListener('DOMContentLoaded', () => {
       // Element selectors
       const loginScreen = document.getElementById('login-screen');
+      const signupScreen = document.getElementById('signup-screen'); // New signup screen
       const startScreen = document.getElementById('start-screen');
       const quizScreen = document.getElementById('quiz-screen');
-      const resultsScreen = document.getElementById('results-screen');
+
       const googleSignInBtn = document.getElementById('googleSignInBtn');
+      const googleSignUpBtn = document.getElementById('googleSignUpBtn'); // New Google Sign Up button
+
       const logoutBtn = document.getElementById('logout-btn');
       const welcomeUserEl = document.getElementById('welcome-user');
       const startBtn = document.getElementById('start-btn');
       const historyBtn = document.getElementById('history-btn');
+      const leaderboardBtn = document.getElementById('leaderboard-btn');
       const submitBtn = document.getElementById('submit-btn');
-      //const restartBtn = document.getElementById('restart-btn');
       const backToHomeBtn = document.getElementById('back-to-home-btn');
       const questionsContainer = document.getElementById('questions-container');
       const timerEl = document.getElementById('timer');
@@ -663,17 +1375,34 @@ const firebaseConfig = {
       const historyModal = document.getElementById('history-modal');
       const closeHistoryBtn = document.getElementById('close-history-btn');
       const historyListEl = document.getElementById('history-list');
+      const leaderboardModal = document.getElementById('leaderboard-modal');
+      const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
+      const leaderboardListEl = document.getElementById('leaderboard-list');
       const darkModeToggle = document.getElementById('darkModeToggle');
       const themeLabel = document.getElementById('theme-label');
       const syncStatus = document.getElementById('sync-status');
-      const syncIcon = document.getElementById('sync-icon');
       const syncText = document.getElementById('sync-text');
 
+      const emailEl = document.getElementById('email');
+      const passwordEl = document.getElementById('password');
+      const signInBtn = document.getElementById('signInBtn');
+      const showSignUpBtn = document.getElementById('showSignUpBtn'); // Button to show signup screen
+      const forgotPasswordBtn = document.getElementById('forgotPassword');
+
+      const signupEmailEl = document.getElementById('signup-email'); // New signup email
+      const signupPasswordEl = document.getElementById('signup-password'); // New signup password
+      const signupConfirmPasswordEl = document.getElementById('signup-confirm-password'); // New confirm password
+      const signUpBtn = document.getElementById('signUpBtn'); // Actual signup button
+      const backToSignInBtn = document.getElementById('backToSignInBtn'); // Button to go back to sign in
+
+      const resultsModal = document.getElementById('results-modal');
+      const closeResultsBtn = document.getElementById('close-results-btn');
+
       const MAX_TESTS = 500;
-      let unsubscribeFromFirestore = null; 
+      let unsubscribeFromFirestore = null;
       let appState = {
         currentUser: null,
-        quizState: null // Will hold the state of the current quiz
+        quizState: null
       };
 
       function init() {
@@ -687,13 +1416,17 @@ const firebaseConfig = {
           if (user) {
             const userId = user.uid;
             if (unsubscribeFromFirestore) unsubscribeFromFirestore();
-            
             const userDocRef = doc(db, "users", userId);
-            
             unsubscribeFromFirestore = onSnapshot(userDocRef, (docSnap) => {
               updateSyncStatus('synced');
               if (docSnap.exists()) {
-                appState.currentUser = { uid: userId, ...docSnap.data() };
+                const firebaseData = docSnap.data();
+                appState.currentUser = {
+                    uid: userId,
+                    ...firebaseData,
+                    // Ensure darkMode is a boolean, falling back to existing state or false
+                    darkMode: typeof firebaseData.darkMode === 'boolean' ? firebaseData.darkMode : (appState.currentUser?.darkMode || false)
+                };
                 saveToLocalStorage(`user_${userId}`, appState.currentUser);
               } else {
                 handleNewUser(user, userDocRef);
@@ -722,14 +1455,14 @@ const firebaseConfig = {
           appState.currentUser = { uid: user.uid, ...userData };
           updateUIForUser();
       }
-      
+
       function createNewUserData(user) {
           return {
-              displayName: user.displayName,
+              displayName: user.displayName || user.email,
               email: user.email,
               photoURL: user.photoURL,
               history: [],
-              darkMode: false
+              // darkMode: false Removed dark mode from user data in Firebase
           };
       }
 
@@ -744,17 +1477,14 @@ const firebaseConfig = {
         syncStatus.className = `sync-status ${status}`;
         switch(status) {
           case 'syncing':
-            syncIcon.textContent = '↻';
-            syncText.textContent = 'Syncing...';
+            syncStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span id="sync-text">Syncing...</span>';
             break;
           case 'synced':
-            syncIcon.textContent = '✓';
-            syncText.textContent = 'Synced';
+            syncStatus.innerHTML = '<i class="fas fa-check"></i><span id="sync-text">Synced</span>';
             setTimeout(() => { syncStatus.style.display = 'none'; }, 2000);
             break;
           case 'error':
-            syncIcon.textContent = '✗';
-            syncText.textContent = 'Sync Error';
+            syncStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span id="sync-text">Sync Error</span>';
             break;
         }
         syncStatus.style.display = 'flex';
@@ -762,45 +1492,134 @@ const firebaseConfig = {
 
       function setupEventListeners() {
         googleSignInBtn.addEventListener('click', signInWithGoogle);
+        googleSignUpBtn.addEventListener('click', signInWithGoogle); // Google sign-up also uses the same logic
         logoutBtn.addEventListener('click', () => signOut(auth).catch(console.error));
         startBtn.addEventListener('click', startQuiz);
         historyBtn.addEventListener('click', showHistory);
+        leaderboardBtn.addEventListener('click', showLeaderboard);
         submitBtn.addEventListener('click', () => submitQuiz());
-        //restartBtn.addEventListener('click', startQuiz);
-        backToHomeBtn.addEventListener('click', showStartScreen);
+        backToHomeBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+            showStartScreen();
+        });
+        closeResultsBtn.addEventListener('click', () => resultsModal.style.display = 'none');
         closeHistoryBtn.addEventListener('click', () => historyModal.style.display = 'none');
+        closeLeaderboardBtn.addEventListener('click', () => leaderboardModal.style.display = 'none');
         darkModeToggle.addEventListener('change', toggleDarkMode);
         window.addEventListener('click', (e) => {
           if (e.target === historyModal) historyModal.style.display = 'none';
+          if (e.target === resultsModal) resultsModal.style.display = 'none';
+          if (e.target === leaderboardModal) leaderboardModal.style.display = 'none';
+        });
+
+        // Email/Password Auth
+        signInBtn.addEventListener('click', signInWithEmail);
+        signUpBtn.addEventListener('click', signUpWithEmail); // Renamed for clarity
+        forgotPasswordBtn.addEventListener('click', sendPasswordReset);
+
+        // Screen Navigation
+        showSignUpBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSignUpScreen();
+        });
+        backToSignInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginScreen();
         });
       }
 
       function signInWithGoogle() {
-        googleSignInBtn.classList.add('loading');
-        googleSignInBtn.innerHTML = '<img src="https://www.google.com/favicon.ico" alt="Google logo" /> Signing in...';
+        // Determine which button was clicked for specific text updates
+        const targetBtn = this.id === 'googleSignInBtn' ? googleSignInBtn : googleSignUpBtn;
+
+        targetBtn.classList.add('loading');
+        targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
         signInWithPopup(auth, provider)
           .catch((error) => {
             console.error('Firebase Sign-In Error:', error);
             alert('Error signing in with Google. Please try again.');
           })
           .finally(() => {
-            googleSignInBtn.classList.remove('loading');
-            googleSignInBtn.innerHTML = '<img src="https://www.google.com/favicon.ico" alt="Google logo" /> Sign in with Google';
+            targetBtn.classList.remove('loading');
+            targetBtn.innerHTML = '<i class="fab fa-google"></i> Sign in with Google';
           });
+      }
+
+      function signInWithEmail() {
+        const email = emailEl.value;
+        const password = passwordEl.value;
+        if (!email || !password) {
+            alert('Please enter both email and password.');
+            return;
+        }
+        signInBtn.classList.add('loading');
+        signInBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+        signInWithEmailAndPassword(auth, email, password)
+            .catch(error => {
+                alert(error.message);
+            })
+            .finally(() => {
+                signInBtn.classList.remove('loading');
+                signInBtn.innerHTML = 'Sign In';
+            });
+      }
+
+      function signUpWithEmail() {
+        const email = signupEmailEl.value;
+        const password = signupPasswordEl.value;
+        const confirmPassword = signupConfirmPasswordEl.value;
+
+        if (!email || !password || !confirmPassword) {
+            alert('Please fill in all fields.');
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert('Passwords do not match.');
+            return;
+        }
+
+        signUpBtn.classList.add('loading');
+        signUpBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                alert('Account created successfully! You are now signed in.');
+                // User is automatically signed in after creation
+            })
+            .catch(error => {
+                alert(error.message);
+            })
+            .finally(() => {
+                signUpBtn.classList.remove('loading');
+                signUpBtn.innerHTML = 'Create Account';
+            });
+      }
+
+      function sendPasswordReset() {
+          const email = emailEl.value;
+          if (!email) {
+              alert('Please enter your email address to reset your password.');
+              return;
+          }
+          sendPasswordResetEmail(auth, email)
+            .then(() => {
+                alert('Password reset email sent! Check your inbox.');
+            })
+            .catch(error => {
+                alert(error.message);
+            });
       }
 
       function applySavedTheme() {
         const isDarkMode = appState.currentUser ? appState.currentUser.darkMode : loadFromLocalStorage('darkMode') === 'true';
         document.body.classList.toggle('dark-mode', isDarkMode);
         darkModeToggle.checked = isDarkMode;
-        themeLabel.textContent = isDarkMode ? 'Light' : 'Dark';
+        themeLabel.textContent = isDarkMode ? '☀️' : '🌙';
       }
 
       async function toggleDarkMode() {
         const isDarkMode = darkModeToggle.checked;
         document.body.classList.toggle('dark-mode', isDarkMode);
-        themeLabel.textContent = isDarkMode ? 'Light' : 'Dark';
-        
+        themeLabel.textContent = isDarkMode ? '☀️' : '🌙';
         if (appState.currentUser?.uid) {
           const userDocRef = doc(db, "users", appState.currentUser.uid);
           try {
@@ -816,18 +1635,30 @@ const firebaseConfig = {
       function showLoginScreen() {
         stopTimer();
         loginScreen.classList.add('active');
+        signupScreen.classList.remove('active'); // Hide signup screen
         startScreen.classList.remove('active');
         quizScreen.classList.remove('active');
-        resultsScreen.classList.remove('active');
         timerEl.style.display = 'none';
+      }
+
+      function showSignUpScreen() {
+        stopTimer();
+        loginScreen.classList.remove('active');
+        signupScreen.classList.add('active'); // Show signup screen
+        startScreen.classList.remove('active');
+        quizScreen.classList.remove('active');
+        timerEl.style.display = 'none';
+        signupEmailEl.value = ''; // Clear fields
+        signupPasswordEl.value = '';
+        signupConfirmPasswordEl.value = '';
       }
 
       function showStartScreen() {
         stopTimer();
         loginScreen.classList.remove('active');
+        signupScreen.classList.remove('active'); // Hide signup screen
         startScreen.classList.add('active');
         quizScreen.classList.remove('active');
-        resultsScreen.classList.remove('active');
         timerEl.style.display = 'none';
         updateStatsUI();
       }
@@ -839,10 +1670,11 @@ const firebaseConfig = {
         testsCompletedEl.textContent = testsTaken;
         testsRemainingEl.textContent = Math.max(0, MAX_TESTS - testsTaken);
         testsProgress.style.width = `${(testsTaken / MAX_TESTS) * 100}%`;
-        
         startBtn.disabled = testsTaken >= MAX_TESTS;
-        startBtn.innerHTML = testsTaken >= MAX_TESTS ? '⛔ Test Limit Reached' : '✏️ Start New Test';
-        
+        startBtn.innerHTML = testsTaken >= MAX_TESTS ?
+          '<i class="fas fa-times-circle"></i> Test Limit Reached' :
+          '<i class="fas fa-play"></i> Start New Test';
+
         if (testsTaken > 0) {
           const totalScore = history.reduce((sum, test) => sum + test.score, 0);
           averageScoreEl.textContent = Math.round(totalScore / testsTaken);
@@ -858,7 +1690,6 @@ const firebaseConfig = {
           alert('You have reached the maximum limit of 500 tests.');
           return;
         }
-        
         appState.quizState = {
           questions: generateQuestions(),
           userAnswers: {},
@@ -867,7 +1698,6 @@ const firebaseConfig = {
           timerInterval: null
         };
         saveQuizStateLocally();
-        
         startScreen.classList.remove('active');
         quizScreen.classList.add('active');
         timerEl.style.display = 'flex';
@@ -903,62 +1733,60 @@ const firebaseConfig = {
           const questionCard = document.createElement('div');
           questionCard.className = 'question-card';
           questionCard.innerHTML = `
-            <div class="question-text">${index + 1}. ${question.text}</div>
+            <div class="question-text">
+              <i class="fas fa-question-circle"></i>
+              <strong>Q${index + 1}:</strong> ${question.text}
+            </div>
             <div class="options">
               ${question.options.map(option => `<div class="option" data-option="${option}">${option}</div>`).join('')}
             </div>
           `;
-          
           const optionsContainer = questionCard.querySelector('.options');
+
+          // Restore previously selected answer in blue
+          const savedAnswer = appState.quizState.userAnswers[index];
+          if (savedAnswer !== undefined) {
+            const selectedOption = optionsContainer.querySelector(`[data-option="${savedAnswer}"]`);
+            if (selectedOption) {
+              selectedOption.classList.add('selected');
+            }
+          }
+
           optionsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('option') && !e.target.classList.contains('disabled')) {
-              handleAnswerSelection(e.target, question, index, optionsContainer);
+              // Remove any previously selected option
+              optionsContainer.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+              });
+
+              // Mark the clicked option as selected (in blue)
+              e.target.classList.add('selected');
+
+              // Save the user's answer
+              const selectedAnswer = Number(e.target.dataset.option);
+              appState.quizState.userAnswers[index] = selectedAnswer;
+
+              saveQuizStateLocally();
             }
           });
-
           questionsContainer.appendChild(questionCard);
         });
-      }
-
-      function handleAnswerSelection(selectedOption, question, index, optionsContainer) {
-        const selectedAnswer = Number(selectedOption.dataset.option);
-        const isCorrect = selectedAnswer === question.answer;
-
-        appState.quizState.userAnswers[index] = selectedAnswer;
-        if (isCorrect) {
-            appState.quizState.score += 5;
-        }
-        
-        selectedOption.classList.add(isCorrect ? 'correct' : 'incorrect');
-
-        optionsContainer.querySelectorAll('.option').forEach(opt => {
-            opt.classList.add('disabled');
-            if (Number(opt.dataset.option) === question.answer && !isCorrect) {
-                opt.classList.add('correct');
-            }
-        });
-        
-        saveQuizStateLocally();
       }
 
       function startTimer() {
         stopTimer();
         const startTime = new Date(appState.quizState.startTime);
-        
         appState.quizState.timerInterval = setInterval(() => {
           const now = new Date();
           const elapsedSeconds = Math.floor((now - startTime) / 1000);
           const timeLeft = 60 - elapsedSeconds;
-          
           updateTimerDisplay(timeLeft);
-          
           if (timeLeft <= 10) timerEl.classList.add('warning');
           if (timeLeft <= 0) submitQuiz(true);
         }, 1000);
       }
 
       function stopTimer() {
-        // FIX: Check if quizState and timerInterval exist before clearing
         if (appState.quizState && appState.quizState.timerInterval) {
             clearInterval(appState.quizState.timerInterval);
             appState.quizState.timerInterval = null;
@@ -969,101 +1797,167 @@ const firebaseConfig = {
       function updateTimerDisplay(timeLeft) {
         const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
         const seconds = String(timeLeft % 60).padStart(2, '0');
-        timerEl.textContent = `⏱️ ${minutes}:${seconds}`;
+        timerEl.textContent = `${minutes}:${seconds}`;
       }
 
       async function submitQuiz(isTimeUp = false) {
         stopTimer();
-        
+
+        // Recalculate score
+        let score = 0;
+        appState.quizState.questions.forEach((question, index) => {
+          const userAnswer = appState.quizState.userAnswers[index];
+          if (userAnswer === question.answer) {
+            score += 5;
+          }
+        });
+        appState.quizState.score = score;
+
         const timeTaken = Math.floor((new Date() - new Date(appState.quizState.startTime)) / 1000);
-        
         const testResult = {
           score: appState.quizState.score,
           timeTaken: timeTaken,
           date: new Date().toISOString(),
           isTimeUp: isTimeUp
         };
-        
-        const newHistory = [...(appState.currentUser.history || []), testResult];
-        
-        // --- SYNC TO FIREBASE ---
+
+        // Sync to Firebase
         updateSyncStatus('syncing');
         const userDocRef = doc(db, "users", appState.currentUser.uid);
         try {
-            await updateDoc(userDocRef, { history: newHistory });
-            updateSyncStatus('synced');
+          // Update user's history
+          await updateDoc(userDocRef, { history: [...(appState.currentUser.history || []), testResult] });
+
+          // Update user's highest score for leaderboard purposes
+          const currentHighestScore = appState.currentUser.highestScore || 0;
+          if (appState.quizState.score > currentHighestScore) {
+              await updateDoc(userDocRef, { highestScore: appState.quizState.score });
+          }
+
+          updateSyncStatus('synced');
         } catch (error) {
-            console.error("Error syncing results to Firestore:", error);
-            updateSyncStatus('error');
+          console.error("Error syncing results to Firestore:", error);
+          updateSyncStatus('error');
         }
-        
+
         clearQuizStateLocally();
         showResults(timeTaken);
       }
 
       function showResults(timeTaken) {
         quizScreen.classList.remove('active');
-        resultsScreen.classList.add('active');
+        resultsModal.style.display = 'flex';
         timerEl.style.display = 'none';
-        
+
         finalScoreEl.textContent = appState.quizState.score;
         timeTakenEl.textContent = timeTaken;
         scoreProgress.style.width = `${appState.quizState.score}%`;
-        
+
         answersReviewEl.innerHTML = appState.quizState.questions.map((q, i) => {
           const userAnswer = appState.quizState.userAnswers[i];
           const isCorrect = userAnswer === q.answer;
           const userAnswerDisplay = userAnswer !== undefined ? userAnswer : 'Not answered';
-          
+
           return `
-            <div class="answer-item">
-              <p><strong>Question ${i + 1}:</strong> ${q.text}</p>
-              <p class="${isCorrect ? 'correct' : 'incorrect'}">
-                Your answer: ${userAnswerDisplay} (${isCorrect ? '✓ Correct' : '✗ Incorrect'})
-              </p>
-              ${!isCorrect ? `<p class="correct">Correct answer: ${q.answer}</p>` : ''}
+            <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
+              <h4>
+                <i class="fas fa-question-circle"></i>
+                Question ${i + 1}: ${q.text}
+              </h4>
+              <div class="answer-feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                <i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                Your answer: ${userAnswerDisplay} (${isCorrect ? 'Correct' : 'Incorrect'})
+              </div>
+              ${!isCorrect ? `
+                <div class="correct-answer">
+                  <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                  <strong>Correct answer:</strong> ${q.answer}
+                </div>
+              ` : ''}
             </div>
           `;
         }).join('');
-        
+
         updateStatsUI();
-        appState.quizState = null; // Clear quiz state after showing results
+        appState.quizState = null;
       }
 
       function showHistory() {
         historyModal.style.display = 'flex';
         const history = appState.currentUser.history || [];
-        
+
         if (history.length === 0) {
-          historyListEl.innerHTML = '<p>No test history yet.</p>';
+          historyListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No test history yet.</p>';
           return;
         }
-        
+
         historyListEl.innerHTML = history.slice().reverse().map((test, index) => {
           const testDate = new Date(test.date);
           const dateStr = testDate.toLocaleDateString();
           const timeStr = testDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          
+          const position = history.length - index;
+
           return `
             <div class="history-item">
-              <h3>Test ${history.length - index}</h3>
-              <p>Score: <strong>${test.score}/100</strong></p>
-              <p>Time: <strong>${test.timeTaken}s</strong></p>
-              <p>Date: <strong>${dateStr} at ${timeStr}</strong></p>
-              ${test.isTimeUp ? '<p>⏰ Time expired</p>' : ''}
+              <h3><i class="fas fa-trophy"></i> Test #${position}</h3>
+              <p><i class="fas fa-star" style="color: var(--warning);"></i> <strong>Score:</strong> ${test.score}/100</p>
+              <p><i class="fas fa-clock"></i> <strong>Time:</strong> ${test.timeTaken}s</p>
+              <p><i class="fas fa-calendar"></i> <strong>Date:</strong> ${dateStr} at ${timeStr}</p>
+              ${test.isTimeUp ? '<p><i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> <strong>Time expired</strong></p>' : ''}
             </div>
           `;
         }).join('');
       }
 
-      // --- LOCAL STORAGE FUNCTIONS ---
+      async function showLeaderboard() {
+          leaderboardModal.style.display = 'flex';
+          leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Loading leaderboard...</p>';
+
+          try {
+              const usersRef = collection(db, "users");
+              // Query users by highestScore in descending order, limit to 10
+              const q = query(usersRef, orderBy("highestScore", "desc"), limit(10));
+              const querySnapshot = await getDocs(q);
+
+              const leaderboard = [];
+              querySnapshot.forEach((doc) => {
+                  const data = doc.data();
+                  if (data.highestScore !== undefined) {
+                      leaderboard.push({
+                          displayName: data.displayName || 'Anonymous',
+                          highestScore: data.highestScore
+                      });
+                  }
+              });
+
+              if (leaderboard.length === 0) {
+                  leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No scores on the leaderboard yet.</p>';
+                  return;
+              }
+
+              leaderboardListEl.innerHTML = leaderboard.map((entry, index) => {
+                  return `
+                      <div class="leaderboard-item">
+                          <span>${index + 1}. ${entry.displayName}</span>
+                          <span>${entry.highestScore} points</span>
+                      </div>
+                  `;
+              }).join('');
+
+          } catch (error) {
+              console.error("Error fetching leaderboard:", error);
+              leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--danger);">Error loading leaderboard.</p>';
+          }
+      }
+
+      // Local Storage Functions
       function getLocalStorageKey(key) {
           if (appState.currentUser?.uid) {
               return `quiz_${appState.currentUser.uid}_${key}`;
           }
           return key;
       }
-      
+
       function saveToLocalStorage(key, data) {
         try {
           localStorage.setItem(getLocalStorageKey(key), JSON.stringify(data));
@@ -1074,7 +1968,8 @@ const firebaseConfig = {
 
       function loadFromLocalStorage(key) {
         try {
-          return JSON.parse(localStorage.getItem(getLocalStorageKey(key)));
+          const data = localStorage.getItem(getLocalStorageKey(key));
+          return data ? JSON.parse(data) : null;
         } catch {
           return null;
         }
@@ -1083,6 +1978,8 @@ const firebaseConfig = {
       function clearLocalStorageForUser() {
           if(!appState.currentUser?.uid) return;
           localStorage.removeItem(getLocalStorageKey('quizState'));
+          // Keep darkMode setting in local storage, it's global now
+          // localStorage.removeItem(getLocalStorageKey('darkMode'));
       }
 
       function saveQuizStateLocally() {
@@ -1090,7 +1987,7 @@ const firebaseConfig = {
               saveToLocalStorage('quizState', appState.quizState);
           }
       }
-      
+
       function clearQuizStateLocally() {
           localStorage.removeItem(getLocalStorageKey('quizState'));
       }
