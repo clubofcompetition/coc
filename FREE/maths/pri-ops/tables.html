@@ -556,21 +556,22 @@
     }
 
     .option:hover:not(.disabled) {
-      border-color: var(--primary);
-      background-color: rgba(99, 102, 241, 0.08); /* Slightly stronger hover */
+      border-color: var(--gray-400); /* A medium gray border on hover */
+      background-color: var(--gray-100); /* A light gray background on hover */
       transform: translateY(-1px);
     }
     .dark-mode .option:hover:not(.disabled) {
-      background-color: rgba(99, 102, 241, 0.15); /* Stronger hover for dark mode */
+      border-color: var(--gray-600); /* A slightly darker gray border for dark mode hover */
+      background-color: var(--gray-800); /* A dark gray background on hover for dark mode */
     }
 
     .option.selected {
-      border-color: #007bff; /* Use a solid blue color */
-      background-color: #007bff; /* Solid blue background */
+      border-color: #0056b3; /* Darker blue color for selection */
+      background-color: #0056b3; /* Darker blue background for selection */
       color: white; /* White text for better contrast on blue */
     }
     .dark-mode .option.selected {
-      background-color: #007bff; /* Solid blue background for dark mode as well */
+      background-color: #0056b3; /* Darker blue background for dark mode as well */
       color: white; /* White text for dark mode */
     }
 
@@ -884,6 +885,16 @@
       flex: 0 0 32%; /* 32% width for leaderboard button on mobile (leaving room for gap) */
       max-width: 32%;
     }
+    /* Styles for the new dark mode toggle placement */
+    .action-buttons .theme-toggle {
+        order: 3; /* Ensure it's after the start button */
+        flex-grow: 1; /* Allow it to take available space */
+        justify-content: flex-end; /* Push it to the right */
+    }
+    .action-buttons .theme-toggle #theme-label {
+        display: none; /* Hide label on mobile to save space */
+    }
+
 
     /* ------------------------------------- */
     /* RESPONSIVE DESIGN - MEDIA QUERIES   */
@@ -901,6 +912,9 @@
         flex-direction: row; /* Horizontal layout for header */
         align-items: center;
         gap: 0; /* Reset gap */
+      }
+      .app-header .logout-btn-container { /* Style for logout button in header */
+        margin-left: auto; /* Push to the right */
       }
 
       .logo {
@@ -974,6 +988,9 @@
         flex: 1 1 auto; /* Allow them to grow, but respect max-width */
         max-width: 250px; /* Set a max-width for tablet buttons */
       }
+      .action-buttons .theme-toggle #theme-label {
+        display: inline-block; /* Show label on tablets */
+      }
 
       /* Combined Score Card Styling for Tablets */
       .combined-score-card {
@@ -1025,6 +1042,10 @@
         align-items: center;
         gap: 0; /* Reset gap */
       }
+      .app-header .logout-btn-container { /* Style for logout button in header */
+        margin-left: auto; /* Push to the right */
+      }
+
 
       .logo {
         font-size: 1.8rem;
@@ -1098,6 +1119,14 @@
         width: auto; /* Allow buttons to take natural width */
         min-width: 200px; /* Ensure a minimum width */
       }
+      .action-buttons .theme-toggle {
+          order: unset; /* Reset order for desktop */
+          flex-grow: 0; /* No grow */
+          justify-content: flex-start; /* Default alignment */
+      }
+      .action-buttons .theme-toggle #theme-label {
+        display: inline-block; /* Show label on desktops */
+      }
 
       .btn-lg {
           padding: 1rem 2.5rem;
@@ -1164,11 +1193,11 @@
       <div class="card glassy-card">
         <div class="logo">
           <i class="fas fa-graduation-cap"></i>
-          <h2>Club Of Competition</h2>
+          <h4>Club Of Competition</h4>
         </div>
         <div class="welcome-section">
-          <h2>Master Your Multiplication Tables</h2>
-          <p>Challenge yourself and improve your math skills</p>
+          <h4>Master Your Multiplication Tables</h4>
+          <p>Practice for math Tables</p>
         </div>
 
         <div class="auth-container">
@@ -1229,21 +1258,14 @@
       <div class="app-header">
         <div class="logo">
           <i class="fas fa-graduation-cap"></i>
-          <h3>Club Of Competition</h3>
+          <h4>Club Of Competition</h4>
         </div>
-        <div class="theme-toggle">
-          <span id="theme-label">🌙</span>
-          <label class="switch">
-            <input type="checkbox" id="darkModeToggle">
-            <span class="slider"></span>
-          </label>
-        </div>
+        <button class="btn btn-secondary" id="logout-btn">Logout</button>
       </div>
 
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
           <h2 id="welcome-user" style="color: var(--text-primary);">Welcome, User!</h2>
-          <button class="btn btn-secondary" id="logout-btn">Logout</button>
         </div>
 
         <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Practice multiplication tables up to 20×10</p>
@@ -1253,6 +1275,13 @@
             <i class="fas fa-play"></i>
             Start New Test
           </button>
+            <div class="theme-toggle">
+              <span id="theme-label">🌙</span>
+              <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
         </div>
 
         <div class="stats-grid">
@@ -1303,13 +1332,13 @@
       <div class="app-header">
         <div class="logo">
           <i class="fas fa-graduation-cap"></i>
-          <h2>Club Of Competition</h2>
+          <h4>Club Of Competition</h4>
         </div>
         <div id="timer" class="timer">⏱️ 01:00</div>
       </div>
 
       <div class="card">
-        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Multiplication Tables Challenge</h2>
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Multiplication Tables Practice</h2>
         <div id="questions-container" class="questions-container"></div>
 
         <div class="submit-btn-container">
