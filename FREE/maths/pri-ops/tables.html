@@ -115,7 +115,7 @@
       background-color: var(--bg-body); /* Changed to bg-body */
       color: var(--text-secondary); /* Default text color */
       line-height: 1.6;
-      transition: var(--transition);
+      transition: var(--transition); /* Keep transition for theme change */
       background-image:
         radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
         radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 20%);
@@ -209,13 +209,10 @@
 
     .screen.active {
       display: block;
-      animation: fadeIn 0.4s ease-out;
+      /* Removed animation: fadeIn 0.4s ease-out; */
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* Removed @keyframes fadeIn */
 
     .card {
       background-color: var(--card-bg); /* Changed to card-bg */
@@ -223,7 +220,7 @@
       box-shadow: var(--shadow);
       padding: 2rem;
       margin-bottom: 1.5rem;
-      transition: var(--transition);
+      transition: var(--transition); /* Keep transition for card hover */
       border: 1px solid var(--card-border); /* Added card border */
     }
 
@@ -258,7 +255,7 @@
       border: none;
       font-weight: 600;
       cursor: pointer;
-      transition: var(--transition);
+      transition: var(--transition); /* Keep transition for button hover */
       text-decoration: none;
       font-size: 1rem;
     }
@@ -329,7 +326,7 @@
       background-color: var(--input-bg); /* Consistent with input backgrounds */
       color: var(--text-secondary);
       cursor: pointer;
-      transition: var(--transition);
+      transition: var(--transition); /* Keep transition for auth button hover */
       font-weight: 500;
     }
 
@@ -349,7 +346,7 @@
       border: 1px solid var(--input-border); /* Changed to input-border */
       border-radius: var(--radius);
       font-size: 1rem;
-      transition: var(--transition);
+      transition: var(--transition); /* Keep transition for form control focus */
       background-color: var(--input-bg); /* Changed to input-bg */
       color: var(--text-primary); /* Ensure input text color is primary */
     }
@@ -370,7 +367,7 @@
       cursor: pointer;
       font-size: 0.9rem;
       text-align: center;
-      transition: var(--transition);
+      transition: var(--transition); /* Keep transition for link hover */
     }
 
     .link:hover {
@@ -465,7 +462,7 @@
       height: 100%;
       border-radius: 4px;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: width 0.5s ease;
+      /* Removed transition: width 0.5s ease; */
     }
 
     .quiz-header {
@@ -493,14 +490,10 @@
     }
 
     .timer.warning {
-      animation: pulse 1s infinite;
+      /* Removed animation: pulse 1s infinite; */
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
+    /* Removed @keyframes pulse */
 
     .questions-container {
       display: flex;
@@ -515,7 +508,7 @@
       padding: 1.5rem;
       box-shadow: var(--shadow-sm);
       border: 1px solid var(--card-border); /* Consistent card border */
-      transition: var(--transition);
+      /* Removed transition: var(--transition); */
     }
 
     .question-card:hover {
@@ -550,20 +543,12 @@
       cursor: pointer;
       text-align: center;
       font-weight: 500;
-      transition: var(--transition);
+      /* REMOVED TRANSITION FOR NO ANIMATION */
       background-color: var(--input-bg); /* Options use input background */
       color: var(--text-primary); /* Option text is primary */
     }
 
-    .option:hover:not(.disabled) {
-      border-color: var(--gray-400); /* A medium gray border on hover */
-      background-color: var(--gray-100); /* A light gray background on hover */
-      transform: translateY(-1px);
-    }
-    .dark-mode .option:hover:not(.disabled) {
-      border-color: var(--gray-600); /* A slightly darker gray border for dark mode hover */
-      background-color: var(--gray-800); /* A dark gray background on hover for dark mode */
-    }
+    /* REMOVED .option:hover:not(.disabled) */
 
     .option.selected {
       border-color: #0056b3; /* Darker blue color for selection */
@@ -628,29 +613,13 @@
       border-radius: var(--radius);
       border: 1px solid var(--card-border); /* Consistent card border */
       margin-bottom: 1rem;
-      transition: var(--transition);
+      /* Removed transition: var(--transition); */
       background-color: var(--bg-content); /* Use bg-content for nested cards */
     }
 
     .answer-item:hover {
       border-color: var(--primary);
       transform: translateX(5px);
-    }
-
-    .answer-item h4 {
-      margin-bottom: 0.75rem;
-      color: var(--text-primary); /* Answer text is primary */
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .answer-item.correct h4 {
-      color: var(--success);
-    }
-
-    .answer-item.incorrect h4 {
-      color: var(--danger);
     }
 
     .answer-feedback {
@@ -733,7 +702,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition);
+      transition: var(--transition); /* Keep transition for close button hover */
     }
 
     .close-btn:hover {
