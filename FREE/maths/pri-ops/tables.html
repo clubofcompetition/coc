@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Club Of Competition - Multiplication Tables</title>
+  <title>Club Of Competition - Math Practice</title>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9F5XW0QKCV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -209,10 +209,7 @@
 
     .screen.active {
       display: block;
-      /* Removed animation: fadeIn 0.4s ease-out; */
     }
-
-    /* Removed @keyframes fadeIn */
 
     .card {
       background-color: var(--card-bg); /* Changed to card-bg */
@@ -270,17 +267,6 @@
       transform: translateY(-1px);
     }
 
-    /* New Orange button style */
-    .btn-orange {
-      background-color: var(--orange-btn);
-      color: white;
-    }
-
-    .btn-orange:hover {
-      background-color: var(--orange-btn-dark);
-      transform: translateY(-1px);
-    }
-
     .btn-secondary {
       background-color: var(--button-secondary-bg); /* Changed to variable */
       color: var(--button-secondary-text); /* Changed to variable */
@@ -297,15 +283,6 @@
     .btn-lg {
       padding: 0.875rem 2rem;
       font-size: 1.1rem;
-    }
-
-    .btn-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
     }
 
     .auth-container {
@@ -403,7 +380,6 @@
       margin: 0;
     }
 
-    /* Combined Score Card Styling */
     .combined-score-card {
         display: flex;
         flex-direction: column; /* Stack on mobile */
@@ -436,7 +412,6 @@
       margin: 0;
     }
 
-    /* Button Group inside Stat Card */
     .stat-card .button-group {
         display: flex;
         flex-direction: column; /* Stack buttons on mobile */
@@ -462,7 +437,6 @@
       height: 100%;
       border-radius: 4px;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
-      /* Removed transition: width 0.5s ease; */
     }
 
     .quiz-header {
@@ -489,12 +463,6 @@
       z-index: 1000;
     }
 
-    .timer.warning {
-      /* Removed animation: pulse 1s infinite; */
-    }
-
-    /* Removed @keyframes pulse */
-
     .questions-container {
       display: flex;
       flex-direction: column;
@@ -507,8 +475,7 @@
       border-radius: var(--radius);
       padding: 1.5rem;
       box-shadow: var(--shadow-sm);
-      border: 1px solid var(--card-border); /* Consistent card border */
-      /* Removed transition: var(--transition); */
+      border: 1px solid var(--card-border);
     }
 
     .question-card:hover {
@@ -520,7 +487,7 @@
       font-weight: 600;
       margin-bottom: 1.25rem;
       font-size: 1.1rem;
-      color: var(--text-primary); /* Question text is primary */
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -538,31 +505,28 @@
 
     .option {
       padding: 1rem;
-      border: 2px solid var(--input-border); /* Options use input border */
+      border: 2px solid var(--input-border);
       border-radius: var(--radius);
       cursor: pointer;
       text-align: center;
       font-weight: 500;
-      /* REMOVED TRANSITION FOR NO ANIMATION */
-      background-color: var(--input-bg); /* Options use input background */
-      color: var(--text-primary); /* Option text is primary */
+      background-color: var(--input-bg);
+      color: var(--text-primary);
     }
-
-    /* REMOVED .option:hover:not(.disabled) */
 
     .option.selected {
-      border-color: #0056b3; /* Darker blue color for selection */
-      background-color: #0056b3; /* Darker blue background for selection */
-      color: white; /* White text for better contrast on blue */
+      border-color: #0056b3;
+      background-color: #0056b3;
+      color: white;
     }
     .dark-mode .option.selected {
-      background-color: #0056b3; /* Darker blue background for dark mode as well */
-      color: white; /* White text for dark mode */
+      background-color: #0056b3;
+      color: white;
     }
 
     .option.correct {
       border-color: var(--success);
-      background-color: rgba(16, 185, 129, 0.15); /* More visible correct state */
+      background-color: rgba(16, 185, 129, 0.15);
       color: var(--success);
     }
     .dark-mode .option.correct {
@@ -571,7 +535,7 @@
 
     .option.incorrect {
       border-color: var(--danger);
-      background-color: rgba(239, 68, 68, 0.15); /* More visible incorrect state */
+      background-color: rgba(239, 68, 68, 0.15);
       color: var(--danger);
     }
     .dark-mode .option.incorrect {
@@ -611,10 +575,9 @@
     .answer-item {
       padding: 1.25rem;
       border-radius: var(--radius);
-      border: 1px solid var(--card-border); /* Consistent card border */
+      border: 1px solid var(--card-border);
       margin-bottom: 1rem;
-      /* Removed transition: var(--transition); */
-      background-color: var(--bg-content); /* Use bg-content for nested cards */
+      background-color: var(--bg-content);
     }
 
     .answer-item:hover {
@@ -628,7 +591,7 @@
       gap: 0.5rem;
       margin: 0.5rem 0;
       font-weight: 500;
-      color: var(--text-secondary); /* Feedback text is secondary */
+      color: var(--text-secondary);
     }
 
     .answer-feedback.correct {
@@ -638,20 +601,34 @@
     .answer-feedback.incorrect {
       color: var(--danger);
     }
-
-    .correct-answer {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem;
-      background-color: rgba(16, 185, 129, 0.1); /* Lighter background for correct */
-      border-radius: var(--radius);
-      margin-top: 0.75rem;
-      border-left: 4px solid var(--success);
-      color: var(--success); /* Text for correct answer */
+    
+    .explanation {
+        background-color: var(--bg-body);
+        border: 1px solid var(--separator-line);
+        border-left: 4px solid var(--warning);
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: var(--radius);
+        font-size: 0.9rem;
     }
-    .dark-mode .correct-answer {
-      background-color: rgba(16, 185, 129, 0.2);
+    .explanation strong {
+        color: var(--text-primary);
+    }
+    .explanation pre {
+        background-color: var(--card-bg);
+        padding: 0.75rem;
+        border-radius: var(--radius-sm);
+        margin-top: 0.5rem;
+        white-space: pre-wrap;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: right;
+    }
+     .explanation ol {
+        padding-left: 20px;
+        margin-top: 0.5rem;
+    }
+    .explanation li {
+        margin-bottom: 0.25rem;
     }
 
     .modal {
@@ -661,30 +638,30 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for better blur effect */
+      background-color: rgba(0, 0, 0, 0.6);
       z-index: 1000;
       justify-content: center;
       align-items: center;
-      backdrop-filter: blur(8px); /* Stronger blur for modal */
+      backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
 
     .modal-content {
-      background-color: var(--bg-content); /* Consistent with content background */
+      background-color: var(--bg-content);
       border-radius: var(--radius-lg);
       width: 90%;
-      max-width: 500px; /* Default max-width for smaller screens */
+      max-width: 500px;
       max-height: 90vh;
       overflow-y: auto;
       padding: 2rem;
       position: relative;
       box-shadow: var(--shadow-lg);
-      border: 1px solid var(--card-border); /* Consistent card border */
-      color: var(--text-secondary); /* Modal text is secondary */
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
     }
 
     .modal-content h2 {
-      color: var(--text-primary); /* Modal headings are primary */
+      color: var(--text-primary);
     }
 
     .close-btn {
@@ -693,7 +670,7 @@
       right: 1rem;
       font-size: 1.5rem;
       cursor: pointer;
-      color: var(--text-secondary); /* Close button uses secondary text */
+      color: var(--text-secondary);
       background: none;
       border: none;
       width: 36px;
@@ -702,23 +679,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition); /* Keep transition for close button hover */
+      transition: var(--transition);
     }
 
     .close-btn:hover {
-      background-color: var(--gray-200); /* Darken background on hover in light mode */
+      background-color: var(--gray-200);
       color: var(--primary);
     }
     .dark-mode .close-btn:hover {
-      background-color: var(--gray-700); /* Lighten background on hover in dark mode */
+      background-color: var(--gray-700);
     }
 
     .history-item, .leaderboard-item {
       padding: 1.25rem;
-      border-bottom: 1px solid var(--separator-line); /* Consistent separator */
+      border-bottom: 1px solid var(--separator-line);
       border-radius: var(--radius);
       margin-bottom: 0.75rem;
-      background-color: var(--card-bg); /* Consistent card background */
+      background-color: var(--card-bg);
     }
 
     .history-item:last-child, .leaderboard-item:last-child {
@@ -743,51 +720,43 @@
         justify-content: space-between;
         align-items: center;
         padding: 1rem 1.25rem;
-        background-color: var(--card-bg); /* Consistent card background */
-        border: 1px solid var(--card-border); /* Consistent card border */
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
         margin-bottom: 0.5rem;
         border-radius: var(--radius);
-        color: var(--text-primary); /* Default leaderboard item text */
+        color: var(--text-primary);
     }
 
     .leaderboard-item span:first-child {
         font-weight: 600;
-        color: var(--text-primary); /* User name is primary text */
+        color: var(--text-primary);
     }
 
     .leaderboard-item span:last-child {
         font-weight: 700;
-        color: var(--primary); /* Score is primary color */
+        color: var(--primary);
     }
 
-    /* Podium Colors for Leaderboard */
     .leaderboard-item:nth-child(1) {
         background: linear-gradient(to right, #FFD700, #FFEA00); /* Gold */
-        color: #333; /* Darker text for gold background */
+        color: #333;
         border-color: #FFD700;
     }
-    .leaderboard-item:nth-child(1) span {
-        color: #333; /* Darker text for gold background */
-    }
+    .leaderboard-item:nth-child(1) span { color: #333; }
 
     .leaderboard-item:nth-child(2) {
         background: linear-gradient(to right, #C0C0C0, #E0E0E0); /* Silver */
-        color: #333; /* Darker text for silver background */
+        color: #333;
         border-color: #C0C0C0;
     }
-    .leaderboard-item:nth-child(2) span {
-        color: #333; /* Darker text for silver background */
-    }
+    .leaderboard-item:nth-child(2) span { color: #333; }
 
     .leaderboard-item:nth-child(3) {
         background: linear-gradient(to right, #CD7F32, #E69138); /* Bronze */
-        color: #333; /* Darker text for bronze background */
+        color: #333;
         border-color: #CD7F32;
     }
-    .leaderboard-item:nth-child(3) span {
-        color: #333; /* Darker text for bronze background */
-    }
-
+    .leaderboard-item:nth-child(3) span { color: #333; }
 
     .sync-status {
       position: fixed;
@@ -796,27 +765,19 @@
       padding: 0.75rem 1rem;
       border-radius: var(--radius);
       font-size: 0.9rem;
-      background-color: var(--card-bg); /* Sync status uses card background */
+      background-color: var(--card-bg);
       box-shadow: var(--shadow);
       display: flex;
       align-items: center;
       gap: 0.5rem;
       z-index: 1001;
-      border: 1px solid var(--card-border); /* Sync status uses card border */
-      color: var(--text-secondary); /* Sync status text is secondary */
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
     }
 
-    .sync-status.syncing {
-      color: var(--warning);
-    }
-
-    .sync-status.synced {
-      color: var(--success);
-    }
-
-    .sync-status.error {
-      color: var(--danger);
-    }
+    .sync-status.syncing { color: var(--warning); }
+    .sync-status.synced { color: var(--success); }
+    .sync-status.error { color: var(--danger); }
 
     .welcome-section {
       text-align: center;
@@ -825,334 +786,194 @@
 
     .welcome-section h2 {
       font-size: 1.8rem;
-      color: var(--text-primary); /* Welcome heading is primary text */
+      color: var(--text-primary);
       margin-bottom: 0.5rem;
     }
 
     .welcome-section p {
-      color: var(--text-secondary); /* Welcome paragraph is secondary text */
+      color: var(--text-secondary);
       font-size: 1.1rem;
       opacity: 0.8;
     }
-
-    .action-buttons {
-      display: flex; /* Changed to flex for mobile */
-      flex-direction: row; /* Changed to row for mobile */
-      gap: 0.75rem; /* Reduced gap for mobile */
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem; /* Added margin-bottom */
-      justify-content: space-between; /* Distribute items */
-      align-items: center;
+    
+    .analysis-section {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border-radius: var(--radius);
+        background-color: var(--bg-body);
+    }
+    .analysis-section h4 {
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid var(--separator-line);
+        padding-bottom: 0.5rem;
+    }
+    .strength, .weakness, .recommendation {
+        padding: 0.75rem;
+        border-left-width: 4px;
+        border-left-style: solid;
+        margin-bottom: 0.5rem;
+        border-radius: var(--radius-sm);
+    }
+    .strength {
+        border-left-color: var(--success);
+        background-color: rgba(16, 185, 129, 0.1);
+    }
+    .weakness {
+        border-left-color: var(--danger);
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+    .recommendation {
+        border-left-color: var(--warning);
+        background-color: rgba(245, 158, 11, 0.1);
     }
 
-    .action-buttons .btn-primary {
-      flex: 0 0 65%; /* 65% width for start button on mobile */
-      max-width: 65%;
+    /* NEW: Modern Dropdown Styles */
+    .custom-select-wrapper {
+        position: relative;
+        user-select: none;
+        width: 100%;
     }
-
-    .action-buttons .btn-secondary {
-      flex: 0 0 32%; /* 32% width for leaderboard button on mobile (leaving room for gap) */
-      max-width: 32%;
-    }
-    /* Styles for the new dark mode toggle placement */
-    .action-buttons .theme-toggle {
-        order: 3; /* Ensure it's after the start button */
-        flex-grow: 1; /* Allow it to take available space */
-        justify-content: flex-end; /* Push it to the right */
-    }
-    .action-buttons .theme-toggle #theme-label {
-        display: none; /* Hide label on mobile to save space */
-    }
-
-
-    /* ------------------------------------- */
-    /* RESPONSIVE DESIGN - MEDIA QUERIES   */
-    /* ------------------------------------- */
-
-    /* Mobile-first: Styles above are for screens up to 480px (small phones) */
-
-    /* Small tablets and large phones (portrait) - 481px to 768px */
-    @media (min-width: 481px) and (max-width: 768px) {
-      .container {
-        padding: 1.5rem; /* Slightly more padding than mobile */
-      }
-
-      .app-header {
-        flex-direction: row; /* Horizontal layout for header */
+    .custom-select-trigger {
+        position: relative;
+        display: flex;
         align-items: center;
-        gap: 0; /* Reset gap */
-      }
-      .app-header .logout-btn-container { /* Style for logout button in header */
-        margin-left: auto; /* Push to the right */
-      }
-
-      .logo {
-        font-size: 1.6rem;
-      }
-      .logo i {
-        font-size: 2rem;
-      }
-
-      .card {
-        padding: 2rem; /* Consistent padding */
-      }
-
-      /* Auth Screens */
-      #login-screen .card,
-      #signup-screen .card {
-          max-width: 400px; /* Constrain width for a better look */
-          margin: 2rem auto; /* Center the card */
-      }
-
-      .welcome-section h2 {
-        font-size: 2rem;
-      }
-      .welcome-section p {
-        font-size: 1.2rem;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(1, 1fr); /* Single column for combined card on tablets */
-        gap: 1.5rem;
-      }
-
-      .stat-card p {
-        font-size: 2rem; /* Larger stats */
-      }
-
-      .options {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Adjust options grid */
-        gap: 1rem;
-      }
-
-      .option {
-        padding: 1.2rem; /* Slightly larger options */
-        font-size: 1.1rem;
-      }
-
-      .score-display {
-        font-size: 3rem; /* Slightly smaller score display than desktop */
-      }
-
-      .modal-content {
-        max-width: 600px; /* Larger modals for tablets */
-        padding: 2.5rem;
-      }
-
-      .timer {
-        top: 1.5rem;
-        right: 2rem;
-        padding: 0.6rem 1.2rem;
-        font-size: 1.05rem;
-      }
-
-      /* Tablet specific adjustments for action buttons */
-      .action-buttons {
-        flex-direction: row; /* Keep row for tablets */
-        gap: 1rem;
-        justify-content: center; /* Center them on tablet */
-      }
-      .action-buttons .btn-primary,
-      .action-buttons .btn-secondary {
-        flex: 1 1 auto; /* Allow them to grow, but respect max-width */
-        max-width: 250px; /* Set a max-width for tablet buttons */
-      }
-      .action-buttons .theme-toggle #theme-label {
-        display: inline-block; /* Show label on tablets */
-      }
-
-      /* Combined Score Card Styling for Tablets */
-      .combined-score-card {
-          flex-direction: column; /* Remain column on tablets for 3 items */
-          padding: 1rem; /* Adjust padding for more items */
-      }
-      .combined-score-stats {
-          flex-direction: column; /* Stack score items */
-          gap: 0.75rem;
-      }
-      .combined-quick-actions {
-          flex-direction: column; /* Stack quick action items */
-          gap: 0.75rem;
-      }
-      .combined-score-item {
-          flex-direction: row; /* Make items row inside the card */
-          justify-content: space-between; /* Space out title and value */
-          width: 100%; /* Take full width */
-      }
-      .combined-score-item h3 {
-          margin-bottom: 0;
-          font-size: 0.9rem; /* Smaller title */
-      }
-      .combined-score-item p {
-          font-size: 1.5rem; /* Smaller value */
-      }
-      /* Button Group inside Stat Card for Tablets */
-      .stat-card .button-group {
-          flex-direction: row; /* Side-by-side on tablets */
-          justify-content: center; /* Center the buttons */
-          flex-wrap: wrap; /* Allow wrapping if space is tight */
-      }
-
-      .stat-card .button-group .btn {
-          width: auto; /* Allow natural width */
-          flex: 1 1 48%; /* Roughly half width, considering gap */
-          max-width: 150px; /* Max width for each button */
-      }
-    }
-
-    /* Desktops and larger tablets (landscape) - 769px and up */
-    @media (min-width: 769px) {
-      .container {
-        padding: 2rem; /* More generous padding */
-      }
-
-      .app-header {
-        flex-direction: row; /* Horizontal layout for header */
-        align-items: center;
-        gap: 0; /* Reset gap */
-      }
-      .app-header .logout-btn-container { /* Style for logout button in header */
-        margin-left: auto; /* Push to the right */
-      }
-
-
-      .logo {
-        font-size: 1.8rem;
-      }
-      .logo i {
-        font-size: 2.2rem;
-      }
-
-      .card {
-        padding: 2.5rem; /* Larger padding for cards */
-      }
-
-      /* Auth Screens */
-      #login-screen .card,
-      #signup-screen .card {
-          max-width: 450px; /* Optimal width for forms */
-          margin: 3rem auto; /* Center the card more prominently */
-      }
-
-      .welcome-section h2 {
-        font-size: 2.2rem;
-      }
-      .welcome-section p {
-        font-size: 1.3rem;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(1, 1fr); /* Still single column for the large combined card */
-        gap: 2rem;
-      }
-
-      .stat-card h3 {
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
         font-size: 1rem;
-      }
-      .stat-card p {
-        font-size: 2.2rem; /* Larger stats */
-      }
-
-      .options {
-        grid-template-columns: repeat(4, 1fr); /* Four columns for quiz options */
-        gap: 1rem;
-      }
-
-      .option {
-        padding: 1.2rem;
-        font-size: 1.1rem;
-      }
-
-      .score-display {
-        font-size: 4rem; /* Largest score display */
-      }
-
-      .modal-content {
-        max-width: 700px; /* Even larger modals for desktops */
-        padding: 3rem;
-      }
-
-      .timer {
-        top: 2rem;
-        right: 2.5rem;
-        padding: 0.75rem 1.5rem;
-        font-size: 1.1rem;
-      }
-
-      .action-buttons {
-        flex-direction: row; /* Horizontal buttons on desktop */
-        justify-content: center;
-        gap: 1.5rem;
-      }
-      .action-buttons .btn {
-        width: auto; /* Allow buttons to take natural width */
-        min-width: 200px; /* Ensure a minimum width */
-      }
-      .action-buttons .theme-toggle {
-          order: unset; /* Reset order for desktop */
-          flex-grow: 0; /* No grow */
-          justify-content: flex-start; /* Default alignment */
-      }
-      .action-buttons .theme-toggle #theme-label {
-        display: inline-block; /* Show label on desktops */
-      }
-
-      .btn-lg {
-          padding: 1rem 2.5rem;
-          font-size: 1.2rem;
-      }
-
-      /* Combined Score Card Styling for Desktops */
-      .combined-score-card {
-          flex-direction: row; /* Side-by-side for 3 items on desktops */
-          flex-wrap: nowrap; /* Prevent wrapping for top level sections */
-          justify-content: space-around; /* Distribute items */
-          gap: 1.5rem; /* Adjust gap */
-          padding: 1.5rem 2rem; /* Adjust padding for combined card */
-      }
-      .combined-score-stats {
-          flex-direction: row; /* Display stats in a row */
-          flex-wrap: wrap; /* Allow wrapping */
-          justify-content: space-around;
-          gap: 1rem;
-          flex: 2; /* Take up more space */
-          align-items: center; /* Vertically align */
-      }
-      .combined-quick-actions {
-          flex: 1; /* Take up less space */
-          flex-direction: column; /* Stack title and buttons */
-          gap: 0.75rem;
-          text-align: center; /* Center quick actions */
-          justify-content: center; /* Vertically center content */
-      }
-      .combined-quick-actions h3 {
-          margin-bottom: 0.5rem; /* Space between title and buttons */
-      }
-
-      .combined-score-item {
-          flex: 1 1 auto; /* Allow items to grow/shrink */
-          min-width: 120px; /* Ensure minimum width */
-          flex-direction: column; /* Stack title and value */
-      }
-      .combined-score-item h3 {
-          font-size: 1rem; /* Restore normal title size */
-      }
-      .combined-score-item p {
-          font-size: 1.75rem; /* Restore normal value size */
-      }
+        font-weight: 500;
+        color: var(--text-primary);
+        background-color: var(--input-bg);
+        border: 1px solid var(--input-border);
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    .custom-select-wrapper.open .custom-select-trigger {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+    .arrow {
+        position: relative;
+        height: 10px;
+        width: 10px;
+    }
+    .arrow::before, .arrow::after {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        width: 0.15rem;
+        height: 100%;
+        background-color: var(--text-secondary);
+        transition: all 0.2s ease;
+    }
+    .arrow::before {
+        left: -3px;
+        transform: rotate(-45deg);
+    }
+    .arrow::after {
+        left: 3px;
+        transform: rotate(45deg);
+    }
+    .custom-select-wrapper.open .arrow::before {
+        left: -3px;
+        transform: rotate(45deg);
+    }
+    .custom-select-wrapper.open .arrow::after {
+        left: 3px;
+        transform: rotate(-45deg);
+    }
+    .custom-options {
+        position: absolute;
+        display: none;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius);
+        margin-top: 0.25rem;
+        box-shadow: var(--shadow);
+        z-index: 2;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .custom-select-wrapper.open .custom-options {
+        display: block;
+    }
+    .custom-option {
+        position: relative;
+        display: block;
+        padding: 0.75rem 1rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    .custom-option:hover {
+        background-color: var(--primary-light);
+        color: white;
+    }
+    .custom-option.selected {
+        background-color: var(--primary);
+        color: white;
+    }
 
 
-      /* Button Group inside Stat Card for Desktops */
-      .stat-card .button-group {
-          flex-direction: row; /* Side-by-side on desktops */
-          justify-content: center;
-          gap: 1rem; /* Adjust gap between buttons */
-      }
+    @media (min-width: 481px) and (max-width: 768px) {
+      .container { padding: 1.5rem; }
+      .app-header { flex-direction: row; align-items: center; gap: 0; }
+      .app-header .logout-btn-container { margin-left: auto; }
+      .logo { font-size: 1.6rem; }
+      .logo i { font-size: 2rem; }
+      .card { padding: 2rem; }
+      #login-screen .card, #signup-screen .card { max-width: 400px; margin: 2rem auto; }
+      .welcome-section h2 { font-size: 2rem; }
+      .welcome-section p { font-size: 1.2rem; }
+      .stats-grid { grid-template-columns: repeat(1, 1fr); gap: 1.5rem; }
+      .stat-card p { font-size: 2rem; }
+      .options { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+      .option { padding: 1.2rem; font-size: 1.1rem; }
+      .score-display { font-size: 3rem; }
+      .modal-content { max-width: 600px; padding: 2.5rem; }
+      .timer { top: 1.5rem; right: 2rem; padding: 0.6rem 1.2rem; font-size: 1.05rem; }
+      .combined-score-card { flex-direction: column; padding: 1rem; }
+      .combined-score-stats { flex-direction: column; gap: 0.75rem; }
+      .combined-quick-actions { flex-direction: column; gap: 0.75rem; }
+      .combined-score-item { flex-direction: row; justify-content: space-between; width: 100%; }
+      .combined-score-item h3 { margin-bottom: 0; font-size: 0.9rem; }
+      .combined-score-item p { font-size: 1.5rem; }
+      .stat-card .button-group { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+      .stat-card .button-group .btn { width: auto; flex: 1 1 48%; max-width: 150px; }
+    }
 
-      .stat-card .button-group .btn {
-          width: auto; /* Allow natural width */
-          flex: 1; /* Allow buttons to share space */
-      }
+    @media (min-width: 769px) {
+      .container { padding: 2rem; }
+      .app-header { flex-direction: row; align-items: center; gap: 0; }
+      .app-header .logout-btn-container { margin-left: auto; }
+      .logo { font-size: 1.8rem; }
+      .logo i { font-size: 2.2rem; }
+      .card { padding: 2.5rem; }
+      #login-screen .card, #signup-screen .card { max-width: 450px; margin: 3rem auto; }
+      .welcome-section h2 { font-size: 2.2rem; }
+      .welcome-section p { font-size: 1.3rem; }
+      .stats-grid { grid-template-columns: repeat(1, 1fr); gap: 2rem; }
+      .stat-card h3 { font-size: 1rem; }
+      .stat-card p { font-size: 2.2rem; }
+      .options { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+      .option { padding: 1.2rem; font-size: 1.1rem; }
+      .score-display { font-size: 4rem; }
+      .modal-content { max-width: 700px; padding: 3rem; }
+      .timer { top: 2rem; right: 2.5rem; padding: 0.75rem 1.5rem; font-size: 1.1rem; }
+      .btn-lg { padding: 1rem 2.5rem; font-size: 1.2rem; }
+      .combined-score-card { flex-direction: row; flex-wrap: nowrap; justify-content: space-around; gap: 1.5rem; padding: 1.5rem 2rem; }
+      .combined-score-stats { flex-direction: row; flex-wrap: wrap; justify-content: space-around; gap: 1rem; flex: 2; align-items: center; }
+      .combined-quick-actions { flex: 1; flex-direction: column; gap: 0.75rem; text-align: center; justify-content: center; }
+      .combined-quick-actions h3 { margin-bottom: 0.5rem; }
+      .combined-score-item { flex: 1 1 auto; min-width: 120px; flex-direction: column; }
+      .combined-score-item h3 { font-size: 1rem; }
+      .combined-score-item p { font-size: 1.75rem; }
+      .stat-card .button-group { flex-direction: row; justify-content: center; gap: 1rem; }
+      .stat-card .button-group .btn { width: auto; flex: 1; }
     }
   </style>
 </head>
@@ -1165,8 +986,8 @@
           <h4>Club Of Competition</h4>
         </div>
         <div class="welcome-section">
-          <h4>Master Your Multiplication Tables</h4>
-          <p>Practice for math Tables</p>
+          <h4>Master Your Math Skills</h4>
+          <p>Practice for math quizzes</p>
         </div>
 
         <div class="auth-container">
@@ -1198,7 +1019,7 @@
             </div>
             <div class="welcome-section">
                 <h2>Create Your Account</h2>
-                <p>Start mastering maths Tables today!</p>
+                <p>Start mastering maths today!</p>
             </div>
 
             <div class="auth-container">
@@ -1233,23 +1054,54 @@
       </div>
 
       <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
           <h2 id="welcome-user" style="color: var(--text-primary);">Welcome, User!</h2>
-        </div>
-
-        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Practice multiplication tables up to 20×10</p>
-
-        <div class="action-buttons">
-          <button id="start-btn" class="btn btn-orange btn-lg">
-            <i class="fas fa-play"></i>
-            Start New Test
-          </button>
-            <div class="theme-toggle">
+          <div class="theme-toggle">
               <span id="theme-label">🌙</span>
               <label class="switch">
                 <input type="checkbox" id="darkModeToggle">
                 <span class="slider"></span>
               </label>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 2rem; text-align: center;">
+            <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Choose a Topic to Practice</h3>
+            <div id="topic-selection-menu" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn btn-primary topic-btn" data-topic="tables" data-duration="60">
+                    <i class="fas fa-table"></i> Tables
+                </button>
+                <button class="btn btn-primary topic-btn" data-topic="addition" data-duration="300">
+                    <i class="fas fa-plus"></i> Addition
+                </button>
+                <button class="btn btn-primary topic-btn" data-topic="subtraction" data-duration="300">
+                    <i class="fas fa-minus"></i> Subtraction
+                </button>
+                <button class="btn btn-primary topic-btn" data-topic="multiplication" data-duration="300">
+                    <i class="fas fa-times"></i> Multiplication
+                </button>
+                <button class="btn btn-primary topic-btn" data-topic="division" data-duration="300">
+                    <i class="fas fa-divide"></i> Division
+                </button>
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="stats-topic-select" style="font-weight: 600; color: var(--text-primary);">View Stats For:</label>
+            <div class="custom-select-wrapper">
+                <div class="custom-select" id="stats-topic-select">
+                    <div class="custom-select-trigger">
+                        <span id="selected-topic-text">Tables</span>
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options">
+                        <span class="custom-option selected" data-value="tables">Tables</span>
+                        <span class="custom-option" data-value="addition">Addition</span>
+                        <span class="custom-option" data-value="subtraction">Subtraction</span>
+                        <span class="custom-option" data-value="multiplication">Multiplication</span>
+                        <span class="custom-option" data-value="division">Division</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1272,6 +1124,9 @@
             <div class="combined-quick-actions">
                 <h3>Quick Actions</h3>
                 <div class="button-group">
+                    <button id="analysis-btn" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i> Analysis
+                    </button>
                     <button id="history-btn" class="btn btn-secondary">
                       <i class="fas fa-history"></i>
                       History
@@ -1287,8 +1142,8 @@
 
         <div style="margin-bottom: 1rem;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-            <span style="color: var(--text-secondary);">Progress</span>
-            <span id="tests-remaining" style="color: var(--text-secondary);">500</span>
+            <span style="color: var(--text-secondary);">Topic Progress</span>
+            <span id="tests-remaining" style="color: var(--text-secondary);">100</span>
           </div>
           <div class="progress-container">
             <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
@@ -1303,11 +1158,11 @@
           <i class="fas fa-graduation-cap"></i>
           <h4>Club Of Competition</h4>
         </div>
-        <div id="timer" class="timer">⏱️ 01:00</div>
+        <div id="timer" class="timer">⏱️ 00:00</div>
       </div>
 
       <div class="card">
-        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Multiplication Tables Practice</h2>
+        <h2 id="quiz-title" style="margin-bottom: 1.5rem; color: var(--primary);">Math Quiz</h2>
         <div id="questions-container" class="questions-container"></div>
 
         <div class="submit-btn-container">
@@ -1342,15 +1197,23 @@
   <div id="history-modal" class="modal">
     <div class="modal-content">
       <button class="close-btn" id="close-history-btn">&times;</button>
-      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-history"></i> Test History</h2>
+      <h2 id="history-title" style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-history"></i> Test History</h2>
       <div id="history-list" class="history-list"></div>
     </div>
   </div>
 
   <div id="leaderboard-modal" class="modal"> <div class="modal-content">
       <button class="close-btn" id="close-leaderboard-btn">&times;</button>
-      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-trophy"></i> Leaderboard (Top 10)</h2>
+      <h2 id="leaderboard-title" style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-trophy"></i> Leaderboard (Top 10)</h2>
       <div id="leaderboard-list" class="leaderboard-list"></div>
+    </div>
+  </div>
+
+  <div id="analysis-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-analysis-btn">&times;</button>
+      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-chart-line"></i> Performance Analysis</h2>
+      <div id="analysis-content"></div>
     </div>
   </div>
 
@@ -1404,18 +1267,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       // Element selectors
       const loginScreen = document.getElementById('login-screen');
-      const signupScreen = document.getElementById('signup-screen'); // New signup screen
+      const signupScreen = document.getElementById('signup-screen');
       const startScreen = document.getElementById('start-screen');
       const quizScreen = document.getElementById('quiz-screen');
+      const quizTitle = document.getElementById('quiz-title');
 
       const googleSignInBtn = document.getElementById('googleSignInBtn');
-      const googleSignUpBtn = document.getElementById('googleSignUpBtn'); // New Google Sign Up button
+      const googleSignUpBtn = document.getElementById('googleSignUpBtn'); 
 
       const logoutBtn = document.getElementById('logout-btn');
       const welcomeUserEl = document.getElementById('welcome-user');
-      const startBtn = document.getElementById('start-btn');
       const historyBtn = document.getElementById('history-btn');
       const leaderboardBtn = document.getElementById('leaderboard-btn');
+      const analysisBtn = document.getElementById('analysis-btn');
       const submitBtn = document.getElementById('submit-btn');
       const backToHomeBtn = document.getElementById('back-to-home-btn');
       const questionsContainer = document.getElementById('questions-container');
@@ -1424,17 +1288,28 @@
       const timeTakenEl = document.getElementById('time-taken');
       const scoreProgress = document.getElementById('score-progress');
       const answersReviewEl = document.getElementById('answers-review');
+      const statsTopicSelect = document.getElementById('stats-topic-select');
+      const selectedTopicText = document.getElementById('selected-topic-text');
       const testsCompletedEl = document.getElementById('tests-completed');
       const averageScoreEl = document.getElementById('average-score');
       const highestScoreEl = document.getElementById('highest-score');
       const testsProgress = document.getElementById('tests-progress');
       const testsRemainingEl = document.getElementById('tests-remaining');
+      
       const historyModal = document.getElementById('history-modal');
       const closeHistoryBtn = document.getElementById('close-history-btn');
       const historyListEl = document.getElementById('history-list');
+      const historyTitle = document.getElementById('history-title');
+      
       const leaderboardModal = document.getElementById('leaderboard-modal');
       const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
       const leaderboardListEl = document.getElementById('leaderboard-list');
+      const leaderboardTitle = document.getElementById('leaderboard-title');
+
+      const analysisModal = document.getElementById('analysis-modal');
+      const closeAnalysisBtn = document.getElementById('close-analysis-btn');
+      const analysisContent = document.getElementById('analysis-content');
+      
       const darkModeToggle = document.getElementById('darkModeToggle');
       const themeLabel = document.getElementById('theme-label');
       const syncStatus = document.getElementById('sync-status');
@@ -1443,19 +1318,19 @@
       const emailEl = document.getElementById('email');
       const passwordEl = document.getElementById('password');
       const signInBtn = document.getElementById('signInBtn');
-      const showSignUpBtn = document.getElementById('showSignUpBtn'); // Button to show signup screen
+      const showSignUpBtn = document.getElementById('showSignUpBtn');
       const forgotPasswordBtn = document.getElementById('forgotPassword');
 
-      const signupEmailEl = document.getElementById('signup-email'); // New signup email
-      const signupPasswordEl = document.getElementById('signup-password'); // New signup password
-      const signupConfirmPasswordEl = document.getElementById('signup-confirm-password'); // New confirm password
-      const signUpBtn = document.getElementById('signUpBtn'); // Actual signup button
-      const backToSignInBtn = document.getElementById('backToSignInBtn'); // Button to go back to sign in
+      const signupEmailEl = document.getElementById('signup-email');
+      const signupPasswordEl = document.getElementById('signup-password');
+      const signupConfirmPasswordEl = document.getElementById('signup-confirm-password');
+      const signUpBtn = document.getElementById('signUpBtn');
+      const backToSignInBtn = document.getElementById('backToSignInBtn');
 
       const resultsModal = document.getElementById('results-modal');
       const closeResultsBtn = document.getElementById('close-results-btn');
 
-      const MAX_TESTS = 500;
+      const MAX_TESTS_PER_TOPIC = 100;
       let unsubscribeFromFirestore = null;
       let appState = {
         currentUser: null,
@@ -1474,17 +1349,21 @@
             const userId = user.uid;
             if (unsubscribeFromFirestore) unsubscribeFromFirestore();
             const userDocRef = doc(db, "users", userId);
-            unsubscribeFromFirestore = onSnapshot(userDocRef, (docSnap) => {
+            unsubscribeFromFirestore = onSnapshot(userDocRef, async (docSnap) => {
               updateSyncStatus('synced');
               if (docSnap.exists()) {
-                const firebaseData = docSnap.data();
-                appState.currentUser = {
-                    uid: userId,
-                    ...firebaseData,
-                    // Ensure darkMode is a boolean, falling back to existing state or false
-                    darkMode: typeof firebaseData.darkMode === 'boolean' ? firebaseData.darkMode : (appState.currentUser?.darkMode || false)
-                };
-                saveToLocalStorage(`user_${userId}`, appState.currentUser);
+                  let firebaseData = docSnap.data();
+                  if (!firebaseData.stats) {
+                      const newStats = createNewUserData({}).stats;
+                      await updateDoc(userDocRef, { stats: newStats });
+                      firebaseData.stats = newStats;
+                  }
+                  appState.currentUser = {
+                      uid: userId,
+                      ...firebaseData,
+                      darkMode: typeof firebaseData.darkMode === 'boolean' ? firebaseData.darkMode : (appState.currentUser?.darkMode || false)
+                  };
+                  saveToLocalStorage(`user_${userId}`, appState.currentUser);
               } else {
                 handleNewUser(user, userDocRef);
               }
@@ -1514,12 +1393,22 @@
       }
 
       function createNewUserData(user) {
+          const topics = ["tables", "addition", "subtraction", "multiplication", "division"];
+          const stats = {};
+          topics.forEach(topic => {
+            stats[topic] = {
+                history: [],
+                highestScore: 0,
+                averageScore: 0
+            };
+          });
+
           return {
               displayName: user.displayName || user.email,
               email: user.email,
               photoURL: user.photoURL,
-              history: [],
-              // darkMode: false Removed dark mode from user data in Firebase
+              stats: stats,
+              darkMode: false
           };
       }
 
@@ -1528,6 +1417,7 @@
           welcomeUserEl.textContent = `Welcome, ${appState.currentUser.displayName || 'User'}!`;
           applySavedTheme();
           showStartScreen();
+          updateStatsUI(statsTopicSelect.dataset.value || 'tables');
       }
 
       function updateSyncStatus(status) {
@@ -1549,32 +1439,72 @@
 
       function setupEventListeners() {
         googleSignInBtn.addEventListener('click', signInWithGoogle);
-        googleSignUpBtn.addEventListener('click', signInWithGoogle); // Google sign-up also uses the same logic
+        googleSignUpBtn.addEventListener('click', signInWithGoogle);
         logoutBtn.addEventListener('click', () => signOut(auth).catch(console.error));
-        startBtn.addEventListener('click', startQuiz);
+        
+        document.querySelectorAll('.topic-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const topic = button.dataset.topic;
+                const duration = parseInt(button.dataset.duration, 10);
+                startQuiz(topic, duration);
+            });
+        });
+
+        // Custom Dropdown Logic
+        const customSelectWrapper = document.querySelector('.custom-select-wrapper');
+        const customSelectTrigger = document.querySelector('.custom-select-trigger');
+        customSelectTrigger.addEventListener('click', () => {
+            customSelectWrapper.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.custom-option').forEach(option => {
+            option.addEventListener('click', function() {
+                if (!this.classList.contains('selected')) {
+                    this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+                    this.classList.add('selected');
+                    selectedTopicText.textContent = this.textContent;
+                    statsTopicSelect.dataset.value = this.dataset.value;
+                    updateStatsUI(this.dataset.value);
+                }
+                customSelectWrapper.classList.remove('open');
+            });
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (!customSelectWrapper.contains(e.target)) {
+                 customSelectWrapper.classList.remove('open');
+            }
+        });
+
+
         historyBtn.addEventListener('click', showHistory);
         leaderboardBtn.addEventListener('click', showLeaderboard);
+        analysisBtn.addEventListener('click', showAnalysis);
+
         submitBtn.addEventListener('click', () => submitQuiz());
         backToHomeBtn.addEventListener('click', () => {
             resultsModal.style.display = 'none';
             showStartScreen();
         });
+
         closeResultsBtn.addEventListener('click', () => resultsModal.style.display = 'none');
         closeHistoryBtn.addEventListener('click', () => historyModal.style.display = 'none');
         closeLeaderboardBtn.addEventListener('click', () => leaderboardModal.style.display = 'none');
+        closeAnalysisBtn.addEventListener('click', () => analysisModal.style.display = 'none');
+        
         darkModeToggle.addEventListener('change', toggleDarkMode);
+        
         window.addEventListener('click', (e) => {
           if (e.target === historyModal) historyModal.style.display = 'none';
           if (e.target === resultsModal) resultsModal.style.display = 'none';
           if (e.target === leaderboardModal) leaderboardModal.style.display = 'none';
+          if (e.target === analysisModal) analysisModal.style.display = 'none';
         });
 
-        // Email/Password Auth
         signInBtn.addEventListener('click', signInWithEmail);
-        signUpBtn.addEventListener('click', signUpWithEmail); // Renamed for clarity
+        signUpBtn.addEventListener('click', signUpWithEmail);
         forgotPasswordBtn.addEventListener('click', sendPasswordReset);
 
-        // Screen Navigation
         showSignUpBtn.addEventListener('click', (e) => {
             e.preventDefault();
             showSignUpScreen();
@@ -1584,24 +1514,13 @@
             showLoginScreen();
         });
       }
-
+      
       function signInWithGoogle() {
-        // Determine which button was clicked for specific text updates
-        const targetBtn = this.id === 'googleSignInBtn' ? googleSignInBtn : googleSignUpBtn;
-
-        targetBtn.classList.add('loading');
-        targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-        signInWithPopup(auth, provider)
-          .catch((error) => {
-            console.error('Firebase Sign-In Error:', error);
-            alert('Error signing in with Google. Please try again.');
-          })
-          .finally(() => {
-            targetBtn.classList.remove('loading');
-            targetBtn.innerHTML = '<i class="fab fa-google"></i> Sign in with Google';
-          });
+        signInWithPopup(auth, provider).catch((error) => {
+            if (error.code !== 'auth/popup-closed-by-user') alert('Error: ' + error.message);
+        });
       }
-
+    
       function signInWithEmail() {
         const email = emailEl.value;
         const password = passwordEl.value;
@@ -1612,9 +1531,7 @@
         signInBtn.classList.add('loading');
         signInBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
         signInWithEmailAndPassword(auth, email, password)
-            .catch(error => {
-                alert(error.message);
-            })
+            .catch((error) => alert(error.message))
             .finally(() => {
                 signInBtn.classList.remove('loading');
                 signInBtn.innerHTML = 'Sign In';
@@ -1638,13 +1555,8 @@
         signUpBtn.classList.add('loading');
         signUpBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
         createUserWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                alert('Account created successfully! You are now signed in.');
-                // User is automatically signed in after creation
-            })
-            .catch(error => {
-                alert(error.message);
-            })
+            .then(() => alert('Account created successfully! You are now signed in.'))
+            .catch(error => alert(error.message))
             .finally(() => {
                 signUpBtn.classList.remove('loading');
                 signUpBtn.innerHTML = 'Create Account';
@@ -1658,12 +1570,8 @@
               return;
           }
           sendPasswordResetEmail(auth, email)
-            .then(() => {
-                alert('Password reset email sent! Check your inbox.');
-            })
-            .catch(error => {
-                alert(error.message);
-            });
+            .then(() => alert('Password reset email sent! Check your inbox.'))
+            .catch(error => alert(error.message));
       }
 
       function applySavedTheme() {
@@ -1692,7 +1600,7 @@
       function showLoginScreen() {
         stopTimer();
         loginScreen.classList.add('active');
-        signupScreen.classList.remove('active'); // Hide signup screen
+        signupScreen.classList.remove('active');
         startScreen.classList.remove('active');
         quizScreen.classList.remove('active');
         timerEl.style.display = 'none';
@@ -1701,11 +1609,11 @@
       function showSignUpScreen() {
         stopTimer();
         loginScreen.classList.remove('active');
-        signupScreen.classList.add('active'); // Show signup screen
+        signupScreen.classList.add('active');
         startScreen.classList.remove('active');
         quizScreen.classList.remove('active');
         timerEl.style.display = 'none';
-        signupEmailEl.value = ''; // Clear fields
+        signupEmailEl.value = '';
         signupPasswordEl.value = '';
         signupConfirmPasswordEl.value = '';
       }
@@ -1713,65 +1621,106 @@
       function showStartScreen() {
         stopTimer();
         loginScreen.classList.remove('active');
-        signupScreen.classList.remove('active'); // Hide signup screen
+        signupScreen.classList.remove('active');
         startScreen.classList.add('active');
         quizScreen.classList.remove('active');
         timerEl.style.display = 'none';
-        updateStatsUI();
+        updateStatsUI(statsTopicSelect.dataset.value || 'tables');
       }
 
-      function updateStatsUI() {
-        if (!appState.currentUser) return;
-        const history = appState.currentUser.history || [];
+      function updateStatsUI(topic) {
+        if (!appState.currentUser?.stats?.[topic]) return;
+
+        const topicStats = appState.currentUser.stats[topic];
+        const history = topicStats.history || [];
         const testsTaken = history.length;
+        
         testsCompletedEl.textContent = testsTaken;
-        averageScoreEl.textContent = '0'; // Default
-        highestScoreEl.textContent = '0'; // Default
+        highestScoreEl.textContent = topicStats.highestScore || 0;
+        averageScoreEl.textContent = topicStats.averageScore ? Math.round(topicStats.averageScore) : 0;
 
-        if (testsTaken > 0) {
-            const totalScore = history.reduce((sum, test) => sum + test.score, 0);
-            averageScoreEl.textContent = Math.round(totalScore / testsTaken);
-            highestScoreEl.textContent = Math.max(...history.map(test => test.score));
-        }
-
-        testsRemainingEl.textContent = Math.max(0, MAX_TESTS - testsTaken);
-        testsProgress.style.width = `${(testsTaken / MAX_TESTS) * 100}%`;
-        startBtn.disabled = testsTaken >= MAX_TESTS;
-        startBtn.innerHTML = testsTaken >= MAX_TESTS ?
-          '<i class="fas fa-times-circle"></i> Test Limit Reached' :
-          '<i class="fas fa-play"></i> Start New Test';
+        testsRemainingEl.textContent = Math.max(0, MAX_TESTS_PER_TOPIC - testsTaken);
+        testsProgress.style.width = `${(testsTaken / MAX_TESTS_PER_TOPIC) * 100}%`;
       }
-
-      function startQuiz() {
-        if ((appState.currentUser.history?.length || 0) >= MAX_TESTS) {
-          alert('You have reached the maximum limit of 500 tests.');
+      
+      function startQuiz(topic, duration) {
+        if (!appState.currentUser.stats[topic]) {
+            alert("Error: Invalid topic selected.");
+            return;
+        }
+        if ((appState.currentUser.stats[topic].history.length || 0) >= MAX_TESTS_PER_TOPIC) {
+          alert(`You have reached the maximum limit of ${MAX_TESTS_PER_TOPIC} tests for this topic.`);
           return;
         }
+        
+        const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+        quizTitle.textContent = `${topicName} Quiz`;
+        
         appState.quizState = {
-          questions: generateQuestions(),
+          questions: generateQuestions(topic),
           userAnswers: {},
           score: 0,
           startTime: new Date().toISOString(),
-          timerInterval: null
+          timerInterval: null,
+          duration: duration,
+          topic: topic
         };
         saveQuizStateLocally();
         startScreen.classList.remove('active');
         quizScreen.classList.add('active');
         timerEl.style.display = 'flex';
         displayQuestions();
-        startTimer();
+        startTimer(duration);
       }
+      
+      function generateQuestions(topic) {
+        const questions = new Set();
+        while (questions.size < 20) {
+            let num1, num2, answer, text;
 
-      function generateQuestions() {
-        const questions = [];
-        for (let i = 0; i < 20; i++) {
-          const num1 = Math.floor(Math.random() * 20) + 1;
-          const num2 = Math.floor(Math.random() * 10) + 1;
-          const answer = num1 * num2;
-          const options = generateOptions(answer);
-          questions.push({ text: `${num1} × ${num2} = ?`, answer, options });
+            switch (topic) {
+                case 'addition':
+                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    num2 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    answer = num1 + num2;
+                    text = `${num1} + ${num2} = ?`;
+                    break;
+                case 'subtraction':
+                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    num2 = Math.floor(Math.random() * num1) + 1; // Ensures positive result
+                    answer = num1 - num2;
+                    text = `${num1} - ${num2} = ?`;
+                    break;
+                case 'division':
+                    const quotient = Math.floor(Math.random() * 90) + 10; // Result from 10 to 99
+                    num2 = Math.floor(Math.random() * 20) + 2; // Divisor from 2 to 21
+                    num1 = num2 * quotient;
+                    answer = quotient;
+                    text = `${num1} ÷ ${num2} = ?`;
+                    break;
+                case 'tables':
+                    num1 = Math.floor(Math.random() * 20) + 1;
+                    num2 = Math.floor(Math.random() * 10) + 1;
+                    answer = num1 * num2;
+                    text = `${num1} × ${num2} = ?`;
+                    break;
+                case 'multiplication':
+                    num1 = Math.floor(Math.random() * 90) + 10; // 10 to 99
+                    num2 = Math.floor(Math.random() * 90) + 10; // 10 to 99
+                    answer = num1 * num2;
+                    text = `${num1} × ${num2} = ?`;
+                    break;
+                default:
+                    text = 'No questions';
+                    answer = 0;
+            }
+            questions.add(JSON.stringify({ text, answer }));
         }
-        return questions;
+
+        return Array.from(questions).map(q => {
+            const parsedQ = JSON.parse(q);
+            return { ...parsedQ, options: generateOptions(parsedQ.answer) };
+        });
       }
 
       function generateOptions(correctAnswer) {
@@ -1779,7 +1728,7 @@
         while (options.size < 4) {
           const offset = (Math.floor(Math.random() * 5) + 1) * (Math.random() < 0.5 ? -1 : 1);
           let wrongAnswer = correctAnswer + offset;
-          if (wrongAnswer > 0) options.add(wrongAnswer);
+          if (wrongAnswer > 0 && wrongAnswer !== correctAnswer) options.add(wrongAnswer);
         }
         return Array.from(options).sort(() => Math.random() - 0.5);
       }
@@ -1800,29 +1749,18 @@
           `;
           const optionsContainer = questionCard.querySelector('.options');
 
-          // Restore previously selected answer in blue
           const savedAnswer = appState.quizState.userAnswers[index];
           if (savedAnswer !== undefined) {
             const selectedOption = optionsContainer.querySelector(`[data-option="${savedAnswer}"]`);
-            if (selectedOption) {
-              selectedOption.classList.add('selected');
-            }
+            if (selectedOption) selectedOption.classList.add('selected');
           }
 
           optionsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('option') && !e.target.classList.contains('disabled')) {
-              // Remove any previously selected option
-              optionsContainer.querySelectorAll('.option').forEach(opt => {
-                opt.classList.remove('selected');
-              });
-
-              // Mark the clicked option as selected (in blue)
+              optionsContainer.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
               e.target.classList.add('selected');
-
-              // Save the user's answer
               const selectedAnswer = Number(e.target.dataset.option);
               appState.quizState.userAnswers[index] = selectedAnswer;
-
               saveQuizStateLocally();
             }
           });
@@ -1830,13 +1768,14 @@
         });
       }
 
-      function startTimer() {
+      function startTimer(duration) {
         stopTimer();
         const startTime = new Date(appState.quizState.startTime);
+        updateTimerDisplay(duration); // Show initial time immediately
         appState.quizState.timerInterval = setInterval(() => {
           const now = new Date();
           const elapsedSeconds = Math.floor((now - startTime) / 1000);
-          const timeLeft = 60 - elapsedSeconds;
+          const timeLeft = duration - elapsedSeconds;
           updateTimerDisplay(timeLeft);
           if (timeLeft <= 10) timerEl.classList.add('warning');
           if (timeLeft <= 0) submitQuiz(true);
@@ -1844,7 +1783,7 @@
       }
 
       function stopTimer() {
-        if (appState.quizState && appState.quizState.timerInterval) {
+        if (appState.quizState?.timerInterval) {
             clearInterval(appState.quizState.timerInterval);
             appState.quizState.timerInterval = null;
         }
@@ -1853,81 +1792,54 @@
 
       function updateTimerDisplay(timeLeft) {
         const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-        const seconds = String(timeLeft % 60).padStart(2, '0');
-        timerEl.textContent = `${minutes}:${seconds}`;
+        const seconds = String(Math.max(0, timeLeft % 60)).padStart(2, '0');
+        timerEl.textContent = `⏱️ ${minutes}:${seconds}`;
       }
 
       async function submitQuiz(isTimeUp = false) {
         stopTimer();
-        // Disable submit button to prevent multiple submissions
         submitBtn.disabled = true;
 
-        // Apply correct/incorrect styling to options on the quiz screen
-        appState.quizState.questions.forEach((question, index) => {
-          const userAnswer = appState.quizState.userAnswers[index];
-          const questionCard = questionsContainer.children[index];
-          const options = questionCard.querySelectorAll('.option');
-
-          options.forEach(optionEl => {
-            optionEl.classList.add('disabled'); // Disable all options
-            const optionValue = Number(optionEl.dataset.option);
-
-            // Remove selected class if it's not the correct answer for visual clarity
-            if (optionEl.classList.contains('selected') && optionValue !== question.answer) {
-                optionEl.classList.remove('selected');
-            }
-
-            if (optionValue === question.answer) {
-              optionEl.classList.add('correct'); // Always highlight the correct answer
-            } else if (optionValue === userAnswer) {
-              optionEl.classList.add('incorrect'); // Highlight user's incorrect choice
-            }
-          });
-        });
-
-        // Recalculate score
         let score = 0;
         appState.quizState.questions.forEach((question, index) => {
           const userAnswer = appState.quizState.userAnswers[index];
-          if (userAnswer === question.answer) {
-            score += 5;
-          }
+          if (userAnswer === question.answer) score += 5;
         });
         appState.quizState.score = score;
 
         const timeTaken = Math.floor((new Date() - new Date(appState.quizState.startTime)) / 1000);
-        const testResult = {
+        const currentTopic = appState.quizState.topic;
+
+        const newResult = {
           score: appState.quizState.score,
           timeTaken: timeTaken,
           date: new Date().toISOString(),
           isTimeUp: isTimeUp
         };
-
-        // Sync to Firebase
+        
         updateSyncStatus('syncing');
-        const userDocRef = doc(db, "users", appState.currentUser.uid);
         try {
-          // Update user's history
-          await updateDoc(userDocRef, { history: [...(appState.currentUser.history || []), testResult] });
+            const userDocRef = doc(db, "users", appState.currentUser.uid);
+            const currentTopicStats = appState.currentUser.stats[currentTopic];
+            
+            const newHistory = [...(currentTopicStats.history || []), newResult];
+            const newHighestScore = Math.max(currentTopicStats.highestScore || 0, newResult.score);
+            const newAverageScore = newHistory.reduce((sum, test) => sum + test.score, 0) / newHistory.length;
 
-          // Update user's highest score for leaderboard purposes
-          const currentHighestScore = appState.currentUser.highestScore || 0;
-          if (appState.quizState.score > currentHighestScore) {
-              await updateDoc(userDocRef, { highestScore: appState.quizState.score });
-          }
-
-          updateSyncStatus('synced');
+            const updatePath = `stats.${currentTopic}`;
+            await updateDoc(userDocRef, {
+                [`${updatePath}.history`]: newHistory,
+                [`${updatePath}.highestScore`]: newHighestScore,
+                [`${updatePath}.averageScore`]: newAverageScore
+            });
+            updateSyncStatus('synced');
         } catch (error) {
           console.error("Error syncing results to Firestore:", error);
           updateSyncStatus('error');
         }
 
-        clearQuizStateLocally();
-        // Delay showing results to allow user to see the corrected colors on quiz screen briefly
-        setTimeout(() => {
-            showResults(timeTaken);
-            submitBtn.disabled = false; // Re-enable for next quiz if needed
-        }, 1500); // 1.5 second delay
+        showResults(timeTaken);
+        submitBtn.disabled = false;
       }
 
       function showResults(timeTaken) {
@@ -1946,78 +1858,128 @@
 
           return `
             <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
-              <h4>
-                <i class="fas fa-question-circle"></i>
-                Question ${i + 1}: ${q.text}
-              </h4>
+              <h4><i class="fas fa-question-circle"></i> Question ${i + 1}: ${q.text}</h4>
               <div class="answer-feedback ${isCorrect ? 'correct' : 'incorrect'}">
                 <i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i>
-                Your answer: ${userAnswerDisplay} (${isCorrect ? 'Correct' : 'Incorrect'})
+                Your answer: ${userAnswerDisplay}
               </div>
-              ${!isCorrect ? `
-                <div class="correct-answer">
-                  <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                  <strong>Correct answer:</strong> ${q.answer}
-                </div>
-              ` : ''}
+              ${!isCorrect ? generateExplanation(q) : ''}
             </div>
           `;
         }).join('');
 
-        updateStatsUI();
+        updateStatsUI(appState.quizState.topic);
+        clearQuizStateLocally();
         appState.quizState = null;
       }
 
+      function generateExplanation(question) {
+        const parts = question.text.split(' ');
+        const num1 = parseInt(parts[0], 10);
+        const operator = parts[1];
+        const num2 = parseInt(parts[2], 10);
+        const answer = question.answer;
+
+        let explanationHTML = `<div class="explanation"><strong>Step-by-step Solution:</strong>`;
+
+        switch (operator) {
+            case '+':
+                explanationHTML += `<p>To add numbers with multiple digits, we add column by column from right to left.</p>
+                                    <ol>
+                                        <li>Align numbers vertically.</li>
+                                        <li>Add the ones place.</li>
+                                        <li>Add the tens place (including any carry-over).</li>
+                                        <li>Continue for all place values.</li>
+                                    </ol>
+                                    <pre>${String(num1).padStart(5)}\n+ ${String(num2).padStart(5)}\n-------\n ${String(answer).padStart(5)}</pre>`;
+                break;
+            case '-':
+                 explanationHTML += `<p>To subtract, we subtract column by column from right to left, borrowing from the next column if needed.</p>
+                                     <ol>
+                                        <li>Align numbers vertically, with the larger number on top.</li>
+                                        <li>Subtract the ones place.</li>
+                                        <li>Subtract the tens place (borrowing if necessary).</li>
+                                        <li>Continue for all place values.</li>
+                                     </ol>
+                                     <pre>${String(num1).padStart(5)}\n- ${String(num2).padStart(5)}\n-------\n ${String(answer).padStart(5)}</pre>`;
+                break;
+            case '×':
+                explanationHTML += `<p>For two-digit multiplication:</p>
+                                    <ol>
+                                        <li>Multiply ${num1} by the ones digit of ${num2}.</li>
+                                        <li>Multiply ${num1} by the tens digit of ${num2}.</li>
+                                        <li>Add the two results together.</li>
+                                    </ol>
+                                    <p>The correct answer is <strong>${answer}</strong>.</p>`;
+                break;
+            case '÷':
+                 explanationHTML += `<p>Division is the reverse of multiplication. We are looking for the number that, when multiplied by ${num2}, gives ${num1}.</p>
+                                     <p>${num2} × <strong>?</strong> = ${num1}</p>
+                                     <p>In this case, ${num2} × <strong>${answer}</strong> = ${num1}.</p>
+                                     <p>The correct answer is <strong>${answer}</strong>.</p>`;
+                break;
+        }
+        explanationHTML += '</div>';
+        return explanationHTML;
+      }
+
       function showHistory() {
-        historyModal.style.display = 'flex';
-        const history = appState.currentUser.history || [];
+        const topic = statsTopicSelect.dataset.value || 'tables';
+        const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+        historyTitle.innerHTML = `<i class="fas fa-history"></i> ${topicName} History`;
+
+        const history = appState.currentUser?.stats?.[topic]?.history || [];
 
         if (history.length === 0) {
-          historyListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No test history yet.</p>';
-          return;
+          historyListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No test history for this topic yet.</p>';
+        } else {
+            historyListEl.innerHTML = history.slice().reverse().map((test, index) => {
+            const testDate = new Date(test.date);
+            const dateStr = testDate.toLocaleDateString();
+            const timeStr = testDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const position = history.length - index;
+
+            return `
+                <div class="history-item">
+                <h3><i class="fas fa-trophy"></i> Test #${position}</h3>
+                <p><i class="fas fa-star" style="color: var(--warning);"></i> <strong>Score:</strong> ${test.score}/100</p>
+                <p><i class="fas fa-clock"></i> <strong>Time:</strong> ${test.timeTaken}s</p>
+                <p><i class="fas fa-calendar"></i> <strong>Date:</strong> ${dateStr} at ${timeStr}</p>
+                ${test.isTimeUp ? '<p><i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> <strong>Time expired</strong></p>' : ''}
+                </div>
+            `;
+            }).join('');
         }
-
-        historyListEl.innerHTML = history.slice().reverse().map((test, index) => {
-          const testDate = new Date(test.date);
-          const dateStr = testDate.toLocaleDateString();
-          const timeStr = testDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          const position = history.length - index;
-
-          return `
-            <div class="history-item">
-              <h3><i class="fas fa-trophy"></i> Test #${position}</h3>
-              <p><i class="fas fa-star" style="color: var(--warning);"></i> <strong>Score:</strong> ${test.score}/100</p>
-              <p><i class="fas fa-clock"></i> <strong>Time:</strong> ${test.timeTaken}s</p>
-              <p><i class="fas fa-calendar"></i> <strong>Date:</strong> ${dateStr} at ${timeStr}</p>
-              ${test.isTimeUp ? '<p><i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> <strong>Time expired</strong></p>' : ''}
-            </div>
-          `;
-        }).join('');
+        historyModal.style.display = 'flex';
       }
 
       async function showLeaderboard() {
+          const topic = statsTopicSelect.dataset.value || 'tables';
+          const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+          leaderboardTitle.innerHTML = `<i class="fas fa-trophy"></i> ${topicName} Leaderboard (Top 10)`;
+
           leaderboardModal.style.display = 'flex';
           leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Loading leaderboard...</p>';
 
           try {
               const usersRef = collection(db, "users");
-              // Query users by highestScore in descending order, limit to 10
-              const q = query(usersRef, orderBy("highestScore", "desc"), limit(10));
+              const q = query(usersRef, orderBy(`stats.${topic}.averageScore`, "desc"), limit(10));
               const querySnapshot = await getDocs(q);
 
               const leaderboard = [];
               querySnapshot.forEach((doc) => {
                   const data = doc.data();
-                  if (data.highestScore !== undefined) {
+                  const averageScore = data.stats?.[topic]?.averageScore;
+                  if (averageScore > 0) {
                       leaderboard.push({
                           displayName: data.displayName || 'Anonymous',
-                          highestScore: data.highestScore
+                          averageScore: averageScore
                       });
                   }
               });
 
               if (leaderboard.length === 0) {
-                  leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No scores on the leaderboard yet.</p>';
+                  leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No scores on the leaderboard for this topic yet.</p>';
                   return;
               }
 
@@ -2025,7 +1987,7 @@
                   return `
                       <div class="leaderboard-item">
                           <span>${index + 1}. ${entry.displayName}</span>
-                          <span>${entry.highestScore} points</span>
+                          <span>Avg: ${Math.round(entry.averageScore)}</span>
                       </div>
                   `;
               }).join('');
@@ -2036,7 +1998,55 @@
           }
       }
 
-      // Local Storage Functions
+      function showAnalysis() {
+        const stats = appState.currentUser.stats;
+        const STRENGTH_THRESHOLD = 85;
+        const WEAKNESS_THRESHOLD = 60;
+        const MIN_TESTS = 3;
+
+        const strengths = [];
+        const weaknesses = [];
+        const recommendations = [];
+        let analyzedTopics = 0;
+
+        for (const topic in stats) {
+            const topicData = stats[topic];
+            const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+            if (topicData.history && topicData.history.length >= MIN_TESTS) {
+                analyzedTopics++;
+                const avg = topicData.averageScore;
+                if (avg >= STRENGTH_THRESHOLD) {
+                    strengths.push(`<div class="strength">You excel at <strong>${topicName}</strong> with an average score of ${Math.round(avg)}.</div>`);
+                } else if (avg <= WEAKNESS_THRESHOLD) {
+                    weaknesses.push(`<div class="weakness">You have an opportunity to improve in <strong>${topicName}</strong>, where your average score is ${Math.round(avg)}.</div>`);
+                    recommendations.push(`<div class="recommendation">Focus on practicing the <strong>${topicName}</strong> topic to boost your performance.</div>`);
+                }
+            }
+        }
+
+        let html = '';
+        if (analyzedTopics === 0) {
+            html = `<p>Complete at least ${MIN_TESTS} tests in any topic to see your performance analysis.</p>`;
+        } else {
+            if (strengths.length > 0) {
+                html += `<div class="analysis-section"><h4>Your Strengths 💪</h4>${strengths.join('')}</div>`;
+            }
+            if (weaknesses.length > 0) {
+                html += `<div class="analysis-section"><h4>Areas for Improvement 🧠</h4>${weaknesses.join('')}</div>`;
+                html += `<div class="analysis-section"><h4>Recommendations 🎯</h4>${recommendations.join('')}</div>`;
+            }
+            if (strengths.length > 0 && weaknesses.length === 0) {
+                html += `<p>Great job! You're showing strong performance in the topics you've practiced. Keep it up!</p>`;
+            }
+             if (strengths.length === 0 && weaknesses.length === 0) {
+                html += `<p>You're performing consistently across all topics. Keep practicing to turn them into strengths!</p>`;
+            }
+        }
+
+        analysisContent.innerHTML = html;
+        analysisModal.style.display = 'flex';
+      }
+      
       function getLocalStorageKey(key) {
           if (appState.currentUser?.uid) {
               return `quiz_${appState.currentUser.uid}_${key}`;
@@ -2064,8 +2074,6 @@
       function clearLocalStorageForUser() {
           if(!appState.currentUser?.uid) return;
           localStorage.removeItem(getLocalStorageKey('quizState'));
-          // Keep darkMode setting in local storage, it's global now
-          // localStorage.removeItem(getLocalStorageKey('darkMode'));
       }
 
       function saveQuizStateLocally() {
@@ -2078,7 +2086,6 @@
           localStorage.removeItem(getLocalStorageKey('quizState'));
       }
 
-      // Initialize the application
       init();
     });
   </script>
