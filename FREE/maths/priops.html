@@ -898,7 +898,7 @@
 
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-          <h2 id="welcome-user" style="color: var(--text-primary);">Welcome, User!</h2>
+          <h2 id="welcome-user" style="color: var(--text-primary);">Hi, User!</h2>
           <div class="theme-toggle">
               <span id="theme-label">🌙</span>
               <label class="switch">
@@ -910,7 +910,7 @@
 
         <div style="text-align: center; margin-bottom: 2rem;">
             <button id="start-new-test-btn" class="btn btn-primary btn-lg">
-                <i class="fas fa-play"></i> Start New Test
+                <i class="fas fa-play"></i> Choose subject to start new test
             </button>
         </div>
 
@@ -1255,7 +1255,7 @@
 
       function updateUIForUser() {
           if (!appState.currentUser) return;
-          welcomeUserEl.textContent = `Welcome, ${appState.currentUser.displayName || 'User'}!`;
+          welcomeUserEl.textContent = `Hi, ${appState.currentUser.displayName || 'User'}!`;
           applySavedTheme();
           showStartScreen();
           updateStatsUI(statsTopicSelect.dataset.value || 'tables');
