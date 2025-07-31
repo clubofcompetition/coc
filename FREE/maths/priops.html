@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club Of Competition - Math Practice</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9F5XW0QKCV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9F5XW0QKCV');
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      /* Base Colors */
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+
+      /* Light Mode Palette */
+      --bg-body: #f3f4f6;
+      --bg-content: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: #e5e7eb;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-placeholder: #6b7280;
+      --input-bg: #ffffff;
+      --input-border: #d1d5db;
+      --button-secondary-bg: #e5e7eb;
+      --button-secondary-text: #374151;
+      --separator-line: #e5e7eb;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      --radius-sm: 0.375rem;
+      --radius: 0.5rem;
+      --radius-lg: 0.75rem;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark-mode {
+      /* Dark Mode Palette */
+      --bg-body: #111827;
+      --bg-content: #1f2937;
+      --card-bg: #1f2937;
+      --card-border: #374151;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-placeholder: #6b7280;
+      --input-bg: #374151;
+      --input-border: #4b5563;
+      --button-secondary-bg: #374151;
+      --button-secondary-text: #f9fafb;
+      --separator-line: #374151;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      transition: var(--transition);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+   
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--separator-line);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--button-secondary-bg);
+      transition: .4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    .dark-mode .slider:before {
+        background-color: var(--text-secondary);
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+      border: 1px solid var(--card-border);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background-color: var(--button-secondary-bg);
+      color: var(--button-secondary-text);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--gray-300);
+      transform: translateY(-1px);
+    }
+    .dark-mode .btn-secondary:hover {
+      background-color: var(--gray-500);
+    }
+    .btn-logout {
+        background-color: transparent;
+        color: var(--danger);
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        width: auto;
+        border: 1px solid var(--danger);
+    }
+    .btn-logout:hover {
+        background-color: var(--danger);
+        color: white;
+    }
+
+    .btn-lg {
+      padding: 0.875rem 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .link {
+      color: var(--primary);
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .link:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+    
+    /* NEW Login Page UI */
+    .auth-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+    .auth-promo-panel {
+        display: none; /* Hidden on mobile by default */
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 3rem;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .auth-promo-panel .logo {
+        color: white;
+        font-size: 2rem;
+    }
+    .auth-promo-panel h2 {
+        font-size: 2.5rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .auth-promo-panel p {
+        font-size: 1.1rem;
+        opacity: 0.8;
+        max-width: 400px;
+    }
+    .auth-features {
+        list-style: none;
+        padding: 0;
+        margin-top: 3rem;
+    }
+    .auth-features li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    .auth-features .fa {
+        font-size: 1.2rem;
+        width: 20px;
+    }
+
+    .auth-form-panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+        background-color: var(--bg-body);
+    }
+    .auth-form-container {
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+    .auth-form-container .logo {
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .auth-form-container h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+    .auth-form-container p {
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+    .auth-container {
+      margin-top: 1rem;
+    }
+    
+    @media (min-width: 992px) {
+        .auth-wrapper {
+            grid-template-columns: 1fr 1fr;
+        }
+        .auth-promo-panel {
+            display: flex;
+        }
+    }
+
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+      color: white;
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: none;
+    }
+    
+    .stats-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+     .stats-card-header h3 {
+        color: var(--text-primary);
+        margin: 0;
+    }
+    .stats-card-header .btn {
+        width: auto;
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .stat-card h3 {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .combined-score-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .combined-score-stats,
+    .combined-quick-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .combined-score-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .combined-score-item h3 {
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+    }
+    .combined-score-item p {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .stat-card .button-group {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .stat-card .button-group .btn {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background-color: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-content);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow);
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      z-index: 1000;
+      border: 1px solid var(--card-border);
+    }
+
+    .questions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .question-card {
+      border-radius: 20px;
+    }
+
+    .question-text {
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .question-text i {
+      color: var(--primary);
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .option {
+      padding: 1rem;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-align: center;
+      font-weight: 500;
+      background-color: var(--bg-content);
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+    .option:hover {
+        transform: translateY(-2px);
+        border-color: var(--primary);
+    }
+
+    .option.selected {
+      border-color: var(--primary-dark);
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .option.correct {
+      border-color: var(--success);
+      background-color: var(--success);
+      color: white;
+    }
+
+    .option.incorrect {
+      border-color: var(--danger);
+      background-color: var(--danger);
+      color: white;
+    }
+
+    .option.disabled {
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
+    .submit-btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .score-display {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0.5rem 0;
+    }
+
+    .answers-review {
+      margin-top: 2rem;
+    }
+
+    .answer-item {
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      margin-bottom: 1rem;
+      background-color: var(--bg-content);
+    }
+
+    .answer-item:hover {
+      border-color: var(--primary);
+    }
+
+    .answer-feedback {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .answer-feedback.correct {
+      color: var(--success);
+    }
+
+    .answer-feedback.incorrect {
+      color: var(--danger);
+    }
+    
+    .explanation {
+        background-color: var(--bg-body);
+        border: 1px solid var(--separator-line);
+        border-left: 4px solid var(--warning);
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+    }
+    .explanation strong {
+        color: var(--text-primary);
+    }
+    .explanation pre {
+        background-color: var(--card-bg);
+        padding: 0.75rem;
+        border-radius: var(--radius-sm);
+        margin-top: 0.5rem;
+        white-space: pre-wrap;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: right;
+    }
+     .explanation ol {
+        padding-left: 20px;
+        margin-top: 0.5rem;
+    }
+    .explanation li {
+        margin-bottom: 0.25rem;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-content {
+      background-color: var(--card-bg);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+    }
+
+    #topic-modal .modal-content, #stats-filter-modal .modal-content {
+        max-width: 600px;
+    }
+
+    .modal-content h2 {
+      color: var(--text-primary);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .close-btn:hover {
+      background-color: var(--gray-200);
+      color: var(--primary);
+    }
+    .dark-mode .close-btn:hover {
+      background-color: var(--gray-700);
+    }
+
+    .history-item, .leaderboard-item {
+      padding: 1.25rem;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+    }
+
+    .history-item:last-child, .leaderboard-item:last-child {
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 0;
+    }
+
+    .history-item h3, .leaderboard-item h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-item h3 i, .leaderboard-item h3 i {
+      font-size: 1.1rem;
+    }
+
+    .leaderboard-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.25rem;
+    }
+
+    .leaderboard-item span:first-child {
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .leaderboard-item span:last-child {
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .leaderboard-item:nth-child(1) {
+        border-left: 4px solid #FFD700;
+    }
+    .leaderboard-item:nth-child(2) {
+        border-left: 4px solid #C0C0C0;
+    }
+    .leaderboard-item:nth-child(3) {
+        border-left: 4px solid #CD7F32;
+    }
+
+    .sync-status {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 1001;
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+    }
+
+    .sync-status.syncing { color: var(--warning); }
+    .sync-status.synced { color: var(--success); }
+    .sync-status.error { color: var(--danger); }
+    
+    .analysis-section {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border-radius: var(--radius);
+        background-color: var(--bg-body);
+    }
+    .analysis-section h4 {
+        color: var(--primary);
+        margin-bottom: 0.75rem;
+        border-bottom: 1px solid var(--separator-line);
+        padding-bottom: 0.5rem;
+    }
+    .strength, .weakness, .recommendation {
+        padding: 0.75rem;
+        border-left-width: 4px;
+        border-left-style: solid;
+        margin-bottom: 0.5rem;
+        border-radius: var(--radius-sm);
+    }
+    .strength {
+        border-left-color: var(--success);
+        background-color: rgba(16, 185, 129, 0.1);
+    }
+    .weakness {
+        border-left-color: var(--danger);
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+    .recommendation {
+        border-left-color: var(--warning);
+        background-color: rgba(245, 158, 11, 0.1);
+    }
+    
+    #topic-selection-menu, #stats-filter-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .container { padding: 1.5rem; }
+      .app-header { flex-direction: row; align-items: center; gap: 0; }
+      .app-header .logout-btn-container { margin-left: auto; }
+      .logo { font-size: 1.6rem; }
+      .logo i { font-size: 2rem; }
+      .card { padding: 2rem; }
+      .stats-grid { grid-template-columns: repeat(1, 1fr); gap: 1.5rem; }
+      .stat-card p { font-size: 2rem; }
+      .options { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+      .option { padding: 1.2rem; font-size: 1.1rem; }
+      .score-display { font-size: 3rem; }
+      .modal-content { max-width: 600px; padding: 2.5rem; }
+      .timer { top: 1.5rem; right: 2rem; padding: 0.6rem 1.2rem; font-size: 1.05rem; }
+      .combined-score-card { flex-direction: column; padding: 1rem; }
+      .combined-score-stats { flex-direction: column; gap: 0.75rem; }
+      .combined-quick-actions { flex-direction: column; gap: 0.75rem; }
+      .combined-score-item { flex-direction: row; justify-content: space-between; width: 100%; }
+      .combined-score-item h3 { margin-bottom: 0; font-size: 0.9rem; }
+      .combined-score-item p { font-size: 1.5rem; }
+      .stat-card .button-group { grid-template-columns: repeat(3, 1fr); }
+      .stat-card .button-group .btn { width: auto; font-size: 0.9rem;}
+    }
+
+    @media (min-width: 769px) {
+      .container { padding: 2rem; }
+      #start-screen .container { max-width: 1200px; } /* Override for start screen */
+      .app-header { flex-direction: row; align-items: center; gap: 0; }
+      .app-header .logout-btn-container { margin-left: auto; }
+      .logo { font-size: 1.8rem; }
+      .logo i { font-size: 2.2rem; }
+      .card { padding: 2.5rem; }
+      .stats-grid { grid-template-columns: repeat(1, 1fr); gap: 2rem; }
+      .stat-card h3 { font-size: 1rem; }
+      .stat-card p { font-size: 2.2rem; }
+      .options { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+      .option { padding: 1.2rem; font-size: 1.1rem; }
+      .score-display { font-size: 4rem; }
+      .modal-content { max-width: 700px; padding: 3rem; }
+      .timer { top: 2rem; right: 2.5rem; padding: 0.75rem 1.5rem; font-size: 1.1rem; }
+      .btn-lg { padding: 1rem 2.5rem; font-size: 1.2rem; }
+      .combined-score-card { flex-direction: row; flex-wrap: nowrap; justify-content: space-around; gap: 1.5rem; padding: 1.5rem 2rem; }
+      .combined-score-stats { flex-direction: row; flex-wrap: wrap; justify-content: space-around; gap: 1rem; flex: 2; align-items: center; }
+      .combined-quick-actions { flex: 1; flex-direction: column; gap: 0.75rem; text-align: center; justify-content: center; }
+      .combined-quick-actions h3 { margin-bottom: 0.5rem; }
+      .combined-score-item { flex: 1 1 auto; min-width: 120px; flex-direction: column; }
+      .combined-score-item h3 { font-size: 1rem; }
+      .combined-score-item p { font-size: 1.75rem; }
+      .stat-card .button-group { flex-direction: row; justify-content: center; gap: 1rem; }
+      .stat-card .button-group .btn { width: auto; flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="login-screen" class="screen active auth-wrapper">
+    <div class="auth-promo-panel">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <h2>Club Of Competition</h2>
+        </div>
+        <h2>Unlock Your Math Potential</h2>
+        <p>Join our community to sharpen your skills, track your progress, and climb the leaderboards.</p>
+        <ul class="auth-features">
+            <li><i class="fa fa-chart-line"></i> Track your progress with detailed stats.</li>
+            <li><i class="fa fa-trophy"></i> Compete on the global leaderboards.</li>
+            <li><i class="fa fa-lightbulb"></i> Get personalized feedback to improve.</li>
+        </ul>
+    </div>
+    <div class="auth-form-panel">
+        <div class="auth-form-container">
+            <h1>Club of Competition</h1>
+            <p>Sign in or create an account to continue.</p>
+            <div class="auth-container">
+                <button id="googleSignInBtn" class="btn btn-primary btn-lg">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="container" id="app-container" style="display: none;">
+    <div id="start-screen" class="screen">
+      <div class="app-header">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <h4>Club Of Competition</h4>
+        </div>
+        <button id="logout-btn" class="btn btn-logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <h2 id="welcome-user" style="color: var(--text-primary);">Welcome, User!</h2>
+          <div class="theme-toggle">
+              <span id="theme-label">🌙</span>
+              <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <button id="start-new-test-btn" class="btn btn-primary btn-lg">
+                <i class="fas fa-play"></i> Start New Test
+            </button>
+        </div>
+
+        <div class="stats-card-header">
+            <h3 id="stats-card-title">Tables Statistics</h3>
+            <button id="show-stats-filter-btn" class="btn btn-secondary">
+                <i class="fas fa-filter"></i> Filter
+            </button>
+        </div>
+        <div id="stats-topic-select" data-value="tables"></div> <div class="stats-grid">
+          <div class="stat-card combined-score-card">
+            <div class="combined-score-stats">
+                <div class="combined-score-item">
+                    <h3>Tests Completed</h3>
+                    <p id="tests-completed">0</p>
+                </div>
+                <div class="combined-score-item">
+                    <h3>Average Score</h3>
+                    <p id="average-score">0</p>
+                </div>
+                <div class="combined-score-item">
+                    <h3>Highest Score</h3>
+                    <p id="highest-score">0</p>
+                </div>
+            </div>
+            <div class="combined-quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="button-group">
+                    <button id="analysis-btn" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i> Analysis
+                    </button>
+                    <button id="history-btn" class="btn btn-secondary">
+                      <i class="fas fa-history"></i>
+                      History
+                    </button>
+                    <button id="leaderboard-btn" class="btn btn-secondary">
+                      <i class="fas fa-trophy"></i>
+                      Leaderboard
+                    </button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span id="progress-bar-label" style="color: var(--text-secondary);">Tables Progress</span>
+            <span id="tests-remaining" style="color: var(--text-secondary);">100</span>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="quiz-screen" class="screen">
+      <div class="app-header">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <h4>Club Of Competition</h4>
+        </div>
+        <div id="timer" class="timer">⏱️ 00:00</div>
+      </div>
+
+      <div class="card">
+        <h2 id="quiz-title" style="margin-bottom: 1.5rem; color: var(--primary);">Math Quiz</h2>
+        <div id="questions-container" class="questions-container"></div>
+
+        <div class="submit-btn-container">
+          <button id="submit-btn" class="btn btn-primary btn-lg">
+            <i class="fas fa-check-circle"></i>
+            Submit Test
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="results-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-results-btn">&times;</button>
+      <div class="results-header">
+        <h2><i class="fas fa-award"></i> Test Results</h2>
+        <div class="score-display" id="final-score">0</div>
+        <p style="color: var(--text-secondary);">out of 100 points</p>
+        <div class="progress-container">
+          <div class="progress-bar" id="score-progress" style="width: 0%"></div>
+        </div>
+        <p style="color: var(--text-secondary);">Time taken: <span id="time-taken">0</span> seconds</p>
+      </div>
+      <div id="answers-review" class="answers-review"></div>
+      <div style="display: flex; justify-content: center; margin-top: 2rem;">
+        <button id="back-to-home-btn" class="btn btn-primary">Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="history-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-history-btn">&times;</button>
+      <h2 id="history-title" style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-history"></i> Test History</h2>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </div>
+
+  <div id="leaderboard-modal" class="modal"> <div class="modal-content">
+      <button class="close-btn" id="close-leaderboard-btn">&times;</button>
+      <h2 id="leaderboard-title" style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-trophy"></i> Leaderboard (Top 10)</h2>
+      <div id="leaderboard-list" class="leaderboard-list"></div>
+    </div>
+  </div>
+
+  <div id="analysis-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-analysis-btn">&times;</button>
+      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-chart-line"></i> Performance Analysis</h2>
+      <div id="analysis-content"></div>
+    </div>
+  </div>
+
+  <div id="topic-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-topic-modal-btn">&times;</button>
+      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-shapes"></i> Choose a Topic</h2>
+      <div id="topic-selection-menu">
+          <button class="btn btn-primary topic-btn" data-topic="tables" data-duration="60">
+              <i class="fas fa-table"></i> Tables
+          </button>
+          <button class="btn btn-primary topic-btn" data-topic="addition" data-duration="300">
+              <i class="fas fa-plus"></i> Addition
+          </button>
+          <button class="btn btn-primary topic-btn" data-topic="subtraction" data-duration="300">
+              <i class="fas fa-minus"></i> Subtraction
+          </button>
+          <button class="btn btn-primary topic-btn" data-topic="multiplication" data-duration="300">
+              <i class="fas fa-times"></i> Multiplication
+          </button>
+          <button class="btn btn-primary topic-btn" data-topic="division" data-duration="300">
+              <i class="fas fa-divide"></i> Division
+          </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="stats-filter-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-stats-filter-modal-btn">&times;</button>
+      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-filter"></i> Filter Stats</h2>
+      <div id="stats-filter-options" class="form-group">
+          </div>
+    </div>
+  </div>
+
+  <div id="sync-status" class="sync-status">
+    <i class="fas fa-sync-alt"></i>
+    <span id="sync-text">Syncing...</span>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup,
+      signOut,
+      onAuthStateChanged,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      onSnapshot,
+      updateDoc,
+      collection,
+      query,
+      orderBy,
+      limit,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC9O1-QzrMD8c6bkifwMlzneLTU8eB4PH8",
+      authDomain: "login-coc.firebaseapp.com",
+      databaseURL: "https://login-coc-default-rtdb.firebaseio.com",
+      projectId: "login-coc",
+      storageBucket: "login-coc.firebaseastorage.app",
+      messagingSenderId: "793350174008",
+      appId: "1:793350174008:web:47f655787f71f4e852bdcd",
+      measurementId: "G-9F5XW0QKCV"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Element selectors
+      const loginScreen = document.getElementById('login-screen');
+      const startScreen = document.getElementById('start-screen');
+      const quizScreen = document.getElementById('quiz-screen');
+      const quizTitle = document.getElementById('quiz-title');
+      const appContainer = document.getElementById('app-container');
+
+      const googleSignInBtn = document.getElementById('googleSignInBtn');
+
+      const logoutBtn = document.getElementById('logout-btn');
+      const welcomeUserEl = document.getElementById('welcome-user');
+      const startNewTestBtn = document.getElementById('start-new-test-btn');
+      const historyBtn = document.getElementById('history-btn');
+      const leaderboardBtn = document.getElementById('leaderboard-btn');
+      const analysisBtn = document.getElementById('analysis-btn');
+      const showStatsFilterBtn = document.getElementById('show-stats-filter-btn');
+      const submitBtn = document.getElementById('submit-btn');
+      const backToHomeBtn = document.getElementById('back-to-home-btn');
+      const questionsContainer = document.getElementById('questions-container');
+      const timerEl = document.getElementById('timer');
+      const finalScoreEl = document.getElementById('final-score');
+      const timeTakenEl = document.getElementById('time-taken');
+      const scoreProgress = document.getElementById('score-progress');
+      const answersReviewEl = document.getElementById('answers-review');
+      const statsTopicSelect = document.getElementById('stats-topic-select');
+      const statsCardTitle = document.getElementById('stats-card-title');
+      const progressBarLabel = document.getElementById('progress-bar-label');
+      const testsCompletedEl = document.getElementById('tests-completed');
+      const averageScoreEl = document.getElementById('average-score');
+      const highestScoreEl = document.getElementById('highest-score');
+      const testsProgress = document.getElementById('tests-progress');
+      const testsRemainingEl = document.getElementById('tests-remaining');
+      
+      const historyModal = document.getElementById('history-modal');
+      const closeHistoryBtn = document.getElementById('close-history-btn');
+      const historyListEl = document.getElementById('history-list');
+      const historyTitle = document.getElementById('history-title');
+      
+      const leaderboardModal = document.getElementById('leaderboard-modal');
+      const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
+      const leaderboardListEl = document.getElementById('leaderboard-list');
+      const leaderboardTitle = document.getElementById('leaderboard-title');
+
+      const analysisModal = document.getElementById('analysis-modal');
+      const closeAnalysisBtn = document.getElementById('close-analysis-btn');
+      const analysisContent = document.getElementById('analysis-content');
+      
+      const topicModal = document.getElementById('topic-modal');
+      const closeTopicModalBtn = document.getElementById('close-topic-modal-btn');
+
+      const statsFilterModal = document.getElementById('stats-filter-modal');
+      const closeStatsFilterModalBtn = document.getElementById('close-stats-filter-modal-btn');
+      const statsFilterOptions = document.getElementById('stats-filter-options');
+      
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const themeLabel = document.getElementById('theme-label');
+      const syncStatus = document.getElementById('sync-status');
+      const syncText = document.getElementById('sync-text');
+      
+      const resultsModal = document.getElementById('results-modal');
+      const closeResultsBtn = document.getElementById('close-results-btn');
+
+      const MAX_TESTS_PER_TOPIC = 100;
+      let unsubscribeFromFirestore = null;
+      let appState = {
+        currentUser: null,
+        quizState: null
+      };
+
+      function init() {
+        setupEventListeners();
+        setupAuthListener();
+        applySavedTheme();
+      }
+
+      function setupAuthListener() {
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            const userId = user.uid;
+            if (unsubscribeFromFirestore) unsubscribeFromFirestore();
+            const userDocRef = doc(db, "users", userId);
+            unsubscribeFromFirestore = onSnapshot(userDocRef, async (docSnap) => {
+              updateSyncStatus('synced');
+              if (docSnap.exists()) {
+                  let firebaseData = docSnap.data();
+                  if (!firebaseData.stats) {
+                      const newStats = createNewUserData({}).stats;
+                      await updateDoc(userDocRef, { stats: newStats });
+                      firebaseData.stats = newStats;
+                  }
+                  appState.currentUser = {
+                      uid: userId,
+                      ...firebaseData,
+                      darkMode: typeof firebaseData.darkMode === 'boolean' ? firebaseData.darkMode : (appState.currentUser?.darkMode || false)
+                  };
+                  saveToLocalStorage(`user_${userId}`, appState.currentUser);
+              } else {
+                handleNewUser(user, userDocRef);
+              }
+              updateUIForUser();
+            }, (error) => {
+              console.error('Firestore snapshot error:', error);
+              updateSyncStatus('error');
+              const localData = loadFromLocalStorage(`user_${userId}`) || createNewUserData(user);
+              appState.currentUser = { uid: userId, ...localData };
+              updateUIForUser();
+            });
+          } else {
+            if (unsubscribeFromFirestore) unsubscribeFromFirestore();
+            appState.currentUser = null;
+            appState.quizState = null;
+            clearLocalStorageForUser();
+            showLoginScreen();
+          }
+        });
+      }
+
+      async function handleNewUser(user, userDocRef) {
+          const userData = createNewUserData(user);
+          await setDoc(userDocRef, userData);
+          appState.currentUser = { uid: user.uid, ...userData };
+          updateUIForUser();
+      }
+
+      function createNewUserData(user) {
+          const topics = ["tables", "addition", "subtraction", "multiplication", "division"];
+          const stats = {};
+          topics.forEach(topic => {
+            stats[topic] = {
+                history: [],
+                highestScore: 0,
+                averageScore: 0
+            };
+          });
+
+          return {
+              displayName: user.displayName || user.email,
+              email: user.email,
+              photoURL: user.photoURL,
+              stats: stats,
+              darkMode: false
+          };
+      }
+
+      function updateUIForUser() {
+          if (!appState.currentUser) return;
+          welcomeUserEl.textContent = `Welcome, ${appState.currentUser.displayName || 'User'}!`;
+          applySavedTheme();
+          showStartScreen();
+          updateStatsUI(statsTopicSelect.dataset.value || 'tables');
+      }
+
+      function updateSyncStatus(status) {
+        syncStatus.className = `sync-status ${status}`;
+        switch(status) {
+          case 'syncing':
+            syncStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span id="sync-text">Syncing...</span>';
+            break;
+          case 'synced':
+            syncStatus.innerHTML = '<i class="fas fa-check"></i><span id="sync-text">Synced</span>';
+            setTimeout(() => { syncStatus.style.display = 'none'; }, 2000);
+            break;
+          case 'error':
+            syncStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span id="sync-text">Sync Error</span>';
+            break;
+        }
+        syncStatus.style.display = 'flex';
+      }
+
+      function setupEventListeners() {
+        googleSignInBtn.addEventListener('click', signInWithGoogle);
+        logoutBtn.addEventListener('click', () => signOut(auth).catch(console.error));
+        
+        startNewTestBtn.addEventListener('click', () => topicModal.style.display = 'flex');
+
+        document.querySelectorAll('.topic-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const topic = button.dataset.topic;
+                const duration = parseInt(button.dataset.duration, 10);
+                topicModal.style.display = 'none';
+                startQuiz(topic, duration);
+            });
+        });
+        
+        showStatsFilterBtn.addEventListener('click', () => {
+            const topics = ["Tables", "Addition", "Subtraction", "Multiplication", "Division"];
+            statsFilterOptions.innerHTML = topics.map(topic => {
+                const value = topic.toLowerCase();
+                const isSelected = (statsTopicSelect.dataset.value || 'tables') === value;
+                return `<button class="btn ${isSelected ? 'btn-primary' : 'btn-secondary'}" data-value="${value}">${topic}</button>`;
+            }).join('');
+            statsFilterModal.style.display = 'flex';
+        });
+
+        statsFilterOptions.addEventListener('click', (e) => {
+            if (e.target.matches('button')) {
+                const value = e.target.dataset.value;
+                statsTopicSelect.dataset.value = value;
+                updateStatsUI(value);
+                statsFilterModal.style.display = 'none';
+            }
+        });
+
+        historyBtn.addEventListener('click', showHistory);
+        leaderboardBtn.addEventListener('click', showLeaderboard);
+        analysisBtn.addEventListener('click', showAnalysis);
+
+        submitBtn.addEventListener('click', () => submitQuiz());
+        backToHomeBtn.addEventListener('click', () => {
+            resultsModal.style.display = 'none';
+            showStartScreen();
+        });
+
+        closeResultsBtn.addEventListener('click', () => resultsModal.style.display = 'none');
+        closeHistoryBtn.addEventListener('click', () => historyModal.style.display = 'none');
+        closeLeaderboardBtn.addEventListener('click', () => leaderboardModal.style.display = 'none');
+        closeAnalysisBtn.addEventListener('click', () => analysisModal.style.display = 'none');
+        closeTopicModalBtn.addEventListener('click', () => topicModal.style.display = 'none');
+        closeStatsFilterModalBtn.addEventListener('click', () => statsFilterModal.style.display = 'none');
+        
+        darkModeToggle.addEventListener('change', toggleDarkMode);
+        
+        window.addEventListener('click', (e) => {
+          if (e.target === historyModal) historyModal.style.display = 'none';
+          if (e.target === resultsModal) resultsModal.style.display = 'none';
+          if (e.target === leaderboardModal) leaderboardModal.style.display = 'none';
+          if (e.target === analysisModal) analysisModal.style.display = 'none';
+          if (e.target === topicModal) topicModal.style.display = 'none';
+          if (e.target === statsFilterModal) statsFilterModal.style.display = 'none';
+        });
+      }
+      
+      function signInWithGoogle() {
+        signInWithPopup(auth, provider).catch((error) => {
+            if (error.code !== 'auth/popup-closed-by-user') alert('Error: ' + error.message);
+        });
+      }
+
+      function applySavedTheme() {
+        const isDarkMode = appState.currentUser ? appState.currentUser.darkMode : loadFromLocalStorage('darkMode') === 'true';
+        document.body.classList.toggle('dark-mode', isDarkMode);
+        darkModeToggle.checked = isDarkMode;
+        themeLabel.textContent = isDarkMode ? '☀️' : '🌙';
+      }
+
+      async function toggleDarkMode() {
+        const isDarkMode = darkModeToggle.checked;
+        document.body.classList.toggle('dark-mode', isDarkMode);
+        themeLabel.textContent = isDarkMode ? '☀️' : '🌙';
+        if (appState.currentUser?.uid) {
+          const userDocRef = doc(db, "users", appState.currentUser.uid);
+          try {
+            await updateDoc(userDocRef, { darkMode: isDarkMode });
+          } catch (error) {
+            console.error("Error updating theme in Firestore:", error);
+          }
+        } else {
+          saveToLocalStorage('darkMode', isDarkMode);
+        }
+      }
+
+      function showLoginScreen() {
+        stopTimer();
+        document.body.style.padding = '0';
+        loginScreen.style.display = 'grid';
+        loginScreen.classList.add('active');
+        appContainer.style.display = 'none';
+        quizScreen.classList.remove('active');
+        timerEl.style.display = 'none';
+      }
+
+      function showStartScreen() {
+        stopTimer();
+        document.body.style.padding = '';
+        loginScreen.style.display = 'none';
+        loginScreen.classList.remove('active');
+        appContainer.style.display = 'block';
+        startScreen.classList.add('active');
+        quizScreen.classList.remove('active');
+        timerEl.style.display = 'none';
+        updateStatsUI(statsTopicSelect.dataset.value || 'tables');
+      }
+
+      function updateStatsUI(topic) {
+        if (!appState.currentUser?.stats?.[topic]) return;
+        
+        const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+        progressBarLabel.textContent = `${topicName} Progress`;
+        statsCardTitle.textContent = `${topicName} Statistics`;
+
+        const topicStats = appState.currentUser.stats[topic];
+        const history = topicStats.history || [];
+        const testsTaken = history.length;
+        
+        testsCompletedEl.textContent = testsTaken;
+        highestScoreEl.textContent = topicStats.highestScore || 0;
+        averageScoreEl.textContent = topicStats.averageScore ? Math.round(topicStats.averageScore) : 0;
+
+        testsRemainingEl.textContent = Math.max(0, MAX_TESTS_PER_TOPIC - testsTaken);
+        testsProgress.style.width = `${(testsTaken / MAX_TESTS_PER_TOPIC) * 100}%`;
+      }
+      
+      function startQuiz(topic, duration) {
+        if (!appState.currentUser.stats[topic]) {
+            alert("Error: Invalid topic selected.");
+            return;
+        }
+        if ((appState.currentUser.stats[topic].history.length || 0) >= MAX_TESTS_PER_TOPIC) {
+          alert(`You have reached the maximum limit of ${MAX_TESTS_PER_TOPIC} tests for this topic.`);
+          return;
+        }
+        
+        const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+        quizTitle.textContent = `${topicName} Quiz`;
+        
+        appState.quizState = {
+          questions: generateQuestions(topic),
+          userAnswers: {},
+          score: 0,
+          startTime: new Date().toISOString(),
+          timerInterval: null,
+          duration: duration,
+          topic: topic
+        };
+        saveQuizStateLocally();
+        startScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        timerEl.style.display = 'flex';
+        displayQuestions();
+        startTimer(duration);
+      }
+      
+      function generateQuestions(topic) {
+        const questions = new Set();
+        while (questions.size < 20) {
+            let num1, num2, answer, text;
+
+            switch (topic) {
+                case 'addition':
+                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    num2 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    answer = num1 + num2;
+                    text = `${num1} + ${num2} = ?`;
+                    break;
+                case 'subtraction':
+                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    num2 = Math.floor(Math.random() * num1) + 1; // Ensures positive result
+                    answer = num1 - num2;
+                    text = `${num1} - ${num2} = ?`;
+                    break;
+                case 'division':
+                    const quotient = Math.floor(Math.random() * 90) + 10; // Result from 10 to 99
+                    num2 = Math.floor(Math.random() * 20) + 2; // Divisor from 2 to 21
+                    num1 = num2 * quotient;
+                    answer = quotient;
+                    text = `${num1} ÷ ${num2} = ?`;
+                    break;
+                case 'tables':
+                    num1 = Math.floor(Math.random() * 20) + 1;
+                    num2 = Math.floor(Math.random() * 10) + 1;
+                    answer = num1 * num2;
+                    text = `${num1} × ${num2} = ?`;
+                    break;
+                case 'multiplication':
+                    num1 = Math.floor(Math.random() * 90) + 10; // 10 to 99
+                    num2 = Math.floor(Math.random() * 90) + 10; // 10 to 99
+                    answer = num1 * num2;
+                    text = `${num1} × ${num2} = ?`;
+                    break;
+                default:
+                    text = 'No questions';
+                    answer = 0;
+            }
+            questions.add(JSON.stringify({ text, answer }));
+        }
+
+        return Array.from(questions).map(q => {
+            const parsedQ = JSON.parse(q);
+            return { ...parsedQ, options: generateOptions(parsedQ.answer) };
+        });
+      }
+
+      function generateOptions(correctAnswer) {
+        const options = new Set([correctAnswer]);
+        while (options.size < 4) {
+          const offset = (Math.floor(Math.random() * 5) + 1) * (Math.random() < 0.5 ? -1 : 1);
+          let wrongAnswer = correctAnswer + offset;
+          if (wrongAnswer > 0 && wrongAnswer !== correctAnswer) options.add(wrongAnswer);
+        }
+        return Array.from(options).sort(() => Math.random() - 0.5);
+      }
+
+      function displayQuestions() {
+        questionsContainer.innerHTML = '';
+        appState.quizState.questions.forEach((question, index) => {
+          const questionCard = document.createElement('div');
+          questionCard.className = 'question-card';
+          questionCard.innerHTML = `
+            <div class="question-text">
+              <i class="fas fa-question-circle"></i>
+              <strong>Q${index + 1}:</strong> ${question.text}
+            </div>
+            <div class="options">
+              ${question.options.map(option => `<div class="option" data-option="${option}">${option}</div>`).join('')}
+            </div>
+          `;
+          const optionsContainer = questionCard.querySelector('.options');
+
+          const savedAnswer = appState.quizState.userAnswers[index];
+          if (savedAnswer !== undefined) {
+            const selectedOption = optionsContainer.querySelector(`[data-option="${savedAnswer}"]`);
+            if (selectedOption) selectedOption.classList.add('selected');
+          }
+
+          optionsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('option') && !e.target.classList.contains('disabled')) {
+              optionsContainer.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+              e.target.classList.add('selected');
+              const selectedAnswer = Number(e.target.dataset.option);
+              appState.quizState.userAnswers[index] = selectedAnswer;
+              saveQuizStateLocally();
+            }
+          });
+          questionsContainer.appendChild(questionCard);
+        });
+      }
+
+      function startTimer(duration) {
+        stopTimer();
+        const startTime = new Date(appState.quizState.startTime);
+        updateTimerDisplay(duration); // Show initial time immediately
+        appState.quizState.timerInterval = setInterval(() => {
+          const now = new Date();
+          const elapsedSeconds = Math.floor((now - startTime) / 1000);
+          const timeLeft = duration - elapsedSeconds;
+          updateTimerDisplay(timeLeft);
+          if (timeLeft <= 10) timerEl.classList.add('warning');
+          if (timeLeft <= 0) submitQuiz(true);
+        }, 1000);
+      }
+
+      function stopTimer() {
+        if (appState.quizState?.timerInterval) {
+            clearInterval(appState.quizState.timerInterval);
+            appState.quizState.timerInterval = null;
+        }
+        timerEl.classList.remove('warning');
+      }
+
+      function updateTimerDisplay(timeLeft) {
+        const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+        const seconds = String(Math.max(0, timeLeft % 60)).padStart(2, '0');
+        timerEl.textContent = `⏱️ ${minutes}:${seconds}`;
+      }
+
+      async function submitQuiz(isTimeUp = false) {
+        stopTimer();
+        submitBtn.disabled = true;
+
+        let score = 0;
+        appState.quizState.questions.forEach((question, index) => {
+          const userAnswer = appState.quizState.userAnswers[index];
+          if (userAnswer === question.answer) score += 5;
+        });
+        appState.quizState.score = score;
+
+        const timeTaken = Math.floor((new Date() - new Date(appState.quizState.startTime)) / 1000);
+        const currentTopic = appState.quizState.topic;
+
+        const newResult = {
+          score: appState.quizState.score,
+          timeTaken: timeTaken,
+          date: new Date().toISOString(),
+          isTimeUp: isTimeUp
+        };
+        
+        updateSyncStatus('syncing');
+        try {
+            const userDocRef = doc(db, "users", appState.currentUser.uid);
+            const currentTopicStats = appState.currentUser.stats[currentTopic];
+            
+            const newHistory = [...(currentTopicStats.history || []), newResult];
+            const newHighestScore = Math.max(currentTopicStats.highestScore || 0, newResult.score);
+            const newAverageScore = newHistory.reduce((sum, test) => sum + test.score, 0) / newHistory.length;
+
+            const updatePath = `stats.${currentTopic}`;
+            await updateDoc(userDocRef, {
+                [`${updatePath}.history`]: newHistory,
+                [`${updatePath}.highestScore`]: newHighestScore,
+                [`${updatePath}.averageScore`]: newAverageScore
+            });
+            updateSyncStatus('synced');
+        } catch (error) {
+          console.error("Error syncing results to Firestore:", error);
+          updateSyncStatus('error');
+        }
+
+        showResults(timeTaken);
+        submitBtn.disabled = false;
+      }
+
+      function showResults(timeTaken) {
+        quizScreen.classList.remove('active');
+        resultsModal.style.display = 'flex';
+        timerEl.style.display = 'none';
+
+        finalScoreEl.textContent = appState.quizState.score;
+        timeTakenEl.textContent = timeTaken;
+        scoreProgress.style.width = `${appState.quizState.score}%`;
+
+        answersReviewEl.innerHTML = appState.quizState.questions.map((q, i) => {
+          const userAnswer = appState.quizState.userAnswers[i];
+          const isCorrect = userAnswer === q.answer;
+          const userAnswerDisplay = userAnswer !== undefined ? userAnswer : 'Not answered';
+
+          return `
+            <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
+              <h4><i class="fas fa-question-circle"></i> Question ${i + 1}: ${q.text}</h4>
+              <div class="answer-feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                <i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                Your answer: ${userAnswerDisplay}
+              </div>
+              ${!isCorrect ? generateExplanation(q) : ''}
+            </div>
+          `;
+        }).join('');
+
+        updateStatsUI(appState.quizState.topic);
+        clearQuizStateLocally();
+        appState.quizState = null;
+      }
+
+      function generateExplanation(question) {
+        const parts = question.text.split(' ');
+        const num1 = parseInt(parts[0], 10);
+        const operator = parts[1];
+        const num2 = parseInt(parts[2], 10);
+        const answer = question.answer;
+
+        let explanationHTML = `<div class="explanation"><strong>Step-by-step Solution:</strong>`;
+
+        switch (operator) {
+            case '+':
+                explanationHTML += `<p>To add numbers with multiple digits, we add column by column from right to left.</p>
+                                    <ol>
+                                        <li>Align numbers vertically.</li>
+                                        <li>Add the ones place.</li>
+                                        <li>Add the tens place (including any carry-over).</li>
+                                        <li>Continue for all place values.</li>
+                                    </ol>
+                                    <pre>${String(num1).padStart(5)}\n+ ${String(num2).padStart(5)}\n-------\n ${String(answer).padStart(5)}</pre>`;
+                break;
+            case '-':
+                 explanationHTML += `<p>To subtract, we subtract column by column from right to left, borrowing from the next column if needed.</p>
+                                     <ol>
+                                        <li>Align numbers vertically, with the larger number on top.</li>
+                                        <li>Subtract the ones place.</li>
+                                        <li>Subtract the tens place (borrowing if necessary).</li>
+                                        <li>Continue for all place values.</li>
+                                     </ol>
+                                     <pre>${String(num1).padStart(5)}\n- ${String(num2).padStart(5)}\n-------\n ${String(answer).padStart(5)}</pre>`;
+                break;
+            case '×':
+                explanationHTML += `<p>For two-digit multiplication:</p>
+                                    <ol>
+                                        <li>Multiply ${num1} by the ones digit of ${num2}.</li>
+                                        <li>Multiply ${num1} by the tens digit of ${num2}.</li>
+                                        <li>Add the two results together.</li>
+                                    </ol>
+                                    <p>The correct answer is <strong>${answer}</strong>.</p>`;
+                break;
+            case '÷':
+                 explanationHTML += `<p>Division is the reverse of multiplication. We are looking for the number that, when multiplied by ${num2}, gives ${num1}.</p>
+                                     <p>${num2} × <strong>?</strong> = ${num1}</p>
+                                     <p>In this case, ${num2} × <strong>${answer}</strong> = ${num1}.</p>
+                                     <p>The correct answer is <strong>${answer}</strong>.</p>`;
+                break;
+        }
+        explanationHTML += '</div>';
+        return explanationHTML;
+      }
+
+      function showHistory() {
+        const topic = statsTopicSelect.dataset.value || 'tables';
+        const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+        historyTitle.innerHTML = `<i class="fas fa-history"></i> ${topicName} History`;
+
+        const history = appState.currentUser?.stats?.[topic]?.history || [];
+
+        if (history.length === 0) {
+          historyListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No test history for this topic yet.</p>';
+        } else {
+            historyListEl.innerHTML = history.slice().reverse().map((test, index) => {
+            const testDate = new Date(test.date);
+            const dateStr = testDate.toLocaleDateString();
+            const timeStr = testDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const position = history.length - index;
+
+            return `
+                <div class="history-item">
+                <h3><i class="fas fa-trophy"></i> Test #${position}</h3>
+                <p><i class="fas fa-star" style="color: var(--warning);"></i> <strong>Score:</strong> ${test.score}/100</p>
+                <p><i class="fas fa-clock"></i> <strong>Time:</strong> ${test.timeTaken}s</p>
+                <p><i class="fas fa-calendar"></i> <strong>Date:</strong> ${dateStr} at ${timeStr}</p>
+                ${test.isTimeUp ? '<p><i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> <strong>Time expired</strong></p>' : ''}
+                </div>
+            `;
+            }).join('');
+        }
+        historyModal.style.display = 'flex';
+      }
+
+      async function showLeaderboard() {
+          const topic = statsTopicSelect.dataset.value || 'tables';
+          const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+          leaderboardTitle.innerHTML = `<i class="fas fa-trophy"></i> ${topicName} Leaderboard (Top 10)`;
+
+          leaderboardModal.style.display = 'flex';
+          leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Loading leaderboard...</p>';
+
+          try {
+              const usersRef = collection(db, "users");
+              const q = query(usersRef, orderBy(`stats.${topic}.averageScore`, "desc"), limit(10));
+              const querySnapshot = await getDocs(q);
+
+              const leaderboard = [];
+              querySnapshot.forEach((doc) => {
+                  const data = doc.data();
+                  const averageScore = data.stats?.[topic]?.averageScore;
+                  if (averageScore > 0) {
+                      leaderboard.push({
+                          displayName: data.displayName || 'Anonymous',
+                          averageScore: averageScore
+                      });
+                  }
+              });
+
+              if (leaderboard.length === 0) {
+                  leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No scores on the leaderboard for this topic yet.</p>';
+                  return;
+              }
+
+              leaderboardListEl.innerHTML = leaderboard.map((entry, index) => {
+                  return `
+                      <div class="leaderboard-item">
+                          <span>${index + 1}. ${entry.displayName}</span>
+                          <span>Avg: ${Math.round(entry.averageScore)}</span>
+                      </div>
+                  `;
+              }).join('');
+
+          } catch (error) {
+              console.error("Error fetching leaderboard:", error);
+              leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--danger);">Error loading leaderboard.</p>';
+          }
+      }
+
+      function showAnalysis() {
+        const stats = appState.currentUser.stats;
+        const STRENGTH_THRESHOLD = 85;
+        const WEAKNESS_THRESHOLD = 60;
+        const MIN_TESTS = 3;
+
+        const strengths = [];
+        const weaknesses = [];
+        const recommendations = [];
+        let analyzedTopics = 0;
+
+        for (const topic in stats) {
+            const topicData = stats[topic];
+            const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
+            if (topicData.history && topicData.history.length >= MIN_TESTS) {
+                analyzedTopics++;
+                const avg = topicData.averageScore;
+                if (avg >= STRENGTH_THRESHOLD) {
+                    strengths.push(`<div class="strength">You excel at <strong>${topicName}</strong> with an average score of ${Math.round(avg)}.</div>`);
+                } else if (avg <= WEAKNESS_THRESHOLD) {
+                    weaknesses.push(`<div class="weakness">You have an opportunity to improve in <strong>${topicName}</strong>, where your average score is ${Math.round(avg)}.</div>`);
+                    recommendations.push(`<div class="recommendation">Focus on practicing the <strong>${topicName}</strong> topic to boost your performance.</div>`);
+                }
+            }
+        }
+
+        let html = '';
+        if (analyzedTopics === 0) {
+            html = `<p>Complete at least ${MIN_TESTS} tests in any topic to see your performance analysis.</p>`;
+        } else {
+            if (strengths.length > 0) {
+                html += `<div class="analysis-section"><h4>Your Strengths 💪</h4>${strengths.join('')}</div>`;
+            }
+            if (weaknesses.length > 0) {
+                html += `<div class="analysis-section"><h4>Areas for Improvement 🧠</h4>${weaknesses.join('')}</div>`;
+                html += `<div class="analysis-section"><h4>Recommendations 🎯</h4>${recommendations.join('')}</div>`;
+            }
+            if (strengths.length > 0 && weaknesses.length === 0) {
+                html += `<p>Great job! You're showing strong performance in the topics you've practiced. Keep it up!</p>`;
+            }
+             if (strengths.length === 0 && weaknesses.length === 0) {
+                html += `<p>You're performing consistently across all topics. Keep practicing to turn them into strengths!</p>`;
+            }
+        }
+
+        analysisContent.innerHTML = html;
+        analysisModal.style.display = 'flex';
+      }
+      
+      function getLocalStorageKey(key) {
+          if (appState.currentUser?.uid) {
+              return `quiz_${appState.currentUser.uid}_${key}`;
+          }
+          return key;
+      }
+
+      function saveToLocalStorage(key, data) {
+        try {
+          localStorage.setItem(getLocalStorageKey(key), JSON.stringify(data));
+        } catch (error) {
+          console.error('Error saving to local storage:', error);
+        }
+      }
+
+      function loadFromLocalStorage(key) {
+        try {
+          const data = localStorage.getItem(getLocalStorageKey(key));
+          return data ? JSON.parse(data) : null;
+        } catch {
+          return null;
+        }
+      }
+
+      function clearLocalStorageForUser() {
+          if(!appState.currentUser?.uid) return;
+          localStorage.removeItem(getLocalStorageKey('quizState'));
+      }
+
+      function saveQuizStateLocally() {
+          if (appState.quizState) {
+              saveToLocalStorage('quizState', appState.quizState);
+          }
+      }
+
+      function clearQuizStateLocally() {
+          localStorage.removeItem(getLocalStorageKey('quizState'));
+      }
+
+      init();
+    });
+  </script>
+</body>
+</html>
