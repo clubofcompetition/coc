@@ -9,7 +9,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-9F5XW0QKCV');
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,7 +22,6 @@
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
-
       /* Light Mode Palette */
       --bg-body: #f3f4f6;
       --bg-content: #ffffff;
@@ -37,7 +35,6 @@
       --button-secondary-bg: #e5e7eb;
       --button-secondary-text: #374151;
       --separator-line: #e5e7eb;
-
       --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
       --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
@@ -46,7 +43,6 @@
       --radius-lg: 0.75rem;
       --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .dark-mode {
       /* Dark Mode Palette */
       --bg-body: #111827;
@@ -62,13 +58,11 @@
       --button-secondary-text: #f9fafb;
       --separator-line: #374151;
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: var(--bg-body);
@@ -78,13 +72,11 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-   
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 1rem;
     }
-
     .app-header {
       display: flex;
       justify-content: space-between;
@@ -93,7 +85,6 @@
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--separator-line);
     }
-
     .logo {
       display: flex;
       align-items: center;
@@ -102,30 +93,25 @@
       font-size: 1.25rem;
       color: var(--primary);
     }
-
     .logo i {
       font-size: 1.5rem;
     }
-
     .theme-toggle {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-
     .switch {
       position: relative;
       display: inline-block;
       width: 50px;
       height: 24px;
     }
-
     .switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
-
     .slider {
       position: absolute;
       cursor: pointer;
@@ -137,7 +123,6 @@
       transition: .4s;
       border-radius: 24px;
     }
-
     .slider:before {
       position: absolute;
       content: "";
@@ -152,23 +137,18 @@
     .dark-mode .slider:before {
         background-color: var(--text-secondary);
     }
-
     input:checked + .slider {
       background-color: var(--primary);
     }
-
     input:checked + .slider:before {
       transform: translateX(26px);
     }
-
     .screen {
       display: none;
     }
-
     .screen.active {
       display: block;
     }
-
     .card {
       background-color: var(--card-bg);
       border-radius: var(--radius-lg);
@@ -178,17 +158,15 @@
       transition: var(--transition);
       border: 1px solid var(--card-border);
     }
-
     .card:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-lg);
     }
-
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
       padding: 0.75rem 1.5rem;
       border-radius: var(--radius);
       border: none;
@@ -199,25 +177,21 @@
       font-size: 1rem;
       width: 100%;
     }
-
     .btn-primary {
       background-color: var(--primary);
       color: white;
       box-shadow: var(--shadow-sm);
     }
-
     .btn-primary:hover {
       background-color: var(--primary-dark);
       transform: translateY(-1px);
       box-shadow: var(--shadow);
     }
-
     .btn-secondary {
       background-color: var(--button-secondary-bg);
       color: var(--button-secondary-text);
       border: 1px solid var(--card-border);
     }
-
     .btn-secondary:hover {
       background-color: var(--gray-300);
       transform: translateY(-1px);
@@ -237,12 +211,10 @@
         background-color: var(--danger);
         color: white;
     }
-
     .btn-lg {
       padding: 0.875rem 2rem;
       font-size: 1.1rem;
     }
-    
     .btn-google {
         background-color: #ffffff;
         color: #374151;
@@ -261,85 +233,28 @@
     .dark-mode .btn-google:hover {
         background-color: #f9fafb;
     }
-
-
     /* NEW Login Page UI */
     #login-screen.active {
-        display: grid;
-    }
-    .auth-wrapper {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         min-height: 100vh;
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-    }
-    .auth-promo-panel {
-        display: none; /* Hidden on mobile by default */
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        padding: 3rem;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .auth-promo-panel .logo {
-        color: white;
-        font-size: 2rem;
-    }
-    .auth-promo-panel h2 {
-        font-size: 2.5rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-    }
-    .auth-promo-panel p {
-        font-size: 1.1rem;
-        opacity: 0.8;
-        max-width: 400px;
-    }
-    .auth-features {
-        list-style: none;
-        padding: 0;
-        margin-top: 3rem;
-    }
-    .auth-features li {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-        font-size: 1rem;
-    }
-    .auth-features .fa {
-        font-size: 1.2rem;
-        width: 20px;
-    }
-
-    .auth-form-panel {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1.5rem;
-        background-color: var(--bg-body);
+        padding: 1rem;
     }
     .auth-form-container {
         width: 100%;
         max-width: 400px;
         text-align: center;
+        background: var(--card-bg);
+        padding: 2.5rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
     }
-    .auth-form-container .logo {
-        justify-content: center;
-        margin-bottom: 1.5rem;
-    }
-    
     .auth-form-container h1 {
         font-size: 2.25rem;
         font-weight: 800;
         color: var(--text-primary);
-        margin-bottom: 0.5rem;
-    }
-    .auth-form-container p {
         margin-bottom: 2rem;
-        font-size: 1.1rem;
     }
     .auth-container {
       margin-top: 1rem;
@@ -349,34 +264,20 @@
         height: 24px;
         margin-right: 0.75rem;
     }
-    
-    @media (min-width: 992px) {
-        .auth-wrapper {
-            grid-template-columns: 1fr 1fr;
-        }
-        .auth-promo-panel {
-            display: flex;
-        }
-    }
-
-
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: 1fr;
       gap: 1.25rem;
       margin-bottom: 1.5rem;
     }
-
     .stat-card {
-      background: linear-gradient(135deg, var(--primary-light), var(--secondary));
-      color: white;
+      background: var(--card-bg);
+      color: var(--text-primary);
       border-radius: var(--radius);
       padding: 1.25rem;
-      text-align: center;
       box-shadow: var(--shadow);
-      border: none;
+      border: 1px solid var(--card-border);
     }
-    
     .stats-card-header {
         display: flex;
         justify-content: space-between;
@@ -392,40 +293,32 @@
         padding: 0.3rem 0.8rem;
         font-size: 0.8rem;
     }
-
     .stat-card h3 {
       font-size: 0.9rem;
-      opacity: 0.9;
       margin-bottom: 0.5rem;
+      color: var(--text-secondary);
     }
-
     .stat-card p {
       font-size: 1.75rem;
       font-weight: 700;
       margin: 0;
+      color: var(--primary);
     }
-
-    .combined-score-card {
-        display: flex;
-        flex-direction: column;
+    .combined-score-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-        padding: 1.5rem;
     }
-
-    .combined-score-stats,
-    .combined-quick-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
     .combined-score-item {
         flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-width: 120px;
+        background-color: var(--bg-body);
+        padding: 1rem;
+        border-radius: var(--radius);
     }
-
     .combined-score-item h3 {
         margin-bottom: 0.25rem;
         font-size: 0.9rem;
@@ -435,21 +328,17 @@
       font-weight: 700;
       margin: 0;
     }
-
     .stat-card .button-group {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 0.5rem;
-        margin-top: 0.5rem;
+        margin-top: 1.5rem;
     }
-
     .stat-card .button-group .btn {
         width: 100%;
         padding: 0.5rem;
         font-size: 0.8rem;
     }
-
-
     .progress-container {
       width: 100%;
       height: 8px;
@@ -458,20 +347,17 @@
       overflow: hidden;
       margin: 1rem 0 1.5rem;
     }
-
     .progress-bar {
       height: 100%;
       border-radius: 4px;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
-
     .quiz-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.5rem;
     }
-
     .timer {
       display: flex;
       align-items: center;
@@ -489,18 +375,15 @@
       z-index: 1000;
       border: 1px solid var(--card-border);
     }
-
     .questions-container {
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
       margin-bottom: 1.5rem;
     }
-
     .question-card {
       border-radius: 20px;
     }
-
     .question-text {
       font-weight: 600;
       margin-bottom: 1.25rem;
@@ -510,17 +393,14 @@
       align-items: center;
       gap: 0.5rem;
     }
-
     .question-text i {
       color: var(--primary);
     }
-
     .options {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 0.75rem;
     }
-
     .option {
       padding: 1rem;
       border: 1px solid var(--card-border);
@@ -536,41 +416,34 @@
         transform: translateY(-2px);
         border-color: var(--primary);
     }
-
     .option.selected {
       border-color: var(--primary-dark);
       background-color: var(--primary);
       color: white;
     }
-    
     .option.correct {
       border-color: var(--success);
       background-color: var(--success);
       color: white;
     }
-
     .option.incorrect {
       border-color: var(--danger);
       background-color: var(--danger);
       color: white;
     }
-
     .option.disabled {
       cursor: not-allowed;
       opacity: 0.8;
     }
-
     .submit-btn-container {
       display: flex;
       justify-content: center;
       margin-top: 1rem;
     }
-
     .results-header {
       text-align: center;
       margin-bottom: 2rem;
     }
-
     .score-display {
       font-size: 3.5rem;
       font-weight: 800;
@@ -580,11 +453,9 @@
       background-clip: text;
       margin: 0.5rem 0;
     }
-
     .answers-review {
       margin-top: 2rem;
     }
-
     .answer-item {
       padding: 1.25rem;
       border-radius: var(--radius);
@@ -592,11 +463,9 @@
       margin-bottom: 1rem;
       background-color: var(--bg-content);
     }
-
     .answer-item:hover {
       border-color: var(--primary);
     }
-
     .answer-feedback {
       display: flex;
       align-items: center;
@@ -605,15 +474,12 @@
       font-weight: 500;
       color: var(--text-secondary);
     }
-
     .answer-feedback.correct {
       color: var(--success);
     }
-
     .answer-feedback.incorrect {
       color: var(--danger);
     }
-    
     .explanation {
         background-color: var(--bg-body);
         border: 1px solid var(--separator-line);
@@ -642,7 +508,6 @@
     .explanation li {
         margin-bottom: 0.25rem;
     }
-
     .modal {
       display: none;
       position: fixed;
@@ -657,7 +522,6 @@
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
-
     .modal-content {
       background-color: var(--card-bg);
       border-radius: var(--radius-lg);
@@ -671,15 +535,12 @@
       border: 1px solid var(--card-border);
       color: var(--text-secondary);
     }
-
     #topic-modal .modal-content, #stats-filter-modal .modal-content {
         max-width: 600px;
     }
-
     .modal-content h2 {
       color: var(--text-primary);
     }
-
     .close-btn {
       position: absolute;
       top: 1rem;
@@ -697,7 +558,6 @@
       justify-content: center;
       transition: var(--transition);
     }
-
     .close-btn:hover {
       background-color: var(--gray-200);
       color: var(--primary);
@@ -705,19 +565,16 @@
     .dark-mode .close-btn:hover {
       background-color: var(--gray-700);
     }
-
     .history-item, .leaderboard-item {
       padding: 1.25rem;
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       margin-bottom: 0.75rem;
     }
-
     .history-item:last-child, .leaderboard-item:last-child {
       border-bottom: 1px solid var(--card-border);
       margin-bottom: 0;
     }
-
     .history-item h3, .leaderboard-item h3 {
       color: var(--primary);
       margin-bottom: 0.5rem;
@@ -725,28 +582,23 @@
       align-items: center;
       gap: 0.5rem;
     }
-
     .history-item h3 i, .leaderboard-item h3 i {
       font-size: 1.1rem;
     }
-
     .leaderboard-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 1rem 1.25rem;
     }
-
     .leaderboard-item span:first-child {
         font-weight: 600;
         color: var(--text-primary);
     }
-
     .leaderboard-item span:last-child {
         font-weight: 700;
         color: var(--primary);
     }
-
     .leaderboard-item:nth-child(1) {
         border-left: 4px solid #FFD700;
     }
@@ -756,28 +608,6 @@
     .leaderboard-item:nth-child(3) {
         border-left: 4px solid #CD7F32;
     }
-
-    .sync-status {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius);
-      font-size: 0.9rem;
-      background-color: var(--card-bg);
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      z-index: 1001;
-      border: 1px solid var(--card-border);
-      color: var(--text-secondary);
-    }
-
-    .sync-status.syncing { color: var(--warning); }
-    .sync-status.synced { color: var(--success); }
-    .sync-status.error { color: var(--danger); }
-    
     .analysis-section {
         margin-bottom: 1.5rem;
         padding: 1rem;
@@ -809,206 +639,224 @@
         border-left-color: var(--warning);
         background-color: rgba(245, 158, 11, 0.1);
     }
-    
     #topic-selection-menu, #stats-filter-options {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
     }
+    /* Mobile-only Fixed Bottom Navigation */
+    .bottom-nav-mobile {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--card-bg);
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--card-border);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    .bottom-nav-mobile button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: var(--radius);
+    }
 
-    @media (min-width: 481px) and (max-width: 768px) {
-      .container { padding: 1.5rem; }
-      .app-header { flex-direction: row; align-items: center; gap: 0; }
-      .app-header .logout-btn-container { margin-left: auto; }
-      .logo { font-size: 1.6rem; }
-      .logo i { font-size: 2rem; }
-      .card { padding: 2rem; }
-      .stats-grid { grid-template-columns: repeat(1, 1fr); gap: 1.5rem; }
-      .stat-card p { font-size: 2rem; }
-      .options { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
-      .option { padding: 1.2rem; font-size: 1.1rem; }
-      .score-display { font-size: 3rem; }
-      .modal-content { max-width: 600px; padding: 2.5rem; }
-      .timer { top: 1.5rem; right: 2rem; padding: 0.6rem 1.2rem; font-size: 1.05rem; }
-      .combined-score-card { flex-direction: column; padding: 1rem; }
-      .combined-score-stats { flex-direction: column; gap: 0.75rem; }
-      .combined-quick-actions { flex-direction: column; gap: 0.75rem; }
-      .combined-score-item { flex-direction: row; justify-content: space-between; width: 100%; }
-      .combined-score-item h3 { margin-bottom: 0; font-size: 0.9rem; }
-      .combined-score-item p { font-size: 1.5rem; }
-      .stat-card .button-group { grid-template-columns: repeat(3, 1fr); }
-      .stat-card .button-group .btn { width: auto; font-size: 0.9rem;}
+    /* --- STYLES FOR MOBILE AND DESKTOP --- */
+
+    @media (max-width: 768px) {
+      /* Show mobile nav and hide desktop start button */
+      .start-test-container {
+        display: none;
+      }
+      .bottom-nav-mobile {
+        display: flex;
+      }
+
+      /* --- MOBILE SPACING ADJUSTMENTS --- */
+      .container {
+          padding: 0.75rem; /* Reduce overall padding */
+      }
+      .card {
+          padding: 1.25rem; /* Reduce card padding */
+          margin-bottom: 1rem;
+      }
+      .modal-content {
+          padding: 1.5rem 1.25rem; /* Reduce modal padding */
+      }
+      .auth-form-container {
+          padding: 2rem 1.5rem; /* Reduce auth form padding */
+      }
+      .app-header {
+          margin-bottom: 1.5rem; /* Reduce header margin */
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+      }
+      #quiz-title,
+      .auth-form-container h1,
+      .results-header {
+          margin-bottom: 1.5rem;
+      }
+      .question-text {
+          margin-bottom: 1rem; /* Reduce space between question and options */
+      }
+      .combined-score-stats {
+          gap: 0.75rem; /* Reduce gap between stat items */
+      }
+      .combined-score-item {
+          padding: 0.75rem;
+      }
+      #topic-selection-menu, #stats-filter-options {
+          gap: 0.75rem;
+      }
+      .answers-review {
+        margin-top: 1.5rem;
+      }
+      .answer-item {
+        padding: 1rem;
+      }
     }
 
     @media (min-width: 769px) {
-      .container { padding: 2rem; }
-      #start-screen .container { max-width: 1200px; } /* Override for start screen */
-      .app-header { flex-direction: row; align-items: center; gap: 0; }
-      .app-header .logout-btn-container { margin-left: auto; }
-      .logo { font-size: 1.8rem; }
-      .logo i { font-size: 2.2rem; }
-      .card { padding: 2.5rem; }
-      .stats-grid { grid-template-columns: repeat(1, 1fr); gap: 2rem; }
-      .stat-card h3 { font-size: 1rem; }
-      .stat-card p { font-size: 2.2rem; }
-      .options { grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-      .option { padding: 1.2rem; font-size: 1.1rem; }
-      .score-display { font-size: 4rem; }
-      .modal-content { max-width: 700px; padding: 3rem; }
-      .timer { top: 2rem; right: 2.5rem; padding: 0.75rem 1.5rem; font-size: 1.1rem; }
-      .btn-lg { padding: 1rem 2.5rem; font-size: 1.2rem; }
-      .combined-score-card { flex-direction: row; flex-wrap: nowrap; justify-content: space-around; gap: 1.5rem; padding: 1.5rem 2rem; }
-      .combined-score-stats { flex-direction: row; flex-wrap: wrap; justify-content: space-around; gap: 1rem; flex: 2; align-items: center; }
-      .combined-quick-actions { flex: 1; flex-direction: column; gap: 0.75rem; text-align: center; justify-content: center; }
-      .combined-quick-actions h3 { margin-bottom: 0.5rem; }
-      .combined-score-item { flex: 1 1 auto; min-width: 120px; flex-direction: column; }
-      .combined-score-item h3 { font-size: 1rem; }
-      .combined-score-item p { font-size: 1.75rem; }
-      .stat-card .button-group { flex-direction: row; justify-content: center; gap: 1rem; }
-      .stat-card .button-group .btn { width: auto; flex: 1; }
+      .bottom-nav-mobile {
+        display: none;
+      }
+      /* Arrange stat items in one row on desktop */
+      .combined-score-stats {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   </style>
 </head>
 <body>
-  <div id="login-screen" class="screen active auth-wrapper">
-    <div class="auth-promo-panel">
-        <div class="logo">
-            <i class="fas fa-graduation-cap"></i>
-            <h2>Club Of Competition</h2>
-        </div>
-        <h2>Unlock Your Math Potential</h2>
-        <p>Join our community to sharpen your skills, track your progress, and climb the leaderboards.</p>
-        <ul class="auth-features">
-            <li><i class="fa fa-chart-line"></i> Track your progress with detailed stats.</li>
-            <li><i class="fa fa-trophy"></i> Compete on the global leaderboards.</li>
-            <li><i class="fa fa-lightbulb"></i> Get personalized feedback to improve.</li>
-        </ul>
-    </div>
-    <div class="auth-form-panel">
-        <div class="auth-form-container">
-            <h1>Club of Competition</h1>
-            <p>Sign in or create an account to continue.</p>
-            <div class="auth-container">
-                <button id="googleSignInBtn" class="btn btn-lg btn-google">
-                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px;">
-                        <g fill="none" fill-rule="evenodd">
-                            <path d="M20.95,10.09 C20.95,9.43 20.89,8.79 20.78,8.18 L12.23,8.18 L12.23,12.27 L17.2,12.27 C16.96,13.68 16.2,14.88 15.08,15.68 L15.08,18.49 L18.4,18.49 C20.12,16.88 20.95,14.71 20.95,12.09" fill="#4285F4"/>
-                            <path d="M12.23,22 C14.93,22 17.2,21.15 18.4,19.64 L15.08,17.23 C14.21,17.78 13.08,18.14 12.23,18.14 C9.6,18.14 7.22,16.45 6.4,14.22 L2.99,14.22 L2.99,16.71 C4.38,19.68 8.04,22 12.23,22" fill="#34A853"/>
-                            <path d="M6.4,13.78 C6.18,13.15 6.05,12.47 6.05,11.75 C6.05,11.03 6.18,10.35 6.4,9.72 L6.4,7.23 L2.99,7.23 C1.96,9.27 1.96,11.73 2.99,13.78" fill="#FBBC05"/>
-                            <path d="M12.23,5.36 C13.67,5.36 14.9,5.87 15.82,6.75 L18.46,4.11 C16.59,2.34 14.07,1.5 12.23,1.5 C8.04,1.5 4.38,3.82 2.99,6.79 L6.4,9.28 C7.22,7.05 9.6,5.36 12.23,5.36" fill="#EA4335"/>
-                        </g>
-                    </svg>
-                    Continue with Google
-                </button>
-            </div>
+  <div id="login-screen" class="screen active">
+    <div class="auth-form-container">
+        <h1>Club of Competition</h1>
+        <div class="auth-container">
+            <button id="googleSignInBtn" class="btn btn-lg btn-google">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px;">
+                    <g fill="none" fill-rule="evenodd">
+                        <path d="M20.95,10.09 C20.95,9.43 20.89,8.79 20.78,8.18 L12.23,8.18 L12.23,12.27 L17.2,12.27 C16.96,13.68 16.2,14.88 15.08,15.68 L15.08,18.49 L18.4,18.49 C20.12,16.88 20.95,14.71 20.95,12.09" fill="#4285F4"/>
+                        <path d="M12.23,22 C14.93,22 17.2,21.15 18.4,19.64 L15.08,17.23 C14.21,17.78 13.08,18.14 12.23,18.14 C9.6,18.14 7.22,16.45 6.4,14.22 L2.99,14.22 L2.99,16.71 C4.38,19.68 8.04,22 12.23,22" fill="#34A853"/>
+                        <path d="M6.4,13.78 C6.18,13.15 6.05,12.47 6.05,11.75 C6.05,11.03 6.18,10.35 6.4,9.72 L6.4,7.23 L2.99,7.23 C1.96,9.27 1.96,11.73 2.99,13.78" fill="#FBBC05"/>
+                        <path d="M12.23,5.36 C13.67,5.36 14.9,5.87 15.82,6.75 L18.46,4.11 C16.59,2.34 14.07,1.5 12.23,1.5 C8.04,1.5 4.38,3.82 2.99,6.79 L6.4,9.28 C7.22,7.05 9.6,5.36 12.23,5.36" fill="#EA4335"/>
+                    </g>
+                </svg>
+                Continue with Google
+            </button>
         </div>
     </div>
   </div>
-
-  <div class="container" id="app-container" style="display: none;">
-    <div id="start-screen" class="screen">
-      <div class="app-header">
-        <div class="logo">
-          <i class="fas fa-graduation-cap"></i>
-          <h4>Club Of Competition</h4>
-        </div>
-        <button id="logout-btn" class="btn btn-logout">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-      </div>
-
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-          <h2 id="welcome-user" style="color: var(--text-primary);">Hi, User!</h2>
-          <div class="theme-toggle">
-              <span id="theme-label">🌙</span>
-              <label class="switch">
-                <input type="checkbox" id="darkModeToggle">
-                <span class="slider"></span>
-              </label>
+  <div id="app-container" style="display: none;">
+    <div class="container">
+        <div id="start-screen" class="screen">
+          <div class="app-header">
+            <div class="logo">
+              <i class="fas fa-graduation-cap"></i>
+              <h4>Club Of Competition</h4>
             </div>
-        </div>
-
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <button id="start-new-test-btn" class="btn btn-primary btn-lg">
-                <i class="fas fa-play"></i> Choose subject to start new test
+            <button id="logout-btn" class="btn btn-logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </button>
-        </div>
-
-        <div class="stats-card-header">
-            <h3 id="stats-card-title">Tables Statistics</h3>
-            <button id="show-stats-filter-btn" class="btn btn-secondary">
-                <i class="fas fa-filter"></i> Filter
-            </button>
-        </div>
-        <div id="stats-topic-select" data-value="tables"></div>
-        <div class="stats-grid">
-          <div class="stat-card combined-score-card">
-            <div class="combined-score-stats">
-                <div class="combined-score-item">
-                    <h3>Tests Completed</h3>
-                    <p id="tests-completed">0</p>
-                </div>
-                <div class="combined-score-item">
-                    <h3>Average Score</h3>
-                    <p id="average-score">0</p>
-                </div>
-                <div class="combined-score-item">
-                    <h3>Highest Score</h3>
-                    <p id="highest-score">0</p>
+          </div>
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+              <h2 id="welcome-user" style="color: var(--text-primary);">Hi, User!</h2>
+              <div class="theme-toggle">
+                  <span id="theme-label">🌙</span>
+                  <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                  </label>
                 </div>
             </div>
-            <div class="combined-quick-actions">
-                <h3>Quick Actions</h3>
-                <div class="button-group">
-                    <button id="analysis-btn" class="btn btn-secondary">
-                        <i class="fas fa-chart-line"></i> Analysis
-                    </button>
-                    <button id="history-btn" class="btn btn-secondary">
-                      <i class="fas fa-history"></i>
-                      History
-                    </button>
-                    <button id="leaderboard-btn" class="btn btn-secondary">
-                      <i class="fas fa-trophy"></i>
-                      Leaderboard
-                    </button>
+            <div class="start-test-container" style="margin-bottom: 2rem;">
+                <button id="start-new-test-btn" class="btn btn-primary btn-lg">
+                    <i class="fas fa-play"></i> Start New Test
+                </button>
+            </div>
+            <div class="stats-card-header">
+                <h3 id="stats-card-title">Tables Statistics</h3>
+                <button id="show-stats-filter-btn" class="btn btn-primary">
+                    <i class="fas fa-filter"></i> View Stats For
+                </button>
+            </div>
+            <div id="stats-topic-select" data-value="tables"></div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="combined-score-stats">
+                    <div class="combined-score-item">
+                        <h3>Tests Completed</h3>
+                        <p id="tests-completed">0</p>
+                    </div>
+                    <div class="combined-score-item">
+                        <h3>Average Score</h3>
+                        <p id="average-score">0</p>
+                    </div>
+                    <div class="combined-score-item">
+                        <h3>Highest Score</h3>
+                        <p id="highest-score">0</p>
+                    </div>
+                    <div class="combined-score-item">
+                        <h3>Total Score</h3>
+                        <p id="total-score">0</p>
+                    </div>
                 </div>
+                <div class="combined-quick-actions">
+                    <div class="button-group">
+                        <button id="analysis-btn" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i> Analysis
+                        </button>
+                        <button id="history-btn" class="btn btn-secondary">
+                          <i class="fas fa-history"></i>
+                          History
+                        </button>
+                        <button id="leaderboard-btn" class="btn btn-secondary">
+                          <i class="fas fa-trophy"></i>
+                          Leaderboard
+                        </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span id="progress-bar-label" style="color: var(--text-secondary);">Tables Progress</span>
+                <span id="tests-remaining" style="color: var(--text-secondary);">100</span>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div style="margin-bottom: 1rem;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-            <span id="progress-bar-label" style="color: var(--text-secondary);">Tables Progress</span>
-            <span id="tests-remaining" style="color: var(--text-secondary);">100</span>
+        <div id="quiz-screen" class="screen">
+          <div class="app-header">
+            <div class="logo">
+              <i class="fas fa-graduation-cap"></i>
+              <h4>Club Of Competition</h4>
+            </div>
+            <div id="timer" class="timer">⏱️ 00:00</div>
           </div>
-          <div class="progress-container">
-            <div class="progress-bar" id="tests-progress" style="width: 0%"></div>
+          <div class="card">
+            <h2 id="quiz-title" style="margin-bottom: 1.5rem; color: var(--primary);">Math Quiz</h2>
+            <div id="questions-container" class="questions-container"></div>
+            <div class="submit-btn-container">
+              <button id="submit-btn" class="btn btn-primary btn-lg">
+                <i class="fas fa-check-circle"></i>
+                Submit Test
+              </button>
+            </div>
           </div>
         </div>
-      </div>
     </div>
 
-    <div id="quiz-screen" class="screen">
-      <div class="app-header">
-        <div class="logo">
-          <i class="fas fa-graduation-cap"></i>
-          <h4>Club Of Competition</h4>
-        </div>
-        <div id="timer" class="timer">⏱️ 00:00</div>
-      </div>
-
-      <div class="card">
-        <h2 id="quiz-title" style="margin-bottom: 1.5rem; color: var(--primary);">Math Quiz</h2>
-        <div id="questions-container" class="questions-container"></div>
-
-        <div class="submit-btn-container">
-          <button id="submit-btn" class="btn btn-primary btn-lg">
-            <i class="fas fa-check-circle"></i>
-            Submit Test
-          </button>
-        </div>
-      </div>
+    <div class="bottom-nav-mobile">
+      <button id="start-new-test-btn-mobile-nav" class="btn btn-primary">
+        <i class="fas fa-play"></i> Start New Test
+      </button>
     </div>
   </div>
 
@@ -1039,7 +887,8 @@
     </div>
   </div>
 
-  <div id="leaderboard-modal" class="modal"> <div class="modal-content">
+  <div id="leaderboard-modal" class="modal">
+    <div class="modal-content">
       <button class="close-btn" id="close-leaderboard-btn">&times;</button>
       <h2 id="leaderboard-title" style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-trophy"></i> Leaderboard (Top 10)</h2>
       <div id="leaderboard-list" class="leaderboard-list"></div>
@@ -1087,11 +936,6 @@
     </div>
   </div>
 
-  <div id="sync-status" class="sync-status">
-    <i class="fas fa-sync-alt"></i>
-    <span id="sync-text">Syncing...</span>
-  </div>
-
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
@@ -1119,7 +963,7 @@
       authDomain: "login-coc.firebaseapp.com",
       databaseURL: "https://login-coc-default-rtdb.firebaseio.com",
       projectId: "login-coc",
-      storageBucket: "login-coc.firebaseastorage.app",
+      storageBucket: "login-coc.firebasestorage.app",
       messagingSenderId: "793350174008",
       appId: "1:793350174008:web:47f655787f71f4e852bdcd",
       measurementId: "G-9F5XW0QKCV"
@@ -1137,12 +981,11 @@
       const quizScreen = document.getElementById('quiz-screen');
       const quizTitle = document.getElementById('quiz-title');
       const appContainer = document.getElementById('app-container');
-
       const googleSignInBtn = document.getElementById('googleSignInBtn');
-
       const logoutBtn = document.getElementById('logout-btn');
       const welcomeUserEl = document.getElementById('welcome-user');
       const startNewTestBtn = document.getElementById('start-new-test-btn');
+      const startNewTestBtnMobileNav = document.getElementById('start-new-test-btn-mobile-nav');
       const historyBtn = document.getElementById('history-btn');
       const leaderboardBtn = document.getElementById('leaderboard-btn');
       const analysisBtn = document.getElementById('analysis-btn');
@@ -1161,38 +1004,29 @@
       const testsCompletedEl = document.getElementById('tests-completed');
       const averageScoreEl = document.getElementById('average-score');
       const highestScoreEl = document.getElementById('highest-score');
+      const totalScoreEl = document.getElementById('total-score');
       const testsProgress = document.getElementById('tests-progress');
       const testsRemainingEl = document.getElementById('tests-remaining');
-      
       const historyModal = document.getElementById('history-modal');
       const closeHistoryBtn = document.getElementById('close-history-btn');
       const historyListEl = document.getElementById('history-list');
       const historyTitle = document.getElementById('history-title');
-      
       const leaderboardModal = document.getElementById('leaderboard-modal');
       const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
       const leaderboardListEl = document.getElementById('leaderboard-list');
       const leaderboardTitle = document.getElementById('leaderboard-title');
-
       const analysisModal = document.getElementById('analysis-modal');
       const closeAnalysisBtn = document.getElementById('close-analysis-btn');
       const analysisContent = document.getElementById('analysis-content');
-      
       const topicModal = document.getElementById('topic-modal');
       const closeTopicModalBtn = document.getElementById('close-topic-modal-btn');
-
       const statsFilterModal = document.getElementById('stats-filter-modal');
       const closeStatsFilterModalBtn = document.getElementById('close-stats-filter-modal-btn');
       const statsFilterOptions = document.getElementById('stats-filter-options');
-      
       const darkModeToggle = document.getElementById('darkModeToggle');
       const themeLabel = document.getElementById('theme-label');
-      const syncStatus = document.getElementById('sync-status');
-      const syncText = document.getElementById('sync-text');
-      
       const resultsModal = document.getElementById('results-modal');
       const closeResultsBtn = document.getElementById('close-results-btn');
-
       const MAX_TESTS_PER_TOPIC = 100;
       let unsubscribeFromFirestore = null;
       let appState = {
@@ -1213,13 +1047,18 @@
             if (unsubscribeFromFirestore) unsubscribeFromFirestore();
             const userDocRef = doc(db, "users", userId);
             unsubscribeFromFirestore = onSnapshot(userDocRef, async (docSnap) => {
-              updateSyncStatus('synced');
               if (docSnap.exists()) {
                   let firebaseData = docSnap.data();
-                  if (!firebaseData.stats) {
+                  if (!firebaseData.stats || !firebaseData.hasOwnProperty('totalScore')) {
                       const newStats = createNewUserData({}).stats;
-                      await updateDoc(userDocRef, { stats: newStats });
-                      firebaseData.stats = newStats;
+                      await updateDoc(userDocRef, { 
+                          stats: firebaseData.stats || newStats,
+                          totalScore: firebaseData.totalScore || 0,
+                          totalTests: firebaseData.totalTests || 0,
+                          overallAverage: firebaseData.overallAverage || 0,
+                          leaderboardScore: firebaseData.leaderboardScore || 0
+                      });
+                      firebaseData = (await getDoc(userDocRef)).data();
                   }
                   appState.currentUser = {
                       uid: userId,
@@ -1233,7 +1072,6 @@
               updateUIForUser();
             }, (error) => {
               console.error('Firestore snapshot error:', error);
-              updateSyncStatus('error');
               const localData = loadFromLocalStorage(`user_${userId}`) || createNewUserData(user);
               appState.currentUser = { uid: userId, ...localData };
               updateUIForUser();
@@ -1262,50 +1100,35 @@
             stats[topic] = {
                 history: [],
                 highestScore: 0,
-                averageScore: 0
+                averageScore: 0,
+                leaderboardScore: 0
             };
           });
-
           return {
               displayName: user.displayName || user.email,
               email: user.email,
               photoURL: user.photoURL,
               stats: stats,
+              totalScore: 0,
+              totalTests: 0,
+              overallAverage: 0,
               darkMode: false
           };
       }
 
       function updateUIForUser() {
-          if (!appState.currentUser) return;
-          welcomeUserEl.textContent = `Hi, ${appState.currentUser.displayName || 'User'}!`;
-          applySavedTheme();
-          showStartScreen();
-          updateStatsUI(statsTopicSelect.dataset.value || 'tables');
-      }
-
-      function updateSyncStatus(status) {
-        syncStatus.className = `sync-status ${status}`;
-        switch(status) {
-          case 'syncing':
-            syncStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span id="sync-text">Syncing...</span>';
-            break;
-          case 'synced':
-            syncStatus.innerHTML = '<i class="fas fa-check"></i><span id="sync-text">Synced</span>';
-            setTimeout(() => { syncStatus.style.display = 'none'; }, 2000);
-            break;
-          case 'error':
-            syncStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span id="sync-text">Sync Error</span>';
-            break;
-        }
-        syncStatus.style.display = 'flex';
+        if (!appState.currentUser) return;
+        welcomeUserEl.textContent = `Hi, ${appState.currentUser.displayName || 'User'}!`;
+        applySavedTheme();
+        showStartScreen();
+        updateStatsUI(statsTopicSelect.dataset.value || 'tables');
       }
 
       function setupEventListeners() {
         googleSignInBtn.addEventListener('click', signInWithGoogle);
         logoutBtn.addEventListener('click', () => signOut(auth).catch(console.error));
-        
         startNewTestBtn.addEventListener('click', () => topicModal.style.display = 'flex');
-
+        startNewTestBtnMobileNav.addEventListener('click', () => topicModal.style.display = 'flex');
         document.querySelectorAll('.topic-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const topic = button.dataset.topic;
@@ -1314,7 +1137,6 @@
                 startQuiz(topic, duration);
             });
         });
-        
         showStatsFilterBtn.addEventListener('click', () => {
             const topics = ["Tables", "Addition", "Subtraction", "Multiplication", "Division"];
             statsFilterOptions.innerHTML = topics.map(topic => {
@@ -1324,7 +1146,6 @@
             }).join('');
             statsFilterModal.style.display = 'flex';
         });
-
         statsFilterOptions.addEventListener('click', (e) => {
             if (e.target.matches('button')) {
                 const value = e.target.dataset.value;
@@ -1333,26 +1154,21 @@
                 statsFilterModal.style.display = 'none';
             }
         });
-
         historyBtn.addEventListener('click', showHistory);
         leaderboardBtn.addEventListener('click', showLeaderboard);
         analysisBtn.addEventListener('click', showAnalysis);
-
         submitBtn.addEventListener('click', () => submitQuiz());
         backToHomeBtn.addEventListener('click', () => {
             resultsModal.style.display = 'none';
             showStartScreen();
         });
-
         closeResultsBtn.addEventListener('click', () => resultsModal.style.display = 'none');
         closeHistoryBtn.addEventListener('click', () => historyModal.style.display = 'none');
         closeLeaderboardBtn.addEventListener('click', () => leaderboardModal.style.display = 'none');
         closeAnalysisBtn.addEventListener('click', () => analysisModal.style.display = 'none');
         closeTopicModalBtn.addEventListener('click', () => topicModal.style.display = 'none');
         closeStatsFilterModalBtn.addEventListener('click', () => statsFilterModal.style.display = 'none');
-        
         darkModeToggle.addEventListener('change', toggleDarkMode);
-        
         window.addEventListener('click', (e) => {
           if (e.target === historyModal) historyModal.style.display = 'none';
           if (e.target === resultsModal) resultsModal.style.display = 'none';
@@ -1362,7 +1178,7 @@
           if (e.target === statsFilterModal) statsFilterModal.style.display = 'none';
         });
       }
-      
+
       function signInWithGoogle() {
         signInWithPopup(auth, provider).catch((error) => {
             if (error.code !== 'auth/popup-closed-by-user') alert('Error: ' + error.message);
@@ -1395,7 +1211,7 @@
       function showLoginScreen() {
         stopTimer();
         document.body.style.padding = '0';
-        loginScreen.style.display = 'grid';
+        loginScreen.style.display = 'flex';
         loginScreen.classList.add('active');
         appContainer.style.display = 'none';
         quizScreen.classList.remove('active');
@@ -1404,35 +1220,32 @@
 
       function showStartScreen() {
         stopTimer();
-        document.body.style.padding = '';
+        document.body.style.paddingBottom = '100px';
         loginScreen.style.display = 'none';
         loginScreen.classList.remove('active');
         appContainer.style.display = 'block';
         startScreen.classList.add('active');
         quizScreen.classList.remove('active');
         timerEl.style.display = 'none';
-        updateStatsUI(statsTopicSelect.dataset.value || 'tables');
       }
 
       function updateStatsUI(topic) {
         if (!appState.currentUser?.stats?.[topic]) return;
-        
         const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
         progressBarLabel.textContent = `${topicName} Progress`;
         statsCardTitle.textContent = `${topicName} Statistics`;
-
         const topicStats = appState.currentUser.stats[topic];
         const history = topicStats.history || [];
         const testsTaken = history.length;
-        
+        const totalScore = history.reduce((sum, test) => sum + test.score, 0);
         testsCompletedEl.textContent = testsTaken;
         highestScoreEl.textContent = topicStats.highestScore || 0;
         averageScoreEl.textContent = topicStats.averageScore ? Math.round(topicStats.averageScore) : 0;
-
+        totalScoreEl.textContent = totalScore;
         testsRemainingEl.textContent = Math.max(0, MAX_TESTS_PER_TOPIC - testsTaken);
         testsProgress.style.width = `${(testsTaken / MAX_TESTS_PER_TOPIC) * 100}%`;
       }
-      
+
       function startQuiz(topic, duration) {
         if (!appState.currentUser.stats[topic]) {
             alert("Error: Invalid topic selected.");
@@ -1442,10 +1255,8 @@
           alert(`You have reached the maximum limit of ${MAX_TESTS_PER_TOPIC} tests for this topic.`);
           return;
         }
-        
         const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
         quizTitle.textContent = `${topicName} Quiz`;
-        
         appState.quizState = {
           questions: generateQuestions(topic),
           userAnswers: {},
@@ -1462,12 +1273,11 @@
         displayQuestions();
         startTimer(duration);
       }
-      
+
       function generateQuestions(topic) {
         const questions = new Set();
         while (questions.size < 20) {
             let num1, num2, answer, text;
-
             switch (topic) {
                 case 'addition':
                     num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
@@ -1506,7 +1316,6 @@
             }
             questions.add(JSON.stringify({ text, answer }));
         }
-
         return Array.from(questions).map(q => {
             const parsedQ = JSON.parse(q);
             return { ...parsedQ, options: generateOptions(parsedQ.answer) };
@@ -1538,13 +1347,11 @@
             </div>
           `;
           const optionsContainer = questionCard.querySelector('.options');
-
           const savedAnswer = appState.quizState.userAnswers[index];
           if (savedAnswer !== undefined) {
             const selectedOption = optionsContainer.querySelector(`[data-option="${savedAnswer}"]`);
             if (selectedOption) selectedOption.classList.add('selected');
           }
-
           optionsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('option') && !e.target.classList.contains('disabled')) {
               optionsContainer.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
@@ -1589,45 +1396,38 @@
       async function submitQuiz(isTimeUp = false) {
         stopTimer();
         submitBtn.disabled = true;
-
         let score = 0;
         appState.quizState.questions.forEach((question, index) => {
           const userAnswer = appState.quizState.userAnswers[index];
           if (userAnswer === question.answer) score += 5;
         });
         appState.quizState.score = score;
-
         const timeTaken = Math.floor((new Date() - new Date(appState.quizState.startTime)) / 1000);
         const currentTopic = appState.quizState.topic;
-
         const newResult = {
           score: appState.quizState.score,
           timeTaken: timeTaken,
           date: new Date().toISOString(),
           isTimeUp: isTimeUp
         };
-        
-        updateSyncStatus('syncing');
         try {
             const userDocRef = doc(db, "users", appState.currentUser.uid);
             const currentTopicStats = appState.currentUser.stats[currentTopic];
-            
             const newHistory = [...(currentTopicStats.history || []), newResult];
             const newHighestScore = Math.max(currentTopicStats.highestScore || 0, newResult.score);
             const newAverageScore = newHistory.reduce((sum, test) => sum + test.score, 0) / newHistory.length;
-
+            const totalTopicScore = newHistory.reduce((sum, test) => sum + test.score, 0);
+            const leaderboardScore = totalTopicScore / MAX_TESTS_PER_TOPIC;
             const updatePath = `stats.${currentTopic}`;
             await updateDoc(userDocRef, {
                 [`${updatePath}.history`]: newHistory,
                 [`${updatePath}.highestScore`]: newHighestScore,
-                [`${updatePath}.averageScore`]: newAverageScore
+                [`${updatePath}.averageScore`]: newAverageScore,
+                [`${updatePath}.leaderboardScore`]: leaderboardScore,
             });
-            updateSyncStatus('synced');
         } catch (error) {
           console.error("Error syncing results to Firestore:", error);
-          updateSyncStatus('error');
         }
-
         showResults(timeTaken);
         submitBtn.disabled = false;
       }
@@ -1636,16 +1436,13 @@
         quizScreen.classList.remove('active');
         resultsModal.style.display = 'flex';
         timerEl.style.display = 'none';
-
         finalScoreEl.textContent = appState.quizState.score;
         timeTakenEl.textContent = timeTaken;
         scoreProgress.style.width = `${appState.quizState.score}%`;
-
         answersReviewEl.innerHTML = appState.quizState.questions.map((q, i) => {
           const userAnswer = appState.quizState.userAnswers[i];
           const isCorrect = userAnswer === q.answer;
           const userAnswerDisplay = userAnswer !== undefined ? userAnswer : 'Not answered';
-
           return `
             <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
               <h4><i class="fas fa-question-circle"></i> Question ${i + 1}: ${q.text}</h4>
@@ -1657,7 +1454,6 @@
             </div>
           `;
         }).join('');
-
         updateStatsUI(appState.quizState.topic);
         clearQuizStateLocally();
         appState.quizState = null;
@@ -1669,9 +1465,7 @@
         const operator = parts[1];
         const num2 = parseInt(parts[2], 10);
         const answer = question.answer;
-
         let explanationHTML = `<div class="explanation"><strong>Step-by-step Solution:</strong>`;
-
         switch (operator) {
             case '+':
                 explanationHTML += `<p>To add numbers with multiple digits, we add column by column from right to left.</p>
@@ -1681,17 +1475,23 @@
                                         <li>Add the tens place (including any carry-over).</li>
                                         <li>Continue for all place values.</li>
                                     </ol>
-                                    <pre>${String(num1).padStart(5)}\n+ ${String(num2).padStart(5)}\n-------\n ${String(answer).padStart(5)}</pre>`;
+                                    <pre>${String(num1).padStart(5)}
++ ${String(num2).padStart(5)}
+-------
+ ${String(answer).padStart(5)}</pre>`;
                 break;
             case '-':
                  explanationHTML += `<p>To subtract, we subtract column by column from right to left, borrowing from the next column if needed.</p>
-                                     <ol>
-                                        <li>Align numbers vertically, with the larger number on top.</li>
-                                        <li>Subtract the ones place.</li>
-                                        <li>Subtract the tens place (borrowing if necessary).</li>
-                                        <li>Continue for all place values.</li>
-                                     </ol>
-                                     <pre>${String(num1).padStart(5)}\n- ${String(num2).padStart(5)}\n-------\n ${String(answer).padStart(5)}</pre>`;
+                                       <ol>
+                                           <li>Align numbers vertically, with the larger number on top.</li>
+                                           <li>Subtract the ones place.</li>
+                                           <li>Subtract the tens place (borrowing if necessary).</li>
+                                           <li>Continue for all place values.</li>
+                                       </ol>
+                                       <pre>${String(num1).padStart(5)}
+- ${String(num2).padStart(5)}
+-------
+ ${String(answer).padStart(5)}</pre>`;
                 break;
             case '×':
                 explanationHTML += `<p>For two-digit multiplication:</p>
@@ -1704,9 +1504,9 @@
                 break;
             case '÷':
                  explanationHTML += `<p>Division is the reverse of multiplication. We are looking for the number that, when multiplied by ${num2}, gives ${num1}.</p>
-                                     <p>${num2} × <strong>?</strong> = ${num1}</p>
-                                     <p>In this case, ${num2} × <strong>${answer}</strong> = ${num1}.</p>
-                                     <p>The correct answer is <strong>${answer}</strong>.</p>`;
+                                       <p>${num2} × <strong>?</strong> = ${num1}</p>
+                                       <p>In this case, ${num2} × <strong>${answer}</strong> = ${num1}.</p>
+                                       <p>The correct answer is <strong>${answer}</strong>.</p>`;
                 break;
         }
         explanationHTML += '</div>';
@@ -1717,9 +1517,7 @@
         const topic = statsTopicSelect.dataset.value || 'tables';
         const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
         historyTitle.innerHTML = `<i class="fas fa-history"></i> ${topicName} History`;
-
         const history = appState.currentUser?.stats?.[topic]?.history || [];
-
         if (history.length === 0) {
           historyListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No test history for this topic yet.</p>';
         } else {
@@ -1728,7 +1526,6 @@
             const dateStr = testDate.toLocaleDateString();
             const timeStr = testDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const position = history.length - index;
-
             return `
                 <div class="history-item">
                 <h3><i class="fas fa-trophy"></i> Test #${position}</h3>
@@ -1747,41 +1544,35 @@
           const topic = statsTopicSelect.dataset.value || 'tables';
           const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
           leaderboardTitle.innerHTML = `<i class="fas fa-trophy"></i> ${topicName} Leaderboard (Top 10)`;
-
           leaderboardModal.style.display = 'flex';
           leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Loading leaderboard...</p>';
-
           try {
               const usersRef = collection(db, "users");
-              const q = query(usersRef, orderBy(`stats.${topic}.averageScore`, "desc"), limit(10));
+              const q = query(usersRef, orderBy(`stats.${topic}.leaderboardScore`, "desc"), limit(10));
               const querySnapshot = await getDocs(q);
-
               const leaderboard = [];
               querySnapshot.forEach((doc) => {
                   const data = doc.data();
-                  const averageScore = data.stats?.[topic]?.averageScore;
-                  if (averageScore > 0) {
+                  const leaderboardScore = data.stats?.[topic]?.leaderboardScore;
+                  if (leaderboardScore > 0) {
                       leaderboard.push({
                           displayName: data.displayName || 'Anonymous',
-                          averageScore: averageScore
+                          leaderboardScore: leaderboardScore
                       });
                   }
               });
-
               if (leaderboard.length === 0) {
                   leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No scores on the leaderboard for this topic yet.</p>';
                   return;
               }
-
               leaderboardListEl.innerHTML = leaderboard.map((entry, index) => {
                   return `
-                      <div class="leaderboard-item">
-                          <span>${index + 1}. ${entry.displayName}</span>
-                          <span>Avg: ${Math.round(entry.averageScore)}</span>
-                      </div>
+                        <div class="leaderboard-item">
+                            <span>${index + 1}. ${entry.displayName}</span>
+                            <span>Score: ${entry.leaderboardScore.toFixed(2)}</span>
+                        </div>
                   `;
               }).join('');
-
           } catch (error) {
               console.error("Error fetching leaderboard:", error);
               leaderboardListEl.innerHTML = '<p style="text-align: center; color: var(--danger);">Error loading leaderboard.</p>';
@@ -1793,12 +1584,10 @@
         const STRENGTH_THRESHOLD = 85;
         const WEAKNESS_THRESHOLD = 60;
         const MIN_TESTS = 3;
-
         const strengths = [];
         const weaknesses = [];
         const recommendations = [];
         let analyzedTopics = 0;
-
         for (const topic in stats) {
             const topicData = stats[topic];
             const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
@@ -1813,7 +1602,6 @@
                 }
             }
         }
-
         let html = '';
         if (analyzedTopics === 0) {
             html = `<p>Complete at least ${MIN_TESTS} tests in any topic to see your performance analysis.</p>`;
@@ -1832,11 +1620,10 @@
                 html += `<p>You're performing consistently across all topics. Keep practicing to turn them into strengths!</p>`;
             }
         }
-
         analysisContent.innerHTML = html;
         analysisModal.style.display = 'flex';
       }
-      
+
       function getLocalStorageKey(key) {
           if (appState.currentUser?.uid) {
               return `quiz_${appState.currentUser.uid}_${key}`;
