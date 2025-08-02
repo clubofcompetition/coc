@@ -12,6 +12,7 @@
     gtag('config', 'G-9F5XW0QKCV');
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Added Chart.js library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
@@ -178,6 +179,15 @@
       font-size: 1rem;
       width: 100%;
     }
+    .btn:disabled {
+      cursor: not-allowed;
+      background-color: var(--button-secondary-bg);
+      opacity: 0.6;
+      color: var(--text-secondary);
+    }
+    .dark-mode .btn:disabled {
+        color: var(--text-placeholder);
+    }
     .btn-primary {
       background-color: var(--primary);
       color: white;
@@ -331,7 +341,7 @@
     }
     .stat-card .button-group {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr); /* Adjusted for 4 buttons */
         gap: 0.5rem;
         margin-top: 1.5rem;
     }
@@ -343,7 +353,7 @@
     .progress-container {
       width: 100%;
       height: 8px;
-      background-color: var(--gray-200);
+      background-color: var(--button-secondary-bg);
       border-radius: 4px;
       overflow: hidden;
       margin: 1rem 0 1.5rem;
@@ -536,7 +546,7 @@
       border: 1px solid var(--card-border);
       color: var(--text-secondary);
     }
-    #analysis-modal .modal-content {
+    #analysis-modal .modal-content, #achievements-modal .modal-content {
         max-width: 800px; /* Wider modal for charts */
     }
     #topic-modal .modal-content, #stats-filter-modal .modal-content {
@@ -663,6 +673,103 @@
         color: var(--text-primary);
         margin-top: 0.5rem;
     }
+    .analysis-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+    .analysis-table th, .analysis-table td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid var(--separator-line);
+    }
+    .analysis-table th {
+        color: var(--text-primary);
+        font-size: 0.9rem;
+    }
+    /* Gamification Styles */
+    .user-profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .streak-display {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--warning);
+    }
+    .xp-level-container {
+      margin-top: 1rem;
+    }
+    .level-display {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+    .badge {
+      text-align: center;
+      opacity: 0.5;
+    }
+    .badge.unlocked {
+      opacity: 1;
+    }
+    .badge-icon {
+      font-size: 3rem;
+      color: var(--text-placeholder);
+      background-color: var(--button-secondary-bg);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.5rem;
+      border: 2px solid var(--separator-line);
+    }
+    .badge.unlocked .badge-icon {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .badge-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+    .badge-description {
+      font-size: 0.8rem;
+    }
+    .toast-notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      transition: opacity 0.5s, top 0.5s;
+    }
+    .toast-notification.show {
+      opacity: 1;
+      top: 40px;
+    }
     /* Mobile-only Fixed Bottom Navigation */
     .bottom-nav-mobile {
       display: none;
@@ -692,6 +799,9 @@
       }
       .bottom-nav-mobile {
         display: flex;
+      }
+      .stat-card .button-group {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 grid on mobile */
       }
 
       /* --- MOBILE SPACING ADJUSTMENTS --- */
@@ -781,8 +891,12 @@
             </button>
           </div>
           <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div class="user-profile-header">
               <h2 id="welcome-user" style="color: var(--text-primary);">Hi, User!</h2>
+              <div class="streak-display">
+                <i class="fas fa-fire"></i>
+                <span id="streak-count">0</span>
+              </div>
               <div class="theme-toggle">
                   <span id="theme-label">🌙</span>
                   <label class="switch">
@@ -791,6 +905,18 @@
                   </label>
                 </div>
             </div>
+
+            <div class="xp-level-container">
+                <div class="level-display">
+                    <span id="level-label">Level 1</span>
+                    <span id="xp-label">0 / 500 XP</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="xp-progress" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- This button is hidden on mobile -->
             <div class="start-test-container" style="margin-bottom: 2rem;">
                 <button id="start-new-test-btn" class="btn btn-primary btn-lg">
                     <i class="fas fa-play"></i> Start New Test
@@ -827,6 +953,9 @@
                     <div class="button-group">
                         <button id="analysis-btn" class="btn btn-secondary">
                             <i class="fas fa-chart-line"></i> Analysis
+                        </button>
+                        <button id="achievements-btn" class="btn btn-secondary">
+                            <i class="fas fa-medal"></i> Achievements
                         </button>
                         <button id="history-btn" class="btn btn-secondary">
                           <i class="fas fa-history"></i>
@@ -872,6 +1001,7 @@
         </div>
     </div>
 
+    <!-- Mobile-only Fixed Bottom Navigation -->
     <div class="bottom-nav-mobile">
       <button id="start-new-test-btn-mobile-nav" class="btn btn-primary">
         <i class="fas fa-play"></i> Start New Test
@@ -879,6 +1009,7 @@
     </div>
   </div>
 
+  <!-- Modals -->
   <div id="results-modal" class="modal">
     <div class="modal-content">
       <button class="close-btn" id="close-results-btn">&times;</button>
@@ -920,6 +1051,12 @@
       <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-chart-line"></i> Performance Analysis</h2>
       
       <div id="text-analysis-content"></div>
+      
+      <div id="granular-analysis-content">
+          <div class="analysis-section" id="speed-analysis"></div>
+          <div class="analysis-section" id="mistakes-analysis"></div>
+          <div class="analysis-section" id="number-performance-analysis"></div>
+      </div>
 
       <div class="chart-container">
           <h4>Average Score by Topic</h4>
@@ -934,24 +1071,32 @@
     </div>
   </div>
 
+  <div id="achievements-modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" id="close-achievements-btn">&times;</button>
+      <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-medal"></i> Achievements</h2>
+      <div id="achievements-grid" class="achievements-grid"></div>
+    </div>
+  </div>
+
   <div id="topic-modal" class="modal">
     <div class="modal-content">
       <button class="close-btn" id="close-topic-modal-btn">&times;</button>
       <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-shapes"></i> Choose a Topic</h2>
       <div id="topic-selection-menu">
-          <button class="btn btn-primary topic-btn" data-topic="tables" data-duration="60">
+          <button class="btn btn-primary topic-btn" data-topic="tables" data-duration="60" data-icon="fa-table" data-text="Tables">
               <i class="fas fa-table"></i> Tables
           </button>
-          <button class="btn btn-primary topic-btn" data-topic="addition" data-duration="300">
+          <button class="btn btn-primary topic-btn" data-topic="addition" data-duration="300" data-icon="fa-plus" data-text="Addition">
               <i class="fas fa-plus"></i> Addition
           </button>
-          <button class="btn btn-primary topic-btn" data-topic="subtraction" data-duration="300">
+          <button class="btn btn-primary topic-btn" data-topic="subtraction" data-duration="300" data-icon="fa-minus" data-text="Subtraction">
               <i class="fas fa-minus"></i> Subtraction
           </button>
-          <button class="btn btn-primary topic-btn" data-topic="multiplication" data-duration="300">
+          <button class="btn btn-primary topic-btn" data-topic="multiplication" data-duration="300" data-icon="fa-times" data-text="Multiplication">
               <i class="fas fa-times"></i> Multiplication
           </button>
-          <button class="btn btn-primary topic-btn" data-topic="division" data-duration="300">
+          <button class="btn btn-primary topic-btn" data-topic="division" data-duration="300" data-icon="fa-divide" data-text="Division">
               <i class="fas fa-divide"></i> Division
           </button>
       </div>
@@ -963,9 +1108,12 @@
       <button class="close-btn" id="close-stats-filter-modal-btn">&times;</button>
       <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-filter"></i> Filter Stats</h2>
       <div id="stats-filter-options" class="form-group">
-          </div>
+          <!-- Options will be dynamically populated by JS -->
+      </div>
     </div>
   </div>
+
+  <div id="toast-notification" class="toast-notification"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -1021,6 +1169,7 @@
       const historyBtn = document.getElementById('history-btn');
       const leaderboardBtn = document.getElementById('leaderboard-btn');
       const analysisBtn = document.getElementById('analysis-btn');
+      const achievementsBtn = document.getElementById('achievements-btn');
       const showStatsFilterBtn = document.getElementById('show-stats-filter-btn');
       const submitBtn = document.getElementById('submit-btn');
       const backToHomeBtn = document.getElementById('back-to-home-btn');
@@ -1050,7 +1199,11 @@
       const analysisModal = document.getElementById('analysis-modal');
       const closeAnalysisBtn = document.getElementById('close-analysis-btn');
       const textAnalysisContent = document.getElementById('text-analysis-content');
+      const granularAnalysisContent = document.getElementById('granular-analysis-content');
       const progressTopicSelector = document.getElementById('progress-topic-selector');
+      const achievementsModal = document.getElementById('achievements-modal');
+      const closeAchievementsBtn = document.getElementById('close-achievements-btn');
+      const achievementsGrid = document.getElementById('achievements-grid');
       const topicModal = document.getElementById('topic-modal');
       const closeTopicModalBtn = document.getElementById('close-topic-modal-btn');
       const statsFilterModal = document.getElementById('stats-filter-modal');
@@ -1060,6 +1213,11 @@
       const themeLabel = document.getElementById('theme-label');
       const resultsModal = document.getElementById('results-modal');
       const closeResultsBtn = document.getElementById('close-results-btn');
+      const streakCountEl = document.getElementById('streak-count');
+      const levelLabelEl = document.getElementById('level-label');
+      const xpLabelEl = document.getElementById('xp-label');
+      const xpProgressEl = document.getElementById('xp-progress');
+      const toastNotification = document.getElementById('toast-notification');
       
       const MAX_TESTS_PER_TOPIC = 100;
       let unsubscribeFromFirestore = null;
@@ -1069,6 +1227,17 @@
         currentUser: null,
         quizState: null
       };
+
+      // --- GAMIFICATION SETUP ---
+      const achievements = {
+        first_quiz: { name: "First Step", desc: "Complete your first quiz.", icon: "fa-shoe-prints" },
+        perfect_score: { name: "Perfectionist", desc: "Get a perfect score of 100.", icon: "fa-bullseye" },
+        speed_demon: { name: "Speed Demon", desc: "Finish a Tables quiz in under 30s.", icon: "fa-bolt" },
+        ten_quizzes: { name: "Consistent Learner", desc: "Complete 10 quizzes.", icon: "fa-calendar-check" },
+        multiplication_master: { name: "Multiplication Master", desc: "Complete 50 multiplication quizzes.", icon: "fa-star" },
+      };
+
+      const levelThresholds = [0, 500, 1200, 2500, 5000, 10000]; // XP for levels 1, 2, 3...
 
       function init() {
         setupEventListeners();
@@ -1092,7 +1261,8 @@
                           totalScore: firebaseData.totalScore || 0,
                           totalTests: firebaseData.totalTests || 0,
                           overallAverage: firebaseData.overallAverage || 0,
-                          leaderboardScore: firebaseData.leaderboardScore || 0
+                          leaderboardScore: firebaseData.leaderboardScore || 0,
+                          xp: 0, level: 1, streak: 0, lastLogin: '', achievements: []
                       });
                       firebaseData = (await getDoc(userDocRef)).data();
                   }
@@ -1102,8 +1272,9 @@
                       darkMode: typeof firebaseData.darkMode === 'boolean' ? firebaseData.darkMode : (appState.currentUser?.darkMode || false)
                   };
                   saveToLocalStorage(`user_${userId}`, appState.currentUser);
+                  await checkDailyStreak();
               } else {
-                handleNewUser(user, userDocRef);
+                await handleNewUser(user, userDocRef);
               }
               updateUIForUser();
             }, (error) => {
@@ -1148,7 +1319,12 @@
               totalScore: 0,
               totalTests: 0,
               overallAverage: 0,
-              darkMode: false
+              darkMode: false,
+              xp: 0,
+              level: 1,
+              streak: 0,
+              lastLogin: new Date().toISOString().split('T')[0],
+              achievements: []
           };
       }
 
@@ -1156,17 +1332,37 @@
         if (!appState.currentUser) return;
         welcomeUserEl.textContent = `Hi, ${appState.currentUser.displayName || 'User'}!`;
         applySavedTheme();
+        updateGamificationUI();
         showStartScreen();
         updateStatsUI(statsTopicSelect.dataset.value || 'tables');
       }
 
       function setupEventListeners() {
+        const openTopicModal = () => {
+            document.querySelectorAll('.topic-btn').forEach(button => {
+                const topic = button.dataset.topic;
+                const topicHistory = appState.currentUser?.stats?.[topic]?.history || [];
+                const isMaxed = topicHistory.length >= MAX_TESTS_PER_TOPIC;
+                
+                button.disabled = isMaxed;
+                if (isMaxed) {
+                    button.innerHTML = `<i class="fas fa-lock"></i> Max Reached`;
+                } else {
+                    const icon = button.dataset.icon;
+                    const text = button.dataset.text;
+                    button.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
+                }
+            });
+            topicModal.style.display = 'flex';
+        };
+
         googleSignInBtn.addEventListener('click', signInWithGoogle);
         logoutBtn.addEventListener('click', () => signOut(auth).catch(console.error));
-        startNewTestBtn.addEventListener('click', () => topicModal.style.display = 'flex');
-        startNewTestBtnMobileNav.addEventListener('click', () => topicModal.style.display = 'flex');
+        startNewTestBtn.addEventListener('click', openTopicModal);
+        startNewTestBtnMobileNav.addEventListener('click', openTopicModal);
         document.querySelectorAll('.topic-btn').forEach(button => {
             button.addEventListener('click', () => {
+                if(button.disabled) return;
                 const topic = button.dataset.topic;
                 const duration = parseInt(button.dataset.duration, 10);
                 topicModal.style.display = 'none';
@@ -1193,6 +1389,7 @@
         historyBtn.addEventListener('click', showHistory);
         leaderboardBtn.addEventListener('click', showLeaderboard);
         analysisBtn.addEventListener('click', showAnalysis);
+        achievementsBtn.addEventListener('click', showAchievements);
         progressTopicSelector.addEventListener('change', (e) => createProgressChart(e.target.value));
         submitBtn.addEventListener('click', () => submitQuiz());
         backToHomeBtn.addEventListener('click', () => {
@@ -1203,6 +1400,7 @@
         closeHistoryBtn.addEventListener('click', () => historyModal.style.display = 'none');
         closeLeaderboardBtn.addEventListener('click', () => leaderboardModal.style.display = 'none');
         closeAnalysisBtn.addEventListener('click', () => analysisModal.style.display = 'none');
+        closeAchievementsBtn.addEventListener('click', () => achievementsModal.style.display = 'none');
         closeTopicModalBtn.addEventListener('click', () => topicModal.style.display = 'none');
         closeStatsFilterModalBtn.addEventListener('click', () => statsFilterModal.style.display = 'none');
         darkModeToggle.addEventListener('change', toggleDarkMode);
@@ -1211,6 +1409,7 @@
           if (e.target === resultsModal) resultsModal.style.display = 'none';
           if (e.target === leaderboardModal) leaderboardModal.style.display = 'none';
           if (e.target === analysisModal) analysisModal.style.display = 'none';
+          if (e.target === achievementsModal) achievementsModal.style.display = 'none';
           if (e.target === topicModal) topicModal.style.display = 'none';
           if (e.target === statsFilterModal) statsFilterModal.style.display = 'none';
         });
@@ -1283,6 +1482,20 @@
         totalScoreEl.textContent = totalScore;
         testsRemainingEl.textContent = Math.max(0, MAX_TESTS_PER_TOPIC - testsTaken);
         testsProgress.style.width = `${(testsTaken / MAX_TESTS_PER_TOPIC) * 100}%`;
+        
+        const isMaxedTests = testsTaken >= MAX_TESTS_PER_TOPIC;
+        startNewTestBtn.disabled = isMaxedTests;
+        startNewTestBtnMobileNav.disabled = isMaxedTests;
+
+        if (isMaxedTests) {
+            const maxReachedHTML = '<i class="fas fa-lock"></i> Max Tests Reached';
+            startNewTestBtn.innerHTML = maxReachedHTML;
+            startNewTestBtnMobileNav.innerHTML = maxReachedHTML;
+        } else {
+            const startTestHTML = '<i class="fas fa-play"></i> Start New Test';
+            startNewTestBtn.innerHTML = startTestHTML;
+            startNewTestBtnMobileNav.innerHTML = startTestHTML;
+        }
       }
 
       function startQuiz(topic, duration) {
@@ -1298,6 +1511,7 @@
         quizTitle.textContent = `${topicName} Quiz`;
         appState.quizState = {
           questions: generateQuestions(topic),
+          detailedQuestions: [], // For granular analytics
           userAnswers: {},
           score: 0,
           startTime: new Date().toISOString(),
@@ -1320,20 +1534,20 @@
             let num1, num2, answer, text;
             switch (topic) {
                 case 'addition':
-                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
-                    num2 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    num1 = Math.floor(Math.random() * 900) + 100;
+                    num2 = Math.floor(Math.random() * 900) + 100;
                     answer = num1 + num2;
                     text = `${num1} + ${num2} = ?`;
                     break;
                 case 'subtraction':
-                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
-                    num2 = Math.floor(Math.random() * num1) + 1; // Ensures positive result
+                    num1 = Math.floor(Math.random() * 900) + 100;
+                    num2 = Math.floor(Math.random() * num1) + 1;
                     answer = num1 - num2;
                     text = `${num1} - ${num2} = ?`;
                     break;
                 case 'division':
-                    const quotient = Math.floor(Math.random() * 90) + 10; // Result from 10 to 99
-                    num2 = Math.floor(Math.random() * 20) + 2; // Divisor from 2 to 21
+                    const quotient = Math.floor(Math.random() * 90) + 10;
+                    num2 = Math.floor(Math.random() * 20) + 2;
                     num1 = num2 * quotient;
                     answer = quotient;
                     text = `${num1} ÷ ${num2} = ?`;
@@ -1345,8 +1559,8 @@
                     text = `${num1} × ${num2} = ?`;
                     break;
                 case 'multiplication':
-                    num1 = Math.floor(Math.random() * 90) + 10; // 10 to 99
-                    num2 = Math.floor(Math.random() * 90) + 10; // 10 to 99
+                    num1 = Math.floor(Math.random() * 90) + 10;
+                    num2 = Math.floor(Math.random() * 90) + 10;
                     answer = num1 * num2;
                     text = `${num1} × ${num2} = ?`;
                     break;
@@ -1354,7 +1568,7 @@
                     text = 'No questions';
                     answer = 0;
             }
-            questions.add(JSON.stringify({ text, answer }));
+            questions.add(JSON.stringify({ text, answer, num1, num2 }));
         }
         return Array.from(questions).map(q => {
             const parsedQ = JSON.parse(q);
@@ -1375,6 +1589,7 @@
       function displayQuestions() {
         questionsContainer.innerHTML = '';
         appState.quizState.questions.forEach((question, index) => {
+          question.displayTime = Date.now(); // Record when question is shown
           const questionCard = document.createElement('div');
           questionCard.className = 'question-card';
           questionCard.innerHTML = `
@@ -1387,17 +1602,23 @@
             </div>
           `;
           const optionsContainer = questionCard.querySelector('.options');
-          const savedAnswer = appState.quizState.userAnswers[index];
-          if (savedAnswer !== undefined) {
-            const selectedOption = optionsContainer.querySelector(`[data-option="${savedAnswer}"]`);
-            if (selectedOption) selectedOption.classList.add('selected');
-          }
           optionsContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('option') && !e.target.classList.contains('disabled')) {
+              const timeTaken = (Date.now() - question.displayTime) / 1000; // Time in seconds
               optionsContainer.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
               e.target.classList.add('selected');
               const selectedAnswer = Number(e.target.dataset.option);
               appState.quizState.userAnswers[index] = selectedAnswer;
+              
+              // Store detailed info for analytics
+              appState.quizState.detailedQuestions[index] = {
+                  text: question.text,
+                  num1: question.num1,
+                  num2: question.num2,
+                  userAnswer: selectedAnswer,
+                  correctAnswer: question.answer,
+                  timeTaken: timeTaken
+              };
               saveQuizStateLocally();
             }
           });
@@ -1408,7 +1629,7 @@
       function startTimer(duration) {
         stopTimer();
         const startTime = new Date(appState.quizState.startTime);
-        updateTimerDisplay(duration); // Show initial time immediately
+        updateTimerDisplay(duration);
         appState.quizState.timerInterval = setInterval(() => {
           const now = new Date();
           const elapsedSeconds = Math.floor((now - startTime) / 1000);
@@ -1437,10 +1658,24 @@
         stopTimer();
         submitBtn.disabled = true;
         let score = 0;
-        appState.quizState.questions.forEach((question, index) => {
-          const userAnswer = appState.quizState.userAnswers[index];
-          if (userAnswer === question.answer) score += 5;
+        let correctAnswers = 0;
+        appState.quizState.questions.forEach((q, index) => {
+          if (appState.quizState.userAnswers[index] === q.answer) {
+            score += 5;
+            correctAnswers++;
+          }
+          if (!appState.quizState.detailedQuestions[index]) {
+              appState.quizState.detailedQuestions[index] = {
+                  text: q.text,
+                  num1: q.num1,
+                  num2: q.num2,
+                  userAnswer: 'Not Answered',
+                  correctAnswer: q.answer,
+                  timeTaken: appState.quizState.duration / appState.quizState.questions.length
+              };
+          }
         });
+
         appState.quizState.score = score;
         const timeTaken = Math.floor((new Date() - new Date(appState.quizState.startTime)) / 1000);
         const currentTopic = appState.quizState.topic;
@@ -1448,7 +1683,8 @@
           score: appState.quizState.score,
           timeTaken: timeTaken,
           date: new Date().toISOString(),
-          isTimeUp: isTimeUp
+          isTimeUp: isTimeUp,
+          questions: appState.quizState.detailedQuestions
         };
         try {
             const userDocRef = doc(db, "users", appState.currentUser.uid);
@@ -1459,12 +1695,27 @@
             const totalTopicScore = newHistory.reduce((sum, test) => sum + test.score, 0);
             const leaderboardScore = totalTopicScore / MAX_TESTS_PER_TOPIC;
             const updatePath = `stats.${currentTopic}`;
+            
+            // Gamification updates
+            const xpGained = (correctAnswers * 10) + 50 + (score === 100 ? 100 : 0);
+            const newXp = (appState.currentUser.xp || 0) + xpGained;
+            const oldLevel = appState.currentUser.level || 1;
+            const newLevel = calculateLevel(newXp);
+            
             await updateDoc(userDocRef, {
                 [`${updatePath}.history`]: newHistory,
                 [`${updatePath}.highestScore`]: newHighestScore,
                 [`${updatePath}.averageScore`]: newAverageScore,
                 [`${updatePath}.leaderboardScore`]: leaderboardScore,
+                xp: newXp,
+                level: newLevel
             });
+
+            if (newLevel > oldLevel) {
+                showToast(`🎉 Level Up! You've reached Level ${newLevel}!`);
+            }
+            await checkAchievements(newResult);
+
         } catch (error) {
           console.error("Error syncing results to Firestore:", error);
         }
@@ -1632,9 +1883,15 @@
         let analyzedTopics = 0;
         let weakestTopic = null;
         let lowestScore = 101;
+        let allQuestions = [];
 
         for (const topic in stats) {
             const topicData = stats[topic];
+            if (topicData.history && topicData.history.length > 0) {
+                topicData.history.forEach(test => {
+                    if(test.questions) allQuestions.push(...test.questions);
+                });
+            }
             if (topicData.history && topicData.history.length >= MIN_TESTS_FOR_ANALYSIS) {
                 analyzedTopics++;
                 const avg = topicData.averageScore;
@@ -1655,6 +1912,7 @@
         let html = '';
         if (analyzedTopics === 0) {
             html = `<p>Complete at least ${MIN_TESTS_FOR_ANALYSIS} tests in any topic to see your performance analysis.</p>`;
+            granularAnalysisContent.style.display = 'none';
         } else {
             if (strengths.length > 0) html += `<div class="analysis-section"><h4>Your Strengths 💪</h4>${strengths.join('')}</div>`;
             if (weaknesses.length > 0) {
@@ -1663,6 +1921,8 @@
             }
             if (strengths.length > 0 && weaknesses.length === 0) html += `<p>Great job! You're showing strong performance. Keep it up!</p>`;
             if (strengths.length === 0 && weaknesses.length === 0) html += `<p>You're performing consistently. Keep practicing to turn your skills into strengths!</p>`;
+            granularAnalysisContent.style.display = 'block';
+            generateGranularReports(allQuestions);
         }
         textAnalysisContent.innerHTML = html;
 
@@ -1684,6 +1944,53 @@
         }
 
         analysisModal.style.display = 'flex';
+      }
+      
+      function generateGranularReports(allQuestions) {
+          // 1. Slowest Correct Answers
+          const correctAnswers = allQuestions.filter(q => q.userAnswer === q.correctAnswer);
+          correctAnswers.sort((a, b) => b.timeTaken - a.timeTaken);
+          const slowestHtml = `<h4>Slowest Correct Answers 🐢</h4><table class="analysis-table"><tr><th>Question</th><th>Time Taken</th></tr>` + 
+              correctAnswers.slice(0, 5).map(q => `<tr><td>${q.text.replace(' = ?', '')}</td><td>${q.timeTaken.toFixed(2)}s</td></tr>`).join('') + `</table>`;
+          document.getElementById('speed-analysis').innerHTML = correctAnswers.length > 0 ? slowestHtml : '<h4>Slowest Correct Answers 🐢</h4><p>Not enough data.</p>';
+
+          // 2. Most Common Mistakes
+          const incorrectAnswers = allQuestions.filter(q => q.userAnswer !== q.correctAnswer && q.userAnswer !== 'Not Answered');
+          const mistakeFrequency = incorrectAnswers.reduce((acc, q) => {
+              acc[q.text] = (acc[q.text] || 0) + 1;
+              return acc;
+          }, {});
+          const sortedMistakes = Object.entries(mistakeFrequency).sort((a, b) => b[1] - a[1]);
+          const mistakesHtml = `<h4>Most Common Mistakes 🧐</h4><table class="analysis-table"><tr><th>Question</th><th>Times Missed</th></tr>` +
+              sortedMistakes.slice(0, 5).map(([text, count]) => `<tr><td>${text.replace(' = ?', '')}</td><td>${count}</td></tr>`).join('') + `</table>`;
+          document.getElementById('mistakes-analysis').innerHTML = sortedMistakes.length > 0 ? mistakesHtml : '<h4>Most Common Mistakes 🧐</h4><p>No mistakes recorded yet!</p>';
+
+          // 3. Performance by Number (for Tables)
+          const tableQuestions = allQuestions.filter(q => q.text.includes('×'));
+          if (tableQuestions.length > 0) {
+              const numberPerformance = {};
+              for (let i = 1; i <= 20; i++) numberPerformance[i] = { correct: 0, total: 0 };
+              
+              tableQuestions.forEach(q => {
+                  const nums = [q.num1, q.num2];
+                  nums.forEach(num => {
+                      if (numberPerformance[num]) {
+                          numberPerformance[num].total++;
+                          if (q.userAnswer === q.correctAnswer) {
+                              numberPerformance[num].correct++;
+                          }
+                      }
+                  });
+              });
+              
+              const numberPerfHtml = `<h4>Performance by Number (Tables) 🔢</h4><table class="analysis-table"><tr><th>Number</th><th>Accuracy</th></tr>` +
+                  Object.entries(numberPerformance).filter(([, data]) => data.total > 0)
+                  .map(([num, data]) => `<tr><td>${num}</td><td>${((data.correct / data.total) * 100).toFixed(0)}% (${data.correct}/${data.total})</td></tr>`).join('') + `</table>`;
+              document.getElementById('number-performance-analysis').innerHTML = numberPerfHtml;
+              document.getElementById('number-performance-analysis').style.display = 'block';
+          } else {
+              document.getElementById('number-performance-analysis').style.display = 'none';
+          }
       }
 
       function createAverageScoreChart(statsData) {
@@ -1733,6 +2040,105 @@
                 plugins: { legend: { display: false } }
             }
         });
+      }
+
+      // --- GAMIFICATION FUNCTIONS ---
+      function updateGamificationUI() {
+          const user = appState.currentUser;
+          if (!user) return;
+          
+          streakCountEl.textContent = user.streak || 0;
+
+          const currentLevel = user.level || 1;
+          const currentXp = user.xp || 0;
+          const xpForNextLevel = levelThresholds[currentLevel] || Infinity;
+          const xpForThisLevel = levelThresholds[currentLevel - 1] || 0;
+          
+          levelLabelEl.textContent = `Level ${currentLevel}`;
+          xpLabelEl.textContent = `${currentXp} / ${xpForNextLevel} XP`;
+          
+          const progress = xpForNextLevel === Infinity ? 100 : ((currentXp - xpForThisLevel) / (xpForNextLevel - xpForThisLevel)) * 100;
+          xpProgressEl.style.width = `${progress}%`;
+      }
+
+      async function checkDailyStreak() {
+        const user = appState.currentUser;
+        if (!user) return;
+
+        const today = new Date().toISOString().split('T')[0];
+        const lastLogin = user.lastLogin;
+
+        if (today === lastLogin) return;
+
+        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+        let newStreak = user.streak || 0;
+
+        if (lastLogin === yesterday) {
+            newStreak++;
+        } else {
+            newStreak = 1;
+        }
+        
+        const userDocRef = doc(db, "users", user.uid);
+        await updateDoc(userDocRef, {
+            streak: newStreak,
+            lastLogin: today
+        });
+      }
+
+      function calculateLevel(xp) {
+          for (let i = levelThresholds.length - 1; i >= 0; i--) {
+              if (xp >= levelThresholds[i]) {
+                  return i + 1;
+              }
+          }
+          return 1;
+      }
+      
+      async function checkAchievements(quizResult) {
+          const user = appState.currentUser;
+          const userAchievements = user.achievements || [];
+          let newAchievements = [];
+
+          if (!userAchievements.includes('first_quiz')) newAchievements.push('first_quiz');
+          if (quizResult.score === 100 && !userAchievements.includes('perfect_score')) newAchievements.push('perfect_score');
+          if (quizResult.topic === 'tables' && quizResult.timeTaken < 30 && !userAchievements.includes('speed_demon')) newAchievements.push('speed_demon');
+          const totalQuizzes = Object.values(user.stats).reduce((sum, topic) => sum + topic.history.length, 0);
+          if (totalQuizzes >= 10 && !userAchievements.includes('ten_quizzes')) newAchievements.push('ten_quizzes');
+          if (user.stats.multiplication?.history.length >= 50 && !userAchievements.includes('multiplication_master')) newAchievements.push('multiplication_master');
+
+          if (newAchievements.length > 0) {
+              const userDocRef = doc(db, "users", user.uid);
+              await updateDoc(userDocRef, {
+                  achievements: [...userAchievements, ...newAchievements]
+              });
+              newAchievements.forEach(id => {
+                  showToast(`🏆 Achievement Unlocked: ${achievements[id].name}`);
+              });
+          }
+      }
+
+      function showAchievements() {
+          const userAchievements = appState.currentUser.achievements || [];
+          achievementsGrid.innerHTML = Object.entries(achievements).map(([id, data]) => {
+              const unlocked = userAchievements.includes(id);
+              return `
+                  <div class="badge ${unlocked ? 'unlocked' : ''}">
+                      <div class="badge-icon"><i class="fas ${data.icon}"></i></div>
+                      <div class="badge-name">${data.name}</div>
+                      <div class="badge-description">${data.desc}</div>
+                  </div>
+              `;
+          }).join('');
+          achievementsModal.style.display = 'flex';
+      }
+      
+      function showToast(message) {
+          toastNotification.textContent = message;
+          toastNotification.classList.add('show');
+          setTimeout(() => {
+              toastNotification.classList.remove('show');
+          }, 4000);
       }
 
       function getLocalStorageKey(key) {
