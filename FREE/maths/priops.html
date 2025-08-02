@@ -12,6 +12,7 @@
     gtag('config', 'G-9F5XW0QKCV');
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
       /* Base Colors */
@@ -535,6 +536,9 @@
       border: 1px solid var(--card-border);
       color: var(--text-secondary);
     }
+    #analysis-modal .modal-content {
+        max-width: 800px; /* Wider modal for charts */
+    }
     #topic-modal .modal-content, #stats-filter-modal .modal-content {
         max-width: 600px;
     }
@@ -643,6 +647,21 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
+    }
+    .chart-container {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: var(--bg-body);
+        border-radius: var(--radius);
+    }
+    #progress-topic-selector {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--input-border);
+        background-color: var(--input-bg);
+        color: var(--text-primary);
+        margin-top: 0.5rem;
     }
     /* Mobile-only Fixed Bottom Navigation */
     .bottom-nav-mobile {
@@ -899,7 +918,19 @@
     <div class="modal-content">
       <button class="close-btn" id="close-analysis-btn">&times;</button>
       <h2 style="margin-bottom: 1.5rem; color: var(--primary);"><i class="fas fa-chart-line"></i> Performance Analysis</h2>
-      <div id="analysis-content"></div>
+      
+      <div id="text-analysis-content"></div>
+
+      <div class="chart-container">
+          <h4>Average Score by Topic</h4>
+          <canvas id="average-score-chart"></canvas>
+      </div>
+
+      <div class="chart-container">
+          <h4>Score Progression</h4>
+          <select id="progress-topic-selector"></select>
+          <canvas id="progress-chart"></canvas>
+      </div>
     </div>
   </div>
 
@@ -986,6 +1017,7 @@
       const welcomeUserEl = document.getElementById('welcome-user');
       const startNewTestBtn = document.getElementById('start-new-test-btn');
       const startNewTestBtnMobileNav = document.getElementById('start-new-test-btn-mobile-nav');
+      const bottomNavMobile = document.querySelector('.bottom-nav-mobile');
       const historyBtn = document.getElementById('history-btn');
       const leaderboardBtn = document.getElementById('leaderboard-btn');
       const analysisBtn = document.getElementById('analysis-btn');
@@ -1017,7 +1049,8 @@
       const leaderboardTitle = document.getElementById('leaderboard-title');
       const analysisModal = document.getElementById('analysis-modal');
       const closeAnalysisBtn = document.getElementById('close-analysis-btn');
-      const analysisContent = document.getElementById('analysis-content');
+      const textAnalysisContent = document.getElementById('text-analysis-content');
+      const progressTopicSelector = document.getElementById('progress-topic-selector');
       const topicModal = document.getElementById('topic-modal');
       const closeTopicModalBtn = document.getElementById('close-topic-modal-btn');
       const statsFilterModal = document.getElementById('stats-filter-modal');
@@ -1027,8 +1060,11 @@
       const themeLabel = document.getElementById('theme-label');
       const resultsModal = document.getElementById('results-modal');
       const closeResultsBtn = document.getElementById('close-results-btn');
+      
       const MAX_TESTS_PER_TOPIC = 100;
       let unsubscribeFromFirestore = null;
+      let averageScoreChart = null;
+      let progressChart = null;
       let appState = {
         currentUser: null,
         quizState: null
@@ -1157,6 +1193,7 @@
         historyBtn.addEventListener('click', showHistory);
         leaderboardBtn.addEventListener('click', showLeaderboard);
         analysisBtn.addEventListener('click', showAnalysis);
+        progressTopicSelector.addEventListener('change', (e) => createProgressChart(e.target.value));
         submitBtn.addEventListener('click', () => submitQuiz());
         backToHomeBtn.addEventListener('click', () => {
             resultsModal.style.display = 'none';
@@ -1211,6 +1248,7 @@
       function showLoginScreen() {
         stopTimer();
         document.body.style.padding = '0';
+        bottomNavMobile.style.display = 'none';
         loginScreen.style.display = 'flex';
         loginScreen.classList.add('active');
         appContainer.style.display = 'none';
@@ -1221,6 +1259,7 @@
       function showStartScreen() {
         stopTimer();
         document.body.style.paddingBottom = '100px';
+        bottomNavMobile.style.display = ''; // Revert to stylesheet default
         loginScreen.style.display = 'none';
         loginScreen.classList.remove('active');
         appContainer.style.display = 'block';
@@ -1270,6 +1309,7 @@
         startScreen.classList.remove('active');
         quizScreen.classList.add('active');
         timerEl.style.display = 'flex';
+        bottomNavMobile.style.display = 'none'; // Hide mobile nav during quiz
         displayQuestions();
         startTimer(duration);
       }
@@ -1583,45 +1623,116 @@
         const stats = appState.currentUser.stats;
         const STRENGTH_THRESHOLD = 85;
         const WEAKNESS_THRESHOLD = 60;
-        const MIN_TESTS = 3;
+        const MIN_TESTS_FOR_ANALYSIS = 3;
+        const MIN_TESTS_FOR_CHART = 1;
+
         const strengths = [];
         const weaknesses = [];
         const recommendations = [];
         let analyzedTopics = 0;
+        let weakestTopic = null;
+        let lowestScore = 101;
+
         for (const topic in stats) {
             const topicData = stats[topic];
-            const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
-            if (topicData.history && topicData.history.length >= MIN_TESTS) {
+            if (topicData.history && topicData.history.length >= MIN_TESTS_FOR_ANALYSIS) {
                 analyzedTopics++;
                 const avg = topicData.averageScore;
+                const topicName = topic.charAt(0).toUpperCase() + topic.slice(1);
                 if (avg >= STRENGTH_THRESHOLD) {
                     strengths.push(`<div class="strength">You excel at <strong>${topicName}</strong> with an average score of ${Math.round(avg)}.</div>`);
                 } else if (avg <= WEAKNESS_THRESHOLD) {
-                    weaknesses.push(`<div class="weakness">You have an opportunity to improve in <strong>${topicName}</strong>, where your average score is ${Math.round(avg)}.</div>`);
-                    recommendations.push(`<div class="recommendation">Focus on practicing the <strong>${topicName}</strong> topic to boost your performance.</div>`);
+                    weaknesses.push(`<div class="weakness">You can improve in <strong>${topicName}</strong>, where your average score is ${Math.round(avg)}.</div>`);
+                    recommendations.push(`<div class="recommendation">Focus on practicing <strong>${topicName}</strong> to boost your performance.</div>`);
+                    if (avg < lowestScore) {
+                        lowestScore = avg;
+                        weakestTopic = topic;
+                    }
                 }
             }
         }
+
         let html = '';
         if (analyzedTopics === 0) {
-            html = `<p>Complete at least ${MIN_TESTS} tests in any topic to see your performance analysis.</p>`;
+            html = `<p>Complete at least ${MIN_TESTS_FOR_ANALYSIS} tests in any topic to see your performance analysis.</p>`;
         } else {
-            if (strengths.length > 0) {
-                html += `<div class="analysis-section"><h4>Your Strengths 💪</h4>${strengths.join('')}</div>`;
-            }
+            if (strengths.length > 0) html += `<div class="analysis-section"><h4>Your Strengths 💪</h4>${strengths.join('')}</div>`;
             if (weaknesses.length > 0) {
                 html += `<div class="analysis-section"><h4>Areas for Improvement 🧠</h4>${weaknesses.join('')}</div>`;
                 html += `<div class="analysis-section"><h4>Recommendations 🎯</h4>${recommendations.join('')}</div>`;
             }
-            if (strengths.length > 0 && weaknesses.length === 0) {
-                html += `<p>Great job! You're showing strong performance in the topics you've practiced. Keep it up!</p>`;
-            }
-             if (strengths.length === 0 && weaknesses.length === 0) {
-                html += `<p>You're performing consistently across all topics. Keep practicing to turn them into strengths!</p>`;
-            }
+            if (strengths.length > 0 && weaknesses.length === 0) html += `<p>Great job! You're showing strong performance. Keep it up!</p>`;
+            if (strengths.length === 0 && weaknesses.length === 0) html += `<p>You're performing consistently. Keep practicing to turn your skills into strengths!</p>`;
         }
-        analysisContent.innerHTML = html;
+        textAnalysisContent.innerHTML = html;
+
+        // --- CHART LOGIC ---
+        const practicedTopics = Object.keys(stats).filter(topic => stats[topic].history && stats[topic].history.length >= MIN_TESTS_FOR_CHART);
+        
+        createAverageScoreChart(practicedTopics.map(t => stats[t]));
+        
+        progressTopicSelector.innerHTML = practicedTopics
+            .map(topic => `<option value="${topic}">${topic.charAt(0).toUpperCase() + topic.slice(1)}</option>`)
+            .join('');
+
+        if (practicedTopics.length > 0) {
+            progressTopicSelector.value = weakestTopic || practicedTopics[0];
+            createProgressChart(progressTopicSelector.value);
+            progressTopicSelector.style.display = 'block';
+        } else {
+            progressTopicSelector.style.display = 'none';
+        }
+
         analysisModal.style.display = 'flex';
+      }
+
+      function createAverageScoreChart(statsData) {
+        if (averageScoreChart) averageScoreChart.destroy();
+        const ctx = document.getElementById('average-score-chart').getContext('2d');
+        const labels = statsData.map(s => Object.keys(appState.currentUser.stats).find(key => appState.currentUser.stats[key] === s).charAt(0).toUpperCase() + Object.keys(appState.currentUser.stats).find(key => appState.currentUser.stats[key] === s).slice(1));
+        const data = statsData.map(s => s.averageScore);
+        
+        averageScoreChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Average Score',
+                    data: data,
+                    backgroundColor: ['rgba(129, 140, 248, 0.6)', 'rgba(139, 92, 246, 0.6)', 'rgba(16, 185, 129, 0.6)', 'rgba(245, 158, 11, 0.6)', 'rgba(239, 68, 68, 0.6)'],
+                    borderColor: ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true, max: 100 } },
+                plugins: { legend: { display: false } }
+            }
+        });
+      }
+
+      function createProgressChart(topic) {
+        if (progressChart) progressChart.destroy();
+        const history = appState.currentUser.stats[topic]?.history || [];
+        const ctx = document.getElementById('progress-chart').getContext('2d');
+        
+        progressChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: history.map((_, i) => `Test ${i + 1}`),
+                datasets: [{
+                    label: 'Score per Test',
+                    data: history.map(test => test.score),
+                    fill: false,
+                    borderColor: 'rgb(99, 102, 241)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true, max: 100 } },
+                plugins: { legend: { display: false } }
+            }
+        });
       }
 
       function getLocalStorageKey(key) {
