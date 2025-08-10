@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unlock Your Success: The Unified Government Exam Syllabus</title>
+    <title>The Complete Government Exam Syllabus</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,10 +30,17 @@
             --accent-1: #f59e0b; /* Amber 500 */
             --accent-2: #4f46e5; /* Indigo 600 */
             --accent-3: #d946ef; /* Fuchsia 500 */
+            --accent-4: #10b981; /* Emerald 500 */
             --modal-question-bg-bright: #eef2ff;
             --modal-solution-bg-bright: #f0fdf4;
             --modal-solution-border-bright: #22c55e;
             --modal-solution-text-bright: #166534;
+            --topic-chip-bg: rgba(71, 85, 105, 0.1);
+            --topic-chip-text: var(--text-primary);
+            --progress-bar-bg: rgba(0,0,0,0.07);
+            --filter-btn-bg: rgba(0,0,0,0.05);
+            --filter-btn-bg-active: var(--accent-2);
+            --filter-btn-text-active: #fff;
 
             /* Tag Colors - Light */
             --tag-vh-bg: #FFE4E6; --tag-vh-text: #9F1239;
@@ -55,21 +62,25 @@
             --accent-1: #fbbf24; /* Amber 400 */
             --accent-2: #818cf8; /* Indigo 400 */
             --accent-3: #f472b6; /* Pink 400 */
+            --accent-4: #34d399; /* Emerald 400 */
             --modal-question-bg-bright: rgba(30, 58, 138, 0.3);
             --modal-solution-bg-bright: rgba(22, 101, 52, 0.3);
             --modal-solution-border-bright: #4ade80;
             --modal-solution-text-bright: #dcfce7;
+            --topic-chip-bg: rgba(148, 163, 184, 0.1);
+            --progress-bar-bg: rgba(255,255,255,0.07);
+            --filter-btn-bg: rgba(255,255,255,0.1);
 
             /* Tag Colors - Dark */
             --tag-vh-bg: rgba(255, 228, 230, 0.1); --tag-vh-text: #fda4af;
             --tag-h-bg: rgba(255, 234, 221, 0.1); --tag-h-text: #fdba74;
-            --tag-m-bg: rgba(254, 249, 195, 0.1); --tag-m-text: #fde04T7;
+            --tag-m-bg: rgba(254, 249, 195, 0.1); --tag-m-text: #fde047;
             --tag-l-bg: rgba(209, 250, 229, 0.1); --tag-l-text: #a7f3d0;
             --tag-ssc-bg: rgba(224, 231, 255, 0.1); --tag-ssc-text: #a5b4fc;
             --tag-banking-bg: rgba(250, 232, 255, 0.1); --tag-banking-text: #f0abfc;
             --tag-railways-bg: rgba(224, 242, 254, 0.1); --tag-railways-text: #7dd3fc;
         }
-        html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 20px); }
         body {
             font-family: 'Manrope', sans-serif;
             background-color: var(--bg);
@@ -88,7 +99,7 @@
         @keyframes move2 { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-40%, -60%) rotate(-40deg); } }
         @keyframes move3 { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(-80px, -40px) rotate(20deg); } }
 
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
         .gradient-text {
             background: linear-gradient(90deg, var(--accent-1), var(--accent-3), var(--accent-2));
             -webkit-background-clip: text;
@@ -97,50 +108,61 @@
             animation: gradient-anim 5s linear infinite;
         }
         @keyframes gradient-anim { to { background-position: 200% center; } }
-        
+                
         .sticky-header { position: sticky; top: 0; z-index: 50; height: var(--header-height); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background-color: var(--header-bg); border-bottom: 1px solid var(--card-border); }
         section { padding-top: var(--header-height); margin-top: -var(--header-height); }
-        .glass-card { background-color: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--card-border); }
-        
+        .glass-card { background-color: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--card-border); }
+                
         .accordion-button::after { content: '+'; font-size: 1.5rem; font-weight: 300; color: var(--text-secondary); transition: transform 0.3s ease-in-out; margin-left: auto; }
         .accordion-button.active::after { transform: rotate(45deg); }
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; }
+        .accordion-content, .detailed-syllabus-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
         
-        .topic-card { transition: transform 0.2s ease-out; }
-        .topic-card:hover { transform: scale(1.03); }
-
+        .topic-card { transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; position: relative; }
+        .topic-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); }
+        html.dark .topic-card:hover { box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3); }
+        .highlight-topic { animation: highlight-anim 1.5s ease-out; }
+        @keyframes highlight-anim { 0% { box-shadow: 0 0 0 0 var(--accent-2); transform: scale(1); } 50% { box-shadow: 0 0 0 6px transparent; transform: scale(1.05); } 100% { box-shadow: 0 0 0 0 transparent; transform: scale(1); } }
+        
         .tag { padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
         .tag-weight-vh { background-color: var(--tag-vh-bg); color: var(--tag-vh-text); }
         .tag-weight-h  { background-color: var(--tag-h-bg); color: var(--tag-h-text); }
         .tag-weight-m  { background-color: var(--tag-m-bg); color: var(--tag-m-text); }
         .tag-weight-l  { background-color: var(--tag-l-bg); color: var(--tag-l-text); }
-        .tag-exam-ssc      { background-color: var(--tag-ssc-bg); color: var(--tag-ssc-text); }
+        .tag-exam-ssc { background-color: var(--tag-ssc-bg); color: var(--tag-ssc-text); }
         .tag-exam-banking { background-color: var(--tag-banking-bg); color: var(--tag-banking-text); }
         .tag-exam-railways{ background-color: var(--tag-railways-bg); color: var(--tag-railways-text); }
-
-        .filter-button { transition: all 0.2s ease; border: 1px solid transparent; flex-shrink: 0; }
-        html.light .filter-button { border-color: var(--card-border); }
-        .filter-button.active-filter {
-            background-image: linear-gradient(90deg, var(--accent-1), var(--accent-3), var(--accent-2));
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 15px -5px rgba(0,0,0,0.3);
-            background-size: 200% auto;
-        }
-        html.dark .filter-button.active-filter { color: var(--bg); }
         
-        .filter-dropdown {
-            -webkit-appearance: none; -moz-appearance: none; appearance: none;
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-primary);
-            flex-shrink: 0;
-        }
+        .topic-chip { background-color: var(--topic-chip-bg); color: var(--topic-chip-text); padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500; }
 
+        .modal-overlay { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index: 100; justify-content: center; align-items: center; animation: modal-fade-in 0.3s ease; }
+        @keyframes modal-fade-in { from { opacity: 0; } to { opacity: 1; } }
+        .modal-content { animation: modal-scale-in 0.3s ease; }
+        @keyframes modal-scale-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        .modal-overlay { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index: 100; justify-content: center; align-items: center; }
+        
+        /* New Styles for Filters, Progress & Job Selector */
+        .filter-button { background-color: var(--filter-btn-bg); padding: 0.3rem 0.8rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; border: 1px solid transparent; transition: all 0.2s ease; }
+        .filter-button.active { background-color: var(--filter-btn-bg-active); color: var(--filter-btn-text-active); border-color: transparent; }
+        .progress-bar-container { background-color: var(--progress-bar-bg); border-radius: 9999px; overflow: hidden; height: 8px; }
+        .progress-bar { background: linear-gradient(90deg, var(--accent-2), var(--accent-3)); height: 100%; width: 0%; transition: width 0.4s ease-out; }
+        .syllabus-checkbox {-webkit-appearance: none; appearance: none; background-color: transparent; margin: 0; font: inherit; color: var(--text-secondary); width: 1.25em; height: 1.25em; border: 0.1em solid currentColor; border-radius: 0.25em; transform: translateY(-0.075em); display: grid; place-content: center; cursor: pointer; }
+        .syllabus-checkbox::before { content: ""; width: 0.75em; height: 0.75em; transform: scale(0); transition: 120ms transform ease-in-out; box-shadow: inset 1em 1em var(--accent-2); border-radius: 0.1em; }
+        .syllabus-checkbox:checked::before { transform: scale(1); }
+        .syllabus-checkbox:checked { border-color: var(--accent-2); }
+        .job-selector-card { cursor: pointer; transition: all 0.3s ease; border-width: 2px; border-color: transparent; }
+        .job-selector-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        html.dark .job-selector-card:hover { box-shadow: 0 10px 25px -5px rgba(0,0,0,0.4); }
+        .job-selector-card.active { transform: translateY(-5px) scale(1.02); }
+        .job-selector-card.active.ssc { border-color: var(--accent-2); box-shadow: 0 0 25px -5px var(--accent-2); }
+        .job-selector-card.active.banking { border-color: var(--accent-3); box-shadow: 0 0 25px -5px var(--accent-3); }
+        .job-selector-card.active.railways { border-color: var(--accent-4); box-shadow: 0 0 25px -5px var(--accent-4); }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -153,391 +175,435 @@
     <nav class="sticky-header">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
              <div class="font-bold text-lg gradient-text">Club of Competition</div>
-             <div class="flex items-center space-x-2 sm:space-x-4 md:space-x-6">
-                 <a href="#unified-syllabus" class="text-sm font-bold text-secondary hover:text-primary transition">Syllabus</a>
+             
+             <div class="hidden lg:flex items-center space-x-6">
+                 <a href="#syllabus" class="text-sm font-bold text-secondary hover:text-primary transition">Syllabus</a>
+                 <a href="#foundation" class="text-sm font-bold text-secondary hover:text-primary transition">Foundation</a>
                  <a href="#dashboard" class="text-sm font-bold text-secondary hover:text-primary transition">Dashboard</a>
                  <button id="theme-toggle" class="p-2 rounded-full text-secondary hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
                      <svg id="theme-toggle-sun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                      <svg id="theme-toggle-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                  </button>
              </div>
+
+             <div class="lg:hidden flex items-center">
+                 <button id="mobile-menu-button" class="p-2 rounded-md text-secondary hover:bg-black/5 dark:hover:bg-white/10 transition-colors z-50">
+                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                 </button>
+             </div>
+        </div>
+        
+        <div id="mobile-menu" class="mobile-menu lg:hidden fixed top-0 right-0 h-full w-64 pt-24 px-8 shadow-xl transform translate-x-full" style="background-color: var(--bg);">
+            <div class="flex flex-col space-y-6 text-lg">
+                 <a href="#syllabus" class="font-bold text-secondary hover:text-primary transition">Syllabus</a>
+                 <a href="#foundation" class="font-bold text-secondary hover:text-primary transition">Foundation</a>
+                 <a href="#dashboard" class="font-bold text-secondary hover:text-primary transition">Dashboard</a>
+                 <div class="pt-4 border-t border-[var(--card-border)]">
+                    <button id="theme-toggle-mobile" class="w-full flex justify-between items-center text-secondary font-bold">
+                        <span>Toggle Theme</span>
+                        <div class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                            <svg class="w-5 h-5 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            <svg class="w-5 h-5 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        </div>
+                    </button>
+                 </div>
+            </div>
         </div>
     </nav>
 
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
 
         <header class="text-center mb-16 md:mb-24">
-            <h1 class="gradient-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-6">The Unified Syllabus.</h1>
-            <p class="text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-secondary">SSC - Banking - Railways</p>
+            <h1 class="gradient-text text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tighter mb-6">Focus on Your Goal.</h1>
+            <p class="text-base sm:text-lg max-w-3xl mx-auto text-secondary">Select your target exam to view the detailed syllabus. Then, build your fundamentals with the Unified Core syllabus.</p>
         </header>
 
-        <section id="unified-syllabus" class="mb-20 md:mb-24">
+        <section id="syllabus" class="mb-16 md:mb-20">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4 tracking-tight">Select Your Exam</h2>
+            <p class="text-base text-center text-secondary max-w-2xl mx-auto mb-10">Click a card below to expand the detailed Prelims & Mains syllabus.</p>
             
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
-                <div class="w-full sm:w-auto">
-                    <div id="exam-filter" class="no-scrollbar flex items-center gap-3 overflow-x-auto sm:flex-wrap sm:justify-center sm:overflow-x-visible pb-2 sm:pb-0">
-                        <button data-filter="all" class="filter-button active-filter font-bold py-2 px-6 rounded-full">All Exams</button>
-                        <button data-filter="SSC" class="filter-button font-bold py-2 px-6 rounded-full">SSC</button>
-                        <button data-filter="Banking" class="filter-button font-bold py-2 px-6 rounded-full">Banking</button>
-                        <button data-filter="Railways" class="filter-button font-bold py-2 px-6 rounded-full">Railways</button>
-                    </div>
+            <div id="job-selector-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="job-selector-card ssc glass-card rounded-2xl p-6 text-center" data-target="ssc-content">
+                    <h3 class="text-xl md:text-2xl font-bold" style="color: var(--accent-2);">SSC Exams</h3>
+                    <p class="text-secondary text-sm mt-1">CGL, CHSL, CPO etc.</p>
                 </div>
-                <div class="relative w-full sm:w-auto">
-                    <select id="weightage-filter-select" class="filter-dropdown w-full font-bold py-2 pl-4 pr-8 rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-2)]">
-                        <option value="all">Filter by Importance</option>
-                        <option value="vh">Very High</option>
-                        <option value="h">High</option>
-                        <option value="m">Medium</option>
-                        <option value="l">Low</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-secondary">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                    </div>
+                <div class="job-selector-card banking glass-card rounded-2xl p-6 text-center" data-target="banking-content">
+                    <h3 class="text-xl md:text-2xl font-bold" style="color: var(--accent-3);">Banking Exams</h3>
+                    <p class="text-secondary text-sm mt-1">IBPS, SBI, RBI etc.</p>
+                </div>
+                <div class="job-selector-card railways glass-card rounded-2xl p-6 text-center" data-target="railways-content">
+                    <h3 class="text-xl md:text-2xl font-bold" style="color: var(--accent-4);">Railways Exams</h3>
+                    <p class="text-secondary text-sm mt-1">NTPC, Group D etc.</p>
                 </div>
             </div>
 
-            <div class="space-y-3" id="unified-accordion"></div>
+            <div id="detailed-syllabus-container">
+                <div id="ssc-content" class="detailed-syllabus-content"></div>
+                <div id="banking-content" class="detailed-syllabus-content"></div>
+                <div id="railways-content" class="detailed-syllabus-content"></div>
+            </div>
         </section>
 
+        <section id="foundation" class="mb-20 md:mb-24">
+            <div class="text-center py-12">
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Build Your Foundation</h2>
+                <p class="text-base text-secondary max-w-3xl mx-auto mb-10">Master these common topics from the Unified Core Syllabus. Filter by exam or weightage and track your progress.</p>
+            </div>
+             <div class="glass-card rounded-xl p-4 mb-8 flex flex-col sm:flex-row sm:items-center gap-4">
+                <div class="flex-1 space-y-3">
+                     <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <span class="font-bold text-sm mr-4 flex-shrink-0">Filter by Exam:</span>
+                        <div id="exam-filter-container" class="inline-flex flex-wrap gap-2">
+                            <button class="filter-button" data-filter-group="exam" data-filter="SSC">SSC</button>
+                            <button class="filter-button" data-filter-group="exam" data-filter="Banking">Banking</button>
+                            <button class="filter-button" data-filter-group="exam" data-filter="Railways">Railways</button>
+                        </div>
+                    </div>
+                     <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                         <span class="font-bold text-sm mr-4 flex-shrink-0">By Weightage:</span>
+                        <div id="weight-filter-container" class="inline-flex flex-wrap gap-2">
+                            <button class="filter-button" data-filter-group="weight" data-filter="vh">Very High</button>
+                            <button class="filter-button" data-filter-group="weight" data-filter="h">High</button>
+                            <button class="filter-button" data-filter-group="weight" data-filter="m">Medium</button>
+                        </div>
+                     </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button id="clear-filters" class="filter-button text-red-500/80 font-bold hidden w-full sm:w-auto">Clear Filters</button>
+                </div>
+             </div>
+            <div id="unified-accordion-container" class="space-y-3"></div>
+        </section>
+        
         <section id="dashboard" class="mb-12">
             <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4 tracking-tight">Your Strategy Dashboard</h2>
-            <p class="text-base sm:text-lg text-center text-secondary max-w-3xl mx-auto mb-12">After building your core, use this dashboard to focus on the high-impact areas that define each exam.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                
-                <div class="glass-card p-6 rounded-2xl shadow-lg border-t-4" style="border-color: var(--accent-2)">
-                    <h3 class="text-xl font-bold text-center">SSC: Advanced Maths</h3>
-                    <div class="h-64"><canvas id="sscMathsChart"></canvas></div>
-                </div>
-                <div class="glass-card p-6 rounded-2xl shadow-lg border-t-4" style="border-color: var(--accent-3)">
-                    <h3 class="text-xl font-bold text-center">Banking: DI & Puzzles</h3>
-                    <div class="h-64"><canvas id="bankingMainsChart"></canvas></div>
-                </div>
-                <div class="glass-card p-6 rounded-2xl shadow-lg border-t-4" style="border-color: #10b981;">
-                    <h3 class="text-xl font-bold text-center">Railways: General Science</h3>
-                    <div class="h-64"><canvas id="railwayGroupDChart"></canvas></div>
-                </div>
+            <p class="text-base sm:text-lg text-center text-secondary max-w-3xl mx-auto mb-12">Click chart sections to highlight relevant topics in the Foundation syllabus above.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                <div class="glass-card p-4 sm:p-6 rounded-2xl shadow-lg border-t-4" style="border-color: var(--accent-2)"><h3 class="text-lg sm:text-xl font-bold text-center">SSC: Advanced Maths</h3><div class="h-64 cursor-pointer mt-4"><canvas id="sscMathsChart"></canvas></div></div>
+                <div class="glass-card p-4 sm:p-6 rounded-2xl shadow-lg border-t-4" style="border-color: var(--accent-3)"><h3 class="text-lg sm:text-xl font-bold text-center">Banking: DI & Puzzles</h3><div class="h-64 cursor-pointer mt-4"><canvas id="bankingMainsChart"></canvas></div></div>
+                <div class="glass-card p-4 sm:p-6 rounded-2xl shadow-lg border-t-4" style="border-color: var(--accent-4)"><h3 class="text-lg sm:text-xl font-bold text-center">Railways: General Science</h3><div class="h-64 cursor-pointer mt-4"><canvas id="railwayGroupDChart"></canvas></div></div>
             </div>
         </section>
 
     </main>
-    
-    <div id="questionModal" class="modal-overlay">
-        <div class="glass-card p-8 rounded-2xl shadow-2xl w-11/12 max-w-2xl max-h-[80vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="modalTitle" class="gradient-text text-2xl font-bold">Model Question</h3>
-                <button id="closeModal" class="text-3xl font-bold text-secondary hover:text-red-500 transition-colors">&times;</button>
-            </div>
-            <div id="modalBody" class="space-y-4">
-                <p class="p-4 rounded-md text-sm md:text-base whitespace-pre-wrap font-mono" style="background-color: var(--modal-question-bg-bright); color: var(--text-primary);"></p>
-                <div class="p-4 rounded-md" style="background-color: var(--modal-solution-bg-bright); border-left: 4px solid var(--modal-solution-border-bright);"></div>
-            </div>
-        </div>
-    </div>
+
+     <div id="questionModal" class="modal-overlay">
+         <div class="glass-card modal-content p-6 sm:p-8 rounded-2xl shadow-2xl w-11/12 max-w-2xl max-h-[80vh] overflow-y-auto">
+             <div class="flex justify-between items-center mb-6"><h3 id="modalTitle" class="gradient-text text-xl sm:text-2xl font-bold">Model Question</h3><button id="closeModal" class="text-3xl font-bold text-secondary hover:text-red-500 transition-colors">&times;</button></div>
+             <div id="modalBody" class="space-y-4">
+                 <p class="p-4 rounded-md text-sm md:text-base whitespace-pre-wrap font-mono" style="background-color: var(--modal-question-bg-bright); color: var(--text-primary);"></p>
+                 <div class="p-4 rounded-md" style="background-color: var(--modal-solution-bg-bright); border-left: 4px solid var(--modal-solution-border-bright);"></div>
+             </div>
+         </div>
+     </div>
 
     <footer class="text-center py-6 bg-black/5 dark:bg-white/5 backdrop-blur-sm text-secondary text-sm">
         <p>Infographic for illustrative purposes. Always refer to official notifications.</p>
     </footer>
 
     <script>
-        const unifiedSyllabus = {
-              "Quantitative Aptitude": {
-                  "Number System & Simplification": [
-                      { name: "Simplification & VBODMAS", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'Solve: 36 ÷ 2 + (18 - 6) × 2'\nA) 42 B) 60 C) 30 D) 52\n\n**Answer:** A) 42. Using BODMAS: 36 ÷ 2 + 12 × 2 = 18 + 24 = 42." },
-                      { name: "LCM & HCF", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'The HCF of two numbers is 11 and their LCM is 693. If one number is 77, find the other.'\nA) 99 B) 66 C) 88 D) 121\n\n**Answer:** A) 99. Product of two numbers = HCF × LCM. 77 × x = 11 × 693. x = (11 × 693) / 77 = 99." },
-                      { name: "Fractions & Decimals", exams: ['SSC', 'Banking', 'Railways'], weight: "m", example: "Q: 'Arrange in ascending order: 2/3, 4/5, 7/9.'\nA) 2/3, 4/5, 7/9 B) 2/3, 7/9, 4/5 C) 4/5, 7/9, 2/3 D) 7/9, 4/5, 2/3\n\n**Answer:** B) 2/3, 7/9, 4/5. Convert to decimals: 0.66, 0.8, 0.77. Ascending order is 0.66, 0.77, 0.8." },
-                      { name: "Surds & Indices", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'Find the value of (27)^(2/3).'\nA) 3 B) 9 C) 18 D) 81\n\n**Answer:** B) 9. (27)^(2/3) = (3³)^(2/3) = 3^(3 * 2/3) = 3² = 9." },
-                      { name: "Unit Digit Calculation", exams: ['SSC', 'Railways'], weight: "l", example: "Q: 'What is the unit digit of 7¹⁰⁵?'\nA) 7 B) 9 C) 3 D) 1\n\n**Answer:** A) 7. The cyclicity of 7 is 4 (7, 9, 3, 1). 105 ÷ 4 gives a remainder of 1. So the unit digit is 7¹ = 7." }
-                  ],
-                  "Arithmetic": [
-                      { name: "Percentage Calculation", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'If 40% of a number is 240, what is the number?'\nA) 600 B) 500 C) 480 D) 720\n\n**Answer:** A) 600. Let the number be x. 0.40 * x = 240 => x = 240 / 0.4 = 600." },
-                      { name: "Profit & Loss Calculation", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'By selling an article for Rs. 100, a man gains Rs. 15. His gain % is:'\nA) 15% B) 17.65% C) 12.5% D) 18%\n\n**Answer:** B) 17.65%. CP = 100 - 15 = 85. Gain % = (15/85) * 100 ≈ 17.65%." },
-                      { name: "Discount & Marked Price", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'An item marked at Rs. 840 is sold for Rs. 714. What is the discount %?'\nA) 10% B) 15% C) 20% D) 25%\n\n**Answer:** B) 15%. Discount = 840 - 714 = 126. Discount % = (126/840) * 100 = 15%." },
-                      { name: "Ratio & Proportion", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'If A:B = 2:3 and B:C = 4:5, what is A:C?'\nA) 2:5 B) 8:15 C) 1:2 D) 3:5\n\n**Answer:** B) 8:15. A/C = (A/B) * (B/C) = (2/3) * (4/5) = 8/15." },
-                      { name: "Partnership Problems", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'A invests Rs. 5000 for 12 months and B invests Rs. 6000 for 8 months. In a profit of Rs. 2700, what is B's share?'\nA) Rs. 1500 B) Rs. 1200 C) Rs. 1800 D) Rs. 2100\n\n**Answer:** B) Rs. 1200. Ratio of profits = 5000*12 : 6000*8 = 60000:48000 = 5:4. B's share = (4/9) * 2700 = 1200." },
-                      { name: "Mixture & Alligation", exams: ['SSC', 'Banking', 'Railways'], weight: "m", example: "Q: 'In what ratio must rice at Rs. 9.30/kg be mixed with rice at Rs. 10.80/kg so that the mixture be worth Rs. 10/kg?'\nA) 8:7 B) 7:8 C) 2:3 D) 3:2\n\n**Answer:** A) 8:7. Using alligation: (10.80-10) : (10-9.30) = 0.80 : 0.70 = 8:7." },
-                      { name: "Average", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'The average of 5 consecutive odd numbers is 21. Find the largest number.'\nA) 21 B) 23 C) 25 D) 27\n\n**Answer:** C) 25. For consecutive numbers, the average is the middle number. Numbers are 17, 19, 21, 23, 25." },
-                      { name: "Simple Interest", exams: ['SSC', 'Banking', 'Railways'], weight: "m", example: "Q: 'Find the simple interest on Rs. 5000 for 2 years at 8% per annum.'\nA) Rs. 400 B) Rs. 800 C) Rs. 5800 D) Rs. 600\n\n**Answer:** B) Rs. 800. SI = (P*R*T)/100 = (5000*8*2)/100 = 800." },
-                      { name: "Compound Interest", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'Find the compound interest on Rs. 1000 for 2 years at 10% p.a.'\nA) Rs. 200 B) Rs. 100 C) Rs. 210 D) Rs. 1210\n\n**Answer:** C) Rs. 210. Amount = 1000 * (1.1)² = 1210. CI = 1210 - 1000 = 210." },
-                      { name: "Time, Speed & Distance", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'A man crosses a 600 m long street in 5 minutes. What is his speed in km/hr?'\nA) 3.6 B) 7.2 C) 8.4 D) 10\n\n**Answer:** B) 7.2. Speed = (600 m) / (300 s) = 2 m/s. (2 * 18/5) km/hr = 7.2 km/hr." },
-                      { name: "Time and Work", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'A can do a work in 15 days and B in 20 days. If they work on it together for 4 days, then the fraction of the work that is left is:'\nA) 1/4 B) 1/10 C) 7/15 D) 8/15\n\n**Answer:** D) 8/15. (A+B)'s 1 day work = 1/15+1/20=7/60. 4 days work = 28/60=7/15. Left = 1-7/15=8/15." }
-                  ],
-                  "Advanced Mathematics": [
-                      { name: "Algebra: Identities & Equations", exams: ['SSC'], weight: "vh", example: "Q: 'If x + 1/x = 3, then x³ + 1/x³ is?'\nA) 27 B) 36 C) 24 D) 18\n\n**Answer:** D) 18. Formula: x³+1/x³ = k³ - 3k = 3³ - 3*3 = 27-9=18." },
-                      { name: "Geometry: Lines & Angles", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'Two parallel lines are intersected by a transversal. If one of the interior angles on the same side is 70°, what is the other?'\nA) 110° B) 70° C) 20° D) 90°\n\n**Answer:** A) 110°. Interior angles on the same side are supplementary (sum = 180°)." },
-                      { name: "Geometry: Triangles", exams: ['SSC', 'Railways'], weight: "vh", example: "Q: 'In triangle ABC, the bisectors of ∠B and ∠C meet at point O. If ∠A = 80°, find ∠BOC.'\nA) 130° B) 100° C) 80° D) 140°\n\n**Answer:** A) 130°. Formula: ∠BOC = 90° + ∠A/2 = 90° + 40° = 130°." },
-                      { name: "Geometry: Circles", exams: ['SSC'], weight: "vh", example: "Q: 'A chord of length 16 cm is drawn in a circle of radius 10 cm. Find the distance of the chord from the center.'\nA) 6 cm B) 8 cm C) 5 cm D) 7 cm\n\n**Answer:** A) 6 cm. The perpendicular from the center bisects the chord (8cm). This forms a right triangle with hypotenuse 10 and one side 8. The other side is √(10²-8²) = 6." },
-                      { name: "Mensuration 2D (Area/Perimeter)", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'The perimeter of a rectangle is 40 cm. If its length is 12 cm, what is its area?'\nA) 96 cm² B) 84 cm² C) 108 cm² D) 92 cm²\n\n**Answer:** A) 96 cm². 2(12+B) = 40 => B=8. Area = 12*8 = 96." },
-                      { name: "Mensuration 3D (Volume/Surface Area)", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'Find the total surface area of a cube with a side of 5 cm.'\nA) 125 cm² B) 100 cm² C) 150 cm² D) 60 cm²\n\n**Answer:** C) 150 cm². TSA of cube = 6a² = 6 * 5² = 150." },
-                      { name: "Trigonometry (Ratios & Identities)", exams: ['SSC'], weight: "h", example: "Q: 'What is the value of sin²63° + sin²27°?'\nA) 0 B) 1 C) 2 D) -1\n\n**Answer:** B) 1. sin²27° = cos²(90-27)° = cos²63°. So sin²63° + cos²63° = 1." }
-                  ]
-              },
-              "General Intelligence & Reasoning": {
-                  "Verbal Reasoning": [
-                      { name: "Analogy: Word-based", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'Cat : Kitten :: Dog : ?'\nA) Puppy B) Cub C) Fawn D) Larva\n\n**Answer:** A) Puppy. A young cat is a kitten, a young dog is a puppy." },
-                      { name: "Analogy: Number & Letter", exams: ['SSC', 'Railways'], weight: "h", example: "Q: '12 : 144 :: 15 : ?'\nA) 169 B) 225 C) 196 D) 256\n\n**Answer:** B) 225. The relation is x : x²." },
-                      { name: "Classification (Odd One Out)", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'Find the odd one out: January, May, July, September'\nA) January B) May C) July D) September\n\n**Answer:** D) September. All others have 31 days." },
-                      { name: "Series: Number & Alphabet", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'Find the next term: 3, 7, 15, 31, 63, ?'\nA) 127 B) 125 C) 131 D) 129\n\n**Answer:** A) 127. Pattern is ×2+1." },
-                      { name: "Coding-Decoding", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'If 'EARTH' is coded as 'FCUXM', how is 'MOON' coded?'\nA) NPPQ B) NQQP C) NQPQ D) NPQP\n\n**Answer:** D) NPQP. Each letter is shifted by a different amount: +1, +2, +3, +4, +5." },
-                      { name: "Blood Relations: Indicating Type", exams: ['SSC', 'Banking', 'Railways'], weight: "m", example: "Q: 'Pointing to a girl, Rajan said, 'She is the daughter of my mother's daughter.' How is the girl related to Rajan?'\nA) Daughter B) Sister C) Niece D) Aunt\n\n**Answer:** C) Niece. Mother's daughter is his sister. Sister's daughter is his niece." },
-                      { name: "Blood Relations: Coded Type", exams: ['Banking'], weight: "m", example: "Q: 'If P+Q means P is the father of Q, P-Q means P is the mother of Q, which of the following shows A is the grandmother of C?'\nA) A-B+C B) C+B-A C) A+B-C D) B-A+C\n\n**Answer:** A) A-B+C. A is mother of B, B is father of C. So A is grandmother of C." },
-                      { name: "Direction & Distance", exams: ['SSC', 'Banking', 'Railways'], weight: "m", example: "Q: 'A man walks 1km East, then 5km South, then 2km East, and finally 9km North. How far is he from the starting point?'\nA) 3 km B) 4 km C) 5 km D) 7 km\n\n**Answer:** C) 5 km. Total East = 3km. Total North = 4km. Distance = √(3²+4²) = 5km." },
-                      { name: "Syllogism", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'Statements: All cars are buses. Some buses are trucks. Conclusions: I. Some cars are trucks. II. No car is a truck.'\nA) Only I follows B) Only II follows C) Either I or II D) Neither\n\n**Answer:** C) Either I or II. There is no definite relation, so a possibility exists for both." }
-                  ],
-                  "Non-Verbal Reasoning": [
-                      { name: "Mirror & Water Images", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'Find the mirror image of the word 'VERTICAL'.'\n\n**Answer:** The letters will be in reverse order and each letter will be laterally inverted." },
-                      { name: "Paper Folding & Cutting", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'A square paper is folded on the diagonal and a punch is made. How will it look when unfolded?'\n\n**Answer:** Requires visualizing the mirroring effect across the fold line." },
-                      { name: "Embedded Figures", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'Find the option figure in which the question figure is hidden/embedded.'\n\n**Answer:** Requires careful observation to find a smaller shape hidden inside a more complex one." },
-                      { name: "Figure Series & Analogy", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'Find the next figure in the series based on rotation and addition of elements.'\n\n**Answer:** Requires identifying the pattern of movement or change from one figure to the next." },
-                      { name: "Counting Figures (Triangles, Squares)", exams: ['SSC', 'Railways'], weight: "l", example: "Q: 'How many triangles are there in a star shape formed by two overlapping equilateral triangles?'\nA) 6 B) 8 C) 10 D) 12\n\n**Answer:** B) 8. (6 small triangles and 2 large ones)." }
-                  ]
-              },
-              "English Language": {
-                  "Grammar Rules": [
-                      { name: "Subject-Verb Agreement", exams: ['SSC', 'Banking'], weight: "vh", example: "Q: 'Spot the error: Each of the students (A)/ have submitted (B)/ the assignment. (C)/ No Error (D)'\n\n**Answer:** B) have submitted. 'Each of' takes a singular verb. It should be 'has submitted'." },
-                      { name: "Tenses & Conditionals", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'Spot the error: If I was you, (A)/ I would not (B)/ accept this offer. (C)/ No Error (D)'\n\n**Answer:** A) If I was you. In hypothetical conditional sentences, 'were' is used instead of 'was'. It should be 'If I were you'." },
-                      { name: "Articles & Determiners", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'Fill in the blank: He is ___ university professor.'\nA) a B) an C) the D) no article\n\n**Answer:** A) a. 'University' starts with a 'y' consonant sound." },
-                      { name: "Prepositions", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'He is accused ___ theft.'\nA) for B) with C) of D) in\n\n**Answer:** C) of. 'Accused of' is the correct prepositional phrase." },
-                      { name: "Conjunctions", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'Spot the error: He is both intelligent (A)/ as well as (B)/ hardworking. (C)/ No Error (D)'\n\n**Answer:** B) as well as. The correlative conjunction 'both' is always followed by 'and', not 'as well as'." },
-                      { name: "Pronouns", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'Spot the error: Let you and I (A)/ go to the (B)/ party. (C)/ No Error (D)'\n\n**Answer:** A) Let you and I. After 'Let', the objective case of the pronoun is used. It should be 'Let you and me'." },
-                      { name: "Adjectives & Adverbs", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'Spot the error: She sings (A)/ very good. (B)/ (C)/ No Error (D)'\n\n**Answer:** B) very good. To modify the verb 'sings', an adverb is needed. It should be 'very well'." },
-                      { name: "Voice & Narration Change", exams: ['SSC'], weight: "h", example: "Q: 'Change to indirect speech: She said, 'I will come tomorrow.''\nA) She said she will come the next day. B) She said she would come tomorrow. C) She said that she would come the next day.\n\n**Answer:** C) She said that she would come the next day." }
-                  ],
-                  "Vocabulary & Usage": [
-                      { name: "Synonyms & Antonyms", exams: ['SSC', 'Banking'], weight: "vh", example: "Q: 'Find the antonym of 'mitigate'.'\nA) Alleviate B) Aggravate C) Assuage D) Lessen\n\n**Answer:** B) Aggravate. Mitigate means to make less severe; aggravate means to make worse." },
-                      { name: "Idioms & Phrases", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'The project was a 'damp squib'. What does this idiom mean?'\nA) A great success B) A complete failure C) A minor problem D) A wet object\n\n**Answer:** B) A complete failure." },
-                      { name: "One-word Substitution", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'A place where birds are kept.'\nA) Aquarium B) Apiary C) Aviary D) Zoo\n\n**Answer:** C) Aviary." },
-                      { name: "Spelling Correction", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'Which of the following spellings is correct?'\nA) Mischeivous B) Mischievous C) Mischevous D) Mischivous\n\n**Answer:** B) Mischievous." },
-                      { name: "Fill in the Blanks (Single/Double)", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'His ___ nature made him an excellent diplomat.'\nA) aggressive B) taciturn C) gregarious D) amiable\n\n**Answer:** D) amiable. Amiable (friendly) fits the context of a diplomat." }
-                  ],
-                  "Comprehension Skills": [
-                      { name: "Reading Comprehension", exams: ['SSC', 'Banking'], weight: "vh", example: "Q: 'Based on the passage, what is the author's primary argument?'\n\n**Answer:** Requires a holistic understanding of the entire passage to identify the central theme or main point." },
-                      { name: "Cloze Test", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'A passage with numbered blanks is given. Choose the best word for each blank.'\n\n**Answer:** Tests vocabulary, grammar, and contextual understanding simultaneously." },
-                      { name: "Para Jumbles", exams: ['SSC', 'Banking'], weight: "h", example: "Q: 'Four sentences are given, jumbled. Arrange them in the correct order to form a meaningful paragraph.'\n\n**Answer:** Tests logical sequencing and understanding of paragraph structure." }
-                  ]
-              },
-              "General Awareness, Science & Computers": {
-                  "History": [
-                      { name: "Indus Valley Civilization", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'Which metal was not known to the people of the Indus Valley Civilization?'\nA) Copper B) Bronze C) Silver D) Iron\n\n**Answer:** D) Iron." },
-                      { name: "Vedic Period", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'The Gayatri Mantra is contained in which Veda?'\nA) Rigveda B) Samaveda C) Yajurveda D) Atharvaveda\n\n**Answer:** A) Rigveda." },
-                      { name: "Buddhism & Jainism", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'Where did Buddha attain enlightenment?'\nA) Sarnath B) Kushinagar C) Bodh Gaya D) Lumbini\n\n**Answer:** C) Bodh Gaya." },
-                      { name: "Mauryan & Gupta Period", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'The rock edicts of Ashoka were written in which script?'\nA) Sanskrit B) Pali C) Brahmi D) Devanagari\n\n**Answer:** C) Brahmi." },
-                      { name: "Delhi Sultanate", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'Who founded the 'slave dynasty' in Delhi?'\nA) Iltutmish B) Balban C) Qutub-ud-din Aibak D) Alauddin Khilji\n\n**Answer:** C) Qutub-ud-din Aibak." },
-                      { name: "Mughal Empire", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'The battle of Panipat (1526) was fought between Babur and whom?'\nA) Rana Sanga B) Hemu C) Ibrahim Lodi D) Sher Shah Suri\n\n**Answer:** C) Ibrahim Lodi." },
-                      { name: "Indian Freedom Struggle", exams: ['SSC', 'Railways'], weight: "vh", example: "Q: 'The 'Poorna Swaraj' (Complete Independence) resolution was passed by the INC in which session?'\nA) Bombay Session B) Lucknow Session C) Lahore Session D) Surat Session\n\n**Answer:** C) Lahore Session (1929)." }
-                  ],
-                  "Geography & Polity": [
-                      { name: "Physical Geography (Solar System, Earth)", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'Which planet is known as the 'Red Planet'?'\nA) Venus B) Mars C) Jupiter D) Saturn\n\n**Answer:** B) Mars." },
-                      { name: "Indian Geography (Rivers, Mountains, States)", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'The Narmada river originates from:'\nA) Western Ghats B) Amarkantak Plateau C) Himalayas D) Satpura Range\n\n**Answer:** B) Amarkantak Plateau." },
-                      { name: "Making of the Constitution", exams: ['SSC', 'Railways'], weight: "m", example: "Q: 'Who was the chairman of the Drafting Committee of the Indian Constitution?'\nA) Jawaharlal Nehru B) Dr. Rajendra Prasad C) Sardar Patel D) Dr. B.R. Ambedkar\n\n**Answer:** D) Dr. B.R. Ambedkar." },
-                      { name: "Fundamental Rights & Duties", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'Which part of the Indian Constitution contains the Fundamental Rights?'\nA) Part I B) Part II C) Part III D) Part IV\n\n**Answer:** C) Part III." },
-                      { name: "Parliament, President, Judiciary", exams: ['SSC', 'Railways'], weight: "h", example: "Q: 'Who administers the oath of office to the President of India?'\nA) Prime Minister B) Vice President C) Speaker of Lok Sabha D) Chief Justice of India\n\n**Answer:** D) Chief Justice of India." }
-                  ],
-                  "Economy, Banking & Current Affairs": [
-                      { name: "Current Affairs (Last 6 Months)", exams: ['SSC', 'Banking', 'Railways'], weight: "vh", example: "Q: 'Who won the Wimbledon Men's Singles title in the current year?'\n\n**Answer:** This is a dynamic question requiring knowledge of recent major events." },
-                      { name: "Indian Economy & Budget", exams: ['SSC', 'Banking', 'Railways'], weight: "h", example: "Q: 'What type of economy is the Indian economy?'\nA) Socialist B) Communist C) Capitalist D) Mixed\n\n**Answer:** D) Mixed." },
-                      { name: "Banking & Financial Awareness", exams: ['Banking'], weight: "vh", example: "Q: 'What is the full form of NEFT?'\nA) National Electronic Funds Transfer B) National E-cash Financial Transaction C) New Electronic Funds Transfer D) National Express Funds Transaction\n\n**Answer:** A) National Electronic Funds Transfer." },
-                      { name: "Monetary Policy (Repo, CRR, SLR)", exams: ['Banking'], weight: "vh", example: "Q: 'When the RBI wants to increase the money supply in the economy, it:'\nA) Increases CRR B) Sells government securities C) Buys government securities D) Increases Repo Rate\n\n**Answer:** C) Buys government securities (through Open Market Operations)." }
-                  ],
-                  "General Science & Computers": [
-                      { name: "Physics (Units, Motion, Light, Sound)", exams: ['SSC', 'Railways'], weight: "vh", example: "Q: 'The audible range of sound for human beings is:'\nA) 2 Hz to 20 Hz B) 20 Hz to 20,000 Hz C) 20 kHz to 200 kHz D) Below 20 Hz\n\n**Answer:** B) 20 Hz to 20,000 Hz." },
-                      { name: "Chemistry (Acids/Bases, Metals, Carbon)", exams: ['SSC', 'Railways'], weight: "vh", example: "Q: 'Which of the following is used in pencils?'\nA) Silicon B) Charcoal C) Graphite D) Phosphorus\n\n**Answer:** C) Graphite." },
-                      { name: "Biology (Human Body, Diseases, Vitamins)", exams: ['SSC', 'Railways'], weight: "vh", example: "Q: 'Insulin is secreted by which gland?'\nA) Pituitary B) Thyroid C) Pancreas D) Adrenal\n\n**Answer:** C) Pancreas." },
-                      { name: "Computer Fundamentals", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'What does CPU stand for?'\nA) Central Processing Unit B) Central Programming Unit C) Computer Processing Unit D) Central Protocol Unit\n\n**Answer:** A) Central Processing Unit." },
-                      { name: "MS Office & Internet", exams: ['SSC', 'Banking'], weight: "m", example: "Q: 'Which of the following is a web browser?'\nA) MS Word B) Google Chrome C) MS Excel D) Notepad\n\n**Answer:** B) Google Chrome." }
-                  ]
-              }
-        };
-    </script>
-    <script>
+        // --- DATA FOR SYLLABUS (omitted for brevity, remains the same) ---
+        const unifiedSyllabus = {"Quantitative Aptitude": {"Number System & Simplification": [{id: "simp", name: "Simplification & VBODMAS", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'Solve: 36 ÷ 2 + (18 - 6) × 2'\nA) 42 B) 60 C) 30 D) 52\n\n**Answer:** A) 42. Using BODMAS: 36 ÷ 2 + 12 × 2 = 18 + 24 = 42."}, {id: "lcm_hcf", name: "LCM & HCF", exams: ["SSC", "Railways"], weight: "m", example: "Q: 'The HCF of two numbers is 11 and their LCM is 693. If one number is 77, find the other.'\nA) 99 B) 66 C) 88 D) 121\n\n**Answer:** A) 99. Product of two numbers = HCF × LCM. 77 × x = 11 × 693. x = (11 × 693) / 77 = 99."}, {id: "frac_dec", name: "Fractions & Decimals", exams: ["SSC", "Banking", "Railways"], weight: "m", example: "Q: 'Arrange in ascending order: 2/3, 4/5, 7/9.'\nA) 2/3, 4/5, 7/9 B) 2/3, 7/9, 4/5 C) 4/5, 7/9, 2/3 D) 7/9, 4/5, 2/3\n\n**Answer:** B) 2/3, 7/9, 4/5. Convert to decimals: 0.66, 0.8, 0.77. Ascending order is 0.66, 0.77, 0.8."}, {id: "surds_ind", name: "Surds & Indices", exams: ["SSC", "Railways"], weight: "m", example: "Q: 'Find the value of (27)^(2/3).'\nA) 3 B) 9 C) 18 D) 81\n\n**Answer:** B) 9. (27)^(2/3) = (3³)^(2/3) = 3^(3 * 2/3) = 3² = 9."}, {id: "unit_dig", name: "Unit Digit Calculation", exams: ["SSC", "Railways"], weight: "l", example: "Q: 'What is the unit digit of 7¹⁰⁵?'\nA) 7 B) 9 C) 3 D) 1\n\n**Answer:** A) 7. The cyclicity of 7 is 4 (7, 9, 3, 1). 105 ÷ 4 gives a remainder of 1. So the unit digit is 7¹ = 7."}], Arithmetic: [{id: "perc", name: "Percentage", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'If 40% of a number is 240, what is the number?'\nA) 600 B) 500 C) 480 D) 720\n\n**Answer:** A) 600. Let the number be x. 0.40 * x = 240 => x = 240 / 0.4 = 600."}, {id: "pnl", name: "Profit & Loss", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'By selling an article for Rs. 100, a man gains Rs. 15. His gain % is:'\nA) 15% B) 17.65% C) 12.5% D) 18%\n\n**Answer:** B) 17.65%. CP = 100 - 15 = 85. Gain % = (15/85) * 100 ≈ 17.65%."}, {id: "disc", name: "Discount & Marked Price", exams: ["SSC", "Banking"], weight: "m", example: "Q: 'An item marked at Rs. 840 is sold for Rs. 714. What is the discount %?'\nA) 10% B) 15% C) 20% D) 25%\n\n**Answer:** B) 15%. Discount = 840 - 714 = 126. Discount % = (126/840) * 100 = 15%."}, {id: "ratio", name: "Ratio & Proportion", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'If A:B = 2:3 and B:C = 4:5, what is A:C?'\nA) 2:5 B) 8:15 C) 1:2 D) 3:5\n\n**Answer:** B) 8:15. A/C = (A/B) * (B/C) = (2/3) * (4/5) = 8/15."}, {id: "partner", name: "Partnership", exams: ["SSC", "Banking"], weight: "m", example: "Q: 'A invests Rs. 5000 for 12 months and B invests Rs. 6000 for 8 months. In a profit of Rs. 2700, what is B's share?'\nA) Rs. 1500 B) Rs. 1200 C) Rs. 1800 D) Rs. 2100\n\n**Answer:** B) Rs. 1200. Ratio of profits = 5000*12 : 6000*8 = 60000:48000 = 5:4. B's share = (4/9) * 2700 = 1200."}, {id: "mix", name: "Mixture & Alligation", exams: ["SSC", "Banking", "Railways"], weight: "m", example: "Q: 'In what ratio must rice at Rs. 9.30/kg be mixed with rice at Rs. 10.80/kg so that the mixture be worth Rs. 10/kg?'\nA) 8:7 B) 7:8 C) 2:3 D) 3:2\n\n**Answer:** A) 8:7. Using alligation: (10.80-10) : (10-9.30) = 0.80 : 0.70 = 8:7."}, {id: "avg", name: "Average", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'The average of 5 consecutive odd numbers is 21. Find the largest number.'\nA) 21 B) 23 C) 25 D) 27\n\n**Answer:** C) 25. For consecutive numbers, the average is the middle number. Numbers are 17, 19, 21, 23, 25."}, {id: "si", name: "Simple Interest", exams: ["SSC", "Banking", "Railways"], weight: "m", example: "Q: 'Find the simple interest on Rs. 5000 for 2 years at 8% per annum.'\nA) Rs. 400 B) Rs. 800 C) Rs. 5800 D) Rs. 600\n\n**Answer:** B) Rs. 800. SI = (P*R*T)/100 = (5000*8*2)/100 = 800."}, {id: "ci", name: "Compound Interest", exams: ["SSC", "Banking"], weight: "h", example: "Q: 'Find the compound interest on Rs. 1000 for 2 years at 10% p.a.'\nA) Rs. 200 B) Rs. 100 C) Rs. 210 D) Rs. 1210\n\n**Answer:** C) Rs. 210. Amount = 1000 * (1.1)² = 1210. CI = 1210 - 1000 = 210."}, {id: "tsd", name: "Time, Speed & Distance", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'A man crosses a 600 m long street in 5 minutes. What is his speed in km/hr?'\nA) 3.6 B) 7.2 C) 8.4 D) 10\n\n**Answer:** B) 7.2. Speed = (600 m) / (300 s) = 2 m/s. (2 * 18/5) km/hr = 7.2 km/hr."}, {id: "tnw", name: "Time and Work", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'A can do a work in 15 days and B in 20 days. If they work on it together for 4 days, then the fraction of the work that is left is:'\nA) 1/4 B) 1/10 C) 7/15 D) 8/15\n\n**Answer:** D) 8/15. (A+B)'s 1 day work = 1/15+1/20=7/60. 4 days work = 28/60=7/15. Left = 1-7/15=8/15."}], "Advanced Mathematics": [{id: "alg", name: "Algebra: Identities & Equations", exams: ["SSC"], weight: "vh", example: "Q: 'If x + 1/x = 3, then x³ + 1/x³ is?'\nA) 27 B) 36 C) 24 D) 18\n\n**Answer:** D) 18. Formula: x³+1/x³ = k³ - 3k = 3³ - 3*3 = 27-9=18."}, {id: "geo_lines", name: "Geometry: Lines & Angles", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'Two parallel lines are intersected by a transversal. If one of the interior angles on the same side is 70°, what is the other?'\nA) 110° B) 70° C) 20° D) 90°\n\n**Answer:** A) 110°. Interior angles on the same side are supplementary (sum = 180°)."}, {id: "geo_tri", name: "Geometry: Triangles", exams: ["SSC", "Railways"], weight: "vh", example: "Q: 'In triangle ABC, the bisectors of ∠B and ∠C meet at point O. If ∠A = 80°, find ∠BOC.'\nA) 130° B) 100° C) 80° D) 140°\n\n**Answer:** A) 130°. Formula: ∠BOC = 90° + ∠A/2 = 90° + 40° = 130°."}, {id: "geo_circ", name: "Geometry: Circles", exams: ["SSC"], weight: "vh", example: "Q: 'A chord of length 16 cm is drawn in a circle of radius 10 cm. Find the distance of the chord from the center.'\nA) 6 cm B) 8 cm C) 5 cm D) 7 cm\n\n**Answer:** A) 6 cm. The perpendicular from the center bisects the chord (8cm). This forms a right triangle with hypotenuse 10 and one side 8. The other side is √(10²-8²) = 6."}, {id: "mens_2d", name: "Mensuration 2D (Area/Perimeter)", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'The perimeter of a rectangle is 40 cm. If its length is 12 cm, what is its area?'\nA) 96 cm² B) 84 cm² C) 108 cm² D) 92 cm²\n\n**Answer:** A) 96 cm². 2(12+B) = 40 => B=8. Area = 12*8 = 96."}, {id: "mens_3d", name: "Mensuration 3D (Volume/Surface Area)", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'Find the total surface area of a cube with a side of 5 cm.'\nA) 125 cm² B) 100 cm² C) 150 cm² D) 60 cm²\n\n**Answer:** C) 150 cm². TSA of cube = 6a² = 6 * 5² = 150."}, {id: "trigo", name: "Trigonometry (Ratios & Identities)", exams: ["SSC"], weight: "h", example: "Q: 'What is the value of sin²63° + sin²27°?'\nA) 0 B) 1 C) 2 D) -1\n\n**Answer:** B) 1. sin²27° = cos²(90-27)° = cos²63°. So sin²63° + cos²63° = 1."}]}, "General Intelligence & Reasoning": {"Verbal Reasoning": [{id: "ana_word", name: "Analogy: Word-based", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'Cat : Kitten :: Dog : ?'\nA) Puppy B) Cub C) Fawn D) Larva\n\n**Answer:** A) Puppy. A young cat is a kitten, a young dog is a puppy."}, {id: "ana_num", name: "Analogy: Number & Letter", exams: ["SSC", "Railways"], weight: "h", example: "Q: '12 : 144 :: 15 : ?'\nA) 169 B) 225 C) 196 D) 256\n\n**Answer:** B) 225. The relation is x : x²."}, {id: "class", name: "Classification (Odd One Out)", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'Find the odd one out: January, May, July, September'\nA) January B) May C) July D) September\n\n**Answer:** D) September. All others have 31 days."}, {id: "series", name: "Series: Number & Alphabet", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'Find the next term: 3, 7, 15, 31, 63, ?'\nA) 127 B) 125 C) 131 D) 129\n\n**Answer:** A) 127. Pattern is ×2+1."}, {id: "coding", name: "Coding-Decoding", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'If 'EARTH' is coded as 'FCUXM', how is 'MOON' coded?'\nA) NPPQ B) NQQP C) NQPQ D) NPQP\n\n**Answer:** D) NPQP. Each letter is shifted by a different amount: +1, +2, +3, +4, +5."}, {id: "blood", name: "Blood Relations", exams: ["SSC", "Banking", "Railways"], weight: "m", example: "Q: 'Pointing to a girl, Rajan said, 'She is the daughter of my mother's daughter.' How is the girl related to Rajan?'\nA) Daughter B) Sister C) Niece D) Aunt\n\n**Answer:** C) Niece. Mother's daughter is his sister. Sister's daughter is his niece."}, {id: "puzzle", name: "Puzzles & Seating Arrangement", exams: ["Banking"], weight: "vh", example: "Q: '8 people A-H are sitting in a circle...'\n\n**Answer:** These are complex logical problems often requiring tabular arrangement to solve."}, {id: "dir", name: "Direction & Distance", exams: ["SSC", "Banking", "Railways"], weight: "m", example: "Q: 'A man walks 1km East, then 5km South, then 2km East, and finally 9km North. How far is he from the starting point?'\nA) 3 km B) 4 km C) 5 km D) 7 km\n\n**Answer:** C) 5 km. Total East = 3km. Total North = 4km. Distance = √(3²+4²) = 5km."}, {id: "syllog", name: "Syllogism", exams: ["SSC", "Banking", "Railways"], weight: "h", example: "Q: 'Statements: All cars are buses. Some buses are trucks. Conclusions: I. Some cars are trucks. II. No car is a truck.'\nA) Only I follows B) Only II follows C) Either I or II D) Neither\n\n**Answer:** C) Either I or II. There is no definite relation, so a possibility exists for both."}], "Non-Verbal Reasoning": [{id: "mirror", name: "Mirror & Water Images", exams: ["SSC", "Railways"], weight: "m", example: "Q: 'Find the mirror image of the word 'VERTICAL'.'\n\n**Answer:** The letters will be in reverse order and each letter will be laterally inverted."}, {id: "paper_cut", name: "Paper Folding & Cutting", exams: ["SSC", "Railways"], weight: "m", example: "Q: 'A square paper is folded on the diagonal and a punch is made. How will it look when unfolded?'\n\n**Answer:** Requires visualizing the mirroring effect across the fold line."}, {id: "embed", name: "Embedded Figures", exams: ["SSC", "Railways"], weight: "m", example: "Q: 'Find the option figure in which the question figure is hidden/embedded.'\n\n**Answer:** Requires careful observation to find a smaller shape hidden inside a more complex one."}, {id: "fig_series", name: "Figure Series & Analogy", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'Find the next figure in the series based on rotation and addition of elements.'\n\n**Answer:** Requires identifying the pattern of movement or change from one figure to the next."}]}, "English Language": {"Grammar Rules": [{id: "sva", name: "Subject-Verb Agreement", exams: ["SSC", "Banking"], weight: "vh", example: "Q: 'Spot the error: Each of the students (A)/ have submitted (B)/ the assignment. (C)/ No Error (D)'\n\n**Answer:** B) have submitted. 'Each of' takes a singular verb. It should be 'has submitted'."}, {id: "tense", name: "Tenses & Conditionals", exams: ["SSC", "Banking"], weight: "h", example: "Q: 'Spot the error: If I was you, (A)/ I would not (B)/ accept this offer. (C)/ No Error (D)'\n\n**Answer:** A) If I was you. In hypothetical conditional sentences, 'were' is used instead of 'was'. It should be 'If I were you'."}, {id: "article", name: "Articles & Determiners", exams: ["SSC", "Banking"], weight: "m", example: "Q: 'Fill in the blank: He is ___ university professor.'\nA) a B) an C) the D) no article\n\n**Answer:** A) a. 'University' starts with a 'y' consonant sound."}, {id: "prep", name: "Prepositions", exams: ["SSC", "Banking"], weight: "h", example: "Q: 'He is accused ___ theft.'\nA) for B) with C) of D) in\n\n**Answer:** C) of. 'Accused of' is the correct prepositional phrase."}, {id: "voice_narr", name: "Voice & Narration Change", exams: ["SSC"], weight: "h", example: "Q: 'Change to indirect speech: She said, 'I will come tomorrow.''\nA) She said she will come the next day. B) She said she would come tomorrow. C) She said that she would come the next day.\n\n**Answer:** C) She said that she would come the next day."}], "Vocabulary & Usage": [{id: "syn_ant", name: "Synonyms & Antonyms", exams: ["SSC", "Banking"], weight: "vh", example: "Q: 'Find the antonym of 'mitigate'.'\nA) Alleviate B) Aggravate C) Assuage D) Lessen\n\n**Answer:** B) Aggravate. Mitigate means to make less severe; aggravate means to make worse."}, {id: "idiom", name: "Idioms & Phrases", exams: ["SSC", "Banking"], weight: "h", example: "Q: 'The project was a 'damp squib'. What does this idiom mean?'\nA) A great success B) A complete failure C) A minor problem D) A wet object\n\n**Answer:** B) A complete failure."}, {id: "ows", name: "One-word Substitution", exams: ["SSC", "Banking"], weight: "h", example: "Q: 'A place where birds are kept.'\nA) Aquarium B) Apiary C) Aviary D) Zoo\n\n**Answer:** C) Aviary."}, {id: "spelling", name: "Spelling Correction", exams: ["SSC", "Banking"], weight: "m", example: "Q: 'Which of the following spellings is correct?'\nA) Mischeivous B) Mischievous C) Mischevous D) Mischivous\n\n**Answer:** B) Mischievous."}], "Comprehension Skills": [{id: "rc", name: "Reading Comprehension", exams: ["SSC", "Banking"], weight: "vh", example: "Q: 'Based on the passage, what is the author's primary argument?'\n\n**Answer:** Requires a holistic understanding of the entire passage to identify the central theme or main point."}, {id: "cloze", name: "Cloze Test", exams: ["SSC", "Banking"], weight: "h", example: "Q: 'A passage with numbered blanks is given. Choose the best word for each blank.'\n\n**Answer:** Tests vocabulary, grammar, and contextual understanding simultaneously."}, {id: "para_jumble", name: "Para Jumbles", exams: ["SSC", "Banking"], weight: "h", example: "Q: 'Four sentences are given, jumbled. Arrange them in the correct order to form a meaningful paragraph.'\n\n**Answer:** Tests logical sequencing and understanding of paragraph structure."}]}, "General Awareness, Science & Computers": {"History & Culture": [{id: "ivc", name: "Indus Valley Civilization", exams: ["SSC", "Railways"], weight: "m", example: "Q: 'Which metal was not known to the people of the Indus Valley Civilization?'\nA) Copper B) Bronze C) Silver D) Iron\n\n**Answer:** D) Iron."}, {id: "buddh_jain", name: "Buddhism & Jainism", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'Where did Buddha attain enlightenment?'\nA) Sarnath B) Kushinagar C) Bodh Gaya D) Lumbini\n\n**Answer:** C) Bodh Gaya."}, {id: "mughal", name: "Mughal Empire", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'The battle of Panipat (1526) was fought between Babur and whom?'\nA) Rana Sanga B) Hemu C) Ibrahim Lodi D) Sher Shah Suri\n\n**Answer:** C) Ibrahim Lodi."}, {id: "freedom", name: "Indian Freedom Struggle", exams: ["SSC", "Railways"], weight: "vh", example: "Q: 'The 'Poorna Swaraj' (Complete Independence) resolution was passed by the INC in which session?'\nA) Bombay Session B) Lucknow Session C) Lahore Session D) Surat Session\n\n**Answer:** C) Lahore Session (1929)."}], "Geography & Polity": [{id: "indian_geo", name: "Indian Geography (Rivers, Mountains, States)", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'The Narmada river originates from:'\nA) Western Ghats B) Amarkantak Plateau C) Himalayas D) Satpura Range\n\n**Answer:** B) Amarkantak Plateau."}, {id: "fr_fd", name: "Fundamental Rights & Duties", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'Which part of the Indian Constitution contains the Fundamental Rights?'\nA) Part I B) Part II C) Part III D) Part IV\n\n**Answer:** C) Part III."}, {id: "parl", name: "Parliament, President, Judiciary", exams: ["SSC", "Railways"], weight: "h", example: "Q: 'Who administers the oath of office to the President of India?'\nA) Prime Minister B) Vice President C) Speaker of Lok Sabha D) Chief Justice of India\n\n**Answer:** D) Chief Justice of India."}], "Economy, Banking & Current Affairs": [{id: "ca", name: "Current Affairs (Last 6 Months)", exams: ["SSC", "Banking", "Railways"], weight: "vh", example: "Q: 'Who won the Wimbledon Men's Singles title in the current year?'\n\n**Answer:** This is a dynamic question requiring knowledge of recent major events."}, {id: "banking_aware", name: "Banking & Financial Awareness", exams: ["Banking"], weight: "vh", example: "Q: 'What is the full form of NEFT?'\nA) National Electronic Funds Transfer B) National E-cash Financial Transaction C) New Electronic Funds Transfer D) National Express Funds Transaction\n\n**Answer:** A) National Electronic Funds Transfer."}, {id: "mon_pol", name: "Monetary Policy (Repo, CRR, SLR)", exams: ["Banking"], weight: "vh", example: "Q: 'When the RBI wants to increase the money supply in the economy, it:'\nA) Increases CRR B) Sells government securities C) Buys government securities D) Increases Repo Rate\n\n**Answer:** C) Buys government securities (through Open Market Operations)."}], "General Science & Computers": [{id: "phy", name: "Physics (Units, Motion, Light, Sound)", exams: ["SSC", "Railways"], weight: "vh", category: 'science', example: "Q: 'The audible range of sound for human beings is:'\nA) 2 Hz to 20 Hz B) 20 Hz to 20,000 Hz C) 20 kHz to 200 kHz D) Below 20 Hz\n\n**Answer:** B) 20 Hz to 20,000 Hz."}, {id: "chem", name: "Chemistry (Acids/Bases, Metals, Carbon)", exams: ["SSC", "Railways"], weight: "vh", category: 'science', example: "Q: 'Which of the following is used in pencils?'\nA) Silicon B) Charcoal C) Graphite D) Phosphorus\n\n**Answer:** C) Graphite."}, {id: "bio", name: "Biology (Human Body, Diseases, Vitamins)", exams: ["SSC", "Railways"], weight: "vh", category: 'science', example: "Q: 'Insulin is secreted by which gland?'\nA) Pituitary B) Thyroid C) Pancreas D) Adrenal\n\n**Answer:** C) Pancreas."}, {id: "comp", name: "Computer Fundamentals & MS Office", exams: ["SSC", "Banking"], weight: "m", example: "Q: 'What does CPU stand for?'\nA) Central Processing Unit B) Central Programming Unit C) Computer Processing Unit D) Central Protocol Unit\n\n**Answer:** A) Central Processing Unit."}]}};
+        const detailedSyllabus = {"SSC": {"examName": "SSC Exams (e.g., CGL, CHSL)", "stages": {"Tier-I (Preliminary) Syllabus": {"General Intelligence & Reasoning": ["Analogy", "Classification", "Coding-Decoding", "Number & Alphabet Series", "Syllogism", "Venn Diagrams", "Direction & Distance", "Blood Relations", "Non-Verbal Reasoning (mirror images, embedded figures, etc.)"], "Quantitative Aptitude": ["Percentage", "Ratio & Proportion", "Profit & Loss", "Time & Work", "Time, Speed & Distance", "Averages", "Simple & Compound Interest", "Basic Algebraic Identities", "Geometry (Circles, Triangles)", "Mensuration (2D/3D formulas)", "Basic Trigonometry"], "English Comprehension": ["Reading Comprehension", "Cloze Test", "Synonyms & Antonyms", "Idioms & Phrases", "One-Word Substitution", "Spelling Correction", "Error Spotting (based on grammar rules)"], "General Awareness": ["Indian History", "Geography", "Polity", "Economy", "General Science (Physics, Chemistry, Biology)", "Current Affairs (last 6-8 months)"]}, "Tier-II (Mains) Syllabus": {"Paper-I (Compulsory for all posts)": {"Module I - Mathematical Abilities": ["Complete Arithmetic & Advanced Maths (Algebra, Geometry, Trigonometry, Mensuration)", "Number Systems", "Fundamental arithmetical operations", "Probability", "Statistics"], "Module II - Reasoning and General Intelligence": ["All Tier-I topics with higher difficulty", "Puzzles", "Seating Arrangement", "Statement-Conclusion", "Critical Thinking", "Data Sufficiency"], "Module III - English Language and Comprehension": ["Advanced Vocabulary & Grammar", "Multiple Reading Comprehension passages", "Complex Para Jumbles", "Active/Passive Voice", "Direct/Indirect Speech"], "Module IV - General Awareness": ["In-depth understanding of Tier-I subjects", "Focus on recent Current Affairs, government schemes, and economic policies"], "Module V - Computer Knowledge Test (Qualifying)": ["Basics of Computer & CPU", "Input/Output devices", "Memory", "Software (MS Office)", "Internet & Email", "Networking & Cyber Security"]}}}},"Banking": {"examName": "Banking Exams (e.g., IBPS PO, SBI PO)", "stages": {"Preliminary Examination Syllabus": {"Reasoning Ability": ["Puzzles (Floor, Box, Day-based)", "Seating Arrangements (Linear, Circular)", "Syllogism", "Inequality", "Blood Relations", "Coding-Decoding", "Direction Sense"], "Quantitative Aptitude": ["Simplification & Approximation", "Number Series (Missing/Wrong)", "Quadratic Equations", "Data Interpretation (Bar Graphs, Pie Charts, Tables)", "Arithmetic Problems"], "English Language": ["Reading Comprehension", "Cloze Test", "Error Spotting", "Fillers (Single/Double)", "Sentence Rearrangement", "Para Jumbles"]}, "Main Examination Syllabus": {"Reasoning & Computer Aptitude": ["High-level Puzzles and Seating Arrangements", "Logical & Critical Reasoning (Statement-Assumption, Inference)", "Data Sufficiency", "Input-Output", "Basic Computer Aptitude"], "Data Analysis & Interpretation": ["Advanced Data Interpretation Sets (Caselets, Missing DI, Funnel DI, Radar)", "Quantity Comparison", "Data Sufficiency"], "English Language": ["All prelims topics with higher difficulty", "Focus on inference-based RC questions", "Advanced vocabulary"], "General/Economy/Banking Awareness": ["Banking & Financial Awareness (Monetary Policy, RBI, Capital Markets)", "Current Affairs (last 6 months)", "Static GK (Banking history, HQs)", "Union Budget & Economic Survey"], "English Language (Descriptive Paper)": ["Letter Writing (Formal/Informal)", "Essay Writing on banking, economy, or social issues"]}}},"Railways": {"examName": "Railways Exams (e.g., RRB NTPC)", "stages": {"1st Stage CBT (Preliminary) Syllabus": {"Mathematics": ["Number System", "Decimals & Fractions", "LCM & HCF", "Ratio and Proportion", "Percentage", "Mensuration", "Time and Work", "Time and Distance", "Simple and Compound Interest", "Profit and Loss", "Elementary Algebra"], "General Intelligence and Reasoning": ["Analogies", "Series (Number and Alphabetical)", "Coding and Decoding", "Syllogism", "Jumbling", "Venn Diagrams", "Puzzle", "Data Sufficiency", "Statement-Conclusion"], "General Awareness": ["Current Events of National and International Importance", "Indian History & Freedom Struggle", "Physical, Social and Economic Geography of India and World", "Indian Polity and Governance", "General Science (Physics, Chemistry, Life Sciences - CBSE 10th level)", "Basics of Computers", "Static GK"]}, "2nd Stage CBT (Mains) Syllabus": {"Mathematics": ["Entire 1st Stage syllabus with increased difficulty and calculation intensity."], "General Intelligence and Reasoning": ["Entire 1st Stage syllabus with more complex and time-consuming questions."], "General Awareness": ["In-depth coverage of the 1st Stage syllabus", "Strong emphasis on General Science", "Deeper questions on Indian Polity, Economy, and recent Current Affairs."]}}}};
+        
         document.addEventListener('DOMContentLoaded', () => {
+            // --- STATE MANAGEMENT ---
+            let progress = JSON.parse(localStorage.getItem('syllabusProgress')) || {};
+            let activeFilters = { exam: new Set(), weight: new Set() };
+            
+            // --- THEME LOGIC ---
             const themeToggle = document.getElementById('theme-toggle');
-            const sunIcon = document.getElementById('theme-toggle-sun');
-            const moonIcon = document.getElementById('theme-toggle-moon');
-            const subjectConfig = {
-                "Quantitative Aptitude": { 
-                    icon: `<svg class="h-6 w-6 mr-3" style="color: var(--accent-1)" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
-                    colorClasses: "border-l-[var(--accent-1)]",
-                },
-                "General Intelligence & Reasoning": {
-                    icon: `<svg class="h-6 w-6 mr-3" style="color: var(--accent-2)" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2 1m2-1l-2-1m2 1V2M8 7l2 1M6 7l2-1M8 7V4.5M12 11V9M12 15v2M12 15a3 3 0 01-3 3H9a3 3 0 01-3-3v-2m6-4a3 3 0 00-3-3H9a3 3 0 00-3 3v2m6 4a3 3 0 013 3h1a3 3 0 013-3v-2m-6-4a3 3 0 003-3h1a3 3 0 003 3v2" /></svg>`,
-                    colorClasses: "border-l-[var(--accent-2)]",
-                },
-                "English Language": {
-                    icon: `<svg class="h-6 w-6 mr-3" style="color: var(--accent-3)" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m4 0v2M3 17h12M9 15v2m4 0v2M4 11h16M4 7h16" /></svg>`,
-                    colorClasses: "border-l-[var(--accent-3)]",
-                },
-                "General Awareness, Science & Computers": {
-                    icon: `<svg class="h-6 w-6 mr-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 16.95l.707.707a1 1 0 001.414 0l.707-.707M7.737 4.05l.707-.707a1 1 0 011.414 0l.707.707M15.263 16.95l-.707.707a1 1 0 01-1.414 0l-.707-.707M15.263 4.05l-.707-.707a1 1 0 00-1.414 0l-.707.707M9 11a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" /></svg>`,
-                    colorClasses: "border-l-emerald-500",
-                }
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            const sunIcons = document.querySelectorAll('.sun-icon');
+            const moonIcons = document.querySelectorAll('.moon-icon');
+            
+            const updateIcons = () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                sunIcons.forEach(i => i.classList.toggle('hidden', isDark));
+                moonIcons.forEach(i => i.classList.toggle('hidden', !isDark));
             };
-
-            const updateIcon = () => {
-                if (document.documentElement.classList.contains('dark')) {
-                    sunIcon.classList.add('hidden');
-                    moonIcon.classList.remove('hidden');
-                } else {
-                    sunIcon.classList.remove('hidden');
-                    moonIcon.classList.add('hidden');
-                }
-            };
-            themeToggle.addEventListener('click', () => {
+            const toggleTheme = () => {
                 document.documentElement.classList.toggle('dark');
                 localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-                updateIcon();
+                updateIcons();
                 updateChartTheme();
-            });
-            updateIcon();
+            };
+            themeToggle.addEventListener('click', toggleTheme);
+            themeToggleMobile.addEventListener('click', toggleTheme);
 
-            function createAccordion(containerId, data) {
+            // --- MOBILE MENU LOGIC ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('translate-x-full');
+            });
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+
+            // --- ACCORDION LOGIC ---
+            function setupAccordions(containerSelector) {
+                document.querySelectorAll(`${containerSelector} .accordion-button`).forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.currentTarget.classList.toggle('active');
+                        const accordionContent = e.currentTarget.nextElementSibling;
+                        accordionContent.style.maxHeight = e.currentTarget.classList.contains('active') ? accordionContent.scrollHeight + 'px' : '0px';
+                    });
+                });
+            }
+
+            // --- RENDERERS ---
+            function createUnifiedAccordion(containerId, data) {
                 const container = document.getElementById(containerId);
                 if (!container) return;
                 let html = '';
+                const subjectIcons = { quant: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M3 6a3 3 0 116 0v2a3 3 0 11-6 0V6zM14 5a3 3 0 10-6 0v2a3 3 0 106 0V5zM3 13a3 3 0 116 0v2a3 3 0 11-6 0v-2zM11 13a3 3 0 100 6h6a3 3 0 100-6h-6z" /></svg>`, reason: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" /></svg>`, eng: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4a2 2 0 012 2v2h4a2 2 0 012 2v4a2 2 0 01-2 2h-4a2 2 0 01-2-2V8H6a2 2 0 01-2-2V4zm2 2v2h4V6H6zm6 4v4H8v-4h4z" clip-rule="evenodd" /></svg>`, ga: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a6 6 0 00-6 6c0 1.887.832 3.554 2.102 4.63.17.15.352.29.544.417l.882.529A6.004 6.004 0 0010 18a6 6 0 006-6c0-1.887-.832-3.554-2.102-4.63a11.93 11.93 0 00-.544-.417l-.882-.529A6.004 6.004 0 0010 2zm0 8a2 2 0 100-4 2 2 0 000 4z" /></svg>` };
+                const unifiedSubjectConfig = {"Quantitative Aptitude": {icon: subjectIcons.quant, colorClasses: "border-l-[var(--accent-1)]"}, "General Intelligence & Reasoning": {icon: subjectIcons.reason, colorClasses: "border-l-[var(--accent-2)]"}, "English Language": {icon: subjectIcons.eng, colorClasses: "border-l-[var(--accent-3)]"}, "General Awareness, Science & Computers": {icon: subjectIcons.ga, colorClasses: "border-l-[var(--accent-4)]"}};
+                
                 for (const [title, groups] of Object.entries(data)) {
-                    const config = subjectConfig[title] || { icon: '', colorClasses: ''};
-                    html += `<div class="glass-card rounded-xl shadow-sm mb-4 border-l-4 ${config.colorClasses}"><button class="accordion-button bg-transparent w-full flex items-center text-left p-4 md:p-5"><div class="flex items-center">${config.icon}<h3 class="font-bold text-lg md:text-xl tracking-tight">${title}</h3></div></button><div class="accordion-content"><div class="px-4 md:px-5 pb-4">`;
+                    const config = unifiedSubjectConfig[title] || { icon: '', colorClasses: ''};
+                    const subjectId = title.toLowerCase().replace(/[^a-z]+/g, '');
+                    html += `<div class="glass-card rounded-xl shadow-sm mb-4 border-l-4 ${config.colorClasses}"><button class="accordion-button bg-transparent w-full flex items-center justify-between text-left p-4 md:p-5"><div class="flex items-center">${config.icon}<h3 class="font-bold text-lg md:text-xl tracking-tight">${title}</h3></div></button><div class="accordion-content"><div class="px-4 md:px-5 pb-4"><div class="my-3"><div class="progress-bar-container"><div class="progress-bar" id="progress-${subjectId}"></div></div></div>`;
                     for (const [groupTitle, topics] of Object.entries(groups)) {
-                        html += `<h4 class="text-base font-bold pt-4 pb-2 text-primary/90">${groupTitle}</h4><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">`;
+                        html += `<h4 class="text-base font-bold pt-4 pb-2 text-primary/90">${groupTitle}</h4><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">`; // Responsive Grid
                         topics.forEach(topic => {
                             const examTags = topic.exams.map(exam => `<span class="tag tag-exam-${exam.toLowerCase()}">${exam}</span>`).join('');
                             let weightTag = '';
-                            if (topic.weight === 'vh') weightTag = '<span class="tag tag-weight-vh">Very High</span>';
-                            else if (topic.weight === 'h') weightTag = '<span class="tag tag-weight-h">High</span>';
-                            else if (topic.weight === 'm') weightTag = '<span class="tag tag-weight-m">Medium</span>';
-                            else if (topic.weight === 'l') weightTag = '<span class="tag tag-weight-l">Low</span>';
-                            const exampleCue = topic.example ? `<div class="text-xs font-bold text-secondary group-hover:gradient-text mt-3">View Example &rarr;</div>` : '';
-                            const examsString = topic.exams.join(',');
-                            html += `<div class="topic-card group cursor-pointer flex-col p-3 rounded-lg bg-black/5 dark:bg-white/5" data-exams="${examsString}" data-weight="${topic.weight}" data-title="${topic.name}" data-example="${topic.example ? encodeURIComponent(topic.example) : ''}"><div class="flex-grow"><p class="font-bold text-sm text-primary">${topic.name}</p><div class="flex flex-wrap gap-1 mt-2">${examTags}${weightTag}</div></div>${exampleCue}</div>`;
+                            if (topic.weight === 'vh') weightTag = '<span class="tag tag-weight-vh">Very High</span>'; else if (topic.weight === 'h') weightTag = '<span class="tag tag-weight-h">High</span>'; else if (topic.weight === 'm') weightTag = '<span class="tag tag-weight-m">Medium</span>'; else if (topic.weight === 'l') weightTag = '<span class="tag tag-weight-l">Low</span>';
+                            const isChecked = progress[topic.id] ? 'checked' : '';
+                            html += `<div class="topic-card group flex flex-col p-3 rounded-lg bg-black/5 dark:bg-white/5" data-exams="${topic.exams.join(',')}" data-weight="${topic.weight}" data-id="${topic.id}" data-subject="${subjectId}" data-category="${topic.category || 'none'}"><input type="checkbox" class="syllabus-checkbox absolute top-2.5 right-2.5" ${isChecked}><div class="flex-grow pr-6" ${topic.example ? `data-title="${topic.name}" data-example="${encodeURIComponent(topic.example)}"` : ''}><p class="font-bold text-sm text-primary cursor-pointer">${topic.name}</p><div class="flex flex-wrap gap-1 mt-2">${examTags}${weightTag}</div></div>${topic.example ? `<div class="mt-auto pt-2 text-right"><span class="text-xs font-bold py-1 px-3 rounded-full bg-[var(--accent-2)] text-white/90 group-hover:bg-[var(--accent-3)] transition-colors cursor-pointer example-btn">Example &rarr;</span></div>` : ''}</div>`;
                         });
                         html += `</div>`;
                     }
                     html += `</div></div></div>`;
                 }
                 container.innerHTML = html;
+                updateAllProgressBars();
             }
-            createAccordion('unified-accordion', unifiedSyllabus);
 
-            document.querySelectorAll('.accordion-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    const accordionContent = button.nextElementSibling;
-                    button.classList.toggle('active');
-                    accordionContent.style.maxHeight = button.classList.contains('active') ? accordionContent.scrollHeight + 'px' : '0px';
-                });
-            });
+            function createDetailedSyllabusCards(targetId, data) {
+                 const container = document.getElementById(targetId);
+                 if (!container || !data) return;
+                 let html = '<div class="pt-4"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6">';
+                 const { stages } = data;
+                 
+                 for(const [stage, content] of Object.entries(stages)) {
+                     html += `<div class="glass-card p-6 rounded-2xl flex flex-col"><h3 class="text-xl font-bold mb-4 border-b border-slate-400/20 pb-3">${stage}</h3><div class="space-y-5 flex-grow">`;
+                     
+                     if (Object.values(content)[0] instanceof Array) {
+                         for (const [subject, topics] of Object.entries(content)) {
+                             html += `<div><h4 class="font-semibold text-primary/90 text-lg mb-3">${subject}</h4><div class="flex flex-wrap gap-2">`;
+                             topics.forEach(topic => { html += `<span class="topic-chip">${topic}</span>`; });
+                             html += `</div></div>`;
+                         }
+                     } else { 
+                         for (const [paper, modules] of Object.entries(content)) {
+                             html += `<div class="pl-3 border-l-2 border-[var(--accent-1)]"><h4 class="font-bold text-lg">${paper}</h4><div class="space-y-4 mt-3">`
+                             for (const [moduleName, topics] of Object.entries(modules)) {
+                                 html += `<div><h5 class="font-semibold text-primary/90">${moduleName}</h5><div class="flex flex-wrap gap-2 mt-2">`;
+                                 topics.forEach(topic => { html += `<span class="topic-chip">${topic}</span>`; });
+                                 html += `</div></div>`;
+                             }
+                             html += `</div></div>`;
+                         }
+                     }
+                     html += `</div></div>`;
+                 }
+                 html += `</div></div>`;
+                 container.innerHTML = html;
+            }
 
-            // Modal Logic
-            const modal = document.getElementById('questionModal');
-            const closeModalBtn = document.getElementById('closeModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalQuestion = modal.querySelector('#modalBody p');
-            const modalAnswer = modal.querySelector('#modalBody div');
-            document.getElementById('unified-accordion').addEventListener('click', e => {
-                const card = e.target.closest('.topic-card');
-                if (card && card.dataset.example) {
-                    const { title, example } = card.dataset;
-                    const [question, answer] = decodeURIComponent(example).split('\n\n**Answer:**');
-                    modalTitle.textContent = title;
-                    modalQuestion.textContent = question.trim();
-                    const answerText = answer ? `<strong style="color: var(--modal-solution-border-bright)">Answer:</strong> <span style="color: var(--modal-solution-text-bright)">${answer.trim()}</span>` : '';
-                    modalAnswer.innerHTML = answerText;
-                    modal.style.display = 'flex';
-                }
-            });
-            closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
-            modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+            // --- INTERACTIVITY LOGIC ---
+            function setupUnifiedSyllabusInteractivity() {
+                const container = document.getElementById('unified-accordion-container');
+                if (!container) return;
+                const modal = document.getElementById('questionModal');
+                const closeModalBtn = document.getElementById('closeModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalQuestion = modal.querySelector('#modalBody p');
+                const modalAnswer = modal.querySelector('#modalBody div');
 
-            // --- Combined Filter Logic ---
-            const examFilterContainer = document.getElementById('exam-filter');
-            const weightageFilterSelect = document.getElementById('weightage-filter-select');
-            const topicCards = document.querySelectorAll('.topic-card');
-            let currentJobFilter = 'all';
-            let currentWeightFilter = 'all';
+                container.addEventListener('click', e => {
+                    const card = e.target.closest('.topic-card');
+                    if (!card) return;
+                    
+                    if (e.target.classList.contains('syllabus-checkbox')) {
+                        const topicId = card.dataset.id;
+                        progress[topicId] = e.target.checked;
+                        localStorage.setItem('syllabusProgress', JSON.stringify(progress));
+                        updateProgressBar(card.dataset.subject);
+                        return;
+                    }
 
-            function applyFilters() {
-                topicCards.forEach(card => {
-                    const cardExams = card.dataset.exams;
-                    const cardWeight = card.dataset.weight;
-
-                    const jobMatch = currentJobFilter === 'all' || cardExams.includes(currentJobFilter);
-                    const weightMatch = currentWeightFilter === 'all' || cardWeight === currentWeightFilter;
-
-                    if (jobMatch && weightMatch) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
+                    if (e.target.classList.contains('example-btn')) {
+                        const exampleData = card.querySelector('[data-example]');
+                         if (exampleData && exampleData.dataset.example) {
+                            const { title, example } = exampleData.dataset;
+                            const [question, answer] = decodeURIComponent(example).split('\n\n**Answer:**');
+                            modalTitle.textContent = title;
+                            modalQuestion.textContent = question.trim();
+                            const answerText = answer ? `<strong style="color: var(--modal-solution-border-bright)">Answer:</strong> <span style="color: var(--modal-solution-text-bright)">${answer.trim()}</span>` : '';
+                            modalAnswer.innerHTML = answerText;
+                            modal.style.display = 'flex';
+                         }
                     }
                 });
+                closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+                modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+            }
+            
+            function setupJobSelectors() {
+                const selectorCards = document.querySelectorAll('.job-selector-card');
+                const contentPanels = document.querySelectorAll('.detailed-syllabus-content');
 
-                // Recalculate height of any open accordions to prevent content clipping
-                setTimeout(() => {
-                    document.querySelectorAll('.accordion-button.active').forEach(button => {
-                        const content = button.nextElementSibling;
-                        content.style.maxHeight = content.scrollHeight + 'px';
+                selectorCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        const targetId = card.dataset.target;
+                        const targetPanel = document.getElementById(targetId);
+
+                        if (card.classList.contains('active')) {
+                            card.classList.remove('active');
+                            targetPanel.style.maxHeight = '0px';
+                            return;
+                        }
+
+                        selectorCards.forEach(c => c.classList.remove('active'));
+                        contentPanels.forEach(p => p.style.maxHeight = '0px');
+                        
+                        card.classList.add('active');
+                        targetPanel.style.maxHeight = targetPanel.scrollHeight + 'px';
                     });
-                }, 10); // A small delay ensures the browser has repainted
+                });
             }
 
-            examFilterContainer.addEventListener('click', e => {
-                const filterButton = e.target.closest('button');
-                if (!filterButton) return;
-                
-                currentJobFilter = filterButton.dataset.filter;
-                examFilterContainer.querySelector('.active-filter')?.classList.remove('active-filter');
-                filterButton.classList.add('active-filter');
-                applyFilters();
-            });
+            // --- PROGRESS BAR LOGIC ---
+            function updateProgressBar(subjectId) {
+                const progressBar = document.getElementById(`progress-${subjectId}`);
+                if (!progressBar) return;
+                const topicCards = document.querySelectorAll(`.topic-card[data-subject="${subjectId}"]`);
+                const checkedCards = document.querySelectorAll(`.topic-card[data-subject="${subjectId}"] .syllabus-checkbox:checked`);
+                const percentage = topicCards.length > 0 ? (checkedCards.length / topicCards.length) * 100 : 0;
+                progressBar.style.width = `${percentage}%`;
+            }
+            function updateAllProgressBars() {
+                const subjects = new Set([...document.querySelectorAll('.topic-card')].map(c => c.dataset.subject));
+                subjects.forEach(updateProgressBar);
+            }
 
-            weightageFilterSelect.addEventListener('change', e => {
-                currentWeightFilter = e.target.value;
-                applyFilters();
-            });
+            // --- FILTERING LOGIC ---
+            function applyFilters() {
+                const topicCards = document.querySelectorAll('.topic-card');
+                const clearBtn = document.getElementById('clear-filters');
+                const showClearBtn = activeFilters.exam.size > 0 || activeFilters.weight.size > 0;
+                clearBtn.classList.toggle('hidden', !showClearBtn);
 
+                topicCards.forEach(card => {
+                    const exams = card.dataset.exams.split(',');
+                    const weight = card.dataset.weight;
+                    
+                    const examMatch = activeFilters.exam.size === 0 || exams.some(exam => activeFilters.exam.has(exam));
+                    const weightMatch = activeFilters.weight.size === 0 || activeFilters.weight.has(weight);
 
-            // Chart Logic
+                    card.style.display = (examMatch && weightMatch) ? 'flex' : 'none';
+                });
+                 document.querySelectorAll('.accordion-button.active').forEach(btn => {
+                     const content = btn.nextElementSibling;
+                     content.style.maxHeight = content.scrollHeight + 'px';
+                 });
+            }
+            function setupFilters() {
+                document.querySelectorAll('.filter-button').forEach(button => {
+                    button.addEventListener('click', e => {
+                        const { filter, filterGroup } = e.target.dataset;
+                        e.target.classList.toggle('active');
+                        if (activeFilters[filterGroup].has(filter)) {
+                            activeFilters[filterGroup].delete(filter);
+                        } else {
+                            activeFilters[filterGroup].add(filter);
+                        }
+                        applyFilters();
+                    });
+                });
+                document.getElementById('clear-filters').addEventListener('click', () => {
+                    activeFilters = { exam: new Set(), weight: new Set() };
+                    document.querySelectorAll('.filter-button.active').forEach(b => b.classList.remove('active'));
+                    applyFilters();
+                });
+            }
+
+            // --- CHART LOGIC ---
             let charts = {};
-            const getChartOptions = (isPieOrDoughnut = false) => {
+            const getChartOptions = () => {
                 const isDark = document.documentElement.classList.contains('dark');
                 const fontColor = isDark ? '#94a3b8' : '#64748b';
-                const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
-                const baseOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: fontColor, font: { size: 12, family: 'Manrope' } } }, tooltip: { titleFont: { family: 'Poppins' }, bodyFont: { family: 'Manrope' }, titleColor: '#fff', bodyColor: '#ddd', backgroundColor: '#1e293b', padding: 10, cornerRadius: 8 } } };
-                if (isPieOrDoughnut) return baseOptions;
-                return { ...baseOptions, scales: { y: { ticks: { color: fontColor }, grid: { color: gridColor, drawOnChartArea: false } }, x: { ticks: { color: fontColor }, grid: { color: gridColor } } } };
+                return { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: fontColor, font: { size: 12, family: 'Manrope' } } }, tooltip: { titleFont: { family: 'Poppins' }, bodyFont: { family: 'Manrope' }, titleColor: '#fff', bodyColor: '#ddd', backgroundColor: '#1e293b', padding: 10, cornerRadius: 8 } } };
             };
+            function highlightTopics(topicIds) {
+                const foundationSection = document.getElementById('foundation');
+                foundationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const firstCard = document.querySelector(`.topic-card[data-id="${topicIds[0]}"]`);
+                if (!firstCard) return;
+                const accordionBtn = firstCard.closest('.glass-card').querySelector('.accordion-button');
+                if (!accordionBtn.classList.contains('active')) {
+                    accordionBtn.click();
+                }
+                setTimeout(() => {
+                    firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    topicIds.forEach(id => {
+                        const card = document.querySelector(`.topic-card[data-id="${id}"]`);
+                        if(card) {
+                            card.classList.remove('highlight-topic');
+                            void card.offsetWidth;
+                            card.classList.add('highlight-topic');
+                        }
+                    });
+                }, 400);
+            }
             function createCharts() {
-                const palette = {
-                    ssc: ['#4f46e5', '#a855f7', '#facc15'],
-                    bank: ['#60a5fa', '#d946ef'],
-                    rail: ['#10b981', '#3b82f6', '#facc15', '#6b7280']
-                };
+                const palette = { ssc: ['#4f46e5', '#a855f7', '#facc15'], bank: ['#60a5fa', '#d946ef'], rail: ['#10b981', '#3b82f6', '#facc15', '#6b7280'] };
                 const sscCtx = document.getElementById('sscMathsChart')?.getContext('2d');
-                if(sscCtx) charts.ssc = new Chart(sscCtx, { 
-                    type: 'pie', 
-                    data: { labels: ['Advanced Maths', 'Arithmetic', 'Others'], datasets: [{ data: [65, 25, 10], backgroundColor: palette.ssc, borderWidth: 0 }] }, 
-                    options: getChartOptions(true)
-                });
+                if(sscCtx) {
+                    charts.ssc = new Chart(sscCtx, { type: 'pie', data: { labels: ['Advanced Maths', 'Arithmetic', 'Others'], datasets: [{ data: [65, 25, 10], backgroundColor: palette.ssc, borderWidth: 0 }] }, options: getChartOptions() });
+                    sscCtx.canvas.onclick = (e) => {
+                        const activePoints = charts.ssc.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
+                        if (activePoints.length) {
+                            const index = activePoints[0].index;
+                            if (index === 0) highlightTopics(['alg', 'geo_lines', 'geo_tri', 'geo_circ', 'mens_2d', 'mens_3d', 'trigo']);
+                            if (index === 1) highlightTopics(['perc', 'pnl', 'ratio', 'avg', 'tnw', 'tsd', 'ci', 'si']);
+                        }
+                    };
+                }
                 const bankCtx = document.getElementById('bankingMainsChart')?.getContext('2d');
-                if(bankCtx) charts.bank = new Chart(bankCtx, { 
-                    type: 'pie', 
-                    data: { labels: ['Core Topics', 'DI & Puzzles'], datasets: [{ data: [22.5, 77.5], backgroundColor: palette.bank, borderWidth: 0 }] }, 
-                    options: getChartOptions(true)
-                });
+                if(bankCtx) {
+                    charts.bank = new Chart(bankCtx, { type: 'pie', data: { labels: ['DI & Puzzles', 'Core Topics'], datasets: [{ data: [77.5, 22.5], backgroundColor: palette.bank, borderWidth: 0 }] }, options: getChartOptions() });
+                    bankCtx.canvas.onclick = () => highlightTopics(['puzzle', 'rc', 'cloze', 'para_jumble']);
+                }
                 const railCtx = document.getElementById('railwayGroupDChart')?.getContext('2d');
-                if(railCtx) charts.rail = new Chart(railCtx, { 
-                    type: 'pie', 
-                    data: { labels: ['Science', 'Reasoning', 'Maths', 'GA & CA'], datasets: [{ data: [25, 30, 25, 20], backgroundColor: palette.rail, borderWidth: 0 }] }, 
-                    options: getChartOptions(true) 
-                });
+                if(railCtx) {
+                    charts.rail = new Chart(railCtx, { type: 'pie', data: { labels: ['Science', 'Reasoning', 'Maths', 'GA & CA'], datasets: [{ data: [25, 30, 25, 20], backgroundColor: palette.rail, borderWidth: 0 }] }, options: getChartOptions() });
+                    railCtx.canvas.onclick = (e) => {
+                         const activePoints = charts.rail.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
+                         if (activePoints.length && activePoints[0].index === 0) {
+                             highlightTopics(['phy', 'chem', 'bio']);
+                         }
+                    };
+                }
             }
-            function updateChartTheme() {
-                Object.values(charts).forEach(chart => {
-                    if(!chart) return;
-                    const isPie = chart.config.type === 'pie' || chart.config.type === 'doughnut';
-                    const newOptions = getChartOptions(isPie);
-                    Object.assign(chart.options, newOptions);
-                    chart.update();
-                });
-            }
+            function updateChartTheme() { Object.values(charts).forEach(chart => { if(chart) { Object.assign(chart.options, getChartOptions()); chart.update(); } }); }
+
+            // --- INITIALIZATION ---
+            updateIcons();
+            createDetailedSyllabusCards('ssc-content', detailedSyllabus.SSC);
+            createDetailedSyllabusCards('banking-content', detailedSyllabus.Banking);
+            createDetailedSyllabusCards('railways-content', detailedSyllabus.Railways);
+            createUnifiedAccordion('unified-accordion-container', unifiedSyllabus);
+            setupUnifiedSyllabusInteractivity();
+            setupAccordions('#unified-accordion-container');
+            setupJobSelectors();
+            setupFilters();
             createCharts();
         });
     </script>
