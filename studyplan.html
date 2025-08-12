@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Chosen Palette: Energetic & Playful -->
-<!-- Application Structure Plan: The SPA is a tab-based dashboard with two primary views: "Prelims Foundation" and "Mains Advanced". The "Full Syllabus Explorer," which contains a large amount of reference data, has been moved into its own dedicated popup modal. This cleans up the main interface, prioritizing the interactive weekly planners and the data visualizations. This structure enhances usability by separating the primary interactive tools (the planners) from the secondary reference tool (the full syllabus list). -->
-<!-- Visualization & Content Choices: 
-- Weekly Focus Navigator: Goal: Inform/Explore. Viz: Interactive HTML Card. Interaction: Tabs switch between Prelims/Mains data sources. A popup modal allows for quick selection of any week. Justification: This is the core interactive element, allowing focused exploration of the detailed plan.
-- Syllabus Breakdown: Goal: Compare. Viz: Dynamic Horizontal Bar Chart (Chart.js). Interaction: The chart's data and labels update when the user switches between the Prelims and Mains tabs. Justification: Provides a clear, stage-specific comparison of subject weightage. Canvas rendering used.
-- Syllabus Navigator: Goal: Organize. Viz: Accordion List in a Modal (HTML/CSS/JS). Interaction: A main button opens the modal; inside, users can click to expand subjects. Justification: Moving this large reference list to a modal declutters the main view and provides a focused environment for exploration.
--->
-<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +13,7 @@
         body {
             font-family: 'Manrope', sans-serif;
             background-color: #f8f9fa;
+            background-image: radial-gradient(circle at 20% 50%, rgba(17, 138, 178, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 30%, rgba(255, 107, 107, 0.05) 0%, transparent 50%);
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
@@ -54,16 +47,37 @@
         }
         .tab-button {
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+            z-index: 0;
+        }
+        .tab-button:hover::before {
+            transform: translateX(100%);
         }
         .tab-button.active {
             background-color: #118AB2;
             color: white;
             box-shadow: 0 4px 14px 0 rgba(17, 138, 178, 0.39);
+            z-index: 1;
+        }
+        .tab-button.active::before {
+            display: none;
         }
         .exam-tag {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            padding: 0.1rem 0.5rem;
+            padding: 0.1rem 0.4rem;
             border-radius: 9999px;
             text-transform: uppercase;
             flex-shrink: 0;
@@ -76,13 +90,93 @@
             position: fixed;
             inset: 0;
             background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
             z-index: 50;
             animation: fadeIn 0.3s ease;
+            place-items: center;
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         body.modal-open {
             overflow: hidden;
+        }
+        .navigator-card {
+            border: 2px solid transparent;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .navigator-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid #118AB2;
+            border-radius: 1.25rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        .navigator-card:hover::before {
+            opacity: 0.3;
+        }
+        .week-selector-btn {
+            transition: all 0.2s ease;
+        }
+        .week-selector-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .week-selector-btn.active-week {
+            background-color: #118AB2 !important;
+            color: white !important;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(17, 138, 178, 0.3);
+        }
+        .week-btn {
+            background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);
+            color: white;
+            font-weight: 600;
+        }
+        .week-btn:hover {
+            background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(17, 138, 178, 0.4);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(255, 107, 107, 0.4);
+        }
+        .btn-primary:disabled {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .modal-title {
+            background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #FF6B6B, #FFD166, #06D6A0, #118AB2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
     </style>
 </head>
@@ -92,7 +186,7 @@
 
         <header class="text-center my-8 md:my-12">
             <h2 class="text-xl md:text-2xl font-bold text-[#073B4C]">Club of Competition Presents</h2>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#118AB2]">Your 98-Week Mastery Plan</h1>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight accent-gradient">Your 98-Week Mastery Plan</h1>
             <p class="mt-4 text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">An interactive guide to mastering the Prelims and Mains syllabus using the "1-3-1 Method."</p>
         </header>
 
@@ -106,15 +200,13 @@
                 <div id="prelims-view">
                     <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#073B4C]">Prelims Foundation Phase</h2>
                     <p class="text-gray-600 mb-6">This 70-week phase is dedicated to building a rock-solid foundation across all core subjects. Your goal is to master the fundamental concepts required to clear the preliminary stage.</p>
-                    <div id="prelims-navigator" class="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border-t-4 border-[#FF6B6B]">
-                    </div>
+                    <div id="prelims-navigator" class="navigator-card p-4 sm:p-6 rounded-2xl shadow-lg border-t-4 border-[#FF6B6B]"></div>
                 </div>
 
                 <div id="mains-view" class="hidden">
                     <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#073B4C]">Mains Advanced Phase</h2>
                     <p class="text-gray-600 mb-6">This 28-week phase focuses on the advanced, in-depth topics crucial for the Mains exam. The goal here is to build on your foundation and develop specialized knowledge.</p>
-                    <div id="mains-navigator" class="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border-t-4 border-[#FFD166]">
-                    </div>
+                    <div id="mains-navigator" class="navigator-card p-4 sm:p-6 rounded-2xl shadow-lg border-t-4 border-[#FFD166]"></div>
                 </div>
             </section>
             
@@ -128,7 +220,7 @@
                 </section>
 
                 <section id="explorer-trigger" class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                     <div class="text-5xl mb-4 text-[#118AB2]">🗺️</div>
+                     <div class="text-5xl mb-4 text-[#118AB2] pulse">🗺️</div>
                      <h2 class="text-xl md:text-2xl font-bold mb-2 text-[#073B4C]">Full Syllabus Explorer</h2>
                      <p class="text-gray-600">Click here to open an interactive list of all 98 topics, tagged by exam and preparation stage.</p>
                 </section>
@@ -136,21 +228,20 @@
         </main>
     </div>
 
-    <div id="week-selector-modal" class="modal-overlay items-center justify-center">
+    <div id="week-selector-modal" class="modal-overlay">
         <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-2xl max-h-[80vh] flex flex-col">
             <div class="p-4 border-b flex justify-between items-center">
                 <h3 class="text-xl font-bold text-[#073B4C]">Select a Week</h3>
                 <button id="close-week-modal-btn" class="text-2xl font-bold text-gray-500 hover:text-black">&times;</button>
             </div>
-            <div id="modal-grid" class="p-6 overflow-y-auto grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
-            </div>
+            <div id="modal-grid" class="p-6 overflow-y-auto grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3"></div>
         </div>
     </div>
 
-    <div id="explorer-modal" class="modal-overlay items-center justify-center">
+    <div id="explorer-modal" class="modal-overlay">
         <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-4xl max-h-[90vh] flex flex-col">
             <div class="p-4 border-b flex justify-between items-center flex-shrink-0">
-                <h3 class="text-xl md:text-2xl font-bold text-[#073B4C]">Full Syllabus Explorer</h3>
+                <h3 class="text-xl md:text-2xl font-bold modal-title">Full Syllabus Explorer</h3>
                 <button id="close-explorer-modal-btn" class="text-2xl font-bold text-gray-500 hover:text-black">&times;</button>
             </div>
             <div class="p-6 overflow-y-auto flex-grow">
@@ -192,21 +283,49 @@
                     datasets: [{
                         label: 'Number of Topics',
                         data: Object.values(subjectCounts),
-                        backgroundColor: ['#FF6B6B', '#FFD166', '#06D6A0', '#118AB2', '#073B4C'],
+                        backgroundColor: Object.keys(subjectCounts).map(subject => subjectColors[subject] || '#073B4C'),
                         borderRadius: 6,
                     }]
                 };
 
                 if (subjectBreakdownChart) {
                     subjectBreakdownChart.data = chartData;
-                    subjectBreakdownChart.update();
+                    subjectBreakdownChart.update('none');
                 } else {
                     const ctx = document.getElementById('subjectBreakdownChart');
                     if (ctx) {
                         subjectBreakdownChart = new Chart(ctx, {
                             type: 'bar',
                             data: chartData,
-                            options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { ...chartTooltipCallback.plugins, legend: { display: false } }, scales: { x: { suggestedMax: 40 } } }
+                            options: { 
+                                indexAxis: 'y', 
+                                responsive: true, 
+                                maintainAspectRatio: false, 
+                                plugins: { 
+                                    ...chartTooltipCallback.plugins, 
+                                    legend: { display: false },
+                                    tooltip: {
+                                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                        titleColor: '#fff',
+                                        bodyColor: '#fff',
+                                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                                        borderWidth: 1,
+                                        cornerRadius: 6,
+                                        displayColors: false
+                                    }
+                                }, 
+                                scales: { 
+                                    x: { 
+                                        suggestedMax: 40,
+                                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                                        ticks: { color: '#6B7280' }
+                                    },
+                                    y: {
+                                        grid: { display: false },
+                                        ticks: { color: '#4B5563', font: { weight: '600' } }
+                                    }
+                                }
+                            }
                         });
                     }
                 }
@@ -222,17 +341,17 @@
             for (const subject in groupedBySubject) {
                 const items = groupedBySubject[subject];
                 const accordionItem = document.createElement('div');
-                accordionItem.className = 'border border-gray-200 rounded-lg';
+                accordionItem.className = 'border border-gray-200 rounded-lg overflow-hidden';
                 const button = document.createElement('button');
-                button.className = 'accordion-button w-full flex justify-between items-center p-4 text-left font-semibold';
-                button.innerHTML = `<span>${subject} (${items.length} topics)</span><span class="arrow text-xl font-light text-gray-500">→</span>`;
+                button.className = 'accordion-button w-full flex justify-between items-center p-4 text-left font-semibold text-gray-800 hover:bg-gray-50 transition-colors';
+                button.innerHTML = `<span class="flex items-center gap-2"><span class="text-lg" style="color: ${subjectColors[subject] || '#073B4C'}">•</span> ${subject} (${items.length} topics)</span><span class="arrow text-xl font-light text-gray-500 transition-transform">→</span>`;
                 const content = document.createElement('div');
-                content.className = 'accordion-content';
-                let listHTML = '<ul class="p-4 pt-0 space-y-2 bg-gray-50">';
+                content.className = 'accordion-content bg-gray-50';
+                let listHTML = '<ul class="p-4 pt-0 space-y-2">';
                 items.forEach(item => {
                     const stageTag = item.stage === 'M' ? '<span class="text-xs font-bold text-orange-500">[M]</span>' : '<span class="text-xs font-bold text-blue-500">[P]</span>';
                     const examTags = item.exams.map(exam => `<span class="exam-tag tag-${exam.toLowerCase()}">${exam}</span>`).join(' ');
-                    listHTML += `<li class="text-sm text-gray-700 p-2 rounded-md hover:bg-gray-100 transition-colors">
+                    listHTML += `<li class="text-sm text-gray-700 p-2 rounded-md hover:bg-white transition-colors border-l-2 border-transparent hover:border-gray-300">
                                     <div class="flex flex-wrap items-center gap-x-2">${stageTag} <span class="font-bold">${`Week ${item.week}:`}</span> <span class="flex-grow">${item.topic}</span></div>
                                     <div class="flex gap-1 flex-wrap mt-1 pl-6">${examTags}</div>
                                  </li>`;
@@ -254,11 +373,15 @@
             const showModal = (data, renderFunc) => {
                 modalGrid.innerHTML = '';
                 currentNavigatorRenderFunc = renderFunc;
+                const currentWeek = parseInt(document.querySelector('.week-btn').textContent);
                 data.forEach(item => {
                     const weekBtn = document.createElement('button');
                     weekBtn.textContent = item.week;
-                    weekBtn.className = 'p-2 border rounded-lg text-center font-semibold hover:bg-[#118AB2] hover:text-white transition-colors';
+                    weekBtn.className = 'week-selector-btn p-2 rounded-lg text-center font-semibold transition-all duration-200';
                     weekBtn.dataset.week = item.week;
+                    if (item.week === currentWeek) {
+                        weekBtn.classList.add('active-week');
+                    }
                     modalGrid.appendChild(weekBtn);
                 });
                 weekSelectorModal.style.display = 'flex';
@@ -293,12 +416,12 @@
                 container.innerHTML = `
                     <div class="flex items-center justify-between mb-4">
                         <span class="font-semibold text-gray-700">Selected Week:</span>
-                        <button id="${containerId}-week-btn" class="p-2 border border-gray-300 rounded-lg shadow-sm font-bold text-[#118AB2] w-28 text-center"></button>
+                        <button id="${containerId}-week-btn" class="week-btn p-2 px-4 rounded-lg shadow-md font-bold w-28 text-center"></button>
                     </div>
                     <div id="${containerId}-content"><p class="text-gray-500">Loading current topic...</p></div>
                     <div class="flex justify-between mt-4">
-                        <button id="${containerId}-prev-btn" class="bg-[#118AB2] text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-[#073B4C] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">← Prev</button>
-                        <button id="${containerId}-next-btn" class="bg-[#118AB2] text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-[#073B4C] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Next →</button>
+                        <button id="${containerId}-prev-btn" class="btn-primary py-2 px-4 rounded-lg shadow-md disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">← Prev</button>
+                        <button id="${containerId}-next-btn" class="btn-primary py-2 px-4 rounded-lg shadow-md disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">Next →</button>
                     </div>
                 `;
 
@@ -320,7 +443,7 @@
                                 <p class="text-lg text-gray-700 font-semibold">${weekData.topic}</p>
                             </div>
                             <div class="mt-2 flex gap-2 flex-wrap">${examTags}</div>
-                            <div class="mt-4 text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
+                            <div class="mt-4 text-sm text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-200">
                                 <p><strong>Mon:</strong> Learn Concept</p>
                                 <p><strong>Tue-Thu:</strong> Intensive Practice</p>
                                 <p><strong>Fri:</strong> Weekly Grand Test</p>
