@@ -3,508 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive 1-3-1 Study Plan</title>
+    <title>24-Month Weekly Study Plan for Government Exams</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Manrope', sans-serif;
-            background-color: #f8f9fa;
-            background-image: radial-gradient(circle at 20% 50%, rgba(17, 138, 178, 0.05) 0%, transparent 50%), radial-gradient(circle at 80% 30%, rgba(255, 107, 107, 0.05) 0%, transparent 50%);
+            background-color: #f8fafc;
         }
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3, h4 {
             font-family: 'Poppins', sans-serif;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 280px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
-        }
-        .accordion-button.active + .accordion-content {
-            max-height: 1500px;
-        }
-        .accordion-button .arrow {
-            transition: transform 0.3s ease;
-        }
-        .accordion-button.active .arrow {
-            transform: rotate(90deg);
-        }
-        .tab-button {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .tab-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%);
-            transform: translateX(-100%);
-            transition: transform 0.5s;
-            z-index: 0;
-        }
-        .tab-button:hover::before {
-            transform: translateX(100%);
-        }
-        .tab-button.active {
-            background-color: #118AB2;
-            color: white;
-            box-shadow: 0 4px 14px 0 rgba(17, 138, 178, 0.39);
-            z-index: 1;
-        }
-        .tab-button.active::before {
-            display: none;
-        }
-        .exam-tag {
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 0.1rem 0.4rem;
-            border-radius: 9999px;
-            text-transform: uppercase;
-            flex-shrink: 0;
-        }
-        .tag-ssc { background-color: #E0E7FF; color: #3730A3; }
-        .tag-banking { background-color: #FAE8FF; color: #86198F; }
-        .tag-railways { background-color: #E0F2FE; color: #0369A1; }
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(6px);
-            z-index: 50;
-            animation: fadeIn 0.3s ease;
-            place-items: center;
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        body.modal-open {
-            overflow: hidden;
-        }
-        .navigator-card {
-            border: 2px solid transparent;
-            background: white;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .navigator-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border: 2px solid #118AB2;
-            border-radius: 1.25rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        .navigator-card:hover::before {
-            opacity: 0.3;
-        }
-        .week-selector-btn {
-            transition: all 0.2s ease;
-        }
-        .week-selector-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .week-selector-btn.active-week {
-            background-color: #118AB2 !important;
-            color: white !important;
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(17, 138, 178, 0.3);
-        }
-        .week-btn {
-            background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);
-            color: white;
-            font-weight: 600;
-        }
-        .week-btn:hover {
-            background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(17, 138, 178, 0.4);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 14px rgba(255, 107, 107, 0.4);
-        }
-        .btn-primary:disabled {
-            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        .modal-title {
-            background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .accent-gradient {
-            background: linear-gradient(135deg, #FF6B6B, #FFD166, #06D6A0, #118AB2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
     </style>
 </head>
-<body class="text-[#073B4C]">
+<body class="text-gray-800">
 
-    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-7xl">
+    <div class="container mx-auto p-4 sm:p-8 max-w-5xl">
 
-        <header class="text-center my-8 md:my-12">
-            <h2 class="text-xl md:text-2xl font-bold text-[#073B4C]">From the Desk of Club of Competition</h2>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight accent-gradient">Your 98-Week Mastery Plan</h1>
-            <p class="mt-4 text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">Stop feeling overwhelmed. This is your smart, structured roadmap to crush your SSC, Banking, or Railways exams while you're still in college.</p>
+        <header class="text-center my-10">
+            <h2 class="text-2xl font-bold text-gray-700 mb-2">From the Desk of Club of Competition</h2>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-700">24-Month Specialized Exam Mastery Plan</h1>
+            <p class="mt-4 text-lg text-gray-600">A week-by-week breakdown of your entire study syllabus.</p>
+            <p class="mt-4 text-lg text-green-700 font-semibold">Designed for college students, this comprehensive plan is your key to cracking almost all major government exams.</p>
+            
+            <div class="mt-8 bg-gray-50 p-6 rounded-xl border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-800 text-center mb-4">Key Exams Covered by This Plan</h3>
+                <div class="flex flex-wrap justify-center items-center gap-3 text-sm">
+                    <span class="bg-blue-100 text-blue-800 font-medium px-3 py-1 rounded-full">SSC CGL</span>
+                    <span class="bg-blue-100 text-blue-800 font-medium px-3 py-1 rounded-full">SSC CHSL</span>
+                    <span class="bg-blue-100 text-blue-800 font-medium px-3 py-1 rounded-full">SSC CPO</span>
+                    <span class="bg-blue-100 text-blue-800 font-medium px-3 py-1 rounded-full">SSC MTS</span>
+                    <span class="bg-green-100 text-green-800 font-medium px-3 py-1 rounded-full">IBPS PO/Clerk</span>
+                    <span class="bg-green-100 text-green-800 font-medium px-3 py-1 rounded-full">SBI PO/Clerk</span>
+                    <span class="bg-green-100 text-green-800 font-medium px-3 py-1 rounded-full">IBPS RRB</span>
+                    <span class="bg-green-100 text-green-800 font-medium px-3 py-1 rounded-full">RBI Assistant</span>
+                    <span class="bg-red-100 text-red-800 font-medium px-3 py-1 rounded-full">RRB NTPC</span>
+                    <span class="bg-red-100 text-red-800 font-medium px-3 py-1 rounded-full">RRB Group D</span>
+                    <span class="bg-red-100 text-red-800 font-medium px-3 py-1 rounded-full">RRB ALP</span>
+                    <span class="bg-yellow-100 text-yellow-800 font-medium px-3 py-1 rounded-full">LIC AAO/ADO</span>
+                    <span class="bg-yellow-100 text-yellow-800 font-medium px-3 py-1 rounded-full">Insurance Exams</span>
+                    <span class="bg-purple-100 text-purple-800 font-medium px-3 py-1 rounded-full">UPSC CSE (Foundation)</span>
+                    <span class="bg-purple-100 text-purple-800 font-medium px-3 py-1 rounded-full">State PSCs (Foundation)</span>
+                </div>
+            </div>
         </header>
 
-        <main class="space-y-8">
-            <section id="prep-stage-selector" class="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg">
-                <div class="flex flex-col sm:flex-row border border-gray-200 rounded-xl p-1 mb-6 bg-gray-50">
-                    <button id="prelims-tab-btn" class="tab-button flex-1 p-3 font-bold rounded-lg active">Phase 1: Build Your Foundation (Weeks 1-70)</button>
-                    <button id="mains-tab-btn" class="tab-button flex-1 p-3 font-bold rounded-lg">Phase 2: Master the Advanced (Weeks 71-98)</button>
+        <div class="space-y-12">
+            
+            <section id="phase1">
+                <div class="bg-blue-600 text-white p-4 rounded-t-xl">
+                    <h2 class="text-3xl font-bold">Phase 1: Aptitude & Reasoning Foundation (Months 1-6)</h2>
                 </div>
+                <div class="bg-white p-6 rounded-b-xl shadow-lg space-y-8">
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">Quantitative Aptitude (Months 1-3)</h3>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">1</td><td class="p-3 border-b">1</td><td class="p-3 border-b">Number System, Simple and Decimal Fractions, Problems on Numbers</td></tr>
+                                <tr><td class="p-3 border-b">2</td><td class="p-3 border-b">Simplification, Square Roots & Cube Roots, Approximate Values</td></tr>
+                                <tr><td class="p-3 border-b">3</td><td class="p-3 border-b">Percentage, Profit & Loss</td></tr>
+                                <tr><td class="p-3 border-b">4</td><td class="p-3 border-b">Average, Ratio and Proportion, Problem on Ages</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">2</td><td class="p-3 border-b">5</td><td class="p-3 border-b">Partnership, Chain Rule</td></tr>
+                                <tr><td class="p-3 border-b">6</td><td class="p-3 border-b">Work & Time, Pipes & Cistern</td></tr>
+                                <tr><td class="p-3 border-b">7</td><td class="p-3 border-b">Speed, Time and Distance, Problems on Trains, Boats & Streams</td></tr>
+                                <tr><td class="p-3 border-b">8</td><td class="p-3 border-b">Simple Interest, Compound Interest</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="5">3</td><td class="p-3 border-b">9</td><td class="p-3 border-b">Alligation or Mixture, True Discount, Banker's Discount</td></tr>
+                                <tr><td class="p-3 border-b">10</td><td class="p-3 border-b">Logarithms, Surds & Indices, H.C.F and L.C.M</td></tr>
+                                <tr><td class="p-3 border-b">11</td><td class="p-3 border-b">Area and Perimeter, Volume & Surface Areas, Heights & Distances</td></tr>
+                                <tr><td class="p-3 border-b">12</td><td class="p-3 border-b">Permutations & Combinations, Probability, Stocks & Shares, Races and Games</td></tr>
+                                <tr><td class="p-3 border-b">13</td><td class="p-3 border-b">Data Interpretation: Table Charts, Bar Charts, Pie Charts, Line Charts</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <div id="prelims-view">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#073B4C]">Phase 1: Build Your Foundation</h2>
-                    <p class="text-gray-600 mb-6">Think of this as your semester syllabus, but for your dream job. This 70-week phase is about building rock-solid concepts in core subjects. Focus on understanding, not just memorizing. You've got this!</p>
-                    <div id="prelims-navigator" class="navigator-card p-4 sm:p-6 rounded-2xl shadow-lg border-t-4 border-[#FF6B6B]"></div>
-                </div>
-
-                <div id="mains-view" class="hidden">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4 text-[#073B4C]">Phase 2: Master the Advanced</h2>
-                    <p class="text-gray-600 mb-6">Now that your foundation is strong, it's time to go deep. This 28-week phase focuses on the tougher, high-scoring topics. It's about applying your knowledge and thinking critically.</p>
-                    <div id="mains-navigator" class="navigator-card p-4 sm:p-6 rounded-2xl shadow-lg border-t-4 border-[#FFD166]"></div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">General Intelligence & Reasoning (Months 4-6)</h3>
+                        <table class="w-full text-left border-collapse">
+                                <thead>
+                                <tr>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">4</td><td class="p-3 border-b">14</td><td class="p-3 border-b">Core Reasoning: Coding Decoding, Direction Test, Blood Relation</td></tr>
+                                <tr><td class="p-3 border-b">15</td><td class="p-3 border-b">Mathematical Reasoning: Mathematical Operation, Inequality, Arithmetical Reasoning</td></tr>
+                                <tr><td class="p-3 border-b">16</td><td class="p-3 border-b">Ordering & Arrangement: Ranking Test, Order Test, Alphabet Test</td></tr>
+                                <tr><td class="p-3 border-b">17</td><td class="p-3 border-b">Verbal Ability: Word Formation, Logical Sequence of Words, Conditional Numbers/Letters</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">5</td><td class="p-3 border-b">18</td><td class="p-3 border-b">Pattern Recognition: Series, Analogy, Classification</td></tr>
+                                <tr><td class="p-3 border-b">19</td><td class="p-3 border-b">Logical Deduction: Find the Missing Number/Letter, Logical Venn Diagram, Syllogism</td></tr>
+                                <tr><td class="p-3 border-b">20</td><td class="p-3 border-b">Analytical Puzzles: Puzzle Test, Decision Making, Matrix</td></tr>
+                                <tr><td class="p-3 border-b">21</td><td class="p-3 border-b">Advanced Reasoning: Data Sufficiency, Input and Password (Input-Output)</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="5">6</td><td class="p-3 border-b">22</td><td class="p-3 border-b">Statement-based Reasoning: Statement & Course of Action, Conclusions, Arguments, Assumptions</td></tr>
+                                <tr><td class="p-3 border-b">23</td><td class="p-3 border-b">Miscellaneous Verbal: Dice, Clock, Calendar, Cube and Cuboid</td></tr>
+                                <tr><td class="p-3 border-b">24</td><td class="p-3 border-b">Non-Verbal (Pattern & Images): Series, Analogy, Classification, Mirror-Images, Water-Images</td></tr>
+                                <tr><td class="p-3 border-b">25</td><td class="p-3 border-b">Non-Verbal (Spatial): Paper Folding, Paper Cutting, Complete the Figure, Hidden Figures</td></tr>
+                                <tr><td class="p-3 border-b">26</td><td class="p-3 border-b">Non-Verbal (Advanced): Grouping, Figure Matrix, Figure Formation, Rule Detection, Dot Situations</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <section id="breakdown" class="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg">
-                    <h2 class="text-2xl md:text-3xl font-bold text-center mb-2 text-[#073B4C]">Your Study Load</h2>
-                    <p id="chart-title" class="text-center text-gray-600 mb-8">Here's how your time is split across subjects in Phase 1.</p>
-                    <div class="chart-container">
-                        <canvas id="subjectBreakdownChart"></canvas>
+
+            <section id="phase2">
+                <div class="bg-green-600 text-white p-4 rounded-t-xl">
+                    <h2 class="text-3xl font-bold">Phase 2: General Awareness, Science & Language (Months 7-24)</h2>
+                </div>
+                <div class="bg-white p-6 rounded-b-xl shadow-lg space-y-8">
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">English, Descriptive Skills & Computers (Months 7-8)</h3>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">7</td><td class="p-3 border-b">27</td><td class="p-3 border-b">Grammar: Error Detection, Articles, Tenses, Common Errors</td></tr>
+                                <tr><td class="p-3 border-b">28</td><td class="p-3 border-b">Grammar: Conditionals, Active & Passive Voices, Direct & Indirect Speech</td></tr>
+                                <tr><td class="p-3 border-b">29</td><td class="p-3 border-b">Comprehension: Sentence Improvement, Reconstruction, Rearranging Sentences</td></tr>
+                                <tr><td class="p-3 border-b">30</td><td class="p-3 border-b">Comprehension: Sentence Completion, Connectors, Cloze Test, Comprehension</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">8</td><td class="p-3 border-b">31</td><td class="p-3 border-b">Vocabulary: Synonyms, Double Synonyms, Homonyms, Antonyms</td></tr>
+                                <tr><td class="p-3 border-b">32</td><td class="p-3 border-b">Vocabulary: Spelling Errors, Substitution, Idioms and Phrases</td></tr>
+                                <tr><td class="p-3 border-b">33</td><td class="p-3 border-b">Essay Writing: Structure & Practice on Social Issues</td></tr>
+                                <tr><td class="p-3 border-b">34</td><td class="p-3 border-b">Computers: All core topics</td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                </section>
 
-                <section id="explorer-trigger" class="bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                     <div class="text-5xl mb-4 text-[#118AB2] pulse">🔍</div>
-                     <h2 class="text-xl md:text-2xl font-bold mb-2 text-[#073B4C]">Explore the Full Syllabus</h2>
-                     <p class="text-gray-600">Click here to see every single topic mapped out for all 98 weeks. Perfect for when you want to plan ahead or just see the big picture.</p>
-                </section>
-            </div>
-        </main>
-    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">History & Geography (Months 9-12)</h3>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="p-3 font-bold border-b">9</td><td class="p-3 border-b">Ancient History: Stone Age, Indus Valley, Vedic Period, Mahajanapadas, Mauryas, Guptas.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">10</td><td class="p-3 border-b">Medieval History: Regional Powers, Delhi Sultanate, Mughals, Architecture, Religious Movements.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">11</td><td class="p-3 border-b">Modern History: EIC, Administration, Revolts (1857), Social Reforms, Independence Movement.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">12</td><td class="p-3 border-b">Geography: Indian Physical Features, Rivers, Climate, Soils, Agriculture, Resources, World Geography.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-    <div id="week-selector-modal" class="modal-overlay">
-        <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-2xl max-h-[80vh] flex flex-col">
-            <div class="p-4 border-b flex justify-between items-center">
-                <h3 class="text-xl font-bold text-[#073B4C]">Jump to Any Week</h3>
-                <button id="close-week-modal-btn" class="text-2xl font-bold text-gray-500 hover:text-black">&times;</button>
-            </div>
-            <div id="modal-grid" class="p-6 overflow-y-auto grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3"></div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">Polity & Economy (Months 13-16)</h3>
+                        <table class="w-full text-left border-collapse">
+                                <thead>
+                                <tr><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="p-3 font-bold border-b">13</td><td class="p-3 border-b">Indian Polity: Constitution, Preamble, Union & Territory, Citizenship, Fundamental Rights & Duties.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">14</td><td class="p-3 border-b">Indian Polity: Government (President, PM, Parliament), Judiciary, State & Local Government.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">15</td><td class="p-3 border-b">Indian Economy: History, Planning, Reforms, Key Sectors, National Income, Poverty, Employment.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">16</td><td class="p-3 border-b">Indian Economy: Money & Banking, Budget, Foreign Trade, Socio-economic Issues.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">Science & Miscellaneous GK (Months 17-24)</h3>
+                        <table class="w-full text-left border-collapse">
+                                <thead>
+                                <tr><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="p-3 font-bold border-b">17-18</td><td class="p-3 border-b">Physics: Introduction, Units, Motion, Force, Work/Energy/Power, Gravitation, Properties of Matter, Waves, Heat, Light, Electricity, Magnetism.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">19-20</td><td class="p-3 border-b">Chemistry: Matter, Atomic Structure, Radioactivity, Periodic Table, Chemical Bonds & Reactions, Acids/Bases/Salts, Organic Chemistry.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">21-22</td><td class="p-3 border-b">Biology: Classification, Cell Biology, Plant Kingdom, Animal Kingdom, Human Body Systems, Diseases, Nutrition, Genetics, Biotechnology.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">23</td><td class="p-3 border-b">Environment & Ecology: Core Concepts, Factors, Components.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">24</td><td class="p-3 border-b">Miscellaneous GK: Sports, Awards, World Organizations, Books & Authors, Indian Culture.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
         </div>
+
     </div>
 
-    <div id="explorer-modal" class="modal-overlay">
-        <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-4xl max-h-[90vh] flex flex-col">
-            <div class="p-4 border-b flex justify-between items-center flex-shrink-0">
-                <h3 class="text-xl md:text-2xl font-bold modal-title">The Complete Syllabus Map</h3>
-                <button id="close-explorer-modal-btn" class="text-2xl font-bold text-gray-500 hover:text-black">&times;</button>
-            </div>
-            <div class="p-6 overflow-y-auto flex-grow">
-                <p class="text-gray-600 mb-4 text-sm">Your entire journey, week by week. [P] = Phase 1 (Foundation), [M] = Phase 2 (Advanced).</p>
-                <div id="syllabus-accordion" class="space-y-2"></div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="text-center py-8 mt-8 text-gray-500">
-        <p>Built by <span class="font-bold">Club of Competition</span> to help college students like you win their dream government jobs.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const studyPlanData = [
-                { week: 1, subject: 'Quant', topic: 'Simplification', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 2, subject: 'Reasoning', topic: 'Analogy', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 3, subject: 'English', topic: 'Subject-Verb Agreement (SVA)', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 4, subject: 'History', topic: 'Ancient', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 5, subject: 'Quant', topic: 'LCM & HCF', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 6, subject: 'Reasoning', topic: 'Classification', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 7, subject: 'English', topic: 'Tenses', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 8, subject: 'History', topic: 'Medieval', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 9, subject: 'Quant', topic: 'Fractions', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 10, subject: 'Reasoning', topic: 'Series', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 11, subject: 'English', topic: 'Articles', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 12, subject: 'History', topic: 'Modern (Part 1)', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 13, subject: 'Quant', topic: 'Decimals', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 14, subject: 'Reasoning', topic: 'Coding-Decoding', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 15, subject: 'English', topic: 'Nouns & Pronouns', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 16, subject: 'History', topic: 'Freedom Struggle', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 17, subject: 'Quant', topic: 'Square/Cube Roots', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 18, subject: 'Reasoning', topic: 'Blood Relations', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 19, subject: 'English', topic: 'Verbs & Adverbs', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 20, subject: 'Polity', topic: 'Constitution Making', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 21, subject: 'Quant', topic: 'Percentage', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 22, subject: 'Reasoning', topic: 'Direction Sense', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 23, subject: 'English', topic: 'Adjectives', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 24, subject: 'Polity', topic: 'Fundamental Rights', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 25, subject: 'Quant', topic: 'Ratio & Proportion', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 26, subject: 'Reasoning', topic: 'Order & Ranking', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 27, subject: 'English', topic: 'Prepositions', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 28, subject: 'Polity', topic: 'Parliament', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 29, subject: 'Quant', topic: 'Partnership', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 30, subject: 'Reasoning', topic: 'Syllogism', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 31, subject: 'English', topic: 'Conjunctions', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 32, subject: 'Polity', topic: 'Judiciary', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 33, subject: 'Quant', topic: 'Average', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 34, subject: 'Reasoning', topic: 'Venn Diagrams', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 35, subject: 'English', topic: 'Vocabulary (Synonyms & Antonyms)', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 36, subject: 'GA', topic: 'Art & Culture', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 37, subject: 'Quant', topic: 'Mixture & Alligation', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 38, subject: 'Reasoning', topic: 'Cubes & Dice', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 39, subject: 'English', topic: 'Reading Comprehension (RC)', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 40, subject: 'GA', topic: 'Books & Authors', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 41, subject: 'Quant', topic: 'Profit & Loss', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 42, subject: 'English', topic: 'Cloze Test', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 43, subject: 'GA', topic: 'Important Days', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 44, subject: 'Quant', topic: 'Discount', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 45, subject: 'English', topic: 'Para Jumbles', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 46, subject: 'GA', topic: 'Geography', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 47, subject: 'Quant', topic: 'Simple Interest (SI)', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 48, subject: 'English', topic: 'Active/Passive Voice', stage: 'P', exams: ['SSC'] }, { week: 49, subject: 'GA', topic: 'Economy', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 50, subject: 'Quant', topic: 'Compound Interest (CI)', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 51, subject: 'English', topic: 'Direct/Indirect Speech', stage: 'P', exams: ['SSC'] }, { week: 52, subject: 'Science', topic: 'Physics', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 53, subject: 'Quant', topic: 'Time & Work', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 54, subject: 'English', topic: 'Vocabulary (Idioms)', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 55, subject: 'Science', topic: 'Chemistry', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 56, subject: 'Quant', topic: 'Pipes & Cisterns', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 57, subject: 'English', topic: 'Vocabulary (One-Word Sub)', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 58, subject: 'Science', topic: 'Biology', stage: 'P', exams: ['SSC', 'Railways'] }, { week: 59, subject: 'Quant', topic: 'Time, Speed & Distance (TSD)', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 60, subject: 'English', topic: 'Spelling Correction', stage: 'P', exams: ['SSC', 'Banking'] }, { week: 61, subject: 'GA', topic: 'Static GK', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 62, subject: 'Quant', topic: 'Problems on Trains', stage: 'P', exams: ['Railways'] }, { week: 63, subject: 'GA', topic: 'Banking Awareness', stage: 'P', exams: ['Banking'] }, { week: 64, subject: 'Quant', topic: 'Boats & Streams', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 65, subject: 'Quant', topic: 'Problems on Ages', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 66, subject: 'Quant', topic: 'Data Interpretation (DI)', stage: 'P', exams: ['SSC', 'Banking', 'Railways'] }, { week: 67, subject: 'Quant', topic: 'Number Series', stage: 'P', exams: ['Banking'] }, { week: 68, subject: 'Quant', topic: 'Data Sufficiency', stage: 'P', exams: ['Banking'] }, { week: 69, subject: 'Quant', topic: 'Quadratic Equations', stage: 'P', exams: ['Banking'] }, { week: 70, subject: 'Reasoning', topic: 'Puzzles', stage: 'P', exams: ['Banking'] },
-                { week: 71, subject: 'Adv. Maths', topic: 'Algebra', stage: 'M', exams: ['SSC'] }, { week: 72, subject: 'Reasoning', topic: 'Input-Output', stage: 'M', exams: ['Banking'] }, { week: 73, subject: 'Computers', topic: 'Fundamentals', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 74, subject: 'Adv. Maths', topic: 'Geometry', stage: 'M', exams: ['SSC'] }, { week: 75, subject: 'Reasoning', topic: 'Coded Inequalities', stage: 'M', exams: ['Banking'] }, { week: 76, subject: 'Computers', topic: 'Hardware & Software', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 77, subject: 'Adv. Maths', topic: 'Mensuration 2D', stage: 'M', exams: ['SSC'] }, { week: 78, subject: 'Reasoning', topic: 'Seating Arrangement', stage: 'M', exams: ['Banking'] }, { week: 79, subject: 'Computers', topic: 'MS Office', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 80, subject: 'Adv. Maths', topic: 'Mensuration 3D', stage: 'M', exams: ['SSC'] }, { week: 81, subject: 'Reasoning', topic: 'Statement & Assumption', stage: 'M', exams: ['Banking'] }, { week: 82, subject: 'Computers', topic: 'Internet & Networking', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 83, subject: 'Adv. Maths', topic: 'Trigonometry', stage: 'M', exams: ['SSC'] }, { week: 84, subject: 'Reasoning', topic: 'Statement & Conclusion', stage: 'M', exams: ['Banking'] }, { week: 85, subject: 'Computers', topic: 'Keyboard Shortcuts', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 86, subject: 'Adv. Maths', topic: 'Statistics & DI', stage: 'M', exams: ['SSC'] }, { week: 87, subject: 'Reasoning', topic: 'Course of Action', stage: 'M', exams: ['Banking'] }, { week: 88, subject: 'Computers', topic: 'Computer Abbreviations', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 89, subject: 'Quant', topic: 'Permutation & Combination', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 90, subject: 'Reasoning', topic: 'Critical Reasoning', stage: 'M', exams: ['Banking'] }, { week: 91, subject: 'Computers', topic: 'Operating Systems', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 92, subject: 'Quant', topic: 'Probability', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 93, subject: 'Reasoning', topic: 'Non-Verbal (Images)', stage: 'M', exams: ['SSC', 'Railways'] }, { week: 94, subject: 'Computers', topic: 'Memory', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 95, subject: 'Reasoning', topic: 'Non-Verbal (Paper)', stage: 'M', exams: ['SSC', 'Railways'] }, { week: 96, subject: 'Computers', topic: 'Input/Output Devices', stage: 'M', exams: ['SSC', 'Banking'] }, { week: 97, subject: 'Reasoning', topic: 'Non-Verbal (Figures)', stage: 'M', exams: ['SSC', 'Railways'] }, { week: 98, subject: 'Computers', topic: 'Cyber Security', stage: 'M', exams: ['SSC', 'Banking'] }
-            ];
-
-            const subjectColors = { 'Quant': '#FF6B6B', 'Adv. Maths': '#FF6B6B', 'Reasoning': '#FFD166', 'English': '#06D6A0', 'History': '#118AB2', 'Polity': '#118AB2', 'GA': '#118AB2', 'Science': '#073B4C', 'Computers': '#073B4C' };
-            const chartTooltipCallback = { plugins: { tooltip: { callbacks: { title: function(tooltipItems) { const item = tooltipItems[0]; let label = item.chart.data.labels[item.dataIndex]; if (Array.isArray(label)) { return label.join(' '); } else { return label; } } } } } };
-            
-            const prelimsData = studyPlanData.filter(t => t.stage === 'P');
-            const mainsData = studyPlanData.filter(t => t.stage === 'M');
-            let subjectBreakdownChart;
-
-            const createOrUpdateChart = (data) => {
-                const subjectCounts = data.reduce((acc, item) => {
-                    let subject = item.subject;
-                    if (['History', 'Polity', 'GA'].includes(subject)) subject = 'General Studies';
-                    if (['Adv. Maths'].includes(subject)) subject = 'Quant';
-                    acc[subject] = (acc[subject] || 0) + 1;
-                    return acc;
-                }, {});
-
-                const chartData = {
-                    labels: Object.keys(subjectCounts),
-                    datasets: [{
-                        label: 'Number of Topics',
-                        data: Object.values(subjectCounts),
-                        backgroundColor: Object.keys(subjectCounts).map(subject => subjectColors[subject] || '#073B4C'),
-                        borderRadius: 6,
-                    }]
-                };
-
-                if (subjectBreakdownChart) {
-                    subjectBreakdownChart.data = chartData;
-                    subjectBreakdownChart.update('none');
-                } else {
-                    const ctx = document.getElementById('subjectBreakdownChart');
-                    if (ctx) {
-                        subjectBreakdownChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: chartData,
-                            options: { 
-                                indexAxis: 'y', 
-                                responsive: true, 
-                                maintainAspectRatio: false, 
-                                plugins: { 
-                                    ...chartTooltipCallback.plugins, 
-                                    legend: { display: false },
-                                    tooltip: {
-                                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                        titleColor: '#fff',
-                                        bodyColor: '#fff',
-                                        borderColor: 'rgba(255, 255, 255, 0.2)',
-                                        borderWidth: 1,
-                                        cornerRadius: 6,
-                                        displayColors: false
-                                    }
-                                }, 
-                                scales: { 
-                                    x: { 
-                                        suggestedMax: 40,
-                                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                                        ticks: { color: '#6B7280' }
-                                    },
-                                    y: {
-                                        grid: { display: false },
-                                        ticks: { color: '#4B5563', font: { weight: '600' } }
-                                    }
-                                }
-                            }
-                        });
-                    }
-                }
-            };
-            
-            const accordionContainer = document.getElementById('syllabus-accordion');
-            const groupedBySubject = studyPlanData.reduce((acc, item) => {
-                if (!acc[item.subject]) acc[item.subject] = [];
-                acc[item.subject].push(item);
-                return acc;
-            }, {});
-
-            for (const subject in groupedBySubject) {
-                const items = groupedBySubject[subject];
-                const accordionItem = document.createElement('div');
-                accordionItem.className = 'border border-gray-200 rounded-lg overflow-hidden';
-                const button = document.createElement('button');
-                button.className = 'accordion-button w-full flex justify-between items-center p-4 text-left font-semibold text-gray-800 hover:bg-gray-50 transition-colors';
-                button.innerHTML = `<span class="flex items-center gap-2"><span class="text-lg" style="color: ${subjectColors[subject] || '#073B4C'}">•</span> ${subject} (${items.length} topics)</span><span class="arrow text-xl font-light text-gray-500 transition-transform">→</span>`;
-                const content = document.createElement('div');
-                content.className = 'accordion-content bg-gray-50';
-                let listHTML = '<ul class="p-4 pt-0 space-y-2">';
-                items.forEach(item => {
-                    const stageTag = item.stage === 'M' ? '<span class="text-xs font-bold text-orange-500">[M]</span>' : '<span class="text-xs font-bold text-blue-500">[P]</span>';
-                    const examTags = item.exams.map(exam => `<span class="exam-tag tag-${exam.toLowerCase()}">${exam}</span>`).join(' ');
-                    listHTML += `<li class="text-sm text-gray-700 p-2 rounded-md hover:bg-white transition-colors border-l-2 border-transparent hover:border-gray-300">
-                                    <div class="flex flex-wrap items-center gap-x-2">${stageTag} <span class="font-bold">${`Week ${item.week}:`}</span> <span class="flex-grow">${item.topic}</span></div>
-                                    <div class="flex gap-1 flex-wrap mt-1 pl-6">${examTags}</div>
-                                 </li>`;
-                });
-                listHTML += '</ul>';
-                content.innerHTML = listHTML;
-                accordionItem.appendChild(button);
-                accordionItem.appendChild(content);
-                accordionContainer.appendChild(accordionItem);
-                button.addEventListener('click', () => button.classList.toggle('active'));
-            }
-
-            const weekSelectorModal = document.getElementById('week-selector-modal');
-            const modalGrid = document.getElementById('modal-grid');
-            const closeModalBtn = document.getElementById('close-week-modal-btn');
-            
-            let currentNavigatorRenderFunc = null;
-
-            const showModal = (data, renderFunc) => {
-                modalGrid.innerHTML = '';
-                currentNavigatorRenderFunc = renderFunc;
-                const currentWeek = parseInt(document.querySelector('.week-btn').textContent);
-                data.forEach(item => {
-                    const weekBtn = document.createElement('button');
-                    weekBtn.textContent = item.week;
-                    weekBtn.className = 'week-selector-btn p-2 rounded-lg text-center font-semibold transition-all duration-200';
-                    weekBtn.dataset.week = item.week;
-                    if (item.week === currentWeek) {
-                        weekBtn.classList.add('active-week');
-                    }
-                    modalGrid.appendChild(weekBtn);
-                });
-                weekSelectorModal.style.display = 'flex';
-                document.body.classList.add('modal-open');
-            };
-            
-            const hideModal = (modalElement) => {
-                if (modalElement) {
-                    modalElement.style.display = 'none';
-                }
-                document.body.classList.remove('modal-open');
-            };
-
-            closeModalBtn.addEventListener('click', () => hideModal(weekSelectorModal));
-            weekSelectorModal.addEventListener('click', (e) => {
-                if (e.target === weekSelectorModal) {
-                    hideModal(weekSelectorModal);
-                }
-            });
-            modalGrid.addEventListener('click', (e) => {
-                if (e.target.tagName === 'BUTTON') {
-                    const weekNum = e.target.dataset.week;
-                    if (currentNavigatorRenderFunc) {
-                        currentNavigatorRenderFunc(weekNum);
-                    }
-                    hideModal(weekSelectorModal);
-                }
-            });
-
-            const createNavigator = (containerId, data, startWeek) => {
-                const container = document.getElementById(containerId);
-                container.innerHTML = `
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-semibold text-gray-700">Current Focus:</span>
-                        <button id="${containerId}-week-btn" class="week-btn p-2 px-4 rounded-lg shadow-md font-bold w-28 text-center"></button>
-                    </div>
-                    <div id="${containerId}-content"><p class="text-gray-500">Loading your topic...</p></div>
-                    <div class="flex justify-between mt-4">
-                        <button id="${containerId}-prev-btn" class="btn-primary py-2 px-4 rounded-lg shadow-md disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">← Previous</button>
-                        <button id="${containerId}-next-btn" class="btn-primary py-2 px-4 rounded-lg shadow-md disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">Next →</button>
-                    </div>
-                `;
-
-                const weekBtn = document.getElementById(`${containerId}-week-btn`);
-                const contentDiv = document.getElementById(`${containerId}-content`);
-                const prevBtn = document.getElementById(`${containerId}-prev-btn`);
-                const nextBtn = document.getElementById(`${containerId}-next-btn`);
-                let currentWeekState = startWeek;
-                
-                const render = (weekNum) => {
-                    currentWeekState = parseInt(weekNum);
-                    const weekData = data.find(item => item.week === currentWeekState);
-                    if (weekData) {
-                        const examTags = weekData.exams.map(exam => `<span class="exam-tag tag-${exam.toLowerCase()}">${exam}</span>`).join(' ');
-                        weekBtn.textContent = `Week ${weekData.week}`;
-                        contentDiv.innerHTML = `
-                            <div class="flex flex-wrap items-baseline gap-x-2">
-                                <p class="text-xl font-bold" style="color: ${subjectColors[weekData.subject] || '#073B4C'}">${weekData.subject}:</p>
-                                <p class="text-lg text-gray-700 font-semibold">${weekData.topic}</p>
-                            </div>
-                            <div class="mt-2 flex gap-2 flex-wrap">${examTags}</div>
-                            <div class="mt-4 text-sm text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-200">
-                                <p><strong>Monday:</strong> Learn the core concept.</p>
-                                <p><strong>Tue-Thu:</strong> Grind through practice questions.</p>
-                                <p><strong>Friday:</strong> Take the weekly test & review.</p>
-                            </div>
-                        `;
-                    }
-                    prevBtn.disabled = currentWeekState === data[0].week;
-                    nextBtn.disabled = currentWeekState === data[data.length - 1].week;
-                };
-
-                weekBtn.addEventListener('click', () => showModal(data, render));
-                prevBtn.addEventListener('click', () => render(currentWeekState - 1));
-                nextBtn.addEventListener('click', () => render(currentWeekState + 1));
-                
-                render(startWeek);
-            };
-
-            createNavigator('prelims-navigator', prelimsData, 1);
-            createNavigator('mains-navigator', mainsData, 71);
-
-            const prelimsTabBtn = document.getElementById('prelims-tab-btn');
-            const mainsTabBtn = document.getElementById('mains-tab-btn');
-            const prelimsView = document.getElementById('prelims-view');
-            const mainsView = document.getElementById('mains-view');
-            const chartTitle = document.getElementById('chart-title');
-            const explorerTrigger = document.getElementById('explorer-trigger');
-            const explorerModal = document.getElementById('explorer-modal');
-            const closeExplorerModalBtn = document.getElementById('close-explorer-modal-btn');
-
-            prelimsTabBtn.addEventListener('click', () => {
-                prelimsTabBtn.classList.add('active');
-                mainsTabBtn.classList.remove('active');
-                prelimsView.classList.remove('hidden');
-                mainsView.classList.add('hidden');
-                chartTitle.textContent = "Here's how your time is split across subjects in Phase 1.";
-                createOrUpdateChart(prelimsData);
-            });
-
-            mainsTabBtn.addEventListener('click', () => {
-                mainsTabBtn.classList.add('active');
-                prelimsTabBtn.classList.remove('active');
-                mainsView.classList.remove('hidden');
-                prelimsView.classList.add('hidden');
-                chartTitle.textContent = "Here's how your time is split across subjects in Phase 2.";
-                createOrUpdateChart(mainsData);
-            });
-            
-            explorerTrigger.addEventListener('click', () => {
-                explorerModal.style.display = 'flex';
-                document.body.classList.add('modal-open');
-            });
-
-            closeExplorerModalBtn.addEventListener('click', () => hideModal(explorerModal));
-            explorerModal.addEventListener('click', (e) => {
-                if(e.target === explorerModal) {
-                    hideModal(explorerModal);
-                }
-            });
-
-            createOrUpdateChart(prelimsData);
-        });
-    </script>
 </body>
 </html>
