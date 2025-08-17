@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24-Month Weekly Study Plan for Government Exams</title>
+    <title>24-Month Weekly Study Plan with Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,18 +16,19 @@
         h1, h2, h3, h4 {
             font-family: 'Poppins', sans-serif;
         }
+        /* Custom style for smoother progress bar animation */
+        #progressBar {
+            transition: width 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body class="text-gray-800">
-
     <div class="container mx-auto p-4 sm:p-8 max-w-5xl">
-
         <header class="text-center my-10">
             <h2 class="text-2xl font-bold text-gray-700 mb-2">From the Desk of Club of Competition</h2>
             <h1 class="text-4xl md:text-5xl font-extrabold text-blue-700">24-Month Specialized Exam Mastery Plan</h1>
-            <p class="mt-4 text-lg text-gray-600">A week-by-week breakdown of your entire study syllabus.</p>
+            <p class="mt-4 text-lg text-gray-600">A week-by-week breakdown of your entire study syllabus with a built-in progress tracker.</p>
             <p class="mt-4 text-lg text-green-700 font-semibold">Designed for college students, this comprehensive plan is your key to cracking almost all major government exams.</p>
-            
             <div class="mt-8 bg-gray-50 p-6 rounded-xl border border-gray-200">
                 <h3 class="text-xl font-bold text-gray-800 text-center mb-4">Key Exams Covered by This Plan</h3>
                 <div class="flex flex-wrap justify-center items-center gap-3 text-sm">
@@ -50,14 +51,22 @@
             </div>
         </header>
 
+        <div class="my-10 bg-white p-6 rounded-xl shadow-md border border-gray-200">
+            <div class="flex justify-between items-center mb-2">
+                 <h3 class="text-xl font-bold text-gray-800">Your Progress Tracker</h3>
+                 <p id="progressText" class="text-gray-600 font-medium"></p>
+            </div>
+            <div class="bg-gray-200 rounded-full h-6 w-full">
+                <div id="progressBar" class="bg-blue-600 h-6 rounded-full text-white text-center text-sm font-medium leading-6" style="width: 0%;">0%</div>
+            </div>
+        </div>
+
         <div class="space-y-12">
-            
             <section id="phase1">
                 <div class="bg-blue-600 text-white p-4 rounded-t-xl">
                     <h2 class="text-3xl font-bold">Phase 1: Aptitude & Reasoning Foundation (Months 1-6)</h2>
                 </div>
                 <div class="bg-white p-6 rounded-b-xl shadow-lg space-y-8">
-                    
                     <div>
                         <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">Quantitative Aptitude (Months 1-3)</h3>
                         <table class="w-full text-left border-collapse">
@@ -66,62 +75,61 @@
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">1</td><td class="p-3 border-b">1</td><td class="p-3 border-b">Number System, Simple and Decimal Fractions, Problems on Numbers</td></tr>
-                                <tr><td class="p-3 border-b">2</td><td class="p-3 border-b">Simplification, Square Roots & Cube Roots, Approximate Values</td></tr>
-                                <tr><td class="p-3 border-b">3</td><td class="p-3 border-b">Percentage, Profit & Loss</td></tr>
-                                <tr><td class="p-3 border-b">4</td><td class="p-3 border-b">Average, Ratio and Proportion, Problem on Ages</td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">2</td><td class="p-3 border-b">5</td><td class="p-3 border-b">Partnership, Chain Rule</td></tr>
-                                <tr><td class="p-3 border-b">6</td><td class="p-3 border-b">Work & Time, Pipes & Cistern</td></tr>
-                                <tr><td class="p-3 border-b">7</td><td class="p-3 border-b">Speed, Time and Distance, Problems on Trains, Boats & Streams</td></tr>
-                                <tr><td class="p-3 border-b">8</td><td class="p-3 border-b">Simple Interest, Compound Interest</td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="5">3</td><td class="p-3 border-b">9</td><td class="p-3 border-b">Alligation or Mixture, True Discount, Banker's Discount</td></tr>
-                                <tr><td class="p-3 border-b">10</td><td class="p-3 border-b">Logarithms, Surds & Indices, H.C.F and L.C.M</td></tr>
-                                <tr><td class="p-3 border-b">11</td><td class="p-3 border-b">Area and Perimeter, Volume & Surface Areas, Heights & Distances</td></tr>
-                                <tr><td class="p-3 border-b">12</td><td class="p-3 border-b">Permutations & Combinations, Probability, Stocks & Shares, Races and Games</td></tr>
-                                <tr><td class="p-3 border-b">13</td><td class="p-3 border-b">Data Interpretation: Table Charts, Bar Charts, Pie Charts, Line Charts</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">1</td><td class="p-3 border-b">1</td><td class="p-3 border-b">Number System, Simple and Decimal Fractions, Problems on Numbers</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w1" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">2</td><td class="p-3 border-b">Simplification, Square Roots & Cube Roots, Approximate Values</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w2" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">3</td><td class="p-3 border-b">Percentage, Profit & Loss</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w3" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">4</td><td class="p-3 border-b">Average, Ratio and Proportion, Problem on Ages</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w4" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">2</td><td class="p-3 border-b">5</td><td class="p-3 border-b">Partnership, Chain Rule</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w5" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">6</td><td class="p-3 border-b">Work & Time, Pipes & Cistern</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w6" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">7</td><td class="p-3 border-b">Speed, Time and Distance, Problems on Trains, Boats & Streams</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w7" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">8</td><td class="p-3 border-b">Simple Interest, Compound Interest</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w8" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="5">3</td><td class="p-3 border-b">9</td><td class="p-3 border-b">Alligation or Mixture, True Discount, Banker's Discount</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w9" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">10</td><td class="p-3 border-b">Logarithms, Surds & Indices, H.C.F and L.C.M</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w10" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">11</td><td class="p-3 border-b">Area and Perimeter, Volume & Surface Areas, Heights & Distances</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w11" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">12</td><td class="p-3 border-b">Permutations & Combinations, Probability, Stocks & Shares, Races and Games</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w12" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">13</td><td class="p-3 border-b">Data Interpretation: Table Charts, Bar Charts, Pie Charts, Line Charts</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w13" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
                             </tbody>
                         </table>
                     </div>
-
                     <div>
                         <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">General Intelligence & Reasoning (Months 4-6)</h3>
                         <table class="w-full text-left border-collapse">
-                                <thead>
+                            <thead>
                                 <tr>
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">4</td><td class="p-3 border-b">14</td><td class="p-3 border-b">Core Reasoning: Coding Decoding, Direction Test, Blood Relation</td></tr>
-                                <tr><td class="p-3 border-b">15</td><td class="p-3 border-b">Mathematical Reasoning: Mathematical Operation, Inequality, Arithmetical Reasoning</td></tr>
-                                <tr><td class="p-3 border-b">16</td><td class="p-3 border-b">Ordering & Arrangement: Ranking Test, Order Test, Alphabet Test</td></tr>
-                                <tr><td class="p-3 border-b">17</td><td class="p-3 border-b">Verbal Ability: Word Formation, Logical Sequence of Words, Conditional Numbers/Letters</td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">5</td><td class="p-3 border-b">18</td><td class="p-3 border-b">Pattern Recognition: Series, Analogy, Classification</td></tr>
-                                <tr><td class="p-3 border-b">19</td><td class="p-3 border-b">Logical Deduction: Find the Missing Number/Letter, Logical Venn Diagram, Syllogism</td></tr>
-                                <tr><td class="p-3 border-b">20</td><td class="p-3 border-b">Analytical Puzzles: Puzzle Test, Decision Making, Matrix</td></tr>
-                                <tr><td class="p-3 border-b">21</td><td class="p-3 border-b">Advanced Reasoning: Data Sufficiency, Input and Password (Input-Output)</td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="5">6</td><td class="p-3 border-b">22</td><td class="p-3 border-b">Statement-based Reasoning: Statement & Course of Action, Conclusions, Arguments, Assumptions</td></tr>
-                                <tr><td class="p-3 border-b">23</td><td class="p-3 border-b">Miscellaneous Verbal: Dice, Clock, Calendar, Cube and Cuboid</td></tr>
-                                <tr><td class="p-3 border-b">24</td><td class="p-3 border-b">Non-Verbal (Pattern & Images): Series, Analogy, Classification, Mirror-Images, Water-Images</td></tr>
-                                <tr><td class="p-3 border-b">25</td><td class="p-3 border-b">Non-Verbal (Spatial): Paper Folding, Paper Cutting, Complete the Figure, Hidden Figures</td></tr>
-                                <tr><td class="p-3 border-b">26</td><td class="p-3 border-b">Non-Verbal (Advanced): Grouping, Figure Matrix, Figure Formation, Rule Detection, Dot Situations</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">4</td><td class="p-3 border-b">14</td><td class="p-3 border-b">Core Reasoning: Coding Decoding, Direction Test, Blood Relation</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w14" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">15</td><td class="p-3 border-b">Mathematical Reasoning: Mathematical Operation, Inequality, Arithmetical Reasoning</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w15" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">16</td><td class="p-3 border-b">Ordering & Arrangement: Ranking Test, Order Test, Alphabet Test</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w16" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">17</td><td class="p-3 border-b">Verbal Ability: Word Formation, Logical Sequence of Words, Conditional Numbers/Letters</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w17" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">5</td><td class="p-3 border-b">18</td><td class="p-3 border-b">Pattern Recognition: Series, Analogy, Classification</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w18" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">19</td><td class="p-3 border-b">Logical Deduction: Find the Missing Number/Letter, Logical Venn Diagram, Syllogism</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w19" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">20</td><td class="p-3 border-b">Analytical Puzzles: Puzzle Test, Decision Making, Matrix</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w20" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">21</td><td class="p-3 border-b">Advanced Reasoning: Data Sufficiency, Input and Password (Input-Output)</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w21" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="5">6</td><td class="p-3 border-b">22</td><td class="p-3 border-b">Statement-based Reasoning: Statement & Course of Action, Conclusions, Arguments, Assumptions</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w22" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">23</td><td class="p-3 border-b">Miscellaneous Verbal: Dice, Clock, Calendar, Cube and Cuboid</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w23" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">24</td><td class="p-3 border-b">Non-Verbal (Pattern & Images): Series, Analogy, Classification, Mirror-Images, Water-Images</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w24" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">25</td><td class="p-3 border-b">Non-Verbal (Spatial): Paper Folding, Paper Cutting, Complete the Figure, Hidden Figures</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w25" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
+                                <tr><td class="p-3 border-b">26</td><td class="p-3 border-b">Non-Verbal (Advanced): Grouping, Figure Matrix, Figure Formation, Rule Detection, Dot Situations</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w26" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
-
             <section id="phase2">
                 <div class="bg-green-600 text-white p-4 rounded-t-xl">
                     <h2 class="text-3xl font-bold">Phase 2: General Awareness, Science & Language (Months 7-24)</h2>
                 </div>
                 <div class="bg-white p-6 rounded-b-xl shadow-lg space-y-8">
-                    
                     <div>
                         <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">English, Descriptive Skills & Computers (Months 7-8)</h3>
                         <table class="w-full text-left border-collapse">
@@ -130,72 +138,138 @@
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
                                     <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">7</td><td class="p-3 border-b">27</td><td class="p-3 border-b">Grammar: Error Detection, Articles, Tenses, Common Errors</td></tr>
-                                <tr><td class="p-3 border-b">28</td><td class="p-3 border-b">Grammar: Conditionals, Active & Passive Voices, Direct & Indirect Speech</td></tr>
-                                <tr><td class="p-3 border-b">29</td><td class="p-3 border-b">Comprehension: Sentence Improvement, Reconstruction, Rearranging Sentences</td></tr>
-                                <tr><td class="p-3 border-b">30</td><td class="p-3 border-b">Comprehension: Sentence Completion, Connectors, Cloze Test, Comprehension</td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">8</td><td class="p-3 border-b">31</td><td class="p-3 border-b">Vocabulary: Synonyms, Double Synonyms, Homonyms, Antonyms</td></tr>
-                                <tr><td class="p-3 border-b">32</td><td class="p-3 border-b">Vocabulary: Spelling Errors, Substitution, Idioms and Phrases</td></tr>
-                                <tr><td class="p-3 border-b">33</td><td class="p-3 border-b">Essay Writing: Structure & Practice on Social Issues</td></tr>
-                                <tr><td class="p-3 border-b">34</td><td class="p-3 border-b">Computers: All core topics</td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">7</td><td class="p-3 border-b">27</td><td class="p-3 border-b">Grammar: Error Detection, Articles, Tenses, Common Errors</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w27" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 border-b">28</td><td class="p-3 border-b">Grammar: Conditionals, Active & Passive Voices, Direct & Indirect Speech</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w28" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 border-b">29</td><td class="p-3 border-b">Comprehension: Sentence Improvement, Reconstruction, Rearranging Sentences</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w29" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 border-b">30</td><td class="p-3 border-b">Comprehension: Sentence Completion, Connectors, Cloze Test, Comprehension</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w30" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b" rowspan="4">8</td><td class="p-3 border-b">31</td><td class="p-3 border-b">Vocabulary: Synonyms, Double Synonyms, Homonyms, Antonyms</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w31" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 border-b">32</td><td class="p-3 border-b">Vocabulary: Spelling Errors, Substitution, Idioms and Phrases</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w32" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 border-b">33</td><td class="p-3 border-b">Essay Writing: Structure & Practice on Social Issues</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w33" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 border-b">34</td><td class="p-3 border-b">Computers: All core topics</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w34" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
                             </tbody>
                         </table>
                     </div>
-
                     <div>
                         <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">History & Geography (Months 9-12)</h3>
                         <table class="w-full text-left border-collapse">
                             <thead>
-                                <tr><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th></tr>
+                                <tr>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr><td class="p-3 font-bold border-b">9</td><td class="p-3 border-b">Ancient History: Stone Age, Indus Valley, Vedic Period, Mahajanapadas, Mauryas, Guptas.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">10</td><td class="p-3 border-b">Medieval History: Regional Powers, Delhi Sultanate, Mughals, Architecture, Religious Movements.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">11</td><td class="p-3 border-b">Modern History: EIC, Administration, Revolts (1857), Social Reforms, Independence Movement.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">12</td><td class="p-3 border-b">Geography: Indian Physical Features, Rivers, Climate, Soils, Agriculture, Resources, World Geography.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">9</td><td class="p-3 border-b">Ancient History: Stone Age, Indus Valley, Vedic Period, Mahajanapadas, Mauryas, Guptas.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m9" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">10</td><td class="p-3 border-b">Medieval History: Regional Powers, Delhi Sultanate, Mughals, Architecture, Religious Movements.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m10" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">11</td><td class="p-3 border-b">Modern History: EIC, Administration, Revolts (1857), Social Reforms, Independence Movement.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m11" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">12</td><td class="p-3 border-b">Geography: Indian Physical Features, Rivers, Climate, Soils, Agriculture, Resources, World Geography.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m12" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
                             </tbody>
                         </table>
                     </div>
-
                     <div>
                         <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">Polity & Economy (Months 13-16)</h3>
                         <table class="w-full text-left border-collapse">
-                                <thead>
-                                <tr><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th></tr>
+                            <thead>
+                                <tr>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr><td class="p-3 font-bold border-b">13</td><td class="p-3 border-b">Indian Polity: Constitution, Preamble, Union & Territory, Citizenship, Fundamental Rights & Duties.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">14</td><td class="p-3 border-b">Indian Polity: Government (President, PM, Parliament), Judiciary, State & Local Government.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">15</td><td class="p-3 border-b">Indian Economy: History, Planning, Reforms, Key Sectors, National Income, Poverty, Employment.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">16</td><td class="p-3 border-b">Indian Economy: Money & Banking, Budget, Foreign Trade, Socio-economic Issues.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">13</td><td class="p-3 border-b">Indian Polity: Constitution, Preamble, Union & Territory, Citizenship, Fundamental Rights & Duties.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m13" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">14</td><td class="p-3 border-b">Indian Polity: Government (President, PM, Parliament), Judiciary, State & Local Government.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m14" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">15</td><td class="p-3 border-b">Indian Economy: History, Planning, Reforms, Key Sectors, National Income, Poverty, Employment.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m15" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">16</td><td class="p-3 border-b">Indian Economy: Money & Banking, Budget, Foreign Trade, Socio-economic Issues.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m16" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
                             </tbody>
                         </table>
                     </div>
-                    
                     <div>
                         <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">Science & Miscellaneous GK (Months 17-24)</h3>
                         <table class="w-full text-left border-collapse">
-                                <thead>
-                                <tr><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th><th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th></tr>
+                            <thead>
+                                <tr>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th>
+                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr><td class="p-3 font-bold border-b">17-18</td><td class="p-3 border-b">Physics: Introduction, Units, Motion, Force, Work/Energy/Power, Gravitation, Properties of Matter, Waves, Heat, Light, Electricity, Magnetism.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">19-20</td><td class="p-3 border-b">Chemistry: Matter, Atomic Structure, Radioactivity, Periodic Table, Chemical Bonds & Reactions, Acids/Bases/Salts, Organic Chemistry.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">21-22</td><td class="p-3 border-b">Biology: Classification, Cell Biology, Plant Kingdom, Animal Kingdom, Human Body Systems, Diseases, Nutrition, Genetics, Biotechnology.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">23</td><td class="p-3 border-b">Environment & Ecology: Core Concepts, Factors, Components.</td></tr>
-                                <tr><td class="p-3 font-bold border-b">24</td><td class="p-3 border-b">Miscellaneous GK: Sports, Awards, World Organizations, Books & Authors, Indian Culture.</td></tr>
+                                <tr><td class="p-3 font-bold border-b">17-18</td><td class="p-3 border-b">Physics: Introduction, Units, Motion, Force, Work/Energy/Power, Gravitation, Properties of Matter, Waves, Heat, Light, Electricity, Magnetism.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m1718" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">19-20</td><td class="p-3 border-b">Chemistry: Matter, Atomic Structure, Radioactivity, Periodic Table, Chemical Bonds & Reactions, Acids/Bases/Salts, Organic Chemistry.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m1920" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">21-22</td><td class="p-3 border-b">Biology: Classification, Cell Biology, Plant Kingdom, Animal Kingdom, Human Body Systems, Diseases, Nutrition, Genetics, Biotechnology.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m2122" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">23</td><td class="p-3 border-b">Environment & Ecology: Core Concepts, Factors, Components.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m23" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
+                                <tr><td class="p-3 font-bold border-b">24</td><td class="p-3 border-b">Miscellaneous GK: Sports, Awards, World Organizations, Books & Authors, Indian Culture.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m24" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
-
         </div>
-
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const storageKey = 'studyPlanProgress';
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+
+            let progressData = {};
+
+            // Function to update the progress bar UI
+            const updateProgressUI = () => {
+                const totalTasks = checkboxes.length;
+                if (totalTasks === 0) return;
+
+                const completedTasks = document.querySelectorAll('.task-checkbox:checked').length;
+                const percentage = Math.round((completedTasks / totalTasks) * 100);
+
+                // Update progress bar
+                progressBar.style.width = `${percentage}%`;
+                progressBar.textContent = `${percentage}%`;
+
+                // Update text label
+                progressText.textContent = `${completedTasks} of ${totalTasks} tasks completed`;
+            };
+
+            // Function to save progress to localStorage
+            const saveProgress = () => {
+                checkboxes.forEach(box => {
+                    progressData[box.id] = box.checked;
+                });
+                localStorage.setItem(storageKey, JSON.stringify(progressData));
+                updateProgressUI();
+            };
+
+            // Function to load progress from localStorage
+            const loadProgress = () => {
+                const savedData = localStorage.getItem(storageKey);
+                if (savedData) {
+                    progressData = JSON.parse(savedData);
+                    checkboxes.forEach(box => {
+                        if (progressData[box.id]) {
+                            box.checked = true;
+                        }
+                    });
+                }
+                // Initial UI update after loading data
+                updateProgressUI();
+            };
+
+            // Add event listeners to all checkboxes to save on change
+            checkboxes.forEach(box => {
+                box.addEventListener('change', saveProgress);
+            });
+
+            // Load saved progress when the page loads
+            loadProgress();
+        });
+    </script>
 </body>
 </html>
