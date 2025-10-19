@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24-Month Weekly Study Plan with Tracker</title>
+    <title>100-Week Exam Mastery Plan (500 Topics)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,10 +26,10 @@
     <div class="container mx-auto p-4 sm:p-8 max-w-5xl">
         <header class="text-center my-10">
             <h2 class="text-2xl font-bold text-gray-700 mb-2">From the Desk of Club of Competition</h2>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-700">24-Month Specialized Exam Mastery Plan</h1>
-            <p class="mt-4 text-lg text-gray-600">A week-by-week breakdown of your entire study syllabus with a built-in progress tracker.</p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-700">100-Week Exam Mastery Plan  (500 Topics)</h1>
+            <p class="mt-4 text-lg text-gray-600">5 Days/Week, 1 Topic/Day</p>
             <p class="mt-4 text-lg text-green-700 font-semibold">Designed for college students, this comprehensive plan is your key to cracking almost all major government exams.</p>
-            <div class="mt-8 bg-gray-50 p-6 rounded-xl border border-gray-200">
+             <div class="mt-8 bg-gray-50 p-6 rounded-xl border border-gray-200">
                 <h3 class="text-xl font-bold text-gray-800 text-center mb-4">Key Exams Covered by This Plan</h3>
                 <div class="flex flex-wrap justify-center items-center gap-3 text-sm">
                     <span class="bg-blue-100 text-blue-800 font-medium px-3 py-1 rounded-full">SSC CGL</span>
@@ -51,7 +51,7 @@
             </div>
         </header>
 
-        <div class="my-10 bg-white p-6 rounded-xl shadow-md border border-gray-200">
+        <div class="my-10 bg-white p-6 rounded-xl shadow-md border border-gray-200 sticky top-4 z-10">
             <div class="flex justify-between items-center mb-2">
                  <h3 class="text-xl font-bold text-gray-800">Your Progress Tracker</h3>
                  <p id="progressText" class="text-gray-600 font-medium"></p>
@@ -62,214 +62,357 @@
         </div>
 
         <div class="space-y-12">
-            <section id="phase1">
-                <div class="bg-blue-600 text-white p-4 rounded-t-xl">
-                    <h2 class="text-3xl font-bold">Phase 1: Aptitude & Reasoning Foundation (Months 1-6)</h2>
-                </div>
-                <div class="bg-white p-6 rounded-b-xl shadow-lg space-y-8">
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">Quantitative Aptitude (Months 1-3)</h3>
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">1</td><td class="p-3 border-b">1</td><td class="p-3 border-b">Number System, Simple and Decimal Fractions, Problems on Numbers</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w1" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">2</td><td class="p-3 border-b">Simplification, Square Roots & Cube Roots, Approximate Values</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w2" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">3</td><td class="p-3 border-b">Percentage, Profit & Loss</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w3" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">4</td><td class="p-3 border-b">Average, Ratio and Proportion, Problem on Ages</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w4" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">2</td><td class="p-3 border-b">5</td><td class="p-3 border-b">Partnership, Chain Rule</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w5" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">6</td><td class="p-3 border-b">Work & Time, Pipes & Cistern</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w6" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">7</td><td class="p-3 border-b">Speed, Time and Distance, Problems on Trains, Boats & Streams</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w7" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">8</td><td class="p-3 border-b">Simple Interest, Compound Interest</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w8" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="5">3</td><td class="p-3 border-b">9</td><td class="p-3 border-b">Alligation or Mixture, True Discount, Banker's Discount</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w9" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">10</td><td class="p-3 border-b">Logarithms, Surds & Indices, H.C.F and L.C.M</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w10" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">11</td><td class="p-3 border-b">Area and Perimeter, Volume & Surface Areas, Heights & Distances</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w11" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">12</td><td class="p-3 border-b">Permutations & Combinations, Probability, Stocks & Shares, Races and Games</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w12" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">13</td><td class="p-3 border-b">Data Interpretation: Table Charts, Bar Charts, Pie Charts, Line Charts</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w13" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">General Intelligence & Reasoning (Months 4-6)</h3>
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">4</td><td class="p-3 border-b">14</td><td class="p-3 border-b">Core Reasoning: Coding Decoding, Direction Test, Blood Relation</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w14" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">15</td><td class="p-3 border-b">Mathematical Reasoning: Mathematical Operation, Inequality, Arithmetical Reasoning</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w15" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">16</td><td class="p-3 border-b">Ordering & Arrangement: Ranking Test, Order Test, Alphabet Test</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w16" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">17</td><td class="p-3 border-b">Verbal Ability: Word Formation, Logical Sequence of Words, Conditional Numbers/Letters</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w17" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">5</td><td class="p-3 border-b">18</td><td class="p-3 border-b">Pattern Recognition: Series, Analogy, Classification</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w18" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">19</td><td class="p-3 border-b">Logical Deduction: Find the Missing Number/Letter, Logical Venn Diagram, Syllogism</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w19" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">20</td><td class="p-3 border-b">Analytical Puzzles: Puzzle Test, Decision Making, Matrix</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w20" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">21</td><td class="p-3 border-b">Advanced Reasoning: Data Sufficiency, Input and Password (Input-Output)</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w21" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="5">6</td><td class="p-3 border-b">22</td><td class="p-3 border-b">Statement-based Reasoning: Statement & Course of Action, Conclusions, Arguments, Assumptions</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w22" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">23</td><td class="p-3 border-b">Miscellaneous Verbal: Dice, Clock, Calendar, Cube and Cuboid</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w23" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">24</td><td class="p-3 border-b">Non-Verbal (Pattern & Images): Series, Analogy, Classification, Mirror-Images, Water-Images</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w24" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">25</td><td class="p-3 border-b">Non-Verbal (Spatial): Paper Folding, Paper Cutting, Complete the Figure, Hidden Figures</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w25" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                                <tr><td class="p-3 border-b">26</td><td class="p-3 border-b">Non-Verbal (Advanced): Grouping, Figure Matrix, Figure Formation, Rule Detection, Dot Situations</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w26" class="task-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-            <section id="phase2">
-                <div class="bg-green-600 text-white p-4 rounded-t-xl">
-                    <h2 class="text-3xl font-bold">Phase 2: General Awareness, Science & Language (Months 7-24)</h2>
-                </div>
-                <div class="bg-white p-6 rounded-b-xl shadow-lg space-y-8">
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">English, Descriptive Skills & Computers (Months 7-8)</h3>
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Week</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topics to Cover</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">7</td><td class="p-3 border-b">27</td><td class="p-3 border-b">Grammar: Error Detection, Articles, Tenses, Common Errors</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w27" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 border-b">28</td><td class="p-3 border-b">Grammar: Conditionals, Active & Passive Voices, Direct & Indirect Speech</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w28" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 border-b">29</td><td class="p-3 border-b">Comprehension: Sentence Improvement, Reconstruction, Rearranging Sentences</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w29" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 border-b">30</td><td class="p-3 border-b">Comprehension: Sentence Completion, Connectors, Cloze Test, Comprehension</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w30" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b" rowspan="4">8</td><td class="p-3 border-b">31</td><td class="p-3 border-b">Vocabulary: Synonyms, Double Synonyms, Homonyms, Antonyms</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w31" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 border-b">32</td><td class="p-3 border-b">Vocabulary: Spelling Errors, Substitution, Idioms and Phrases</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w32" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 border-b">33</td><td class="p-3 border-b">Essay Writing: Structure & Practice on Social Issues</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w33" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 border-b">34</td><td class="p-3 border-b">Computers: All core topics</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-w34" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">History & Geography (Months 9-12)</h3>
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="p-3 font-bold border-b">9</td><td class="p-3 border-b">Ancient History: Stone Age, Indus Valley, Vedic Period, Mahajanapadas, Mauryas, Guptas.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m9" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">10</td><td class="p-3 border-b">Medieval History: Regional Powers, Delhi Sultanate, Mughals, Architecture, Religious Movements.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m10" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">11</td><td class="p-3 border-b">Modern History: EIC, Administration, Revolts (1857), Social Reforms, Independence Movement.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m11" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">12</td><td class="p-3 border-b">Geography: Indian Physical Features, Rivers, Climate, Soils, Agriculture, Resources, World Geography.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m12" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">Polity & Economy (Months 13-16)</h3>
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="p-3 font-bold border-b">13</td><td class="p-3 border-b">Indian Polity: Constitution, Preamble, Union & Territory, Citizenship, Fundamental Rights & Duties.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m13" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">14</td><td class="p-3 border-b">Indian Polity: Government (President, PM, Parliament), Judiciary, State & Local Government.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m14" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">15</td><td class="p-3 border-b">Indian Economy: History, Planning, Reforms, Key Sectors, National Income, Poverty, Employment.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m15" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">16</td><td class="p-3 border-b">Indian Economy: Money & Banking, Budget, Foreign Trade, Socio-economic Issues.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m16" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-700 border-b-2 border-green-200 pb-2 mb-4">Science & Miscellaneous GK (Months 17-24)</h3>
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Month</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Weekly Focus</th>
-                                    <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="p-3 font-bold border-b">17-18</td><td class="p-3 border-b">Physics: Introduction, Units, Motion, Force, Work/Energy/Power, Gravitation, Properties of Matter, Waves, Heat, Light, Electricity, Magnetism.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m1718" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">19-20</td><td class="p-3 border-b">Chemistry: Matter, Atomic Structure, Radioactivity, Periodic Table, Chemical Bonds & Reactions, Acids/Bases/Salts, Organic Chemistry.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m1920" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">21-22</td><td class="p-3 border-b">Biology: Classification, Cell Biology, Plant Kingdom, Animal Kingdom, Human Body Systems, Diseases, Nutrition, Genetics, Biotechnology.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m2122" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">23</td><td class="p-3 border-b">Environment & Ecology: Core Concepts, Factors, Components.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m23" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                                <tr><td class="p-3 font-bold border-b">24</td><td class="p-3 border-b">Miscellaneous GK: Sports, Awards, World Organizations, Books & Authors, Indian Culture.</td><td class="p-3 border-b text-center"><input type="checkbox" id="task-m24" class="task-checkbox h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+            <!-- DYNAMICALLY GENERATED CONTENT WILL GO HERE -->
         </div>
+        
+        <footer class="mt-12 bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-3xl font-bold text-gray-700 border-b-2 border-gray-200 pb-2 mb-4">Plan Summary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600">
+                <div>
+                    <p><strong>Total Weeks:</strong> 100 weeks exactly</p>
+                    <p><strong>Weekly Schedule:</strong> 5 days learning, 2 days break</p>
+                    <p><strong>Daily Topics:</strong> 1 new topic per day</p>
+                    <p><strong>Total Topics:</strong> 500 static syllabus topics</p>
+                    <p><strong>Coverage:</strong> 100% static syllabus for all government exams</p>
+                    <p><strong>Focus:</strong> Pure concept learning only</p>
+                    <p><strong>Progression:</strong> Systematic from basic to advanced</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg text-gray-700 mb-2">Phase Distribution:</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>Quantitative Aptitude:</strong> 35 weeks (175 topics)</li>
+                        <li><strong>Reasoning & Logic:</strong> 25 weeks (125 topics)</li>
+                        <li><strong>English Language:</strong> 13 weeks (65 topics)</li>
+                        <li><strong>General Awareness:</strong> 27 weeks (135 topics)</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const storageKey = 'studyPlanProgress';
-            const checkboxes = document.querySelectorAll('.task-checkbox');
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
-
-            let progressData = {};
-
-            // Function to update the progress bar UI
-            const updateProgressUI = () => {
-                const totalTasks = checkboxes.length;
-                if (totalTasks === 0) return;
-
-                const completedTasks = document.querySelectorAll('.task-checkbox:checked').length;
-                const percentage = Math.round((completedTasks / totalTasks) * 100);
-
-                // Update progress bar
-                progressBar.style.width = `${percentage}%`;
-                progressBar.textContent = `${percentage}%`;
-
-                // Update text label
-                progressText.textContent = `${completedTasks} of ${totalTasks} tasks completed`;
-            };
-
-            // Function to save progress to localStorage
-            const saveProgress = () => {
-                checkboxes.forEach(box => {
-                    progressData[box.id] = box.checked;
-                });
-                localStorage.setItem(storageKey, JSON.stringify(progressData));
-                updateProgressUI();
-            };
-
-            // Function to load progress from localStorage
-            const loadProgress = () => {
-                const savedData = localStorage.getItem(storageKey);
-                if (savedData) {
-                    progressData = JSON.parse(savedData);
-                    checkboxes.forEach(box => {
-                        if (progressData[box.id]) {
-                            box.checked = true;
-                        }
-                    });
+    const planData = [
+        {
+            phase: "PHASE 1: QUANTITATIVE APTITUDE (Weeks 1-35)",
+            color: "blue",
+            subSections: [
+                {
+                    title: "Basic Mathematics (Weeks 1-12)",
+                    weeks: [
+                        { week: 1, topics: ["Types of Numbers", "Divisibility Rules", "HCF & LCM", "Unit Digit & Cyclicity", "Number Properties"] },
+                        { week: 2, topics: ["Fraction Operations", "Decimal Operations", "Recurring Decimals", "Surds & Indices", "Simplification"] },
+                        { week: 3, topics: ["Percentage Calculation", "Percentage Change", "Population Growth", "Depreciation", "Successive Percentage"] },
+                        { week: 4, topics: ["Ratio Basics", "Partnership", "Mean Proportional", "Mixture Problems", "Advanced Ratio"] },
+                        { week: 5, topics: ["Simple Average", "Weighted Average", "Average Speed", "Alligation Rule", "Mixture Problems"] },
+                        { week: 6, topics: ["Cost Price, Selling Price", "Profit/Loss Percentage", "Discount & MP", "Successive Discount", "Faulty Weights"] },
+                        { week: 7, topics: ["SI Formula", "Finding Rate/Time/Principal", "Equal Interest Problems", "Installments in SI", "Multiple Loan Schemes"] },
+                        { week: 8, topics: ["Annual Compounding", "Half-yearly Compounding", "Difference SI & CI", "Finding Rate in CI", "Finding Time in CI"] },
+                        { week: 9, topics: ["Basic Work Formula", "Work Efficiency", "Wages Distribution", "Alternate Day Work", "Work with Leaving/Joining"] },
+                        { week: 10, topics: ["Inlet Pipes", "Outlet Pipes", "Leakage Problems", "Alternate Opening", "Multiple Pipe Systems"] },
+                        { week: 11, topics: ["Basic TSD Formula", "Average Speed", "Relative Speed Same Direction", "Relative Speed Opposite Direction", "Train Problems (Pole/Man)"] },
+                        { week: 12, topics: ["Train Problems (Platform)", "Trains Crossing Each Other", "Boat & Stream Downstream", "Boat & Stream Upstream", "Speed of Boat/Stream Finding"] }
+                    ]
+                },
+                {
+                    title: "Advanced Mathematics (Weeks 13-25)",
+                    weeks: [
+                        { week: 13, topics: ["Algebraic Identities", "Linear Equations One Variable", "Linear Equations Two Variables", "Quadratic Equations Factorization", "Quadratic Equations Formula"] },
+                        { week: 14, topics: ["Sum & Product of Roots", "Nature of Roots", "Sequence & Series Basics", "Arithmetic Progression", "Geometric Progression"] },
+                        { week: 15, topics: ["Lines & Angles", "Triangle Types & Properties", "Triangle Congruence", "Triangle Similarity", "Pythagoras Theorem"] },
+                        { week: 16, topics: ["Triangle Centers", "Quadrilateral Properties", "Circle Theorems Chord", "Circle Theorems Tangent", "Cyclic Quadrilaterals"] },
+                        { week: 17, topics: ["Distance Formula", "Section Formula", "Slope of Line", "Area of Triangle Coordinates", "Straight Line Equations"] },
+                        { week: 18, topics: ["Square Area & Perimeter", "Rectangle Area & Perimeter", "Triangle Area & Perimeter", "Circle Area & Circumference", "Complex 2D Shapes"] },
+                        { week: 19, topics: ["Cube Volume & Surface Area", "Cuboid Volume & Surface Area", "Cylinder Volume & Surface Area", "Cone Volume & Surface Area", "Sphere Volume & Surface Area"] },
+                        { week: 20, topics: ["Trigonometric Ratios", "Trigonometric Identities", "Complementary Angles", "Specific Angle Values", "Height & Distance"] },
+                        { week: 21, topics: ["Permutation Basics", "Combination Basics", "Probability Dice", "Probability Coins", "Probability Cards"] },
+                        { week: 22, topics: ["Probability Balls in Bag", "Conditional Probability", "Set Theory Basics", "Statistics Mean, Median, Mode", "Range & Frequency"] },
+                        { week: 23, topics: ["Table DI Simple", "Table DI Percentage", "Pie Chart Single", "Pie Chart Multiple", "Bar Graph Vertical"] },
+                        { week: 24, topics: ["Bar Graph Horizontal", "Bar Graph Stacked", "Line Graph Single", "Line Graph Multiple", "Mixed Graphs"] },
+                        { week: 25, topics: ["Caselets", "Data Sufficiency", "Radar DI", "Advanced Table DI", "Complex Pie Charts"] }
+                    ]
+                },
+                {
+                    title: "Quantitative Applications (Weeks 26-35)",
+                    weeks: [
+                        { week: 26, topics: ["Number Series Advanced", "Mathematical Operations", "Calendar Calculations", "Clock Problems", "Mathematical Puzzles"] },
+                        { week: 27, topics: ["SI Applications", "CI Applications", "Profit/Loss in Business", "Percentage in Finance", "Growth Rate Calculations"] },
+                        { week: 28, topics: ["Age Problems Advanced", "Number Problems Advanced", "Business Mathematics", "Stock & Shares", "Measurement Systems"] },
+                        { week: 29, topics: ["Real-world Applications", "Advanced Calculations", "Approximation Techniques", "Quick Maths Methods", "Problem Solving Strategies"] },
+                        { week: 30, topics: ["Basic QC", "Variable QC", "Algebraic QC", "Geometric QC", "DI based QC"] },
+                        { week: 31, topics: ["Mean Applications", "Median Applications", "Mode Applications", "Standard Deviation", "Data Analysis Techniques"] },
+                        { week: 32, topics: ["Equations with Modulus", "Algebraic Inequalities", "Maximum/Minimum Values", "Functions Basics", "Advanced Sequences"] },
+                        { week: 33, topics: ["Similar Triangle Applications", "Advanced Circle Theorems", "3D Geometry Basics", "Coordinate Geometry Advanced", "Complex Shape Analysis"] },
+                        { week: 34, topics: ["Permutation Restrictions", "Combination Groups", "Probability Combined Events", "Set Theory Applications", "Advanced Statistics"] },
+                        { week: 35, topics: ["Complex Word Problems", "Multi-concept Problems", "Time-bound Solving", "Accuracy Techniques", "Advanced Problem Solving"] }
+                    ]
                 }
-                // Initial UI update after loading data
-                updateProgressUI();
-            };
+            ]
+        },
+        {
+            phase: "PHASE 2: REASONING & LOGIC (Weeks 36-60)",
+            color: "green",
+            subSections: [
+                 {
+                    title: "Verbal Reasoning (Weeks 36-45)",
+                    weeks: [
+                        { week: 36, topics: ["Alphabet Series Single", "Alphabet Series Double", "Number Series Addition/Subtraction", "Number Series Multiplication/Division", "Number Series Square/Cube"] },
+                        { week: 37, topics: ["Number Series Prime/Composite", "Mixed Series Patterns", "Alphanumeric Series", "Symbol Series", "Complex Series Patterns"] },
+                        { week: 38, topics: ["Word Analogies Synonyms", "Word Analogies Antonyms", "Word Analogies Worker-Tool", "Word Analogies Part-Whole", "Word Analogies Cause-Effect"] },
+                        { week: 39, topics: ["Number Analogies Simple", "Number Analogies Logic-based", "Mixed Analogies", "Complex Relationships", "Analogy Applications"] },
+                        { week: 40, topics: ["Word Classification Meaning", "Word Classification Odd-one-out", "Number Classification", "Letter Classification", "Mixed Classification"] },
+                        { week: 41, topics: ["Letter Coding Forward/Backward", "Number Coding Position-based", "Mixed Letter-Number Coding", "Symbol Coding", "Conditional Coding"] },
+                        { week: 42, topics: ["Matrix Coding", "Message Word Codes", "Coding by Analogy", "Binary Coding", "Clock-based Coding"] },
+                        { week: 43, topics: ["Simple Family Relations", "Coded Relations", "Family Tree Problems", "Complex Relations", "Multiple Family Problems"] },
+                        { week: 44, topics: ["Basic Direction Concepts", "Complex Direction Paths", "Direction with Distance", "Shadow-based Directions", "Direction Puzzles"] },
+                        { week: 45, topics: ["Rank from Left/Right", "Rank in Queue", "Height/Weight Ordering", "Age-based Ordering", "Multiple Parameter Ordering"] }
+                    ]
+                },
+                {
+                    title: "Puzzles & Arrangements (Weeks 46-50)",
+                    weeks: [
+                        { week: 46, topics: ["Single Row Arrangements", "Double Row Arrangements", "North-South Facing", "Complex Linear Sets", "Linear with Multiple Parameters"] },
+                        { week: 47, topics: ["Facing Centre", "Facing Outward", "Mixed Facing", "Circular with Gaps", "Complex Circular"] },
+                        { week: 48, topics: ["Square Arrangements", "Rectangular Facing", "Mixed Shape Arrangements", "Complex Seating", "Multi-table Arrangements"] },
+                        { week: 49, topics: ["Single Parameter Floors", "Double Parameter Floors", "Multiple Parameters", "Complex Floor Systems", "Building-based Puzzles"] },
+                        { week: 50, topics: ["Days of Week", "Months/Dates", "Time-based Scheduling", "Multiple Events", "Complex Scheduling"] }
+                    ]
+                },
+                {
+                    title: "Logical Reasoning (Weeks 51-55)",
+                    weeks: [
+                        { week: 51, topics: ["2-Statement Syllogism", "3-Statement Syllogism", "Either-or Cases", "Coded Syllogism", "Complex Syllogism"] },
+                        { week: 52, topics: ["Statement-Conclusion Definite", "Statement-Conclusion Possibility", "Statement-Assumption Necessary", "Statement-Assumption Possible", "Statement-Argument Strong/Weak"] },
+                        { week: 53, topics: ["Cause & Effect", "Course of Action", "Inference Drawing", "Logical Consistency", "Paradox Resolution"] },
+                        { week: 54, topics: ["Group Formation", "Selection Problems", "Distribution Problems", "Comparison Puzzles", "Logical Sequence"] },
+                        { week: 55, topics: ["Condition-based Decisions", "Data-based Decisions", "Ethical Decision Making", "Administrative Decisions", "Complex Scenario Analysis"] }
+                    ]
+                },
+                {
+                    title: "Non-Verbal Reasoning (Weeks 56-60)",
+                     weeks: [
+                        { week: 56, topics: ["Figure Series Completion", "Missing Figure Series", "Figure Analogy", "Figure Classification", "Pattern Completion"] },
+                        { week: 57, topics: ["Mirror Images Vertical", "Mirror Images Horizontal", "Water Images", "Paper Folding", "Paper Cutting"] },
+                        { week: 58, topics: ["Cube Faces Counting", "Cube Painting", "Dice Standard Problems", "Dice Unfolded Nets", "Cube Assembly"] },
+                        { week: 59, topics: ["Venn Diagrams 2-circle", "Venn Diagrams 3-circle", "Counting Figures Triangles", "Counting Figures Squares", "Counting Figures Rectangles"] },
+                        { week: 60, topics: ["Embedded Figures Simple", "Embedded Figures Complex", "Figure Completion", "Dot Situation", "Shape Rotation"] }
+                    ]
+                }
+            ]
+        },
+        {
+            phase: "PHASE 3: ENGLISH LANGUAGE (Weeks 61-73)",
+            color: "purple",
+            subSections: [
+                {
+                    title: "Grammar Fundamentals (Weeks 61-65)",
+                    weeks: [
+                        { week: 61, topics: ["Nouns & Types", "Pronouns & Usage", "Verbs & Tenses", "Adjectives & Degrees", "Adverbs & Types"] },
+                        { week: 62, topics: ["Prepositions & Usage", "Conjunctions & Types", "Interjections", "Articles & Determiners", "Subject-Verb Agreement"] },
+                        { week: 63, topics: ["Present Tenses", "Past Tenses", "Future Tenses", "Perfect Tenses", "Continuous Tenses"] },
+                        { week: 64, topics: ["Active-Passive Voice", "Direct-Indirect Speech", "Question Tags", "Modals & Auxiliaries", "Conditionals"] },
+                        { week: 65, topics: ["Sentence Types", "Clause Analysis", "Phrase Usage", "Parallelism", "Sentence Variety"] }
+                    ]
+                },
+                {
+                    title: "Error Detection & Improvement (Weeks 66-68)",
+                    weeks: [
+                        { week: 66, topics: ["Tense Errors", "Subject-Verb Errors", "Pronoun Errors", "Preposition Errors", "Article Errors"] },
+                        { week: 67, topics: ["Conjunction Errors", "Modifier Errors", "Parallelism Errors", "Redundancy Errors", "Ambiguity Errors"] },
+                        { week: 68, topics: ["Phrase Replacement", "Error Correction", "Sentence Rearrangement", "Para Jumbles", "Sentence Completion"] }
+                    ]
+                },
+                {
+                    title: "Vocabulary Building (Weeks 69-70)",
+                    weeks: [
+                        { week: 69, topics: ["Synonyms", "Antonyms", "One Word Substitution", "Homophones/Homonyms", "Confusables"] },
+                        { week: 70, topics: ["Idioms & Phrases", "Phrasal Verbs", "Foreign Words", "Word Analogies", "Contextual Vocabulary"] }
+                    ]
+                },
+                {
+                    title: "Reading & Comprehension (Weeks 71-73)",
+                    weeks: [
+                        { week: 71, topics: ["Fact-based RC", "Inference-based RC", "Vocabulary-in-context", "Tone & Purpose", "Main Idea & Theme"] },
+                        { week: 72, topics: ["Complex Passage Analysis", "Critical Reading", "Comparative Reading", "Technical Passage", "Literary Passage"] },
+                        { week: 73, topics: ["Cloze Test", "Para Completion", "Sentence Connectors", "Word Usage", "Spelling & Punctuation"] }
+                    ]
+                }
+            ]
+        },
+        {
+            phase: "PHASE 4: GENERAL AWARENESS (Weeks 74-100)",
+            color: "red",
+            subSections: [
+                {
+                    title: "History & Culture (Weeks 74-78)",
+                    weeks: [
+                        { week: 74, topics: ["Indus Valley Civilization", "Vedic Period", "Mahajanapadas", "Mauryan Empire", "Gupta Empire"] },
+                        { week: 75, topics: ["Delhi Sultanate", "Mughal Empire", "Bhakti Movement", "Sufi Movement", "Maratha Empire"] },
+                        { week: 76, topics: ["Advent of Europeans", "British East India Company", "Revolt of 1857", "Social Reform Movements", "Indian National Congress"] },
+                        { week: 77, topics: ["Gandhian Era", "Revolutionary Movements", "Constitutional Development", "Independence & Partition", "Governor Generals & Viceroys"] },
+                        { week: 78, topics: ["Architecture & Monuments", "Dance Forms", "Music Traditions", "Painting Styles", "Literature & Languages"] }
+                    ]
+                },
+                {
+                    title: "Geography & Environment (Weeks 79-83)",
+                    weeks: [
+                        { week: 79, topics: ["Earth & Universe", "Landforms & Rocks", "Climate & Weather", "Natural Vegetation", "Soil Types"] },
+                        { week: 80, topics: ["Physical Features", "River Systems", "Climate & Monsoon", "Natural Resources", "Agriculture Patterns"] },
+                        { week: 81, topics: ["Continents & Oceans", "Major Landforms", "Climate Zones", "Economic Geography", "Environmental Geography"] },
+                        { week: 82, topics: ["Ecosystem Types", "Biodiversity", "Conservation Efforts", "Environmental Pollution", "Climate Change"] },
+                        { week: 83, topics: ["Natural Disasters", "Man-made Disasters", "Disaster Preparedness", "Mitigation Strategies", "Government Initiatives"] }
+                    ]
+                },
+                {
+                    title: "Polity & Governance (Weeks 84-86)",
+                    weeks: [
+                        { week: 84, topics: ["Constitution Features", "Preamble", "Fundamental Rights", "Directive Principles", "Fundamental Duties"] },
+                        { week: 85, topics: ["Union Executive", "Parliament", "Judiciary", "State Government", "Local Government"] },
+                        { week: 86, topics: ["Election Process", "Political Parties", "Federal Structure", "Center-State Relations", "Important Laws"] }
+                    ]
+                },
+                {
+                    title: "Economics & Social Development (Weeks 87-90)",
+                    weeks: [
+                        { week: 87, topics: ["Economic Concepts", "National Income", "Planning in India", "Economic Reforms", "Poverty & Unemployment"] },
+                        { week: 88, topics: ["Agriculture Sector", "Industry Sector", "Service Sector", "Banking System", "Public Finance"] },
+                        { week: 89, topics: ["Education System", "Health & Family Welfare", "Poverty Alleviation", "Rural Development", "Urban Development"] },
+                        { week: 90, topics: ["Microeconomics Concepts", "Macroeconomics Concepts", "Inflation & Deflation", "Monetary Policy", "International Trade"] }
+                    ]
+                },
+                 {
+                    title: "Science & Technology (Weeks 91-94)",
+                    weeks: [
+                        { week: 91, topics: ["Physics Fundamentals", "Chemistry Fundamentals", "Biology Fundamentals", "Scientific Laws", "Inventions & Discoveries"] },
+                        { week: 92, topics: ["Information Technology", "Communication Technology", "Space Technology", "Defense Technology", "Biotechnology"] },
+                        { week: 93, topics: ["Computer Basics", "Hardware Components", "Software Types", "Operating Systems", "Memory & Storage"] },
+                        { week: 94, topics: ["Computer Networks", "Internet & Web", "Database Management", "Programming Basics", "Cyber Security"] }
+                    ]
+                },
+                 {
+                    title: "Banking & Finance (Weeks 95-97)",
+                    weeks: [
+                        { week: 95, topics: ["Banking History", "Types of Banks", "Banking Products", "Digital Banking", "RBI & its Functions"] },
+                        { week: 96, topics: ["Capital Markets", "Money Markets", "Stock Exchanges", "Mutual Funds", "Insurance Sector"] },
+                        { week: 97, topics: ["Financial Regulators", "Monetary Policy", "Fiscal Policy", "Economic Survey", "Union Budget"] }
+                    ]
+                },
+                 {
+                    title: "Miscellaneous GK (Weeks 98-100)",
+                    weeks: [
+                        { week: 98, topics: ["International Organizations", "World Politics", "Indian Foreign Policy", "Bilateral Relations", "Global Issues"] },
+                        { week: 99, topics: ["National Awards", "International Awards", "Sports Tournaments", "Player Achievements", "Sports Governance"] },
+                        { week: 100, topics: ["Government Schemes", "Important Days", "Books & Authors", "Cultural Events", "Famous Personalities"] }
+                    ]
+                }
+            ]
+        }
+    ];
 
-            // Add event listeners to all checkboxes to save on change
-            checkboxes.forEach(box => {
-                box.addEventListener('change', saveProgress);
-            });
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainContainer = document.querySelector('.space-y-12');
+        let topicCounter = 0;
 
-            // Load saved progress when the page loads
-            loadProgress();
+        const colorClasses = {
+            blue: { bg: 'bg-blue-600', border: 'border-blue-200', focus: 'focus:ring-blue-500', text: 'text-blue-600' },
+            green: { bg: 'bg-green-600', border: 'border-green-200', focus: 'focus:ring-green-500', text: 'text-green-600' },
+            purple: { bg: 'bg-purple-600', border: 'border-purple-200', focus: 'focus:ring-purple-500', text: 'text-purple-600' },
+            red: { bg: 'bg-red-600', border: 'border-red-200', focus: 'focus:ring-red-500', text: 'text-red-600' }
+        };
+
+        planData.forEach(phase => {
+            const phaseColors = colorClasses[phase.color];
+            const section = document.createElement('section');
+
+            section.innerHTML = `
+                <div class="${phaseColors.bg} text-white p-4 rounded-t-xl">
+                    <h2 class="text-3xl font-bold">${phase.phase}</h2>
+                </div>
+                <div class="bg-white p-6 rounded-b-xl shadow-lg space-y-8">
+                    ${phase.subSections.map(subSection => `
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-700 border-b-2 ${phaseColors.border} pb-2 mb-4">${subSection.title}</h3>
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20">Week</th>
+                                        <th class="p-3 bg-gray-100 font-semibold text-sm border-b">Topic (1 Topic / Day)</th>
+                                        <th class="p-3 bg-gray-100 font-semibold text-sm border-b w-20 text-center">Done ✔️</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${subSection.weeks.map(weekData => 
+                                        weekData.topics.map((topic, index) => {
+                                            topicCounter++;
+                                            if (index === 0) {
+                                                return `<tr>
+                                                    <td class="p-3 font-bold border-b" rowspan="5">${weekData.week}</td>
+                                                    <td class="p-3 border-b">${topic}</td>
+                                                    <td class="p-3 border-b text-center"><input type="checkbox" id="task-${topicCounter}" class="task-checkbox h-5 w-5 ${phaseColors.text} rounded border-gray-300 ${phaseColors.focus}"></td>
+                                                </tr>`;
+                                            }
+                                            return `<tr>
+                                                <td class="p-3 border-b">${topic}</td>
+                                                <td class="p-3 border-b text-center"><input type="checkbox" id="task-${topicCounter}" class="task-checkbox h-5 w-5 ${phaseColors.text} rounded border-gray-300 ${phaseColors.focus}"></td>
+                                            </tr>`;
+                                        }).join('')
+                                    ).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            mainContainer.appendChild(section);
         });
+
+        // Progress Tracker Logic
+        const storageKey = 'studyPlanProgress_100w';
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+
+        let progressData = {};
+
+        const updateProgressUI = () => {
+            const totalTasks = checkboxes.length;
+            if (totalTasks === 0) return;
+
+            const completedTasks = document.querySelectorAll('.task-checkbox:checked').length;
+            const percentage = Math.round((completedTasks / totalTasks) * 100);
+
+            progressBar.style.width = `${percentage}%`;
+            progressBar.textContent = `${percentage}%`;
+            progressText.textContent = `${completedTasks} of ${totalTasks} topics completed`;
+        };
+
+        const saveProgress = () => {
+            checkboxes.forEach(box => {
+                progressData[box.id] = box.checked;
+            });
+            localStorage.setItem(storageKey, JSON.stringify(progressData));
+            updateProgressUI();
+        };
+
+        const loadProgress = () => {
+            const savedData = localStorage.getItem(storageKey);
+            if (savedData) {
+                progressData = JSON.parse(savedData);
+                checkboxes.forEach(box => {
+                    if (progressData[box.id]) {
+                        box.checked = true;
+                    }
+                });
+            }
+            updateProgressUI();
+        };
+
+        checkboxes.forEach(box => {
+            box.addEventListener('change', saveProgress);
+        });
+
+        loadProgress();
+    });
     </script>
 </body>
 </html>
