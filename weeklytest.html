@@ -154,11 +154,10 @@
         </div>
 
         <!-- Horizontal scroll container for mobile -->
-        <div class="w-full overflow-x-auto pb-6">
-            <div class="flex space-x-8 md:grid md:grid-cols-3 md:gap-8 md:space-x-0">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
                 <!-- Tier 1: Basic -->
-                <div class="w-80 md:w-auto flex-shrink-0 border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.0s;">
+                <div class="border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.0s;">
                     <h3 class="text-base sm:text-xl font-bold text-gray-800">Basic Test</h3>
                     <p class="text-3xl sm:text-5xl font-extrabold my-4">₹165</p>
                     <p class="text-xs text-gray-500 -mt-4 mb-6">(incl. GST)</p>
@@ -174,7 +173,7 @@
                 </div>
 
                 <!-- Tier 2: Advanced (Most Popular) -->
-                <div class="w-80 md:w-auto flex-shrink-0 border-2 border-blue-500 rounded-2xl p-8 text-center flex flex-col relative card-hover bg-white shadow-2xl shadow-blue-500/10 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.1s;">
+                <div class="border-2 border-blue-500 rounded-2xl p-8 text-center flex flex-col relative card-hover bg-white shadow-2xl shadow-blue-500/10 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.1s;">
                     <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">MOST POPULAR</span>
                     <h3 class="text-base sm:text-xl font-bold text-blue-800">Advanced</h3>
                     <p class="text-3xl sm:text-5xl font-extrabold my-4 text-blue-700">₹235</p>
@@ -193,7 +192,7 @@
                 </div>
 
                 <!-- Tier 3: Premium -->
-                <div class="w-80 md:w-auto flex-shrink-0 border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.2s;">
+                <div class="border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.2s;">
                     <h3 class="text-base sm:text-xl font-bold text-gray-800">Premium</h3>
                      <p class="text-3xl sm:text-5xl font-extrabold my-4">₹590</p>
                      <p class="text-xs text-gray-500 -mt-4 mb-6">(incl. GST)</p>
@@ -210,11 +209,64 @@
                     </div>
                     <a href="https://payments.cashfree.com/forms/premiumweeklytestfee" target="_blank" rel="noopener noreferrer" class="mt-8 block w-full bg-gradient-dark text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg text-sm sm:text-lg btn-hover-effect text-center">Enroll Now</a>
                 </div>
-            </div>
         </div>
         
-        <div class="text-center mt-8">
-             <p class="text-xs text-gray-500">*Recharge benefit applicable upon purchasing the discounted course.</p>
+        <!-- Compare Plans Section -->
+        <div class="mt-16 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.3s;">
+            <h2 class="text-xl md:text-3xl font-bold text-blue-900 text-center mb-10">Compare Plans at a Glance</h2>
+            <div class="max-w-4xl mx-auto overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+                <table class="w-full text-sm sm:text-base text-left text-gray-700">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="p-4 font-bold text-gray-800 border-b-2 border-gray-200">Feature</th>
+                            <th class="p-4 font-bold text-center text-gray-800 border-b-2 border-gray-200">Basic</th>
+                            <th class="p-4 font-bold text-center text-blue-800 border-b-2 border-blue-200 bg-blue-100">Advanced</th>
+                            <th class="p-4 font-bold text-center text-gray-800 border-b-2 border-gray-200">Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white">
+                            <td class="p-4 border-b border-gray-200 font-semibold">Weekly Mock Test</td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                            <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-4 border-b border-gray-200 font-semibold">Full Practice Access</td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-red-400 font-bold text-xl">✖</span></td>
+                            <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-4 border-b border-gray-200 font-semibold">Live Classes & Training</td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-red-400 font-bold text-xl">✖</span></td>
+                            <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-red-400 font-bold text-xl">✖</span></td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-4 border-b border-gray-200 font-semibold">365 Days Free Recharge*</td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-red-400 font-bold text-xl">✖</span></td>
+                            <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-4 border-b-0 font-semibold">Guaranteed Course Discount</td>
+                            <td class="p-4 text-center border-b-0 font-bold text-lg">50%</td>
+                            <td class="p-4 text-center border-b-0 font-bold text-lg text-blue-700 bg-blue-50">70%</td>
+                            <td class="p-4 text-center border-b-0 font-bold text-lg">80%</td>
+                        </tr>
+                        <tr class="bg-gray-100">
+                            <td class="p-4 border-b-0 font-extrabold text-gray-800">Total Savings</td>
+                            <td class="p-4 text-center border-b-0 font-extrabold text-lg text-green-700">₹24,999</td>
+                            <td class="p-4 text-center border-b-0 font-extrabold text-lg text-green-700 bg-blue-100">₹38,598</td>
+                            <td class="p-4 text-center border-b-0 font-extrabold text-lg text-green-700">₹48,598</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <div class="text-center mt-4">
+                <p class="text-xs text-gray-500">*Recharge benefit applicable upon purchasing the discounted course.</p>
+            </div>
         </div>
         
         <!-- Terms and Conditions Section -->
@@ -263,5 +315,6 @@
 
 </body>
 </html>
+
 
 
