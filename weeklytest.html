@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Test Registration - Club of Competition</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to use the Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .gradient-text-pro {
+            background-image: linear-gradient(to right, #1e3a8a, #374151);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Subtle background pattern for sections */
+        .pattern-bg {
+            background-color: #f7f9fc;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23dbeafe' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* --- Animation Keyframes --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Animation Utility Classes --- */
+        .animate-on-load {
+            opacity: 0; /* Start hidden */
+            animation-fill-mode: forwards; /* Stay at the 'to' state */
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+        }
+
+        .btn-hover-effect {
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+            background-size: 200% auto;
+        }
+        .btn-hover-effect:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            background-position: right center;
+        }
+
+        .bg-gradient-blue {
+             background-image: linear-gradient(to right, #3b82f6, #2563eb);
+        }
+        
+        .bg-gradient-dark {
+             background-image: linear-gradient(to right, #374151, #1f2937);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+
+    <div class="w-full max-w-7xl mx-auto bg-white p-4 sm:p-6 md:p-12 rounded-2xl shadow-2xl border border-gray-100">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-12 animate-on-load" style="animation-name: scaleIn; animation-duration: 0.6s;">
+            <p class="font-playfair text-lg sm:text-xl md:text-2xl text-amber-600 font-bold mb-4">From the Desk of Club of Competition</p>
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black gradient-text-pro">Your Journey to Success Starts Here</h1>
+            <p class="text-gray-600 mt-4 text-xs sm:text-sm md:text-lg max-w-3xl mx-auto">Join our weekly challenge to compete, win incredible prizes, and accelerate your government job preparation with our AI-powered course.</p>
+        </div>
+
+        <!-- Prizes Section -->
+        <div class="rounded-2xl p-4 sm:p-6 md:p-8 mb-16 pattern-bg">
+             <h2 class="text-xl md:text-3xl font-bold text-blue-900 text-center mb-8 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.2s;">Weekly Challenge Prizes</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                 
+                 <!-- Top 10 Prize Card -->
+                 <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg flex flex-col h-full card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.4s;">
+                    <div class="flex-grow">
+                        <div class="mb-4">
+                            <span class="inline-block bg-gradient-to-r from-amber-400 to-orange-500 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-md">TOP 10 WINNERS</span>
+                        </div>
+                         <h3 class="text-lg sm:text-2xl md:text-3xl font-bold text-gray-800">100% Course Discount</h3>
+                         <div class="my-4">
+                            <p class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-amber-500">PAY ₹0</p>
+                            <p class="font-bold text-sm md:text-lg text-green-700 mt-2">Total Value Won: ₹50,348</p>
+                            <p class="text-xs text-gray-500">(₹49,999 Course + ₹349 Recharge)</p>
+                         </div>
+                         <hr class="my-4 border-gray-200">
+                         <p class="font-semibold text-gray-700">Get the <span class="text-blue-800">100-Week Govt. Job Mastery Course</span> absolutely FREE.</p>
+                    </div>
+                 </div>
+
+                 <!-- Random 100 Prize Card -->
+                 <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg flex flex-col h-full card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.6s;">
+                    <div class="flex-grow">
+                        <div class="mb-4">
+                             <span class="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-md">100 LUCKY WINNERS</span>
+                        </div>
+                         <h3 class="text-lg sm:text-2xl md:text-3xl font-bold text-gray-800">95% Course Discount</h3>
+                         <div class="my-4">
+                            <p class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-blue-700">PAY ₹2,500</p>
+                            <p class="font-bold text-sm md:text-lg text-green-700 mt-2">Total Value Won: ₹47,848</p>
+                            <p class="text-xs text-gray-500">(₹47,499 Savings + ₹349 Recharge)</p>
+                         </div>
+                         <hr class="my-4 border-gray-200">
+                         <p class="font-semibold text-gray-700">Unlock the <span class="text-blue-800">100-Week Govt. Job Mastery Course</span> at a minimal price.</p>
+                    </div>
+                     <p class="text-xs text-gray-500 mt-3">*Winners can use the 95% discount or their package discount, whichever is better. Recharge on course purchase.</p>
+                 </div>
+             </div>
+        </div>
+        
+        <!-- Why Join Us Section -->
+        <div class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.7s;">
+                    <h2 class="text-xl md:text-3xl font-bold text-blue-900 mb-6">Why Join the Challenge?</h2>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex items-center text-sm md:text-lg"><svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Guaranteed value for every participant.</li>
+                        <li class="flex items-center text-sm md:text-lg"><svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Test your skills against aspirants nationwide.</li>
+                        <li class="flex items-center text-sm md:text-lg"><svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Access premium content and expert-led classes.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-8 card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.8s;">
+                    <img src="https://placehold.co/60x60/dbeafe/1e3a8a?text=RK" alt="Student" class="w-16 h-16 rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
+                    <p class="text-gray-600 italic text-center">"The weekly tests were a game-changer... the practice also boosted my confidence immensely. Highly recommended!"</p>
+                    <p class="font-bold text-blue-800 mt-4 text-right">- Rakesh Kumar, SSC CGL Aspirant</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Tiers Section -->
+        <div class="text-center mb-10 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.9s;">
+            <h2 class="text-xl md:text-3xl font-bold text-blue-900">Invest in Your Future: Choose Your Plan</h2>
+            <p class="text-gray-500 mt-2">Each plan is an entry to the competition and a step towards your dream job.</p>
+        </div>
+
+        <!-- Horizontal scroll container for mobile -->
+        <div class="w-full overflow-x-auto pb-6">
+            <div class="flex space-x-8 md:grid md:grid-cols-3 md:gap-8 md:space-x-0">
+            
+                <!-- Tier 1: Basic -->
+                <div class="w-80 md:w-auto flex-shrink-0 border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.0s;">
+                    <h3 class="text-base sm:text-xl font-bold text-gray-800">Basic Test</h3>
+                    <p class="text-3xl sm:text-5xl font-extrabold my-4">₹165</p>
+                    <p class="text-xs text-gray-500 -mt-4 mb-6">(incl. GST)</p>
+                    <ul class="space-y-4 text-gray-600 text-left flex-grow mb-8">
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly Mock Test</span></li>
+                    </ul>
+                    <div class="mt-auto pt-6 border-t-2 border-dashed bg-slate-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-500">Guaranteed Benefit</p>
+                        <p class="font-extrabold text-xl sm:text-3xl text-green-600">50% OFF</p>
+                        <p class="mt-2 font-bold text-sm md:text-lg">Total Savings: <span class="text-green-700">₹24,999</span></p>
+                    </div>
+                    <a href="https://payments.cashfree.com/forms/weeklytestfee" target="_blank" rel="noopener noreferrer" class="mt-8 block w-full bg-gradient-dark text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg text-sm sm:text-lg btn-hover-effect text-center">Enroll Now</a>
+                </div>
+
+                <!-- Tier 2: Advanced (Most Popular) -->
+                <div class="w-80 md:w-auto flex-shrink-0 border-2 border-blue-500 rounded-2xl p-8 text-center flex flex-col relative card-hover bg-white shadow-2xl shadow-blue-500/10 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.1s;">
+                    <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">MOST POPULAR</span>
+                    <h3 class="text-base sm:text-xl font-bold text-blue-800">Advanced</h3>
+                    <p class="text-3xl sm:text-5xl font-extrabold my-4 text-blue-700">₹235</p>
+                    <p class="text-xs text-gray-500 -mt-4 mb-6">(incl. GST)</p>
+                    <ul class="space-y-4 text-gray-600 text-left flex-grow mb-8">
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly Mock Test</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Full Practice Access</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>365 Days Free Recharge*<span class="block text-xs text-gray-400">(Value: Upto ₹3,599)</span></div></li>
+                    </ul>
+                    <div class="mt-auto pt-6 border-t-2 border-dashed bg-blue-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-500">Guaranteed Benefit</p>
+                        <p class="font-extrabold text-xl sm:text-3xl text-green-600">70% OFF</p>
+                        <p class="mt-2 font-bold text-sm md:text-lg">Total Benefits: <span class="text-green-700">₹38,598</span></p>
+                    </div>
+                    <a href="https://payments.cashfree.com/forms/proweeklytestfee" target="_blank" rel="noopener noreferrer" class="mt-8 block w-full bg-gradient-blue text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg text-sm sm:text-lg btn-hover-effect text-center">Enroll Now</a>
+                </div>
+
+                <!-- Tier 3: Premium -->
+                <div class="w-80 md:w-auto flex-shrink-0 border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.2s;">
+                    <h3 class="text-base sm:text-xl font-bold text-gray-800">Premium</h3>
+                     <p class="text-3xl sm:text-5xl font-extrabold my-4">₹590</p>
+                     <p class="text-xs text-gray-500 -mt-4 mb-6">(incl. GST)</p>
+                    <ul class="space-y-4 text-gray-600 text-left flex-grow mb-8">
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly Mock Test</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Full Practice Access</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>Live Classes & Training<span class="block text-xs text-gray-400">Choice of: 10th Maths (CBSE), AWS Cloud, or Python (Value: ₹5,000)</span></div></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>365 Days Free Recharge*<span class="block text-xs text-gray-400">(Value: Upto ₹3,599)</span></div></li>
+                    </ul>
+                     <div class="mt-auto pt-6 border-t-2 border-dashed bg-slate-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-500">Guaranteed Benefit</p>
+                        <p class="font-extrabold text-xl sm:text-3xl text-green-600">80% OFF</p>
+                        <p class="mt-2 font-bold text-sm md:text-lg">Total Benefits: <span class="text-green-700">₹48,598</span></p>
+                    </div>
+                    <a href="https://payments.cashfree.com/forms/premiumweeklytestfee" target="_blank" rel="noopener noreferrer" class="mt-8 block w-full bg-gradient-dark text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg text-sm sm:text-lg btn-hover-effect text-center">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-8">
+             <p class="text-xs text-gray-500">*Recharge benefit applicable upon purchasing the discounted course.</p>
+        </div>
+        
+        <!-- Terms and Conditions Section -->
+        <div class="mt-16 pt-12 border-t border-gray-200 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.3s;">
+            <h3 class="text-center text-base md:text-xl font-bold text-gray-700 mb-6">Terms & Conditions</h3>
+            <div class="text-left text-sm text-gray-600 max-w-4xl mx-auto space-y-3 bg-gray-50 p-8 rounded-2xl border">
+                <p><strong>1. Non-Refundable Fee:</strong> The fee for participating is strictly non-refundable as it grants access to a knowledge-based competition and digital educational services.</p>
+                <p><strong>2. Winner Selection:</strong> Top 10 winners are based on highest scores, with time taken as a tie-breaker. The 100 lucky winners are selected via a randomized algorithm. All decisions by Club of Competition are final.</p>
+                <p><strong>3. Prize Redemption:</strong> Prizes are non-transferable and must be claimed within 30 days of announcement. Recharge benefits are processed after the discounted course purchase.</p>
+                <p><strong>4. Fair Play:</strong> Any participant engaging in unfair means will be disqualified immediately without a refund and barred from future events.</p>
+                 <p><strong>5. Offer Modification:</strong> Club of Competition reserves the right to modify or cancel the competition, prizes, or terms at any time without prior notice.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-12 border-t border-gray-200 pt-10">
+             <p class="font-bold text-blue-800">Made with ❤️ for Ambitious Students</p>
+            <p class="text-sm text-gray-500 mt-2">An investment in knowledge pays the best interest. Secure your future today.</p>
+            <p class="text-xs text-gray-400 mt-4">&copy; 2025 Club of Competition. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Script to trigger animations on load when elements are in view
+        document.addEventListener("DOMContentLoaded", function() {
+            const animatedElements = document.querySelectorAll('.animate-on-load');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationName = entry.target.style.animationName || 'fadeInUp';
+                        entry.target.style.animationDuration = entry.target.style.animationDuration || '0.5s';
+                        entry.target.style.opacity = '1';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
