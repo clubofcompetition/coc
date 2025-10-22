@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Ionicons for modern icons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <style>
         /* Custom styles to use the Inter font */
         body {
@@ -86,64 +89,57 @@
             <p class="text-gray-600 mt-4 text-xs sm:text-sm md:text-lg max-w-3xl mx-auto">Join our weekly challenge to compete, win incredible prizes, and accelerate your government job preparation with our AI-powered course.</p>
         </div>
 
-        <!-- Prizes Section -->
-        <div class="rounded-2xl p-4 sm:p-6 md:p-8 mb-16 pattern-bg">
-             <h2 class="text-xl md:text-3xl font-bold text-blue-900 text-center mb-8 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.2s;">Weekly Challenge Prizes</h2>
-             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-                 
-                 <!-- Top 10 Prize Card -->
-                 <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg flex flex-col h-full card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.4s;">
-                    <div class="flex-grow">
-                        <div class="mb-4">
+        <!-- Prizes & Earn While you Learn Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Left Side Prizes -->
+            <div class="lg:col-span-2 space-y-8">
+                <h2 class="text-xl md:text-3xl font-bold text-blue-900 text-center lg:text-left animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.2s;">Weekly Challenge Prizes</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                    <!-- Top 10 Prize Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg flex flex-col h-full card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.4s;">
+                        <div class="flex-grow">
+                            <ion-icon name="trophy" class="text-5xl text-amber-400 mx-auto mb-3"></ion-icon>
                             <span class="inline-block bg-gradient-to-r from-amber-400 to-orange-500 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-md">TOP 10 WINNERS</span>
+                            <h3 class="mt-4 text-lg sm:text-2xl md:text-2xl font-bold text-gray-800">100% Course Discount</h3>
+                            <p class="text-sm text-gray-500 mt-2 px-4">Secure your dream job preparation without any cost.</p>
+                            <div class="my-4">
+                                <p class="text-3xl sm:text-5xl md:text-5xl font-extrabold text-amber-500">PAY ₹0</p>
+                                <p class="font-bold text-sm md:text-base text-green-700 mt-2">Total Value Won: ₹50,348</p>
+                                <p class="text-xs text-gray-500">(₹49,999 Course + ₹349 Recharge)</p>
+                            </div>
                         </div>
-                         <h3 class="text-lg sm:text-2xl md:text-3xl font-bold text-gray-800">100% Course Discount</h3>
-                         <div class="my-4">
-                            <p class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-amber-500">PAY ₹0</p>
-                            <p class="font-bold text-sm md:text-lg text-green-700 mt-2">Total Value Won: ₹50,348</p>
-                            <p class="text-xs text-gray-500">(₹49,999 Course + ₹349 Recharge)</p>
-                         </div>
-                         <hr class="my-4 border-gray-200">
-                         <p class="font-semibold text-gray-700">Get the <span class="text-blue-800">100-Week Govt. Job Mastery Course</span> absolutely FREE.</p>
                     </div>
-                     <p class="text-xs text-gray-500 mt-3">*The free one-month recharge is awarded upon claiming your free course prize.</p>
-                 </div>
-
-                 <!-- Random 100 Prize Card -->
-                 <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg flex flex-col h-full card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.6s;">
-                    <div class="flex-grow">
-                        <div class="mb-4">
-                             <span class="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-md">100 LUCKY WINNERS</span>
+                    <!-- Random 100 Prize Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg flex flex-col h-full card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.6s;">
+                       <div class="flex-grow">
+                            <ion-icon name="sparkles" class="text-5xl text-blue-500 mx-auto mb-3"></ion-icon>
+                            <span class="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-bold px-4 py-1.5 rounded-full shadow-md">100 LUCKY WINNERS</span>
+                            <h3 class="mt-4 text-lg sm:text-2xl md:text-2xl font-bold text-gray-800">95% Course Discount</h3>
+                            <p class="text-sm text-gray-500 mt-2 px-4">An incredible opportunity to access premium education at a fraction of the cost.</p>
+                            <div class="my-4">
+                                <p class="text-3xl sm:text-5xl md:text-5xl font-extrabold text-blue-700">PAY ₹2,500</p>
+                                <p class="font-bold text-sm md:text-base text-green-700 mt-2">Total Value Won: ₹47,848</p>
+                                <p class="text-xs text-gray-500">(₹47,499 Savings + ₹349 Recharge)</p>
+                            </div>
                         </div>
-                         <h3 class="text-lg sm:text-2xl md:text-3xl font-bold text-gray-800">95% Course Discount</h3>
-                         <div class="my-4">
-                            <p class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-blue-700">PAY ₹2,500</p>
-                            <p class="font-bold text-sm md:text-lg text-green-700 mt-2">Total Value Won: ₹47,848</p>
-                            <p class="text-xs text-gray-500">(₹47,499 Savings + ₹349 Recharge)</p>
-                         </div>
-                         <hr class="my-4 border-gray-200">
-                         <p class="font-semibold text-gray-700">Unlock the <span class="text-blue-800">100-Week Govt. Job Mastery Course</span> at a minimal price.</p>
                     </div>
-                     <p class="text-xs text-gray-500 mt-3">*Winners can use the 95% discount or their package discount, whichever is better. Recharge on course purchase.</p>
-                 </div>
-             </div>
-        </div>
-
-        <!-- Earn While You Learn Section -->
-        <div class="mb-16 text-center animate-on-load" style="animation-name: scaleIn; animation-duration: 0.5s; animation-delay: 0.7s;">
-            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl border-2 border-dashed border-green-200">
-                 <h2 class="text-xl md:text-3xl font-bold text-green-800 mb-4">Introducing Our 'Earn While You Learn' Program</h2>
-                 <p class="text-gray-600 max-w-3xl mx-auto mb-6">A unique opportunity for every student who joins our Mastery Course!</p>
-                 <div class="bg-white p-6 rounded-xl shadow-lg inline-block max-w-sm">
-                    <p class="text-sm text-gray-500 font-medium">Take Free Daily Tests Inside The Course & Earn</p>
-                    <p class="text-4xl md:text-6xl font-extrabold text-green-600 my-2">₹100 Every Day</p>
-                    <p class="font-bold text-lg text-gray-700">For 500 Days</p>
-                    <hr class="my-4 border-gray-200">
-                    <p class="text-lg font-bold text-blue-900">Potential Earnings: <span class="text-green-700">Up to ₹50,000!</span></p>
-                 </div>
-                 <p class="text-xs text-gray-500 mt-4 max-w-xl mx-auto">This exclusive benefit is available to all prize winners and every student who purchases the course, regardless of the discount availed.</p>
+                </div>
+            </div>
+             <!-- Right Side: Earn While you Learn -->
+            <div class="lg:col-span-1 text-center animate-on-load" style="animation-name: scaleIn; animation-duration: 0.5s; animation-delay: 0.7s;">
+                 <div class="bg-gradient-to-br from-green-600 to-emerald-700 p-8 rounded-2xl h-full flex flex-col justify-center items-center shadow-2xl card-hover">
+                     <ion-icon name="cash" class="text-6xl text-white opacity-90 mb-4"></ion-icon>
+                     <h2 class="text-xl md:text-2xl font-bold text-white mb-3">Earn While You Learn</h2>
+                     <p class="text-white/80 max-w-3xl mx-auto mb-5 text-sm">Your dedication pays off. Study daily and earn back your investment.</p>
+                     <div class="bg-white/10 p-4 rounded-xl text-white">
+                        <p class="font-bold text-4xl md:text-5xl">₹100<span class="text-2xl font-medium tracking-tight opacity-80">/day</span></p>
+                        <p class="font-medium">For 500 Days</p>
+                     </div>
+                     <p class="text-lg font-bold text-white mt-4">Potential Earnings: Up to <span class="text-yellow-300">₹50,000!</span></p>
+                </div>
             </div>
         </div>
+
 
         <!-- How it Works (Plan Explanation) Section -->
         <div class="mb-16 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 0.8s;">
@@ -181,7 +177,7 @@
                     <div class="space-y-4 pl-4 border-l-4 border-blue-200">
                         <div>
                             <h4 class="font-bold text-gray-700">1. Basic Plan (₹165)</h4>
-                            <p class="text-gray-600 text-sm md:text-base">Gives you test access and a guaranteed <strong class="font-semibold">50% course discount</strong>.</p>
+                            <p class="text-gray-600 text-sm md:text-base">Gives you test access, a free 1-year recharge (on course purchase), and a guaranteed <strong class="font-semibold">50% course discount</strong>.</p>
                         </div>
                         <div>
                             <h4 class="font-bold text-gray-700">2. Advanced Plan (₹235)</h4>
@@ -227,14 +223,15 @@
                 <!-- Tier 3: Premium -->
                 <div class="border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.2s;">
                     <h3 class="text-base sm:text-xl font-bold text-gray-800">Premium</h3>
+                    <p class="text-sm text-gray-500 mt-2 min-h-[3.5rem]">The ultimate package for comprehensive preparation and skill development.</p>
                      <p class="text-3xl sm:text-5xl font-extrabold my-4">₹590</p>
                      <p class="text-xs text-gray-500 -mt-4 mb-6">(₹500.00 + 18% GST)</p>
                     <ul class="space-y-4 text-gray-600 text-left flex-grow mb-8">
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly Mock Test</span></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>7 Days Validity</span></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Full Practice Access</span></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>Live Classes & Training<span class="block text-xs text-gray-400">Choice of ONE: 10th Maths (CBSE), AWS Cloud, or Python (Value: ₹5,000)</span></div></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>365 Days Free Recharge*<span class="block text-xs text-gray-400">(Value: Upto ₹3,599)</span></div></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly All-India Mock Test</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>7-Day Test Access Window</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Unlimited Practice Access</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>Expert-Led Live Training<span class="block text-xs text-gray-400">Choice of ONE: 10th Maths (CBSE), AWS Cloud, or Python (Value: ₹5,000)</span></div></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>1-Year Free Recharge Bonus*<span class="block text-xs text-gray-400">(Value: Upto ₹3,599)</span></div></li>
                     </ul>
                      <div class="mt-auto pt-6 border-t-2 border-dashed bg-slate-50 p-4 rounded-lg">
                         <p class="text-sm font-semibold text-gray-500">Guaranteed Benefit</p>
@@ -248,13 +245,14 @@
                 <div class="border-2 border-blue-500 rounded-2xl p-8 text-center flex flex-col relative card-hover bg-white shadow-2xl shadow-blue-500/10 animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.3s;">
                     <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">MOST POPULAR</span>
                     <h3 class="text-base sm:text-xl font-bold text-blue-800">Advanced</h3>
+                    <p class="text-sm text-gray-500 mt-2 min-h-[3.5rem]">The perfect balance of practice, value, and popular benefits.</p>
                     <p class="text-3xl sm:text-5xl font-extrabold my-4 text-blue-700">₹235</p>
                     <p class="text-xs text-gray-500 -mt-4 mb-6">(₹199.15 + 18% GST)</p>
                     <ul class="space-y-4 text-gray-600 text-left flex-grow mb-8">
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly Mock Test</span></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>7 Days Validity</span></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Full Practice Access</span></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>365 Days Free Recharge*<span class="block text-xs text-gray-400">(Value: Upto ₹3,599)</span></div></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly All-India Mock Test</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>7-Day Test Access Window</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Unlimited Practice Access</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>1-Year Free Recharge Bonus*<span class="block text-xs text-gray-400">(Value: Upto ₹3,599)</span></div></li>
                     </ul>
                     <div class="mt-auto pt-6 border-t-2 border-dashed bg-blue-50 p-4 rounded-lg">
                         <p class="text-sm font-semibold text-gray-500">Guaranteed Benefit</p>
@@ -267,16 +265,18 @@
                 <!-- Tier 1: Basic -->
                 <div class="border border-gray-200 rounded-2xl p-8 text-center flex flex-col card-hover animate-on-load" style="animation-name: fadeInUp; animation-duration: 0.5s; animation-delay: 1.4s;">
                     <h3 class="text-base sm:text-xl font-bold text-gray-800">Basic Test</h3>
+                    <p class="text-sm text-gray-500 mt-2 min-h-[3.5rem]">The essential first step to benchmark your preparation and compete.</p>
                     <p class="text-3xl sm:text-5xl font-extrabold my-4">₹165</p>
                     <p class="text-xs text-gray-500 -mt-4 mb-6">(₹139.83 + 18% GST)</p>
                     <ul class="space-y-4 text-gray-600 text-left flex-grow mb-8">
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly Mock Test</span></li>
-                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>7 Days Validity</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Weekly All-India Mock Test</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>7-Day Test Access Window</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-blue-600 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div>1-Year Free Recharge Bonus*<span class="block text-xs text-gray-400">(Value: Upto ₹3,599)</span></div></li>
                     </ul>
                     <div class="mt-auto pt-6 border-t-2 border-dashed bg-slate-50 p-4 rounded-lg">
                         <p class="text-sm font-semibold text-gray-500">Guaranteed Benefit</p>
                         <p class="font-extrabold text-xl sm:text-3xl text-green-600">50% OFF</p>
-                        <p class="mt-2 font-bold text-sm md:text-lg">Total Savings: <span class="text-green-700">₹24,999</span></p>
+                        <p class="mt-2 font-bold text-sm md:text-lg">Total Benefits: <span class="text-green-700">₹28,598</span></p>
                     </div>
                     <a href="https://payments.cashfree.com/forms/weeklytestfee" target="_blank" rel="noopener noreferrer" class="mt-8 block w-full bg-gradient-dark text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg text-sm sm:text-lg btn-hover-effect text-center">Enroll Now</a>
                 </div>
@@ -297,46 +297,52 @@
                     </thead>
                     <tbody>
                         <tr class="bg-white">
+                            <td class="p-4 border-b border-gray-200 font-semibold">Total Payable</td>
+                            <td class="p-4 text-center border-b border-gray-200 font-bold text-lg">₹590</td>
+                            <td class="p-4 text-center border-b border-gray-200 bg-blue-50 font-bold text-lg text-blue-700">₹235</td>
+                            <td class="p-4 text-center border-b border-gray-200 font-bold text-lg">₹165</td>
+                        </tr>
+                        <tr class="bg-gray-50">
                             <td class="p-4 border-b border-gray-200 font-semibold">Weekly Mock Test</td>
                             <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                             <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                             <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                         </tr>
-                        <tr class="bg-gray-50">
+                        <tr class="bg-white">
                             <td class="p-4 border-b border-gray-200 font-semibold">Test Validity</td>
                             <td class="p-4 text-center border-b border-gray-200 font-semibold">7 Days</td>
                             <td class="p-4 text-center border-b border-gray-200 bg-blue-50 font-semibold">7 Days</td>
                             <td class="p-4 text-center border-b border-gray-200 font-semibold">7 Days</td>
                         </tr>
-                        <tr class="bg-white">
+                        <tr class="bg-gray-50">
                             <td class="p-4 border-b border-gray-200 font-semibold">Full Practice Access</td>
                             <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                             <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                             <td class="p-4 text-center border-b border-gray-200"><span class="text-red-400 font-bold text-xl">✖</span></td>
                         </tr>
-                        <tr class="bg-gray-50">
+                        <tr class="bg-white">
                             <td class="p-4 border-b border-gray-200 font-semibold">Live Classes & Training</td>
                             <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                             <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-red-400 font-bold text-xl">✖</span></td>
                             <td class="p-4 text-center border-b border-gray-200"><span class="text-red-400 font-bold text-xl">✖</span></td>
                         </tr>
-                        <tr class="bg-white">
+                        <tr class="bg-gray-50">
                             <td class="p-4 border-b border-gray-200 font-semibold">365 Days Free Recharge*</td>
                             <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                             <td class="p-4 text-center border-b border-gray-200 bg-blue-50"><span class="text-green-500 font-bold text-2xl">✔</span></td>
-                            <td class="p-4 text-center border-b border-gray-200"><span class="text-red-400 font-bold text-xl">✖</span></td>
+                            <td class="p-4 text-center border-b border-gray-200"><span class="text-green-500 font-bold text-2xl">✔</span></td>
                         </tr>
-                        <tr class="bg-gray-50">
+                        <tr class="bg-white">
                             <td class="p-4 border-b-0 font-semibold">Guaranteed Course Discount</td>
                             <td class="p-4 text-center border-b-0 font-bold text-lg">80%</td>
                             <td class="p-4 text-center border-b-0 font-bold text-lg text-blue-700 bg-blue-50">70%</td>
                             <td class="p-4 text-center border-b-0 font-bold text-lg">50%</td>
                         </tr>
                         <tr class="bg-gray-100">
-                            <td class="p-4 border-b-0 font-extrabold text-gray-800">Total Savings</td>
+                            <td class="p-4 border-b-0 font-extrabold text-gray-800">Total Benefits</td>
                             <td class="p-4 text-center border-b-0 font-extrabold text-lg text-green-700">₹48,598</td>
                             <td class="p-4 text-center border-b-0 font-extrabold text-lg text-green-700 bg-blue-100">₹38,598</td>
-                            <td class="p-4 text-center border-b-0 font-extrabold text-lg text-green-700">₹24,999</td>
+                            <td class="p-4 text-center border-b-0 font-extrabold text-lg text-green-700">₹28,598</td>
                         </tr>
                     </tbody>
                 </table>
