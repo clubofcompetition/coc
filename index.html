@@ -87,8 +87,15 @@
             }
         }
         /* --- FLUID TYPOGRAPHY --- */
-        .text-fluid-h1 { font-size: clamp(2.25rem, 1rem + 5vw, 4.5rem); } /* Increased max size for desktop */
-        .text-fluid-h2 { font-size: clamp(1.875rem, 1.2rem + 2.5vw, 3rem); } /* Increased max size for desktop */
+        .text-fluid-h1 { font-size: clamp(2.25rem, 1rem + 5vw, 4.5rem); } /* 36px to 72px */
+        .text-fluid-h2 { font-size: clamp(1.875rem, 1.2rem + 2.5vw, 3rem); } /* 30px to 48px */
+        .text-fluid-h3 { font-size: clamp(1.25rem, 1rem + 0.5vw, 1.5rem); } /* 20px to 24px - for section sub-headings */
+        .text-fluid-h4 { font-size: clamp(1.1rem, 1rem + 0.25vw, 1.25rem); } /* 17.6px to 20px - for card titles */
+        .text-fluid-lead { font-size: clamp(1.1rem, 0.9rem + 0.5vw, 1.25rem); } /* 17.6px to 20px - for lead paragraphs */
+        .text-fluid-p { font-size: clamp(0.95rem, 0.85rem + 0.25vw, 1.125rem); } /* 15.2px to 18px - for main body text */
+        .text-fluid-small { font-size: clamp(0.8rem, 0.75rem + 0.1vw, 0.875rem); } /* 12.8px to 14px - for captions/footer */
+        .text-fluid-nav-title { font-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem); } /* 18px to 20px */
+        .text-fluid-nav { font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem); } /* 14.4px to 16px */
         
         /* --- BACKGROUND PATTERNS --- */
         .hero-bg {
@@ -99,6 +106,15 @@
         /* --- MENU STYLES --- */
         .nav-link.active { color: #1e40af; /* primary color */ }
         .nav-link.active .underline-anim { transform: scaleX(1); }
+
+        /* --- Shrink Header on Scroll --- */
+        header .header-inner {
+            transition: padding 0.3s ease-in-out;
+        }
+        header.header-scrolled .header-inner {
+            padding-top: 0.5rem;    /* 8px */
+            padding-bottom: 0.5rem; /* 8px */
+        }
 
         body { background-color: white; padding-bottom: 70px; }
         .taskbar { position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: white; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-around; align-items: center; z-index: 50; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
@@ -118,9 +134,10 @@
         .menu.active { right: 0; }
         .menu-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 45; display: none; opacity: 0; transition: opacity 0.3s ease;}
         .menu-overlay.active { display: block; opacity: 1;}
-        .menu-item { padding: 15px 25px; border-bottom: 1px solid #f1f1f1; color: #333; font-weight: 600; transition: background 0.2s; display: flex; align-items: center; font-family: 'Poppins', sans-serif; font-size: 1rem; }
-        .menu-item i { margin-right: 15px; width: 20px; text-align: center; color: #6b7280; font-size: 1.1rem; }
+        .menu-item { padding: 15px 25px; border-bottom: 1px solid #f1f1f1; color: #333; font-weight: 600; transition: background 0.2s, color 0.2s; display: flex; align-items: center; font-family: 'Poppins', sans-serif; font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1rem); }
+        .menu-item i { margin-right: 15px; width: 20px; text-align: center; color: #6b7280; font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem); transition: color 0.2s; }
         .menu-item:hover { background: #f8fafc; color: #1e40af;}
+        .menu-item:hover i { color: #1e40af; }
         .floating-whatsapp { position: fixed; bottom: 90px; right: 20px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 90; animation: pulse 1.5s infinite, float 3s ease-in-out infinite; transition: transform 0.3s, box-shadow 0.3s; }
         .floating-whatsapp:hover { transform: scale(1.15); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
         .floating-whatsapp i { font-size: 28px; }
@@ -152,7 +169,7 @@
 
 <!-- Navigation -->
 <header class="bg-white shadow-lg fixed w-full top-0 z-30" aria-label="Main navigation">
-    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center header-inner">
         <a href="#" class="flex items-center space-x-2 min-w-0" aria-label="Home">
             <img 
                 src="logo.png" 
@@ -160,33 +177,37 @@
                 class="h-10 w-auto animate-wiggle flex-shrink-0"
                 onerror="this.onerror=null; this.src='https://placehold.co/160x40/cccccc/000000?text=Logo+Error'"
             />
-            <span class="text-xl font-bold text-gray-800 font-poppins truncate">Club of Competition</span>
+            <span class="font-bold text-gray-800 font-poppins truncate text-fluid-nav-title">Club of Competition</span>
         </a>
         <div class="hidden md:flex items-center space-x-8">
              <nav class="flex space-x-8 font-poppins" id="desktop-nav">
-                <a href="#story" class="nav-link font-semibold text-gray-600 hover:text-primary transition relative group">
+                <a href="https://clubofcompetition.in/studyplan" target="_blank" class="nav-link font-semibold text-gray-600 hover:text-primary transition transform duration-300 hover:-translate-y-0.5 relative group text-fluid-nav">
+                    <span>Study Plan</span>
+                    <span class="underline-anim absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
+                </a>
+                <a href="#story" class="nav-link font-semibold text-gray-600 hover:text-primary transition transform duration-300 hover:-translate-y-0.5 relative group text-fluid-nav">
                     <span>Compare</span>
                     <span class="underline-anim absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
                 </a>
-                <a href="#features" class="nav-link font-semibold text-gray-600 hover:text-primary transition relative group">
+                <a href="#features" class="nav-link font-semibold text-gray-600 hover:text-primary transition transform duration-300 hover:-translate-y-0.5 relative group text-fluid-nav">
                     <span>Features</span>
                     <span class="underline-anim absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
                 </a>
-                <a href="#testimonials" class="nav-link font-semibold text-gray-600 hover:text-primary transition relative group">
+                <a href="#testimonials" class="nav-link font-semibold text-gray-600 hover:text-primary transition transform duration-300 hover:-translate-y-0.5 relative group text-fluid-nav">
                     <span>Success Stories</span>
                     <span class="underline-anim absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
                 </a>
-                <a href="#pricing" class="nav-link font-semibold text-gray-600 hover:text-primary transition relative group">
+                <a href="#pricing" class="nav-link font-semibold text-gray-600 hover:text-primary transition transform duration-300 hover:-translate-y-0.5 relative group text-fluid-nav">
                     <span>Pricing</span>
                      <span class="underline-anim absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
                 </a>
-                <a href="#faq" class="nav-link font-semibold text-gray-600 hover:text-primary transition relative group">
+                <a href="#faq" class="nav-link font-semibold text-gray-600 hover:text-primary transition transform duration-300 hover:-translate-y-0.5 relative group text-fluid-nav">
                     <span>FAQ</span>
                      <span class="underline-anim absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
                 </a>
             </nav>
-            <a href="#pricing" class="bg-primary text-white px-6 py-2.5 rounded-full font-semibold font-poppins hover:bg-blue-800 transition shadow hover:shadow-lg transform hover:scale-105">
-                Enroll Now
+            <a href="https://club-of-competition-977913736368.us-west1.run.app/" target="_blank" class="bg-primary text-white px-6 py-2.5 rounded-full font-semibold font-poppins hover:bg-blue-800 transition shadow hover:shadow-lg transform hover:scale-105 text-fluid-nav">
+                Login to Learn
             </a>
         </div>
         <!-- Hamburger Menu Button -->
@@ -201,9 +222,11 @@
     <!-- Mobile Menu -->
     <div class="menu" id="menu">
         <div class="flex justify-between items-center px-5 py-4 border-b bg-gray-50">
-            <span class="text-lg font-bold text-primary font-poppins">Menu</span>
+            <span class="font-bold text-primary font-poppins text-fluid-nav-title">Menu</span>
             <button id="menuCloseBtn" aria-label="Close menu"><i class="fas fa-times text-2xl text-gray-600 hover:text-primary"></i></button>
         </div>
+        <a href="httpsD://club-of-competition-977913736368.us-west1.run.app/" target="_blank" class="menu-item"><i class="fas fa-sign-in-alt"></i> Login to Learn</a>
+        <a href="https://clubofcompetition.in/studyplan" target="_blank" class="menu-item"><i class="fas fa-book-open"></i> Study Plan</a>
         <a href="#story" class="menu-item"><i class="fas fa-lightbulb"></i> Compare Paths</a>
         <a href="#features" class="menu-item"><i class="fas fa-star"></i> Features</a>
         <a href="#testimonials" class="menu-item"><i class="fas fa-users"></i> Success Stories</a>
@@ -211,12 +234,12 @@
         <a href="#faq" class="menu-item"><i class="fas fa-question-circle"></i> FAQ</a>
         <a href="#about" class="menu-item"><i class="fas fa-user-tie"></i> About Us</a>
         <div class="p-4 mt-4">
-            <a href="https://wa.me/919966591511" target="_blank" class="flex items-center justify-center bg-whatsapp text-white px-6 py-3 rounded-lg font-semibold w-full hover:scale-105 transition transform font-poppins">
+            <a href="https://wa.me/919966591511" target="_blank" class="flex items-center justify-center bg-whatsapp text-white px-6 py-3 rounded-lg font-semibold w-full hover:scale-105 transition transform font-poppins text-fluid-p">
                 <i class="fab fa-whatsapp mr-2"></i> Join on WhatsApp
             </a>
         </div>
         <div class="p-4">
-            <p class="text-sm font-semibold text-gray-700 mb-3 text-center font-poppins">Follow Us</p>
+            <p class="font-semibold text-gray-700 mb-3 text-center font-poppins text-fluid-small">Follow Us</p>
             <div class="flex justify-center space-x-4">
                 <a href="https://instagram.com/club_of_competition" target="_blank" class="social-link instagram"><i class="fab fa-instagram fa-2x"></i></a>
                 <a href="https://youtube.com/@clubofcompetition" target="_blank" class="social-link youtube"><i class="fab fa-youtube fa-2x"></i></a>
@@ -233,20 +256,20 @@
     <main id="main">
 
         <!-- Hero Section -->
-        <section class="hero-bg pt-32 pb-20 px-6 text-center relative overflow-hidden" id="hero">
+        <section class="hero-bg pt-40 pb-20 px-6 text-center relative overflow-hidden" id="hero">
             <div class="container mx-auto max-w-7xl relative z-10">
                 <h1 class="text-fluid-h1 font-extrabold text-gray-900 leading-tight mb-6 font-poppins">
                     Your <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text animate-sparkle">100-weeks Foundation Course</span> to Crack Every Major Government Exam 🚀
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto">
+                <p class="text-fluid-lead text-gray-600 mb-8 max-w-4xl mx-auto">
                     From SSC to UPSC, Banking to Railways — follow a structured, week-by-week plan designed by experts. 🌱📚
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-10">
-                    <a href="#pricing" class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-800 transition shadow-lg hover:shadow-xl flex items-center justify-center gap-2 hover:scale-105 transform duration-200 group font-poppins" aria-label="Enroll in the course">
+                <div class="flex flex-col md:flex-row justify-center gap-4 mt-10">
+                    <a href="#pricing" class="bg-primary text-white px-8 py-4 rounded-lg text-fluid-p font-semibold hover:bg-blue-800 transition shadow-lg hover:shadow-xl flex items-center justify-center gap-2 hover:scale-105 transform duration-200 group font-poppins" aria-label="Enroll in the course">
                         <i class="fas fa-rocket" aria-hidden="true"></i> Enroll Now ✅
                     </a>
-                    <a href="https://clubofcompetition.in/weeklytest" class="border-2 border-primary text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition flex items-center justify-center gap-2 hover:scale-105 transform duration-200 group font-poppins" aria-label="Register for Weekly Test">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Register for Weekly Test💡
+                    <a href="https://wa.me/919966591511?text=Hi%20CoC,%20I%20have%20a%20question%20about%20the%20course." class="border-2 border-primary text-primary px-8 py-4 rounded-lg text-fluid-p font-semibold hover:bg-blue-50 transition flex items-center justify-center gap-2 hover:scale-105 transform duration-200 group font-poppins" aria-label="Ask a question">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Ask a Question 💡
                     </a>
                 </div>
             </div>
@@ -263,7 +286,7 @@
                         </span>
                         <span class="block">Mastery vs Crash: Build a Legacy</span>
                     </h2>
-                    <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    <p class="text-fluid-lead text-gray-600 max-w-2xl mx-auto leading-relaxed">
                         Grow like a <strong>mango tree</strong> — deep roots, lasting success — or rush like a <strong>banana plant</strong> — fast, fragile, forgotten.
                     </p>
                 </div>
@@ -273,9 +296,9 @@
                     <div class="bg-white rounded-xl shadow-lg border-b-8 border-green-500 p-8 transform transition hover:shadow-2xl hover:-translate-y-2 flex flex-col">
                         <div class="text-center mb-6">
                             <span class="text-6xl">🌳</span>
-                            <h3 class="text-2xl font-bold text-gray-800 mt-4 font-poppins">The Mastery Path</h3>
+                            <h3 class="text-fluid-h3 font-bold text-gray-800 mt-4 font-poppins">The Mastery Path</h3>
                         </div>
-                        <ul class="space-y-4 text-gray-700 text-left">
+                        <ul class="space-y-4 text-fluid-p text-gray-700 text-left">
                             <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0"></i><div><strong class="text-gray-900">Time:</strong> 2–3 years of consistent, paced effort.</div></li>
                             <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0"></i><div><strong class="text-gray-900">Learning:</strong> Deep conceptual clarity & understanding.</div></li>
                             <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0"></i><div><strong class="text-gray-900">Material:</strong> NCERTs + Standard reference books.</div></li>
@@ -288,9 +311,9 @@
                     <div class="bg-white rounded-xl shadow-lg border-b-8 border-orange-500 p-8 transform transition hover:shadow-2xl hover:-translate-y-2 flex flex-col">
                         <div class="text-center mb-6">
                             <span class="text-6xl">🍌</span>
-                            <h3 class="text-2xl font-bold text-gray-800 mt-4 font-poppins">The Crash Course Trap</h3>
+                            <h3 class="text-fluid-h3 font-bold text-gray-800 mt-4 font-poppins">The Crash Course Trap</h3>
                         </div>
-                        <ul class="space-y-4 text-gray-700 text-left">
+                        <ul class="space-y-4 text-fluid-p text-gray-700 text-left">
                             <li class="flex items-start gap-3"><i class="fas fa-times-circle text-red-500 mt-1 flex-shrink-0"></i><div><strong class="text-gray-900">Time:</strong> 3–6 months of last-minute panic.</div></li>
                             <li class="flex items-start gap-3"><i class="fas fa-times-circle text-red-500 mt-1 flex-shrink-0"></i><div><strong class="text-gray-900">Learning:</strong> Rote memorization and high-stakes guesswork.</div></li>
                             <li class="flex items-start gap-3"><i class="fas fa-times-circle text-red-500 mt-1 flex-shrink-0"></i><div><strong class="text-gray-900">Material:</strong> Random PDFs and unverified notes.</div></li>
@@ -309,23 +332,23 @@
                 <h2 class="text-fluid-h2 font-bold text-gray-800 mb-6 flex items-center justify-center gap-2 font-poppins">
                     <i class="fas fa-rocket text-purple-600 animate-sparkle"></i> Why This Plan Works 🎯
                 </h2>
-                <p class="text-lg text-gray-600 mb-12">Unlike random study guides, this is a proven, holistic strategy for long-term success. 🌈✨</p>
+                <p class="text-fluid-lead text-gray-600 mb-12">Unlike random study guides, this is a proven, holistic strategy for long-term success. 🌈✨</p>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex gap-4 group">
                         <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center flex-shrink-0 group-hover:animate-bounce-slow"><i class="fas fa-hourglass-half text-xl"></i></div>
-                        <div class="text-left"><h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 font-poppins">Long-Term Preparation 🌱</h3><p class="text-gray-600">Build deep conceptual clarity over 2 years — no last-minute panic. 📚</p></div>
+                        <div class="text-left"><h3 class="text-fluid-h4 font-bold text-gray-800 group-hover:text-blue-600 font-poppins">Long-Term Preparation 🌱</h3><p class="text-fluid-p text-gray-600">Build deep conceptual clarity over 2 years — no last-minute panic. 📚</p></div>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex gap-4 group">
                         <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-full flex items-center justify-center flex-shrink-0 group-hover:animate-float"><i class="fas fa-gamepad text-xl"></i></div>
-                        <div class="text-left"><h3 class="text-xl font-bold text-gray-800 group-hover:text-purple-600 font-poppins">Gamified Learning 🎮</h3><p class="text-gray-600">Stay motivated with weekly tests, leaderboards, and performance badges. 🏆</p></div>
+                        <div class="text-left"><h3 class="text-fluid-h4 font-bold text-gray-800 group-hover:text-purple-600 font-poppins">Gamified Learning 🎮</h3><p class="text-fluid-p text-gray-600">Stay motivated with weekly tests, leaderboards, and performance badges. 🏆</p></div>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex gap-4 group">
                         <div class="w-12 h-12 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center flex-shrink-0 group-hover:animate-pulse-slow"><i class="fas fa-lightbulb text-xl"></i></div>
-                        <div class="text-left"><h3 class="text-xl font-bold text-gray-800 group-hover:text-teal-600 font-poppins">Smart Learning Suggestions 💡</h3><p class="text-gray-600">Our AI recommends what to study next based on your progress. 🤖</p></div>
+                        <div class="text-left"><h3 class="text-fluid-h4 font-bold text-gray-800 group-hover:text-teal-600 font-poppins">Smart Learning Suggestions 💡</h3><p class="text-fluid-p text-gray-600">Our AI recommends what to study next based on your progress. 🤖</p></div>
                     </div>
                     <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex gap-4 group">
                         <div class="w-12 h-12 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center flex-shrink-0 group-hover:animate-bounce-slow"><i class="fas fa-newspaper text-xl"></i></div>
-                        <div class="text-left"><h3 class="text-xl font-bold text-gray-800 group-hover:text-yellow-600 font-poppins">Weekly Current Affairs 📰</h3><p class="text-gray-600">Stay updated with concise, exam-focused weekly summaries. 🗞️</p></div>
+                        <div class="text-left"><h3 class="text-fluid-h4 font-bold text-gray-800 group-hover:text-yellow-600 font-poppins">Weekly Current Affairs 📰</h3><p class="text-fluid-p text-gray-600">Stay updated with concise, exam-focused weekly summaries. 🗞️</p></div>
                     </div>
                 </div>
             </div>
@@ -337,28 +360,28 @@
                 <h2 class="text-fluid-h2 font-bold text-gray-800 mb-6 flex items-center justify-center gap-2 font-poppins">
                     <i class="fas fa-trophy text-yellow-500"></i> Hear From Our Rankers
                 </h2>
-                <p class="text-lg text-gray-600 mb-20">Join over 1,000+ students who transformed their preparation with us.</p>
+                <p class="text-fluid-lead text-gray-600 mb-20">Join over 1,000+ students who transformed their preparation with us.</p>
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- Testimonial 1 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-primary transform hover:-translate-y-2 transition-transform duration-300 relative testimonial-card">
                         <img src="https://placehold.co/100x100/E7F0FF/1e40af?text=AR" alt="Aarav Sharma" class="w-24 h-24 rounded-full mx-auto -mt-20 mb-4 border-4 border-white shadow-md">
-                        <p class="text-gray-600 italic">"The 100-week plan was a game-changer. The structured approach removed all the guesswork. I went from being completely lost to clearing SSC CGL in my first serious attempt."</p>
-                        <h4 class="font-bold text-primary mt-4 font-poppins">Aarav Sharma</h4>
-                        <p class="text-sm text-gray-500">SSC CGL - Tax Assistant</p>
+                        <p class="text-fluid-p text-gray-600 italic">"The 100-week plan was a game-changer. The structured approach removed all the guesswork. I went from being completely lost to clearing SSC CGL in my first serious attempt."</p>
+                        <h4 class="text-fluid-h4 font-bold text-primary mt-4 font-poppins">Aarav Sharma</h4>
+                        <p class="text-fluid-small text-gray-500">SSC CGL - Tax Assistant</p>
                     </div>
                      <!-- Testimonial 2 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-secondary transform hover:-translate-y-2 transition-transform duration-300 relative testimonial-card">
                         <img src="https://placehold.co/100x100/E6F6F2/059669?text=PS" alt="Priya Singh" class="w-24 h-24 rounded-full mx-auto -mt-20 mb-4 border-4 border-white shadow-md">
-                        <p class="text-gray-600 italic">"I was working full-time and struggling to find time. The daily WhatsApp lessons were perfect for me. The consistency helped me crack the IBPS PO exam. Thank you, CoC team!"</p>
-                        <h4 class="font-bold text-secondary mt-4 font-poppins">Priya Singh</h4>
-                        <p class="text-sm text-gray-500">IBPS PO - Bank Officer</p>
+                        <p class="text-fluid-p text-gray-600 italic">"I was working full-time and struggling to find time. The daily WhatsApp lessons were perfect for me. The consistency helped me crack the IBPS PO exam. Thank you, CoC team!"</p>
+                        <h4 class="text-fluid-h4 font-bold text-secondary mt-4 font-poppins">Priya Singh</h4>
+                        <p class="text-fluid-small text-gray-500">IBPS PO - Bank Officer</p>
                     </div>
                      <!-- Testimonial 3 -->
                     <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-accent transform hover:-translate-y-2 transition-transform duration-300 relative testimonial-card">
                         <img src="https://placehold.co/100x100/FEF2E5/d97706?text=RK" alt="Rohan Kumar" class="w-24 h-24 rounded-full mx-auto -mt-20 mb-4 border-4 border-white shadow-md">
-                        <p class="text-gray-600 italic">"After failing Railways twice, I had lost hope. The mentorship and doubt support here is unparalleled. They identified my weak areas and helped me build a strong foundation."</p>
-                        <h4 class="font-bold text-accent mt-4 font-poppins">Rohan Kumar</h4>
-                        <p class="text-sm text-gray-500">RRB NTPC - Station Master</p>
+                        <p class="text-fluid-p text-gray-600 italic">"After failing Railways twice, I had lost hope. The mentorship and doubt support here is unparalleled. They identified my weak areas and helped me build a strong foundation."</p>
+                        <h4 class="text-fluid-h4 font-bold text-accent mt-4 font-poppins">Rohan Kumar</h4>
+                        <p class="text-fluid-small text-gray-500">RRB NTPC - Station Master</p>
                     </div>
                 </div>
             </div>
@@ -370,34 +393,34 @@
             <h2 class="text-fluid-h2 font-bold text-gray-800 mb-6 flex items-center justify-center gap-2 font-poppins">
                 <i class="fas fa-wallet text-green-600 animate-sparkle"></i> Invest in Your Future 💰
             </h2>
-            <p class="text-lg text-gray-600 mb-12">One-time payment for a lifetime of success. ✅</p>
+            <p class="text-fluid-lead text-gray-600 mb-12">One-time payment for a lifetime of success. ✅</p>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 <div class="bg-white p-8 rounded-2xl shadow-2xl border-2 border-primary transform hover:scale-105 transition duration-300 relative">
-                    <span class="absolute top-0 right-4 -mt-4 bg-yellow-400 text-yellow-900 text-sm font-bold px-4 py-1 rounded-full font-poppins">Most Popular</span>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4 font-poppins">🚀 Complete 100-weeks Mastery Plan</h3>
+                    <span class="absolute top-0 right-4 -mt-4 bg-yellow-400 text-yellow-900 text-fluid-small font-bold px-4 py-1 rounded-full font-poppins">Most Popular</span>
+                    <h3 class="text-fluid-h3 font-bold text-gray-800 mb-4 font-poppins">🚀 Complete 100-weeks Mastery Plan</h3>
                     <div class="price">₹49,999</div>
-                    <p class="text-gray-500 text-sm mb-6">One-time • No hidden fees • Lifetime Access 🔐</p>
-                    <ul class="text-left text-gray-700 space-y-3 mb-8">
+                    <p class="text-fluid-small text-gray-500 mb-6">One-time • No hidden fees • Lifetime Access 🔐</p>
+                    <ul class="text-left text-fluid-p text-gray-700 space-y-3 mb-8">
                         <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 🗓️ 100 Week Study Plan</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 💬 Premium WhatsApp Community</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 🎯 Priority Doubt Support</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 📊 AI-Powered Syllabus Tracker</li>
                     </ul>
-                    <a href="https://wa.me/919966591511" target="_blank" class="inline-block bg-whatsapp text-white px-8 py-4 rounded-lg font-bold hover:bg-green-700 transition shadow-lg w-full flex items-center justify-center gap-2 hover:scale-105 font-poppins">
+                    <a href="https://wa.me/919966591511" target="_blank" class="inline-block bg-whatsapp text-white px-8 py-4 rounded-lg font-bold text-fluid-p hover:bg-green-700 transition shadow-lg w-full flex items-center justify-center gap-2 hover:scale-105 font-poppins">
                         <i class="fab fa-whatsapp"></i> Enroll Now 💬
                     </a>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 transform hover:scale-105 transition duration-300">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4 font-poppins">🧪 Universal Weekly Test</h3>
+                    <h3 class="text-fluid-h3 font-bold text-gray-800 mb-4 font-poppins">🧪 Universal Weekly Test</h3>
                     <div class="price text-indigo-700">₹499</div>
-                    <p class="text-gray-600 text-sm mb-6">One-time • Phase 1 access • Instant Results 📊</p>
-                    <ul class="text-left text-gray-700 space-y-3 mb-8">
+                    <p class="text-fluid-small text-gray-600 mb-6">One-time • Phase 1 access • Instant Results 📊</p>
+                    <ul class="text-left text-fluid-p text-gray-700 space-y-3 mb-8">
                         <li class="flex items-center gap-2"><i class="fas fa-trophy text-yellow-500"></i> <strong>Win Cash Prizes or Vouchers</strong> 💵</li>
                         <li class="flex items-center gap-2"><i class="fas fa-chart-line text-blue-500"></i> Detailed Performance Analytics</li>
                         <li class="flex items-center gap-2"><i class="fas fa-certificate text-orange-500"></i> All-India Rank Certificate</li>
                     </ul>
-                    <a href="https://wa.me/919966591511?text=Hi%20CoC,%20I%20want%20to%20join%20the%20Universal%20Weekly%20Test" target="_blank" class="inline-block bg-indigo-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-indigo-700 transition shadow-lg w-full flex items-center justify-center gap-2 hover:scale-105 font-poppins">
+                    <a href="https://wa.me/919966591511?text=Hi%20CoC,%20I%20want%20to%20join%20the%20Universal%20Weekly%20Test" target="_blank" class="inline-block bg-indigo-600 text-white px-8 py-4 rounded-lg font-bold text-fluid-p hover:bg-indigo-700 transition shadow-lg w-full flex items-center justify-center gap-2 hover:scale-105 font-poppins">
                         <i class="fas fa-award"></i> Join Weekly Test 🏆
                     </a>
                 </div>
@@ -413,40 +436,40 @@
                 <!-- FAQ Item 1 -->
                 <div class="bg-white rounded-lg shadow-md">
                     <button @click="open = open === 1 ? null : 1" class="w-full text-left p-6 flex justify-between items-center">
-                        <span class="font-semibold text-lg text-gray-800">Is this course suitable for a working professional?</span>
+                        <span class="font-semibold text-fluid-h4 text-gray-800">Is this course suitable for a working professional?</span>
                         <i class="fas" :class="open === 1 ? 'fa-minus text-primary' : 'fa-plus text-gray-500'"></i>
                     </button>
-                    <div x-cloak x-show="open === 1" x-transition class="p-6 pt-0 text-gray-600">
+                    <div x-cloak x-show="open === 1" x-transition class="p-6 pt-0 text-fluid-p text-gray-600">
                         <p>Absolutely! The course is designed for flexibility. The daily lessons are delivered on WhatsApp, which you can access anytime. Many of our successful students are working professionals who dedicated 2-3 hours daily and followed the plan consistently.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 2 -->
                 <div class="bg-white rounded-lg shadow-md">
                     <button @click="open = open === 2 ? null : 2" class="w-full text-left p-6 flex justify-between items-center">
-                        <span class="font-semibold text-lg text-gray-800">What if I have doubts?</span>
+                        <span class="font-semibold text-fluid-h4 text-gray-800">What if I have doubts?</span>
                         <i class="fas" :class="open === 2 ? 'fa-minus text-primary' : 'fa-plus text-gray-500'"></i>
                     </button>
-                    <div x-cloak x-show="open === 2" x-transition class="p-6 pt-0 text-gray-600">
+                    <div x-cloak x-show="open === 2" x-transition class="p-6 pt-0 text-fluid-p text-gray-600">
                         <p>You get access to our premium WhatsApp community where you can ask doubts anytime. Our expert mentors provide priority support and ensure that all your queries are resolved promptly.</p>
                     </div>
                 </div>
                 <!-- FAQ Item 3 -->
                 <div class="bg-white rounded-lg shadow-md">
                     <button @click="open = open === 3 ? null : 3" class="w-full text-left p-6 flex justify-between items-center">
-                        <span class="font-semibold text-lg text-gray-800">Is the course fee refundable?</span>
+                        <span class="font-semibold text-fluid-h4 text-gray-800">Is the course fee refundable?</span>
                         <i class="fas" :class="open === 3 ? 'fa-minus text-primary' : 'fa-plus text-gray-500'"></i>
                     </button>
-                    <div x-cloak x-show="open === 3" x-transition class="p-6 pt-0 text-gray-600">
+                    <div x-cloak x-show="open === 3" x-transition class="p-6 pt-0 text-fluid-p text-gray-600">
                         <p>Due to the digital nature of the course and instant access to all materials, the fee is non-refundable. We are confident in the value our course provides and encourage you to take the free trial test to experience the quality firsthand before enrolling.</p>
                     </div>
                 </div>
                  <!-- FAQ Item 4 -->
                  <div class="bg-white rounded-lg shadow-md">
                     <button @click="open = open === 4 ? null : 4" class="w-full text-left p-6 flex justify-between items-center">
-                        <span class="font-semibold text-lg text-gray-800">What if I miss a few days of study?</span>
+                        <span class="font-semibold text-fluid-h4 text-gray-800">What if I miss a few days of study?</span>
                         <i class="fas" :class="open === 4 ? 'fa-minus text-primary' : 'fa-plus text-gray-500'"></i>
                     </button>
-                    <div x-cloak x-show="open === 4" x-transition class="p-6 pt-0 text-gray-600">
+                    <div x-cloak x-show="open === 4" x-transition class="p-6 pt-0 text-fluid-p text-gray-600">
                         <p>The plan is structured weekly, giving you the flexibility to catch up over the weekend. All materials are accessible 24/7, so you can study at your own pace. The key is consistency over the long term, not perfection every single day.</p>
                     </div>
                 </div>
@@ -459,16 +482,16 @@
             <div class="container mx-auto max-w-7xl">
                 <h2 class="text-fluid-h2 font-bold text-center text-gray-800 mb-12 font-poppins">Our Story & Mission</h2>
                 <div class="bg-white p-10 rounded-2xl shadow-xl border border-gray-200 grid md:grid-cols-3 gap-8 items-center">
-                    <div class="md:col-span-2 leading-relaxed text-gray-700 space-y-4">
+                    <div class="md:col-span-2 leading-relaxed text-fluid-p text-gray-700 space-y-4">
                         <p>I still remember the day I failed—again. It was my third attempt, and I felt like a fraud. My parents had sacrificed so much, and I was stuck in the same cycle of hope and failure.</p>
                         <p>Everything changed when I met a mentor who taught me that <strong>hard work isn't enough; you need the right strategy.</strong></p>
                         <p class="font-bold text-primary">We created this company to replace years of struggle with a proven 100-weeks foundation course. We've been where you are, and we know the path to success.</p>
-                        <p>Today, 1,000+ students have cracked exams with us. Now, it’s your turn.</p>
+                        <p>Today, 1,000+ students have. Now, it’s your turn.</p>
                     </div>
                     <div class="text-center">
                         <img src="https://placehold.co/200x200/E7F0FF/1e40af?text=Founder" alt="M Govardhan, Founder of Club of Competition" class="w-48 h-48 rounded-full mx-auto mb-4 shadow-lg">
-                        <p class="text-lg font-bold text-primary font-poppins">[M Govardhan]</p>
-                        <p class="text-sm text-gray-600">Founder & CEO</p>
+                        <p class="text-fluid-h4 font-bold text-primary font-poppins">[M Govardhan]</p>
+                        <p class="text-fluid-small text-gray-600">Founder & CEO</p>
                     </div>
                 </div>
             </div>
@@ -481,12 +504,12 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
-                    <h4 class="font-bold text-lg mb-4 font-poppins">Club of Competition</h4>
-                    <p class="text-gray-400 text-sm">Your trusted partner in cracking government exams through structured, long-term preparation.</p>
+                    <h4 class="text-fluid-h4 font-bold mb-4 font-poppins">Club of Competition</h4>
+                    <p class="text-fluid-small text-gray-400">Your trusted partner in cracking government exams through structured, long-term preparation.</p>
                 </div>
                  <div>
-                    <h4 class="font-bold text-lg mb-4 font-poppins">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
+                    <h4 class="text-fluid-h4 font-bold mb-4 font-poppins">Quick Links</h4>
+                    <ul class="space-y-2 text-fluid-small">
                         <li><a href="#story" class="text-gray-400 hover:text-white">Compare</a></li>
                         <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
                         <li><a href="#testimonials" class="text-gray-400 hover:text-white">Success Stories</a></li>
@@ -495,23 +518,23 @@
                     </ul>
                 </div>
                 <div>
-                     <h4 class="font-bold text-lg mb-4 font-poppins">Legal</h4>
-                    <ul class="space-y-2 text-sm">
+                     <h4 class="text-fluid-h4 font-bold mb-4 font-poppins">Legal</h4>
+                    <ul class="space-y-2 text-fluid-small">
                         <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
                     </ul>
                 </div>
                  <div>
-                    <h4 class="font-bold text-lg mb-4 font-poppins">Follow Us</h4>
+                    <h4 class="text-fluid-h4 font-bold mb-4 font-poppins">Follow Us</h4>
                     <div class="flex space-x-4">
                         <a href="https://instagram.com/club_of_competition" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-instagram fa-2x"></i></a>
                         <a href="https://youtube.com/@clubofcompetition" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-youtube fa-2x"></i></a>
                         <a href="https://twitter.com/clubofcompete" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-x-twitter fa-2x"></i></a>
-                        <a href="https://t.me/club_of_competition" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-telegram fa-2x"></i></a>
+                        <a href="httpsT://t.me/club_of_competition" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-telegram fa-2x"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-fluid-small text-gray-400">
                 <p>&copy; 2024 Club of Competition. All Rights Reserved.</p>
             </div>
         </div>
@@ -600,12 +623,21 @@
             item.addEventListener('click', closeMenu);
         });
 
-        // Active Nav Link on Scroll
+        // Active Nav Link on Scroll & Header Shrink
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('#desktop-nav a.nav-link');
+        const headerEl = document.querySelector('header');
 
         window.addEventListener('scroll', () => {
             let current = '';
+            // --- Shrink Header ---
+            if (window.scrollY > 50) {
+                headerEl.classList.add('header-scrolled');
+            } else {
+                headerEl.classList.remove('header-scrolled');
+            }
+
+            // --- Active Link ---
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
@@ -624,4 +656,3 @@
     </script>
 </body>
 </html>
-
