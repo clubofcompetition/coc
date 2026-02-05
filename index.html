@@ -195,15 +195,27 @@
                 </div>
 
                 <!-- Three Button Row -->
-                <div class="btn-row gap-2 sm:gap-4 md:gap-6 px-2">
-                    <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="hero-btn bg-blue-50 text-primary border border-blue-100 hover:bg-blue-100">
-                        <i class="fas fa-edit text-blue-500"></i> Free Test
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 w-full px-2">
+                    <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" 
+                       class="group px-6 py-3.5 rounded-full bg-white text-blue-600 font-bold shadow-md border border-blue-100 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base">
+                        <span class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-edit text-sm"></i>
+                        </span>
+                        <span>Free Test</span>
                     </a>
-                    <a href="#pricing" class="hero-btn bg-primary text-white shadow-lg shadow-blue-200 hover:bg-blue-800">
-                        <i class="fas fa-rocket"></i> Enroll Now
+
+                    <a href="#pricing" 
+                       class="px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-indigo-600 text-white font-bold shadow-lg shadow-blue-200 hover:shadow-blue-400 hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 text-base sm:text-lg">
+                        <i class="fas fa-rocket animate-pulse"></i> 
+                        <span>Enroll Now</span>
                     </a>
-                    <button onclick="sharePage()" class="hero-btn bg-white border border-gray-200 text-gray-700 hover:border-primary hover:text-primary">
-                        <i class="fas fa-share-alt text-slate-500"></i> Share Page
+
+                    <button onclick="sharePage()" 
+                            class="group px-6 py-3.5 rounded-full bg-slate-50 text-slate-600 font-bold border border-slate-200 hover:bg-white hover:text-slate-900 hover:shadow-lg hover:border-slate-300 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base">
+                        <span class="w-8 h-8 rounded-full bg-white border border-slate-100 flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300">
+                             <i class="fas fa-share-alt text-sm group-hover:rotate-12 transition-transform duration-300"></i>
+                        </span>
+                        <span>Share</span>
                     </button>
                 </div>
             </div>
@@ -356,16 +368,6 @@
                             <h4 class="text-xl font-bold text-slate-900 font-poppins">M Govardhan</h4>
                             <p class="text-primary font-bold uppercase tracking-widest text-[10px] mt-1">Founder & CEO</p>
                         </div>
-                        
-                        <!-- COO Profile Card -->
-                        <div class="bg-slate-50 p-6 rounded-[2.5rem] border border-slate-100 flex-1 text-center group">
-                            <div class="mb-4 overflow-hidden rounded-[2rem] shadow-lg aspect-square max-w-[240px] mx-auto bg-white">
-                                <!-- REPLACE IMAGE: Change src="coo.png" to your image URL -->
-                                <img src="coo.png" alt="R Ashok Babu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x400/F1F5F9/1e40af?text=COO'">
-                            </div>
-                            <h4 class="text-xl font-bold text-slate-900 font-poppins">R Ashok Babu</h4>
-                            <p class="text-primary font-bold uppercase tracking-widest text-[10px] mt-1">Co-Founder & COO</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -433,7 +435,7 @@
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
-    <button id="scrollTopBtn" 
+    <button id="scrollTopBtn"
             class="fixed bottom-40 right-6 bg-slate-900 text-white w-14 h-14 rounded-2xl shadow-xl transition-all duration-300 opacity-0 translate-y-10 pointer-events-none z-40 flex items-center justify-center hover:bg-primary">
         <i class="fas fa-arrow-up"></i>
     </button>
