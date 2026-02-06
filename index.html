@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="no-scrollbar">
 <head>
@@ -113,7 +114,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-manrope antialiased" x-data="{ privacyOpen: false, termsOpen: false }">
+<body class="bg-slate-50 text-slate-900 font-manrope antialiased" x-data="{ privacyOpen: false, termsOpen: false, safetyOpen: false, refundOpen: false, shippingOpen: false }">
 
     <!-- Header -->
     <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-white py-4 border-b border-slate-100">
@@ -395,6 +396,9 @@
                     <ul class="space-y-3 text-sm text-slate-400">
                         <li><a href="#" @click.prevent="privacyOpen = true" class="hover:text-white transition-colors">Privacy Policy</a></li>
                         <li><a href="#" @click.prevent="termsOpen = true" class="hover:text-white transition-colors">Terms & Conditions</a></li>
+                        <li><a href="#" @click.prevent="refundOpen = true" class="hover:text-white transition-colors">Refund & Cancellation</a></li>
+                        <li><a href="#" @click.prevent="shippingOpen = true" class="hover:text-white transition-colors">Shipping & Delivery</a></li>
+                        <li><a href="#" @click.prevent="safetyOpen = true" class="hover:text-white text-red-400 transition-colors"><i class="fas fa-shield-alt mr-1"></i> Cyber Safety</a></li>
                     </ul>
                 </div> 
                 <div>
@@ -497,7 +501,7 @@
                 <p>The materials provided (PDFs, Videos, Schedules) are for your <strong>personal use only</strong>. Sharing, reselling, or distributing our proprietary content is strictly prohibited and may lead to immediate termination of your account without refund.</p>
 
                 <h4 class="font-bold text-slate-900 text-base">2. Payments & Refunds</h4>
-                <p><strong>Strict No-Refund Policy:</strong> As our course strategy and materials are digital intellectual property shared immediately or on a schedule, we do not offer refunds once enrollment is confirmed. Please review our free materials before purchasing.</p>
+                <p>Please refer to our specific Refund & Cancellation Policy for detailed terms regarding payment cancellations.</p>
 
                 <h4 class="font-bold text-slate-900 text-base">3. Disclaimer of Results</h4>
                 <p>We provide a structured path and mentorship. However, passing a government exam depends entirely on the student's personal effort and discipline. We do not guarantee employment or specific exam results.</p>
@@ -507,6 +511,113 @@
             </div>
             <div class="mt-8 pt-6 border-t border-slate-100 text-center">
                 <button @click="termsOpen = false" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors">I Agree</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refund & Cancellation Policy Modal -->
+    <div x-show="refundOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" @click="refundOpen = false"></div>
+        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up">
+            <button @click="refundOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <h3 class="text-2xl font-bold font-poppins mb-6 text-slate-900 border-b border-slate-100 pb-4">Refund & Cancellation Policy</h3>
+            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
+                <p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Effective Date: October 2024</p>
+                <p>At <strong>Club of Competition</strong>, we prioritize the quality of our educational content. Please read our policy carefully before enrolling.</p>
+
+                <h4 class="font-bold text-slate-900 text-base">1. Cancellation Policy</h4>
+                <p>Since our services (100-Weeks Course, Weekly Tests) grant immediate access to proprietary digital content, schedules, and mentorship groups, <strong>cancellations are not permitted</strong> once the payment is successfully processed.</p>
+
+                <h4 class="font-bold text-slate-900 text-base">2. Refund Policy</h4>
+                <p><strong>Strict No-Refund Policy:</strong> We do not offer refunds for any course or test series fees under any circumstances. This includes, but is not limited to:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Change of mind after enrollment.</li>
+                    <li>Inability to attend classes due to personal reasons.</li>
+                    <li>Technical issues on the student's end (internet/device).</li>
+                </ul>
+
+                <h4 class="font-bold text-slate-900 text-base">3. Double Payment Issues</h4>
+                <p>If you have accidentally made a duplicate payment for the same course, please contact us at support within 48 hours. Upon verification, the duplicate amount will be refunded to the original source within 7-10 working days.</p>
+                
+                <h4 class="font-bold text-slate-900 text-base">4. Try Before You Buy</h4>
+                <p>We strongly encourage all students to try our "Free Test" and review our open study plan before making a purchase to ensure the course meets their expectations.</p>
+            </div>
+            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+                <button @click="refundOpen = false" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shipping & Delivery Policy Modal -->
+    <div x-show="shippingOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" @click="shippingOpen = false"></div>
+        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up">
+            <button @click="shippingOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <h3 class="text-2xl font-bold font-poppins mb-6 text-slate-900 border-b border-slate-100 pb-4">Shipping & Delivery Policy</h3>
+            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
+                <p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Effective Date: October 2024</p>
+                <p><strong>Club of Competition</strong> operates exclusively as a digital educational platform.</p>
+
+                <h4 class="font-bold text-slate-900 text-base">1. Mode of Delivery</h4>
+                <p>All our products (Study Plans, Test Series, Mentorship) are delivered <strong>digitally online</strong>. We do not ship physical books, DVDs, or pen drives.</p>
+
+                <h4 class="font-bold text-slate-900 text-base">2. Delivery Timelines</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Immediate Access:</strong> For automated products like the "Weekly Test", access is granted instantly upon successful payment.</li>
+                    <li><strong>Mentorship Groups:</strong> For the "100-Weeks Course", you will be added to the respective Premium WhatsApp Group and provided login credentials within <strong>24 hours</strong> of payment confirmation.</li>
+                </ul>
+
+                <h4 class="font-bold text-slate-900 text-base">3. Non-Delivery</h4>
+                <p>If you do not receive your course access or login details within 24 hours of payment, please contact our support team immediately at <strong>+91 9966591511</strong> with your transaction ID.</p>
+            </div>
+            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+                <button @click="shippingOpen = false" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors">Okay</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cyber Safety Modal -->
+    <div x-show="safetyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
+        <div class="absolute inset-0 bg-red-950/60 backdrop-blur-sm transition-opacity" @click="safetyOpen = false"></div>
+        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up border-t-8 border-red-500">
+            <button @click="safetyOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500 hover:bg-red-100 transition-colors">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
+                <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-2xl">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="text-2xl font-bold font-poppins text-slate-900">Cyber Safety & Fraud Alert</h3>
+            </div>
+            
+            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
+                <p class="font-bold text-red-600 bg-red-50 p-4 rounded-xl border border-red-100">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> Warning: Club of Competition (COC) will NEVER ask you for OTPs or sensitive personal banking details.
+                </p>
+
+                <h4 class="font-bold text-slate-900 text-base">1. Impersonation Alerts</h4>
+                <p>Beware of fake Telegram groups or WhatsApp numbers pretending to be "Club of Competition". Always verify that you are speaking to our official business account. Our official support number is <strong>+91 9966591511</strong>.</p>
+
+                <h4 class="font-bold text-slate-900 text-base">2. Payment Safety</h4>
+                <p>We do NOT accept payments via personal UPI IDs (like name@upi) sent over chat. All payments must be made through:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Links provided on this official website (clubofcompetition.in).</li>
+                    <li>Official verified payment gateways integrated into our app.</li>
+                    <li>Direct account transfer to "COC NINE SOLUTIONS PRIVATE LIMITED".</li>
+                </ul>
+
+                <h4 class="font-bold text-slate-900 text-base">3. Protect Your OTP</h4>
+                <p>Fraudsters may call pretending to be our support staff to "activate" your course and ask for an OTP. <strong>NEVER share your OTP with anyone.</strong> We can activate courses without it.</p>
+                
+                <h4 class="font-bold text-slate-900 text-base">4. Reporting Fraud</h4>
+                <p>If you receive suspicious messages, please take a screenshot and report it to us immediately on WhatsApp (+91 9966591511) and block the sender.</p>
+            </div>
+            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+                <button @click="safetyOpen = false" class="bg-red-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-red-700 transition-colors shadow-lg shadow-red-200">I Understand</button>
             </div>
         </div>
     </div>
