@@ -12,21 +12,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    
+        
     <title>100-Weeks Govt Exam Course | Club of Competition</title>
     <link rel="icon" type="image/png" href="logo.png" />
     <meta name="description" content="Join India's most structured 100-weeks government exam Foundation course. Daily WhatsApp lessons, AI-powered tracker, and proven strategy." />
-    
+        
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    
+        
     <!-- Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    
     <script>
         tailwind.config = {
             theme: {
@@ -36,9 +36,10 @@
                         manrope: ['Manrope', 'sans-serif']
                     },
                     colors: {
-                        primary: '#1e40af',
-                        secondary: '#059669',
-                        accent: '#d97706',
+                        primary: '#4f46e5', // Modern Indigo
+                        secondary: '#10b981', // Emerald
+                        accent: '#f59e0b', // Amber
+                        dark: '#0f172a',
                         whatsapp: '#25D366',
                         instagram: '#E4405F',
                         youtube: '#FF0000',
@@ -52,14 +53,13 @@
                     },
                     keyframes: {
                         float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-                        sparkle: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.5 } },
+                        sparkle: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
                         wiggle: { '0%, 100%': { transform: 'rotate(-2deg)' }, '50%': { transform: 'rotate(2deg)' } }
                     }
                 }
             }
         }
     </script>
-
     <style>
         /* Hide scrollbars globally */
         * {
@@ -71,108 +71,138 @@
         }
 
         html { scroll-behavior: smooth; overflow-x: hidden; }
-        body { overflow-x: hidden; width: 100%; -webkit-font-smoothing: antialiased; }
-        
+        body { 
+            overflow-x: hidden; 
+            width: 100%; 
+            -webkit-font-smoothing: antialiased; 
+            background-color: #f8fafc;
+        }
+                
         [x-cloak] { display: none !important; }
-        
-        .text-fluid-h1 { font-size: clamp(1.75rem, 5vw, 4rem); }
-        .text-fluid-h2 { font-size: clamp(1.5rem, 4vw, 3rem); }
-        .text-fluid-p { font-size: clamp(0.95rem, 1.2vw, 1.125rem); }
+                
+        /* Fluid Typography */
+        .text-fluid-h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.1; }
+        .text-fluid-h2 { font-size: clamp(1.8rem, 5vw, 3.5rem); line-height: 1.2; }
+        .text-fluid-p { font-size: clamp(1rem, 1.2vw, 1.25rem); line-height: 1.7; }
 
-        .header-scrolled { padding: 0.4rem 0 !important; box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1); background: rgba(255, 255, 255, 0.98); }
-        
-        .taskbar { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; background: white; border-top: 1px solid #e5e7eb; display: flex; z-index: 50; padding-bottom: env(safe-area-inset-bottom); }
-        
+        .header-scrolled { 
+            padding: 0.5rem 0 !important; 
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1); 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+                
+        .taskbar { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 70px; 
+            background: white; 
+            border-top: 1px solid #f1f5f9; 
+            display: flex; 
+            z-index: 50; 
+            padding-bottom: env(safe-area-inset-bottom);
+            box-shadow: 0 -10px 25px -5px rgba(0,0,0,0.05);
+        }
+                
         .hero-pattern {
             background-color: #ffffff;
-            background-image: radial-gradient(#e0e7ff 0.8px, transparent 0.8px);
-            background-size: 24px 24px;
+            background-image: radial-gradient(var(--tw-colors-indigo-100) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        .testimonial-card::before {
-            content: "\f10d";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
             position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            font-size: 3rem;
-            color: #f1f5f9;
-            z-index: 0;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--tw-colors-primary);
+            transition: width 0.3s ease;
         }
-        
-        .hero-btn {
-            @apply px-4 py-3 md:px-8 md:py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 font-poppins text-[10px] sm:text-sm md:text-base whitespace-nowrap shadow-sm hover:-translate-y-0.5;
-        }
-
-        .btn-row {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
+        .nav-link:hover::after {
             width: 100%;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-manrope antialiased" x-data="{ privacyOpen: false, termsOpen: false, safetyOpen: false, refundOpen: false, shippingOpen: false }">
+<body class="text-slate-900 font-manrope antialiased" x-data="{ privacyOpen: false, termsOpen: false, safetyOpen: false, refundOpen: false, shippingOpen: false }">
 
     <!-- Header -->
-    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-white py-4 border-b border-slate-100">
-        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 bg-white/80 backdrop-blur-md py-5 border-b border-slate-100">
+        <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group" aria-label="Home">
-                <img src="logo.png" alt="Logo" class="h-9 md:h-10 w-auto animate-wiggle" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1e40af/ffffff?text=C'">
-                <span class="font-poppins font-bold text-base md:text-xl tracking-tight text-slate-800">Club of Competition</span>
+                <div class="p-1 bg-gradient-to-tr from-primary to-purple-500 rounded-xl">
+                    <img src="logo.png" alt="Logo" class="h-9 md:h-10 w-auto bg-white rounded-lg p-0.5 animate-wiggle" onerror="this.onerror=null; this.src='https://placehold.co/40x40/4f46e5/ffffff?text=C'">
+                </div>
+                <span class="font-poppins font-bold text-lg md:text-2xl tracking-tight text-dark">Club of Competition</span>
             </a>
             
-            <nav class="hidden lg:flex items-center gap-8 font-poppins text-sm font-semibold text-slate-600" id="desktop-nav">
+            <nav class="hidden lg:flex items-center gap-10 font-poppins text-sm font-bold text-slate-500" id="desktop-nav">
                 <a href="https://clubofcompetition.in/studyplan" class="nav-link hover:text-primary transition-colors">Study Plan</a>
                 <a href="#story" class="nav-link hover:text-primary transition-colors">Compare Path</a>
                 <a href="#about" class="nav-link hover:text-primary transition-colors">About Us</a>
                 <a href="#testimonials" class="nav-link hover:text-primary transition-colors">Results</a>
-                <a href="#pricing" class="nav-link hover:text-primary transition-colors">Pricing</a>
-                <a href="https://app.clubofcompetition.in" target="_blank" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-blue-800 transition-all shadow-md">Login</a>
+                <a href="#pricing" class="nav-link hover:text-primary transition-colors text-accent">Pricing</a>
+                <a href="https://app.clubofcompetition.in" target="_blank" class="bg-primary text-white px-8 py-3 rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 active:scale-95">Login</a>
             </nav>
 
-            <button id="menuBtn" class="lg:hidden text-2xl p-2 text-slate-800" aria-label="Open Menu">
-                <i class="fas fa-bars"></i>
+            <button id="menuBtn" class="lg:hidden text-2xl p-2 text-dark" aria-label="Open Menu">
+                <i class="fas fa-bars-staggered"></i>
             </button>
         </div>
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-300 lg:hidden flex flex-col">
-        <div class="p-6 flex flex-col h-full overflow-y-auto no-scrollbar">
-            <div class="flex justify-between items-center mb-10">
-                <span class="font-bold text-xl text-primary font-poppins">Menu</span>
-                <button id="closeBtn" class="text-2xl p-2" aria-label="Close Menu"><i class="fas fa-times"></i></button>
+    <div id="mobileMenu" class="fixed inset-0 z-[60] bg-white translate-x-full transition-transform duration-500 lg:hidden flex flex-col">
+        <div class="p-8 flex flex-col h-full overflow-y-auto no-scrollbar">
+            <div class="flex justify-between items-center mb-12">
+                <span class="font-bold text-2xl gradient-text font-poppins">Menu</span>
+                <button id="closeBtn" class="text-2xl p-3 bg-slate-50 rounded-full" aria-label="Close Menu"><i class="fas fa-times"></i></button>
             </div>
-            <nav class="flex flex-col gap-6 text-lg font-poppins font-semibold mb-8">
-                <a href="https://app.clubofcompetition.in" class="flex items-center gap-3"><i class="fas fa-sign-in-alt text-slate-400"></i> Student Login</a>
-                <a href="https://clubofcompetition.in/studyplan" class="flex items-center gap-3"><i class="fas fa-book-open text-slate-400"></i> View Study Map</a>
-                <a href="#story" class="mobile-nav-link flex items-center gap-3"><i class="fas fa-lightbulb text-slate-400"></i> The Story</a>
-                <a href="#about" class="mobile-nav-link flex items-center gap-3"><i class="fas fa-user-tie text-slate-400"></i> Our Story</a>
-                <a href="#testimonials" class="mobile-nav-link flex items-center gap-3"><i class="fas fa-users text-slate-400"></i> Our Winners</a>
-                <a href="#pricing" class="mobile-nav-link flex items-center gap-3"><i class="fas fa-tag text-slate-400"></i> Start Now</a>
+            <nav class="flex flex-col gap-8 text-xl font-poppins font-bold mb-12">
+                <a href="https://app.clubofcompetition.in" class="flex items-center gap-4 text-primary"><i class="fas fa-sign-in-alt opacity-50"></i> Student Login</a>
+                <a href="https://clubofcompetition.in/studyplan" class="flex items-center gap-4"><i class="fas fa-book-open opacity-50"></i> View Study Map</a>
+                <a href="#story" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-lightbulb opacity-50"></i> The Story</a>
+                <a href="#about" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-user-tie opacity-50"></i> Our Story</a>
+                <a href="#testimonials" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-users opacity-50"></i> Our Winners</a>
+                <a href="#pricing" class="mobile-nav-link flex items-center gap-4 text-accent"><i class="fas fa-tag opacity-50"></i> Start Now</a>
                 <hr class="border-slate-100">
-                <a href="https://wa.me/919491700443" class="text-whatsapp flex items-center gap-3">
-                    <i class="fab fa-whatsapp text-2xl"></i> Talk to a Mentor
+                <a href="https://wa.me/919491700443" class="text-whatsapp flex items-center gap-4 text-2xl">
+                    <i class="fab fa-whatsapp"></i> Talk to a Mentor
                 </a>
             </nav>
 
             <!-- Social Media Profiles -->
-            <div class="mt-auto border-t border-slate-100 pt-8 pb-10 text-center">
-                <p class="text-slate-400 text-[10px] uppercase tracking-widest font-bold mb-6">Follow Our Journey</p>
-                <div class="flex justify-center items-center gap-5">
-                    <a href="https://instagram.com/club_of_competition" target="_blank" class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-instagram hover:bg-instagram hover:text-white transition-all">
+            <div class="mt-auto border-t border-slate-100 pt-10 pb-8 text-center">
+                <p class="text-slate-400 text-[11px] uppercase tracking-[0.2em] font-black mb-8">Follow Our Journey</p>
+                <div class="flex justify-center items-center gap-6">
+                    <a href="https://instagram.com/club_of_competition" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-instagram hover:bg-instagram hover:text-white transition-all">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
-                    <a href="https://youtube.com/@clubofcompetition" target="_blank" class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-youtube hover:bg-youtube hover:text-white transition-all">
+                    <a href="https://youtube.com/@clubofcompetition" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-youtube hover:bg-youtube hover:text-white transition-all">
                         <i class="fab fa-youtube text-xl"></i>
                     </a>
-                    <a href="https://twitter.com/clubofcompete" target="_blank" class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-black hover:bg-black hover:text-white transition-all">
+                    <a href="https://twitter.com/clubofcompete" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-black hover:bg-black hover:text-white transition-all">
                         <i class="fab fa-x-twitter text-xl"></i>
                     </a>
-                    <a href="https://t.me/club_of_competition" target="_blank" class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-telegram hover:bg-telegram hover:text-white transition-all">
+                    <a href="https://t.me/club_of_competition" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-telegram hover:bg-telegram hover:text-white transition-all">
                         <i class="fab fa-telegram-plane text-xl"></i>
                     </a>
                 </div>
@@ -182,92 +212,105 @@
 
     <main id="main">
         <!-- Hero Section -->
-        <section class="hero-pattern pt-32 md:pt-48 pb-20 px-4">
-            <div class="container mx-auto max-w-5xl text-center">
-                <h1 class="text-fluid-h1 font-poppins font-extrabold text-slate-900 leading-tight mb-6 text-balance">
-                    Your <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text animate-sparkle">AI powered 100-weeks Foundation Course</span> to win any Exam
+        <section class="hero-pattern pt-40 md:pt-56 pb-24 px-4 overflow-hidden">
+            <div class="container mx-auto max-w-6xl text-center relative">
+                <!-- Decorative background elements -->
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float"></div>
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float" style="animation-delay: 1.5s"></div>
+
+                <div class="inline-block px-4 py-1.5 mb-8 bg-indigo-50 border border-indigo-100 rounded-full">
+                    <span class="text-primary font-bold text-xs md:text-sm uppercase tracking-widest">🇮🇳 India's Most Structured Foundation</span>
+                </div>
+
+                <h1 class="text-fluid-h1 font-poppins font-extrabold text-dark leading-[1.1] mb-8 text-balance">
+                    Your <span class="gradient-text animate-sparkle">AI powered 100-weeks</span> Foundation Course to win any Exam
                 </h1>
-                <p class="text-fluid-p text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
+                <p class="text-fluid-p text-slate-600 mb-12 max-w-4xl mx-auto font-medium">
                     We turn the mountain of SSC, UPSC, and Banking exams into small, easy steps. Like following a map, we guide you every single week until you become a master of your career.
                 </p>
                 
-                <div id="targetDateDisplay" class="text-sm md:text-xl font-bold text-slate-800 mb-12 p-5 bg-white rounded-2xl shadow-sm border border-slate-100 inline-block">
+                <div id="targetDateDisplay" class="text-sm md:text-xl font-bold text-slate-800 mb-14 p-6 glass-card rounded-3xl shadow-xl shadow-slate-200/50 border border-white inline-block">
                     <!-- Date inserted by JS -->
                 </div>
 
                 <!-- Three Button Row -->
-                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 w-full px-2">
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full px-2 max-w-4xl mx-auto">
                     <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank"
-                        class="group px-6 py-3.5 rounded-full bg-white text-blue-600 font-bold shadow-md border border-blue-100 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base">
-                        <span class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        class="group flex-1 min-w-[160px] px-8 py-5 rounded-2xl bg-white text-primary font-bold shadow-lg border border-slate-100 hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                             <i class="fas fa-edit text-sm"></i>
-                        </span>
-                        <span>Free Test</span>
+                        </div>
+                        <span class="text-sm sm:text-base">Free Test</span>
                     </a>
 
                     <a href="#pricing"
-                        class="px-8 py-4 rounded-full bg-gradient-to-r from-blue-700 to-indigo-600 text-white font-bold shadow-lg shadow-blue-200 hover:shadow-blue-400 hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 text-base sm:text-lg">
+                        class="flex-1 min-w-[200px] px-10 py-5 rounded-2xl bg-gradient-to-r from-primary to-indigo-700 text-white font-bold shadow-2xl shadow-indigo-300 hover:shadow-indigo-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
                         <i class="fas fa-rocket animate-pulse"></i> 
-                        <span>Enroll Now</span>
+                        <span class="text-base sm:text-lg">Enroll Now</span>
                     </a>
 
                     <button onclick="sharePage()" 
-                            class="group px-6 py-3.5 rounded-full bg-slate-50 text-slate-600 font-bold border border-slate-200 hover:bg-white hover:text-slate-900 hover:shadow-lg hover:border-slate-300 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base">
-                        <span class="w-8 h-8 rounded-full bg-white border border-slate-100 flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300">
-                             <i class="fas fa-share-alt text-sm group-hover:rotate-12 transition-transform duration-300"></i>
-                        </span>
-                        <span>Share</span>
+                            class="group flex-1 min-w-[160px] px-8 py-5 rounded-2xl bg-slate-900 text-white font-bold shadow-lg hover:bg-black hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
+                             <i class="fas fa-share-alt text-sm"></i>
+                        </div>
+                        <span class="text-sm sm:text-base">Share</span>
                     </button>
                 </div>
             </div>
         </section>
 
         <!-- Story Section -->
-        <section id="story" class="py-24 bg-white px-4 border-t border-slate-50">
+        <section id="story" class="py-28 bg-white px-4 border-t border-slate-50 relative">
             <div class="container mx-auto px-6 max-w-6xl">
-                <div class="text-center mb-10">
-                    <h2 class="font-poppins text-fluid-h2 font-bold text-slate-900 mb-6 uppercase tracking-tight">The Story of Two Students</h2>
+                <div class="text-center mb-16">
+                    <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">The Methodology</span>
+                    <h2 class="font-poppins text-fluid-h2 font-bold text-dark mb-6">The Story of Two Students</h2>
                 </div>
 
                 <!-- Story Text -->
-                <div class="max-w-4xl mx-auto bg-blue-50/50 p-8 rounded-[2.5rem] mb-16 border border-blue-100 relative shadow-sm">
+                <div class="max-w-5xl mx-auto bg-gradient-to-br from-indigo-50/50 to-blue-50/50 p-10 md:p-16 rounded-[3rem] mb-20 border border-indigo-100 relative shadow-inner">
                     <p class="text-fluid-p text-slate-700 leading-relaxed font-medium text-center italic">
-                        Once, a tiny Mango seed and a Banana sprout were planted side-by-side. The Banana plant grew super fast! It showed off big leaves in just weeks. But when a heavy wind blew, it tipped over because its roots were shallow. The Mango seed took its time. It spent months building deep, strong roots under the earth where no one could see. It didn't have big leaves right away, but years later, it became a giant tree that stood tall against every storm and gave sweet fruit to generations. Which one will you be?
+                        Once, a tiny Mango seed and a Banana sprout were planted side-by-side. The Banana plant grew super fast! It showed off big leaves in just weeks. But when a heavy wind blew, it tipped over because its roots were shallow. The Mango seed took its time. It spent months building deep, strong roots under the earth where no one could see. It didn't have big leaves right away, but years later, it became a giant tree that stood tall against every storm and gave sweet fruit to generations. <span class="text-primary font-bold not-italic">Which one will you be?</span>
                     </p>
+                    <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-indigo-100">
+                        <i class="fas fa-chevron-down text-primary"></i>
+                    </div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="grid md:grid-cols-2 gap-10 lg:gap-14">
                     <!-- Banana Card -->
-                    <div class="p-8 md:p-10 rounded-[3rem] bg-slate-50 border-2 border-transparent hover:border-orange-300 transition-all opacity-85 group shadow-sm order-1 md:order-1">
-                        <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="p-10 md:p-14 rounded-[3.5rem] bg-slate-50 border-2 border-transparent hover:border-orange-200 transition-all group shadow-sm">
+                        <div class="w-20 h-20 bg-orange-100 text-orange-600 rounded-[2rem] flex items-center justify-center text-4xl mb-8 group-hover:rotate-12 transition-transform">
                             <i class="fas fa-bolt"></i>
                         </div>
-                        <h3 class="font-poppins text-2xl font-bold mb-2 text-slate-700 uppercase tracking-tight">The Rushing Banana Plant</h3>
-                        <p class="text-orange-600 font-bold mb-6 text-sm md:text-base italic uppercase tracking-wider">Rushing Banana as Crash Course</p>
-                        <ul class="space-y-4 text-slate-500 text-fluid-p font-medium">
-                            <li class="flex items-start gap-3"><i class="fas fa-times-circle text-orange-400 mt-1"></i> <span><strong>Huge Rush:</strong> Trying to learn everything in just 3 months.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-times-circle text-orange-400 mt-1"></i> <span><strong>Cramming:</strong> Memorizing facts without understanding. You forget them fast.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-times-circle text-orange-400 mt-1"></i> <span><strong>Fragile Base:</strong> If the exam changes even slightly, you get completely stuck.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-times-circle text-orange-400 mt-1"></i> <span><strong>Burnout:</strong> Feeling tired, sleepy, and stressed out every single night.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-times-circle text-orange-400 mt-1"></i> <span><span><strong>Confusion:</strong> Getting 10 different tips from 10 different people.</span></li>
-                            <li class="flex items-start gap-3 font-bold text-slate-700"><i class="fas fa-times-circle text-orange-400 mt-1"></i> <span><strong>Final Result:</strong> Failing and having to start over from zero.</span></li>
+                        <h3 class="font-poppins text-3xl font-bold mb-3 text-slate-800 tracking-tight">The Rushing Banana Plant</h3>
+                        <p class="text-orange-600 font-bold mb-10 text-xs uppercase tracking-widest bg-orange-50 inline-block px-3 py-1 rounded-full">Crash Course Path</p>
+                        <ul class="space-y-6 text-slate-500 text-fluid-p font-medium">
+                            <li class="flex items-start gap-4"><i class="fas fa-times-circle text-orange-400 mt-1.5"></i> <span><strong>Huge Rush:</strong> Trying to learn everything in just 3 months.</span></li>
+                            <li class="flex items-start gap-4"><i class="fas fa-times-circle text-orange-400 mt-1.5"></i> <span><strong>Cramming:</strong> Memorizing facts without understanding. You forget them fast.</span></li>
+                            <li class="flex items-start gap-4"><i class="fas fa-times-circle text-orange-400 mt-1.5"></i> <span><strong>Fragile Base:</strong> If the exam changes even slightly, you get completely stuck.</span></li>
+                            <li class="flex items-start gap-4"><i class="fas fa-times-circle text-orange-400 mt-1.5"></i> <span><strong>Burnout:</strong> Feeling tired, sleepy, and stressed out every single night.</span></li>
+                            <li class="flex items-start gap-4 font-bold text-slate-800"><i class="fas fa-skull-crossbones text-orange-500 mt-1.5"></i> <span><strong>Final Result:</strong> Failing and having to start over from zero.</span></li>
                         </ul>
                     </div>
 
                     <!-- Mango Card -->
-                    <div class="p-8 md:p-10 rounded-[3rem] bg-slate-50 border-2 border-transparent hover:border-emerald-500 transition-all duration-500 group relative overflow-hidden shadow-sm hover:shadow-xl order-2 md:order-2">
-                        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform">
+                    <div class="p-10 md:p-14 rounded-[3.5rem] bg-white border-2 border-indigo-50 hover:border-secondary transition-all duration-500 group relative shadow-2xl shadow-indigo-100/50">
+                        <div class="absolute top-8 right-10">
+                            <span class="px-4 py-1.5 bg-secondary text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-secondary/30">Winner Path</span>
+                        </div>
+                        <div class="w-20 h-20 bg-emerald-100 text-secondary rounded-[2rem] flex items-center justify-center text-4xl mb-8 group-hover:scale-110 transition-transform">
                             <i class="fas fa-tree"></i>
                         </div>
-                        <h3 class="font-poppins text-2xl font-bold mb-2 text-emerald-800 uppercase tracking-tight">The Strong Mango Tree</h3>
-                        <p class="text-emerald-600 font-bold mb-6 text-sm md:text-base italic uppercase tracking-wider">Mango Tree as Mastery Course</p>
-                        <ul class="space-y-4 text-slate-600 text-fluid-p font-medium">
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span><strong>Small Steps:</strong> You study just a little bit every day. It is easy and fun.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span><strong>Understanding:</strong> You learn why things happen and never forget them.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span><strong>Deep Roots:</strong> Your foundation is strong like a massive skyscraper.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span><strong>Calm Mind:</strong> No last-minute panic. You feel ready for anything.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span><strong>Memory:</strong> Important things stay in your head for years, not days.</span></li>
-                            <li class="flex items-start gap-3 font-bold text-slate-900"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> <span><strong>Final Result:</strong> You clear the exam and win a permanent job for life.</span></li>
+                        <h3 class="font-poppins text-3xl font-bold mb-3 text-dark tracking-tight">The Strong Mango Tree</h3>
+                        <p class="text-secondary font-bold mb-10 text-xs uppercase tracking-widest bg-emerald-50 inline-block px-3 py-1 rounded-full">100-Weeks Mastery Course</p>
+                        <ul class="space-y-6 text-slate-700 text-fluid-p font-medium">
+                            <li class="flex items-start gap-4"><i class="fas fa-check-circle text-secondary mt-1.5"></i> <span><strong>Small Steps:</strong> You study just a little bit every day. It is easy and fun.</span></li>
+                            <li class="flex items-start gap-4"><i class="fas fa-check-circle text-secondary mt-1.5"></i> <span><strong>Understanding:</strong> You learn why things happen and never forget them.</span></li>
+                            <li class="flex items-start gap-4"><i class="fas fa-check-circle text-secondary mt-1.5"></i> <span><strong>Deep Roots:</strong> Your foundation is strong like a massive skyscraper.</span></li>
+                            <li class="flex items-start gap-4"><i class="fas fa-check-circle text-secondary mt-1.5"></i> <span><strong>Calm Mind:</strong> No last-minute panic. You feel ready for anything.</span></li>
+                            <li class="flex items-start gap-4 font-bold text-dark"><i class="fas fa-award text-accent mt-1.5"></i> <span><strong>Final Result:</strong> You clear the exam and win a permanent job for life.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -275,44 +318,58 @@
         </section>
 
         <!-- Pricing Section -->
-        <section id="pricing" class="py-24 px-4 bg-slate-900 text-white relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/20 blur-[120px] rounded-full -mr-48 -mt-48"></div>
-            <div class="container mx-auto max-w-6xl text-center relative z-10">
-                <h2 class="text-fluid-h2 font-bold mb-6 font-poppins">Start Your Winner Journey</h2>
-                <p class="text-slate-400 mb-16 max-w-xl mx-auto font-medium">Invest in a long-term system that builds a career. No hidden costs, just help until you win.</p>
+        <section id="pricing" class="py-32 px-4 bg-dark text-white relative overflow-hidden">
+            <!-- Background effects -->
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full -mr-72 -mt-72 opacity-50"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full -ml-48 -mb-48 opacity-30"></div>
 
-                <div class="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <div class="bg-white/10 backdrop-blur-xl border border-white/20 p-8 md:p-12 rounded-[2.5rem] text-left hover:scale-[1.02] transition-transform relative shadow-2xl">
-                        <span class="absolute top-6 right-8 bg-accent text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Recommended</span>
-                        <h3 class="text-2xl font-bold mb-2 font-poppins text-pretty">Full 100-Weeks Mastery</h3>
-                        <div class="flex items-baseline gap-2 my-8">
-                            <span class="text-5xl font-extrabold text-white font-poppins">₹49,999</span>
-                            <span class="text-slate-400 text-sm font-bold">One-time payment</span>
+            <div class="container mx-auto max-w-6xl text-center relative z-10">
+                <span class="text-primary font-black uppercase tracking-[0.4em] text-[11px] mb-6 block">Investment</span>
+                <h2 class="text-fluid-h2 font-bold mb-8 font-poppins">Start Your Winner Journey</h2>
+                <p class="text-slate-400 mb-20 max-w-2xl mx-auto font-medium text-lg">Invest in a long-term system that builds a career. No hidden costs, just help until you win.</p>
+
+                <div class="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                    <!-- Mastery Plan -->
+                    <div class="bg-white/5 backdrop-blur-2xl border border-white/10 p-10 md:p-14 rounded-[3.5rem] text-left hover:border-primary/50 transition-all relative shadow-2xl group">
+                        <div class="absolute -top-5 left-10 bg-accent text-white text-[11px] font-black px-5 py-2 rounded-full uppercase tracking-[0.2em] shadow-xl shadow-accent/40 group-hover:-translate-y-1 transition-transform">Most Popular</div>
+                        <h3 class="text-3xl font-bold mb-4 font-poppins text-white">Full 100-Weeks Mastery</h3>
+                        <p class="text-slate-400 text-sm mb-8">Comprehensive support from day one to exam day.</p>
+                        
+                        <div class="flex items-baseline gap-3 my-10">
+                            <span class="text-6xl font-black text-white font-poppins">₹49,999</span>
+                            <span class="text-slate-400 text-sm font-bold bg-white/5 px-3 py-1 rounded-lg">One-time</span>
                         </div>
-                        <ul class="space-y-4 mb-10 text-slate-300 font-medium">
-                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> <span>Complete 100 Week Lesson Map</span></li>
-                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> <span>Private Expert WhatsApp Group</span></li>
-                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> <span>24/7 Priority Question Support</span></li>
-                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> <span>AI Personal Buddy Tracker</span></li>
+                        
+                        <ul class="space-y-5 mb-12 text-slate-300 font-medium">
+                            <li class="flex items-center gap-4"><i class="fas fa-check-double text-secondary text-lg"></i> <span>Complete 100 Week Lesson Map</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-check-double text-secondary text-lg"></i> <span>Private Expert WhatsApp Group</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-check-double text-secondary text-lg"></i> <span>24/7 Priority Question Support</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-check-double text-secondary text-lg"></i> <span>AI Personal Buddy Tracker</span></li>
                         </ul>
-                        <a href="https://wa.me/919491700443" target="_blank" class="w-full block text-center py-5 bg-whatsapp text-white rounded-2xl font-bold text-xl hover:bg-green-600 transition-all shadow-xl">
+                        
+                        <a href="https://wa.me/919491700443" target="_blank" class="w-full block text-center py-6 bg-whatsapp text-white rounded-[1.5rem] font-bold text-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-2xl shadow-whatsapp/20">
                             Enroll via WhatsApp
                         </a>
                     </div>
                     
-                    <div class="bg-white p-8 md:p-12 rounded-[2.5rem] text-left text-slate-900 hover:scale-[1.02] transition-transform shadow-xl">
-                        <h3 class="text-2xl font-bold mb-2 font-poppins text-pretty">Universal Weekly Test</h3>
-                        <div class="flex items-baseline gap-2 my-8">
-                            <span class="text-5xl font-extrabold text-primary font-poppins">₹499</span>
-                            <span class="text-slate-500 text-sm font-bold">Per Test Attempt</span>
+                    <!-- Weekly Test -->
+                    <div class="bg-white p-10 md:p-14 rounded-[3.5rem] text-left text-dark hover:shadow-indigo-500/20 transition-all shadow-2xl relative">
+                        <h3 class="text-3xl font-bold mb-4 font-poppins text-dark">Universal Weekly Test</h3>
+                        <p class="text-slate-500 text-sm mb-8">Test your knowledge against students nationwide.</p>
+
+                        <div class="flex items-baseline gap-3 my-10">
+                            <span class="text-6xl font-black text-primary font-poppins">₹499</span>
+                            <span class="text-slate-500 text-sm font-bold bg-slate-100 px-3 py-1 rounded-lg">Per Test</span>
                         </div>
-                        <ul class="space-y-4 mb-10 text-slate-600 font-medium">
-                            <li class="flex items-center gap-3"><i class="fas fa-award text-amber-500"></i> <span>Win Cash Prizes & Vouchers</span></li>
-                            <li class="flex items-center gap-3"><i class="fas fa-chart-line text-primary"></i> <span>See Your Ranking in India</span></li>
-                            <li class="flex items-center gap-3"><i class="fas fa-certificate text-accent"></i> <span>Performance Certificate</span></li>
-                            <li class="flex items-center gap-3"><i class="fas fa-bolt text-primary"></i> <span>Instant Scorecard & Answers</span></li>
+                        
+                        <ul class="space-y-5 mb-12 text-slate-600 font-medium">
+                            <li class="flex items-center gap-4"><i class="fas fa-trophy text-accent text-lg"></i> <span>Win Cash Prizes & Vouchers</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-globe-asia text-primary text-lg"></i> <span>See Your Ranking in India</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-certificate text-purple-600 text-lg"></i> <span>Performance Certificate</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-bolt text-secondary text-lg"></i> <span>Instant Scorecard & Answers</span></li>
                         </ul>
-                        <a href="https://wa.me/919491700443?text=Hi%20CoC,%20I%20want%20to%20join%20the%20Universal%20Weekly%20Test" target="_blank" class="w-full block text-center py-5 bg-primary text-white rounded-2xl font-bold text-xl hover:bg-blue-800 transition-all shadow-xl">
+                        
+                        <a href="https://wa.me/919491700443?text=Hi%20CoC,%20I%20want%20to%20join%20the%20Universal%20Weekly%20Test" target="_blank" class="w-full block text-center py-6 bg-primary text-white rounded-[1.5rem] font-bold text-2xl hover:bg-indigo-700 active:scale-95 transition-all shadow-2xl shadow-primary/20">
                             Join Weekly Test
                         </a>
                     </div>
@@ -321,23 +378,31 @@
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-24 px-4 bg-white" x-data="{ active: null }">
-            <div class="container mx-auto max-w-3xl">
-                <h2 class="text-fluid-h2 font-bold text-center text-slate-900 mb-16 font-poppins">Simple Answers to Questions</h2>
-                <div class="space-y-4">
+        <section id="faq" class="py-32 px-4 bg-white" x-data="{ active: null }">
+            <div class="container mx-auto max-w-4xl">
+                <div class="text-center mb-20">
+                    <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Help Center</span>
+                    <h2 class="text-fluid-h2 font-bold text-dark mb-6 font-poppins">Simple Answers to Questions</h2>
+                </div>
+                
+                <div class="space-y-5">
                     <template x-for="(item, index) in [
                         { q: 'Is this for busy people?', a: 'Yes! It only takes 2-3 hours a day. The lessons are on WhatsApp so you can study whenever you are free.' },
                         { q: 'What if I get stuck?', a: 'Just send a message! Our experts are always ready to help you understand things clearly and simply.' },
                         { q: 'Can I get my money back?', a: 'Because we give you all our study secrets immediately, we cannot offer a refund. But you will love the results!' },
                         { q: 'What if I miss a day of study?', a: 'That\'s okay! You can catch up on the weekend. The secret to success is just not giving up.' }
                     ]" :key="index">
-                        <div class="border border-slate-100 rounded-2xl overflow-hidden transition-all shadow-sm" :class="active === index ? 'ring-2 ring-primary/20' : ''">
-                            <button @click="active = active === index ? null : index" class="w-full text-left p-6 flex justify-between items-center group">
-                                <span class="font-bold text-slate-800 md:text-lg group-hover:text-primary transition-colors" x-text="item.q"></span>
-                                <i class="fas fa-chevron-down transition-transform duration-300" :class="active === index ? 'rotate-180 text-primary' : 'text-slate-400'"></i>
+                        <div class="group border border-slate-100 rounded-3xl overflow-hidden transition-all duration-300" :class="active === index ? 'shadow-2xl shadow-indigo-100 border-indigo-200' : 'hover:border-slate-300 shadow-sm'">
+                            <button @click="active = active === index ? null : index" class="w-full text-left p-8 flex justify-between items-center bg-white transition-colors">
+                                <span class="font-bold text-slate-800 text-lg md:text-xl group-hover:text-primary transition-colors pr-4" x-text="item.q"></span>
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center transition-all" :class="active === index ? 'bg-primary text-white rotate-180' : 'bg-slate-50 text-slate-400'">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
                             </button>
-                            <div x-show="active === index" class="px-6 pb-6 text-slate-600 font-medium" x-cloak>
-                                <p x-text="item.a"></p>
+                            <div x-show="active === index" x-collapse x-cloak>
+                                <div class="px-8 pb-8 pt-2 text-slate-600 font-medium text-lg leading-relaxed">
+                                    <p x-text="item.a" class="pl-0"></p>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -345,29 +410,37 @@
             </div>
         </section>
 
-        <!-- Founder's Story & Team Section -->
-        <section id="about" class="py-24 px-4 bg-slate-50">
+        <!-- Founder Section -->
+        <section id="about" class="py-32 px-4 bg-slate-50">
             <div class="container mx-auto max-w-6xl">
-                <div class="bg-white p-8 md:p-16 rounded-[3rem] shadow-sm border border-slate-100 grid lg:grid-cols-3 gap-12 items-center">
-                    <div class="lg:col-span-1 space-y-6">
-                        <h2 class="text-3xl font-bold text-slate-900 font-poppins">Our Story & Mission</h2>
-                        <div class="leading-relaxed text-slate-600 text-fluid-p space-y-4 font-medium">
-                            <p>I failed my big exams three times and felt very sad. But then I realized something: <strong>Working hard is good, but working smart with a plan is the only way to win.</strong></p>
-                            <p class="font-bold text-primary italic">"We built Club of Competition so you don't have to struggle alone. We turn scary 2-year goals into 100 weeks of winning."</p>
+                <div class="bg-white p-10 md:p-20 rounded-[4rem] shadow-2xl shadow-slate-200 border border-slate-100 grid lg:grid-cols-5 gap-16 items-center">
+                    <div class="lg:col-span-3 space-y-8">
+                        <div>
+                            <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Our Roots</span>
+                            <h2 class="text-4xl md:text-5xl font-bold text-dark font-poppins leading-tight">Our Story & Mission</h2>
+                        </div>
+                        <div class="leading-relaxed text-slate-600 text-fluid-p space-y-6 font-medium">
+                            <p>I failed my big exams three times and felt very sad. But then I realized something: <strong class="text-dark">Working hard is good, but working smart with a plan is the only way to win.</strong></p>
+                            <div class="bg-indigo-50 p-8 rounded-[2rem] border-l-8 border-primary italic text-primary text-xl font-bold">
+                                "We built Club of Competition so you don't have to struggle alone. We turn scary 2-year goals into 100 weeks of winning."
+                            </div>
                             <p>Today, more than 1,000 students are winning. Now, it is your turn to join the winner's team!</p>
                         </div>
                     </div>
                     
-                    <!-- Team Image Space -->
-                    <div class="lg:col-span-2 flex flex-col sm:flex-row gap-6 justify-center items-stretch">
-                        <!-- Founder Profile Card -->
-                        <div class="bg-slate-50 p-6 rounded-[2.5rem] border border-slate-100 flex-1 text-center group">
-                            <div class="mb-4 overflow-hidden rounded-[2rem] shadow-lg aspect-square max-w-[240px] mx-auto bg-white">
-                                <!-- REPLACE IMAGE: Change src="founder.png" to your image URL -->
-                                <img src="founder.png" alt="M Govardhan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x400/E7F0FF/1e40af?text=Founder'">
+                    <!-- Founder Image -->
+                    <div class="lg:col-span-2 flex flex-col gap-8">
+                        <div class="bg-gradient-to-tr from-slate-100 to-white p-8 rounded-[3.5rem] border border-slate-100 text-center group shadow-xl shadow-slate-100">
+                            <div class="mb-8 overflow-hidden rounded-[2.5rem] shadow-2xl aspect-square max-w-[300px] mx-auto bg-white border-4 border-white">
+                                <img src="founder.png" alt="M Govardhan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/500x500/E7F0FF/4f46e5?text=Founder'">
                             </div>
-                            <h4 class="text-xl font-bold text-slate-900 font-poppins">M Govardhan</h4>
-                            <p class="text-primary font-bold uppercase tracking-widest text-[10px] mt-1">Founder & CEO</p>
+                            <h4 class="text-2xl font-bold text-dark font-poppins">M Govardhan</h4>
+                            <p class="text-primary font-black uppercase tracking-[0.2em] text-[11px] mt-2">Founder & CEO</p>
+                            
+                            <div class="flex justify-center gap-4 mt-8">
+                                <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-instagram hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -376,249 +449,150 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white pt-20 pb-24 md:pb-12 border-t border-white/5 no-scrollbar">
+    <footer class="bg-dark text-white pt-24 pb-32 md:pb-16 border-t border-white/5 no-scrollbar">
         <div class="container mx-auto px-6 max-w-6xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 text-center md:text-left">
                 <div>
-                    <h4 class="font-bold mb-6 font-poppins text-lg text-pretty">Club of Competition</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Your professional partner for government exams. Simple steps, huge results.</p>
+                    <a href="#" class="flex items-center gap-3 justify-center md:justify-start mb-8">
+                        <img src="logo.png" alt="Logo" class="h-8 w-auto filter brightness-0 invert" onerror="this.src='https://placehold.co/40x40/ffffff/000000?text=C'">
+                        <span class="font-poppins font-bold text-xl tracking-tight">Club of Competition</span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-8">Your professional partner for government exams. Simple steps, huge results.</p>
                 </div> 
+
                 <div>
-                    <h4 class="font-bold mb-6 font-poppins text-lg text-slate-300 uppercase tracking-widest text-xs">Explore</h4>
-                    <ul class="space-y-3 text-sm text-slate-400">
+                    <h4 class="font-bold mb-8 font-poppins text-xs uppercase tracking-[0.3em] text-slate-500">Explore</h4>
+                    <ul class="space-y-4 text-sm text-slate-400 font-bold">
                         <li><a href="#story" class="hover:text-white transition-colors">Compare Path</a></li>
                         <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
                         <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
                     </ul>
                 </div>
-                <div> 
-                    <h4 class="font-bold mb-6 font-poppins text-lg text-slate-300 uppercase tracking-widest text-xs">Support</h4>
-                    <ul class="space-y-3 text-sm text-slate-400">
+
+                <div>
+                     <h4 class="font-bold mb-8 font-poppins text-xs uppercase tracking-[0.3em] text-slate-500">Support</h4>
+                    <ul class="space-y-4 text-sm text-slate-400 font-bold">
                         <li><a href="#" @click.prevent="privacyOpen = true" class="hover:text-white transition-colors">Privacy Policy</a></li>
                         <li><a href="#" @click.prevent="termsOpen = true" class="hover:text-white transition-colors">Terms & Conditions</a></li>
                         <li><a href="#" @click.prevent="refundOpen = true" class="hover:text-white transition-colors">Refund & Cancellation</a></li>
                         <li><a href="#" @click.prevent="shippingOpen = true" class="hover:text-white transition-colors">Shipping & Delivery</a></li>
-                        <li><a href="#" @click.prevent="safetyOpen = true" class="hover:text-white text-red-400 transition-colors"><i class="fas fa-shield-alt mr-1"></i> Cyber Safety</a></li>
+                        <li><a href="#" @click.prevent="safetyOpen = true" class="text-red-400 hover:text-red-300 transition-colors"><i class="fas fa-shield-alt mr-2"></i> Cyber Safety</a></li>
                     </ul>
                 </div> 
+
                 <div>
-                    <h4 class="font-bold mb-6 font-poppins text-lg text-slate-300 uppercase tracking-widest text-xs font-bold">Follow Us</h4>
-                    <div class="flex justify-center md:justify-start space-x-5">
-                        <a href="https://instagram.com/club_of_competition" target="_blank" class="text-slate-400 hover:text-white text-xl transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/@clubofcompetition" target="_blank" class="text-slate-400 hover:text-white text-xl transition-colors" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="https://twitter.com/clubofcompete" target="_blank" class="text-slate-400 hover:text-white text-xl transition-colors" aria-label="X Twitter"><i class="fab fa-x-twitter"></i></a>
-                        <a href="https://t.me/club_of_competition" target="_blank" class="text-slate-400 hover:text-white text-xl transition-colors" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    <h4 class="font-bold mb-8 font-poppins text-xs uppercase tracking-[0.3em] text-slate-500">Connect</h4>
+                    <div class="flex justify-center md:justify-start space-x-6">
+                        <a href="https://instagram.com/club_of_competition" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@clubofcompetition" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://twitter.com/clubofcompete" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="X Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://t.me/club_of_competition" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                    <div class="mt-10 p-5 rounded-2xl bg-white/5 border border-white/5">
+                        <p class="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2">Help Desk</p>
+                        <p class="font-bold text-sm">+91 9491700443</p>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-white/5 mt-16 pt-8 text-center text-[10px] text-slate-500 font-bold uppercase tracking-widest">
-                <p class="mb-2">Presented and operated by COC NINE SOLUTIONS PRIVATE LIMITED</p>
-                <p>&copy; 2024 Club of Competition. All Rights Reserved.</p>
+            
+            <div class="border-t border-white/5 mt-20 pt-10 text-center">
+                <div class="text-[10px] text-slate-500 font-black uppercase tracking-[0.4em] space-y-3">
+                    <p>Presented and operated by COC NINE SOLUTIONS PRIVATE LIMITED</p>
+                    <p>&copy; 2024 Club of Competition. All Rights Reserved.</p>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Mobile Navigation Taskbar -->
-    <div class="taskbar lg:hidden bg-white border-t border-slate-100 no-scrollbar">
-        <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 transition-colors">
-            <i class="fas fa-edit text-blue-500"></i>
-            <span class="text-[9px] font-bold uppercase tracking-tighter">Free Test</span>
+    <div class="taskbar lg:hidden bg-white">
+        <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="flex-1 flex flex-col items-center justify-center gap-1.5 text-slate-400">
+            <i class="fas fa-edit text-xl text-primary"></i>
+            <span class="text-[10px] font-black uppercase tracking-tighter">Free Test</span>
         </a>
-        <a href="https://app.clubofcompetition.in" target="_blank" class="flex-1 flex flex-col items-center justify-center gap-1 text-primary">
-            <i class="fas fa-user-circle"></i>
-            <span class="text-[9px] font-bold uppercase tracking-tighter">Student Login</span>
+        <a href="https://app.clubofcompetition.in" target="_blank" class="flex-1 flex flex-col items-center justify-center gap-1.5 border-x border-slate-50">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white shadow-lg -mt-8 border-4 border-white">
+                <i class="fas fa-user-circle text-lg"></i>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-tighter text-primary">Login</span>
         </a>
-        <button onclick="sharePage()" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 transition-colors">
-            <i class="fas fa-share-alt text-slate-600"></i>
-            <span class="text-[9px] font-bold uppercase tracking-tighter">Share</span>
+        <button onclick="sharePage()" class="flex-1 flex flex-col items-center justify-center gap-1.5 text-slate-400">
+            <i class="fas fa-share-alt text-xl text-dark"></i>
+            <span class="text-[10px] font-black uppercase tracking-tighter">Share</span>
         </button>
     </div>
 
     <!-- Floating Buttons -->
-    <a href="https://wa.me/919491700443?text=Hi%20CoC,%20I%20want%20the%20100-weeks%20Mastery%20Plan"
-        target="_blank"
-        class="fixed bottom-24 right-6 bg-whatsapp text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-xl z-40 animate-float hover:scale-110 transition-transform">
-        <i class="fab fa-whatsapp text-3xl"></i>
+    <a href="https://wa.me/919491700443?text=Hi%20CoC,%20I%20want%20the%20100-weeks%20Mastery%20Plan" 
+        target="_blank" 
+        class="fixed bottom-24 right-6 bg-whatsapp text-white w-16 h-16 rounded-[1.5rem] flex items-center justify-center shadow-2xl z-40 animate-float hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-4xl"></i>
     </a>
 
-    <button id="scrollTopBtn"
-            class="fixed bottom-40 right-6 bg-slate-900 text-white w-14 h-14 rounded-2xl shadow-xl transition-all duration-300 opacity-0 translate-y-10 pointer-events-none z-40 flex items-center justify-center hover:bg-primary">
+    <button id="scrollTopBtn" 
+            class="fixed bottom-44 right-6 bg-dark text-white w-16 h-16 rounded-[1.5rem] shadow-2xl transition-all duration-500 opacity-0 translate-y-10 pointer-events-none z-40 flex items-center justify-center hover:bg-primary">
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Modals (Reused with updated styling) -->
     <!-- Privacy Policy Modal -->
-    <div x-show="privacyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" @click="privacyOpen = false"></div>
-        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up">
-            <button @click="privacyOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
-                <i class="fas fa-times text-lg"></i>
+    <div x-show="privacyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
+        <div class="absolute inset-0 bg-dark/80 backdrop-blur-md" @click="privacyOpen = false"></div>
+        <div class="relative bg-white rounded-[3rem] w-full max-w-2xl max-h-[85vh] overflow-y-auto p-10 md:p-14 shadow-2xl">
+            <button @click="privacyOpen = false" class="absolute top-8 right-8 w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-dark hover:rotate-90 transition-all">
+                <i class="fas fa-times text-xl"></i>
             </button>
-            <h3 class="text-2xl font-bold font-poppins mb-6 text-slate-900 border-b border-slate-100 pb-4">Privacy Policy</h3>
-            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
-                <p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Last Updated: October 2024</p>
+            <h3 class="text-3xl font-bold font-poppins mb-8 text-dark border-b border-slate-100 pb-6">Privacy Policy</h3>
+            <div class="prose prose-slate text-slate-600 font-medium space-y-6">
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Last Updated: October 2024</p>
                 <p>Welcome to <strong>Club of Competition</strong>, operated by <strong>COC NINE SOLUTIONS PRIVATE LIMITED</strong>. Your privacy is critically important to us.</p>
-                
-                <h4 class="font-bold text-slate-900 text-base">1. Information We Collect</h4>
+                <h4 class="font-bold text-dark text-xl">1. Information We Collect</h4>
                 <p>We collect minimal information necessary to provide our educational services:</p>
-                <ul class="list-disc pl-5 space-y-1">
+                <ul class="list-disc pl-5 space-y-2">
                     <li><strong>Personal Details:</strong> Name, Email Address, and Phone Number (for WhatsApp integration).</li>
                     <li><strong>Performance Data:</strong> Quiz scores and progress tracking within our apps.</li>
                 </ul>
-
-                <h4 class="font-bold text-slate-900 text-base">2. How We Use Your Data</h4>
-                <p>We use your data solely for:</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>Delivering daily study schedules and PDF materials via WhatsApp.</li>
-                    <li>Generating personalized performance reports.</li>
-                    <li>Notifying you about exam dates or schedule changes.</li>
-                </ul>
-
-                <h4 class="font-bold text-slate-900 text-base">3. Data Sharing & Security</h4>
-                <p>We <strong>never sell your data</strong> to third-party advertisers. Your data is stored securely using industry-standard encryption. We may share minimal data with trusted partners (like WhatsApp API providers) strictly to deliver our services.</p>
-                
-                <h4 class="font-bold text-slate-900 text-base">4. Contact Us</h4>
-                <p>If you have questions about your data, please contact our support team via the WhatsApp link provided on this website.</p>
+                <h4 class="font-bold text-dark text-xl">2. How We Use Your Data</h4>
+                <p>We use your data solely for delivering daily study schedules and PDF materials via WhatsApp and generating performance reports.</p>
             </div>
-            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <button @click="privacyOpen = false" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors">Understood</button>
+            <div class="mt-12 pt-8 border-t border-slate-100 text-center">
+                <button @click="privacyOpen = false" class="w-full md:w-auto bg-primary text-white px-12 py-4 rounded-2xl font-bold hover:bg-indigo-700 transition-colors shadow-xl shadow-indigo-100">Close Policy</button>
             </div>
         </div>
     </div>
 
-    <!-- Terms & Conditions Modal -->
-    <div x-show="termsOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" @click="termsOpen = false"></div>
-        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up">
-            <button @click="termsOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-            <h3 class="text-2xl font-bold font-poppins mb-6 text-slate-900 border-b border-slate-100 pb-4">Terms & Conditions</h3>
-            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
-                <p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Effective Date: October 2024</p>
-                <p>By enrolling in the 100-Weeks Course or using our services, you agree to the following terms set by <strong>COC NINE SOLUTIONS PRIVATE LIMITED</strong>.</p>
-                
-                <h4 class="font-bold text-slate-900 text-base">1. Course Usage & License</h4>
-                <p>The materials provided (PDFs, Videos, Schedules) are for your <strong>personal use only</strong>. Sharing, reselling, or distributing our proprietary content is strictly prohibited and may lead to immediate termination of your account without refund.</p>
-
-                <h4 class="font-bold text-slate-900 text-base">2. Payments & Refunds</h4>
-                <p>Please refer to our specific Refund & Cancellation Policy for detailed terms regarding payment cancellations.</p>
-
-                <h4 class="font-bold text-slate-900 text-base">3. Disclaimer of Results</h4>
-                <p>We provide a structured path and mentorship. However, passing a government exam depends entirely on the student's personal effort and discipline. We do not guarantee employment or specific exam results.</p>
-                
-                <h4 class="font-bold text-slate-900 text-base">4. Code of Conduct</h4>
-                <p>We maintain a respectful environment. Any abusive behavior towards mentors or fellow students in our community groups will result in removal from the program.</p>
+    <!-- Terms Modal -->
+    <div x-show="termsOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
+        <div class="absolute inset-0 bg-dark/80 backdrop-blur-md" @click="termsOpen = false"></div>
+        <div class="relative bg-white rounded-[3rem] w-full max-w-2xl max-h-[85vh] overflow-y-auto p-10 shadow-2xl">
+            <button @click="termsOpen = false" class="absolute top-8 right-8 w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center"><i class="fas fa-times"></i></button>
+            <h3 class="text-3xl font-bold font-poppins mb-8 text-dark">Terms & Conditions</h3>
+            <div class="text-slate-600 font-medium space-y-4">
+                <p>By enrolling in the 100-Weeks Course, you agree to the terms set by <strong>COC NINE SOLUTIONS PRIVATE LIMITED</strong>.</p>
+                <p>Content is for personal use only. Sharing or reselling proprietary content is strictly prohibited.</p>
             </div>
-            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <button @click="termsOpen = false" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors">I Agree</button>
-            </div>
+            <div class="mt-10 border-t pt-8 text-center"><button @click="termsOpen = false" class="bg-primary text-white px-10 py-4 rounded-2xl font-bold">I Agree</button></div>
         </div>
     </div>
 
-    <!-- Refund & Cancellation Policy Modal -->
-    <div x-show="refundOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" @click="refundOpen = false"></div>
-        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up">
-            <button @click="refundOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-            <h3 class="text-2xl font-bold font-poppins mb-6 text-slate-900 border-b border-slate-100 pb-4">Refund & Cancellation Policy</h3>
-            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
-                <p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Effective Date: October 2024</p>
-                <p>At <strong>Club of Competition</strong>, we prioritize the quality of our educational content. Please read our policy carefully before enrolling.</p>
-
-                <h4 class="font-bold text-slate-900 text-base">1. Cancellation Policy</h4>
-                <p>Since our services (100-Weeks Course, Weekly Tests) grant immediate access to proprietary digital content, schedules, and mentorship groups, <strong>cancellations are not permitted</strong> once the payment is successfully processed.</p>
-
-                <h4 class="font-bold text-slate-900 text-base">2. Refund Policy</h4>
-                <p><strong>Strict No-Refund Policy:</strong> We do not offer refunds for any course or test series fees under any circumstances. This includes, but is not limited to:</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>Change of mind after enrollment.</li>
-                    <li>Inability to attend classes due to personal reasons.</li>
-                    <li>Technical issues on the student's end (internet/device).</li>
-                </ul>
-
-                <h4 class="font-bold text-slate-900 text-base">3. Double Payment Issues</h4>
-                <p>If you have accidentally made a duplicate payment for the same course, please contact us at support within 48 hours. Upon verification, the duplicate amount will be refunded to the original source within 7-10 working days.</p>
-                
-                <h4 class="font-bold text-slate-900 text-base">4. Try Before You Buy</h4>
-                <p>We strongly encourage all students to try our "Free Test" and review our open study plan before making a purchase to ensure the course meets their expectations.</p>
-            </div>
-            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <button @click="refundOpen = false" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors">I Understand</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Shipping & Delivery Policy Modal -->
-    <div x-show="shippingOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" @click="shippingOpen = false"></div>
-        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up">
-            <button @click="shippingOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-colors">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-            <h3 class="text-2xl font-bold font-poppins mb-6 text-slate-900 border-b border-slate-100 pb-4">Shipping & Delivery Policy</h3>
-            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
-                <p class="text-xs text-slate-400 uppercase tracking-widest font-bold">Effective Date: October 2024</p>
-                <p><strong>Club of Competition</strong> operates exclusively as a digital educational platform.</p>
-
-                <h4 class="font-bold text-slate-900 text-base">1. Mode of Delivery</h4>
-                <p>All our products (Study Plans, Test Series, Mentorship) are delivered <strong>digitally online</strong>. We do not ship physical books, DVDs, or pen drives.</p>
-
-                <h4 class="font-bold text-slate-900 text-base">2. Delivery Timelines</h4>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li><strong>Immediate Access:</strong> For automated products like the "Weekly Test", access is granted instantly upon successful payment.</li>
-                    <li><strong>Mentorship Groups:</strong> For the "100-Weeks Course", you will be added to the respective Premium WhatsApp Group and provided login credentials within <strong>24 hours</strong> of payment confirmation.</li>
-                </ul>
-
-                <h4 class="font-bold text-slate-900 text-base">3. Non-Delivery</h4>
-                <p>If you do not receive your course access or login details within 24 hours of payment, please contact our support team immediately at <strong>+91 9491700443</strong> with your transaction ID.</p>
-            </div>
-            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <button @click="shippingOpen = false" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors">Okay</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cyber Safety Modal -->
-    <div x-show="safetyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 px-4" x-cloak>
-        <div class="absolute inset-0 bg-red-950/60 backdrop-blur-sm transition-opacity" @click="safetyOpen = false"></div>
-        <div class="relative bg-white rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto p-8 shadow-2xl animate-fade-in-up border-t-8 border-red-500">
-            <button @click="safetyOpen = false" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500 hover:bg-red-100 transition-colors">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-            <div class="flex items-center gap-4 mb-6 border-b border-slate-100 pb-4">
-                <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-2xl">
+    <!-- Safety Modal -->
+    <div x-show="safetyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
+        <div class="absolute inset-0 bg-red-950/80 backdrop-blur-md" @click="safetyOpen = false"></div>
+        <div class="relative bg-white rounded-[3rem] w-full max-w-2xl max-h-[85vh] overflow-y-auto p-10 md:p-14 shadow-2xl border-t-8 border-red-500">
+            <button @click="safetyOpen = false" class="absolute top-8 right-8 w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500"><i class="fas fa-times"></i></button>
+            <div class="flex items-center gap-6 mb-10">
+                <div class="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center text-red-600 text-3xl shadow-inner">
                     <i class="fas fa-shield-alt"></i>
                 </div>
-                <h3 class="text-2xl font-bold font-poppins text-slate-900">Cyber Safety & Fraud Alert</h3>
+                <h3 class="text-3xl font-bold font-poppins text-dark">Cyber Safety Alert</h3>
             </div>
-            
-            <div class="prose prose-slate text-slate-600 text-sm leading-relaxed space-y-4">
-                <p class="font-bold text-red-600 bg-red-50 p-4 rounded-xl border border-red-100">
-                    <i class="fas fa-exclamation-triangle mr-2"></i> Warning: Club of Competition (COC) will NEVER ask you for OTPs or sensitive personal banking details.
+            <div class="space-y-6 text-slate-600 font-medium">
+                <p class="font-bold text-red-600 bg-red-50 p-6 rounded-[1.5rem] border border-red-100">
+                    Warning: Club of Competition (COC) will NEVER ask you for OTPs or banking details.
                 </p>
-
-                <h4 class="font-bold text-slate-900 text-base">1. Impersonation Alerts</h4>
-                <p>Beware of fake Telegram groups or WhatsApp numbers pretending to be "Club of Competition". Always verify that you are speaking to our official business account. Our official support number is <strong>+91 9491700443</strong>.</p>
-
-                <h4 class="font-bold text-slate-900 text-base">2. Payment Safety</h4>
-                <p>We do NOT accept payments via personal UPI IDs (like name@upi) sent over chat. All payments must be made through:</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>Links provided on this official website (clubofcompetition.in).</li>
-                    <li>Official verified payment gateways integrated into our app.</li>
-                    <li>Direct account transfer to "COC NINE SOLUTIONS PRIVATE LIMITED".</li>
-                </ul>
-
-                <h4 class="font-bold text-slate-900 text-base">3. Protect Your OTP</h4>
-                <p>Fraudsters may call pretending to be our support staff to "activate" your course and ask for an OTP. <strong>NEVER share your OTP with anyone.</strong> We can activate courses without it.</p>
-                
-                <h4 class="font-bold text-slate-900 text-base">4. Reporting Fraud</h4>
-                <p>If you receive suspicious messages, please take a screenshot and report it to us immediately on WhatsApp (+91 9491700443) and block the sender.</p>
+                <p>All payments must be made through links provided on this official website (clubofcompetition.in) or direct account transfer to "COC NINE SOLUTIONS PRIVATE LIMITED".</p>
             </div>
-            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <button @click="safetyOpen = false" class="bg-red-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-red-700 transition-colors shadow-lg shadow-red-200">I Understand</button>
-            </div>
+            <div class="mt-12 text-center"><button @click="safetyOpen = false" class="w-full bg-red-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-red-200">I Understand</button></div>
         </div>
     </div>
 
@@ -632,7 +606,7 @@
             const formatted = target.toLocaleDateString('en-IN', options);
             const display = document.getElementById('targetDateDisplay');
             if (display) {
-                display.innerHTML = `Start today & be <span class="text-primary font-bold">Exam-Ready by ${formatted}</span>`;
+                display.innerHTML = `Start today & be <span class="text-primary font-black">Exam-Ready by ${formatted}</span>`;
             }
         });
 
@@ -643,7 +617,7 @@
         const links = document.querySelectorAll('#desktop-nav .nav-link');
 
         window.onscroll = () => {
-            if (window.scrollY > 50) {
+            if (window.scrollY > 80) {
                 nav.classList.add('header-scrolled');
                 btn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
             } else {
@@ -658,8 +632,8 @@
                 }
             });
             links.forEach(l => {
-                l.classList.remove('active');
-                if (l.getAttribute('href').includes(current)) l.classList.add('active');
+                l.classList.remove('text-primary');
+                if (l.getAttribute('href').includes(current)) l.classList.add('text-primary');
             });
         };
 
@@ -691,10 +665,10 @@
                 document.body.removeChild(el);
                 
                 const note = document.createElement('div');
-                note.className = "fixed top-20 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl z-[100] text-sm font-bold";
+                note.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-dark text-white px-8 py-4 rounded-2xl shadow-2xl z-[100] text-sm font-bold animate-bounce";
                 note.innerText = "Link copied to clipboard!";
                 document.body.appendChild(note);
-                setTimeout(() => note.remove(), 2000);
+                setTimeout(() => note.remove(), 2500);
             }
         }
     </script>
