@@ -92,17 +92,44 @@
             backdrop-filter: blur(8px);
         }
         
-        .taskbar { 
+        /* Wrapper to manage bottom Taskbar securely */
+        .taskbar-wrapper { 
              position: fixed; 
              bottom: calc(1.5rem + env(safe-area-inset-bottom)); 
              left: 50%;
              transform: translateX(-50%);
              width: calc(100% - 2rem);
-             max-width: 500px;
-             height: 70px; 
+             z-index: 40; /* Lower than top navbar to prevent overlap */
              display: flex; 
-             z-index: 50; 
+             pointer-events: none; /* Let clicks pass through gaps */
+        }
+        .taskbar-wrapper > * {
+             pointer-events: auto; /* Re-enable for content */
+        }
+        
+        .taskbar {
+             width: 100%;
+             height: 75px; 
+             display: flex;
+             flex-direction: row;
+             justify-content: space-around;
+             align-items: center;
              border-radius: 2rem;
+             -ms-overflow-style: none;
+             scrollbar-width: none;
+        }
+        .taskbar::-webkit-scrollbar { display: none; }
+
+        @media (max-width: 1023px) {
+            .taskbar-wrapper {
+                 max-width: 550px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .taskbar-wrapper {
+                 max-width: 1000px; /* Wider desktop taskbar to fit socials perfectly */
+            }
         }
         
         .hero-pattern {
@@ -141,11 +168,11 @@
         }
     </style>
 </head>
-<body class="text-slate-900 font-manrope antialiased" x-data="{ privacyOpen: false, termsOpen: false, safetyOpen: false, refundOpen: false, shippingOpen: false }">
+<body class="text-slate-900 font-manrope antialiased" x-data="{ safetyOpen: false }">
 
     <!-- Header -->
-    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 bg-white/80 backdrop-blur-md py-5 border-b border-slate-100">
-        <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
+    <header id="navbar" class="fixed top-0 w-full z-50 transition-transform duration-500 bg-white/80 backdrop-blur-md py-5 border-b border-slate-100">
+        <div class="container mx-auto px-4 md:px-8 lg:px-[120px] flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 group" aria-label="Home">
                 <div class="p-1 bg-gradient-to-tr from-primary to-purple-500 rounded-xl">
                     <img src="logo.png" alt="Logo" class="h-9 md:h-10 w-auto bg-white rounded-lg p-0.5 animate-wiggle" onerror="this.onerror=null; this.src='https://placehold.co/40x40/4f46e5/ffffff?text=C'">
@@ -154,10 +181,8 @@
             </a>
             
             <nav class="hidden lg:flex items-center gap-10 font-poppins text-sm font-bold text-slate-500" id="desktop-nav">
-                <a href="https://clubofcompetition.in/studyplan" class="nav-link hover:text-primary transition-colors">Study Plan</a>
                 <a href="#story" class="nav-link hover:text-primary transition-colors">Compare Path</a>
                 <a href="#about" class="nav-link hover:text-primary transition-colors">About Us</a>
-                <a href="#testimonials" class="nav-link hover:text-primary transition-colors">Results</a>
                 <a href="#pricing" class="nav-link hover:text-primary transition-colors text-accent">Pricing</a>
                 <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="bg-primary text-white px-8 py-3 rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 active:scale-95">Free Test</a>
             </nav>
@@ -177,10 +202,8 @@
             </div>
             <nav class="flex flex-col gap-8 text-xl font-poppins font-bold mb-12">
                 <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="flex items-center gap-4 text-primary"><i class="fas fa-edit opacity-50"></i> Free Test</a>
-                <a href="https://clubofcompetition.in/studyplan" class="flex items-center gap-4"><i class="fas fa-book-open opacity-50"></i> View Study Map</a>
                 <a href="#story" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-lightbulb opacity-50"></i> The Story</a>
                 <a href="#about" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-user-tie opacity-50"></i> Our Story</a>
-                <a href="#testimonials" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-users opacity-50"></i> Our Winners</a>
                 <a href="#pricing" class="mobile-nav-link flex items-center gap-4 text-accent"><i class="fas fa-tag opacity-50"></i> Start Now</a>
                 <hr class="border-slate-100">
                 <a href="https://wa.me/919491700443" class="text-whatsapp flex items-center gap-4 text-2xl">
@@ -192,6 +215,9 @@
             <div class="mt-auto border-t border-slate-100 pt-10 pb-8 text-center">
                 <p class="text-slate-400 text-[11px] uppercase tracking-[0.2em] font-black mb-8">Follow Our Journey</p>
                 <div class="flex justify-center items-center gap-6">
+                    <a href="https://www.facebook.com/share/1B9heWv9tu/" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all">
+                        <i class="fab fa-facebook text-xl"></i>
+                    </a>
                     <a href="https://instagram.com/club_of_competition" target="_blank" class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-instagram hover:bg-instagram hover:text-white transition-all">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
@@ -211,7 +237,7 @@
 
     <main id="main">
         <!-- Hero Section -->
-        <section class="hero-pattern pt-28 md:pt-40 pb-24 px-4 overflow-hidden">
+        <section class="hero-pattern min-h-screen flex flex-col justify-center pt-20 md:pt-28 pb-24 px-4 lg:px-[120px] overflow-hidden">
             <div class="container mx-auto max-w-6xl text-center relative">
                 <!-- Decorative background elements -->
                 <div class="absolute -top-20 -left-20 w-64 h-64 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float"></div>
@@ -252,7 +278,7 @@
         </section>
 
         <!-- Story Section -->
-        <section id="story" class="py-28 bg-white px-4 border-t border-slate-50 relative">
+        <section id="story" class="min-h-screen flex flex-col justify-center py-20 bg-white px-4 lg:px-[120px] border-t border-slate-50 relative">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-16">
                     <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">The Methodology</span>
@@ -308,8 +334,44 @@
             </div>
         </section>
 
+        <!-- COC CAT Section -->
+        <section id="coc-cat" class="min-h-screen flex flex-col justify-center py-20 bg-indigo-50 px-4 lg:px-[120px] relative overflow-hidden">
+            <div class="container mx-auto max-w-6xl relative z-10">
+                <div class="bg-white rounded-[4rem] shadow-2xl shadow-indigo-100 p-10 md:p-16 lg:p-20 flex flex-col lg:flex-row items-center gap-12 border border-white">
+                    <div class="lg:w-1/2 space-y-8">
+                        <div>
+                            <span class="text-purple-600 font-black uppercase tracking-[0.3em] text-[10px] mb-4 block bg-purple-50 inline-block px-4 py-1.5 rounded-full">Discover Your Path</span>
+                            <h2 class="text-4xl md:text-5xl font-bold text-dark font-poppins leading-tight">Career Advice Test <span class="text-purple-600 text-3xl md:text-4xl block mt-2">(COC CAT)</span></h2>
+                        </div>
+                        <p class="text-slate-600 text-fluid-p font-medium leading-relaxed">
+                            Confused between UPSC, SSC, Banking, or State Exams? Our AI-driven psychological and aptitude test analyzes your strengths, weaknesses, and personality to recommend the most suitable government career for you.
+                        </p>
+                        <ul class="space-y-5 text-slate-700 font-medium">
+                            <li class="flex items-center gap-4"><i class="fas fa-brain text-purple-500 text-xl w-6"></i> <span>Psychological Profile Analysis</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-chart-pie text-purple-500 text-xl w-6"></i> <span>Aptitude & Strengths Mapping</span></li>
+                            <li class="flex items-center gap-4"><i class="fas fa-bullseye text-purple-500 text-xl w-6"></i> <span>Personalized Exam Recommendation</span></li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/2 relative w-full flex justify-center mt-10 lg:mt-0">
+                        <!-- Illustrative abstract block for COC CAT -->
+                        <div class="relative w-full max-w-md aspect-square bg-gradient-to-tr from-purple-100 to-indigo-50 rounded-[3rem] p-8 flex items-center justify-center border-4 border-white shadow-lg">
+                            <div class="absolute top-8 right-8 md:top-10 md:right-10 w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-xl animate-float">
+                                <i class="fas fa-compass text-2xl md:text-3xl text-primary"></i>
+                            </div>
+                            <div class="absolute bottom-8 left-8 md:bottom-10 md:left-10 w-20 h-20 md:w-24 md:h-24 bg-white rounded-2xl flex items-center justify-center shadow-xl animate-float" style="animation-delay: 1s;">
+                                <i class="fas fa-user-graduate text-3xl md:text-4xl text-secondary"></i>
+                            </div>
+                            <div class="w-32 h-32 md:w-40 md:h-40 bg-purple-600 rounded-full flex items-center justify-center shadow-2xl text-white z-10 animate-pulse">
+                                <i class="fas fa-fingerprint text-5xl md:text-6xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Pricing Section -->
-        <section id="pricing" class="py-32 px-4 bg-dark text-white relative overflow-hidden">
+        <section id="pricing" class="min-h-screen flex flex-col justify-center py-20 px-4 lg:px-[120px] bg-dark text-white relative overflow-hidden">
             <!-- Background effects -->
             <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full -mr-72 -mt-72 opacity-50"></div>
             <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full -ml-48 -mb-48 opacity-30"></div>
@@ -369,7 +431,7 @@
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-32 px-4 bg-white" x-data="{ active: null }">
+        <section id="faq" class="min-h-screen flex flex-col justify-center py-20 px-4 lg:px-[120px] bg-white" x-data="{ active: null }">
             <div class="container mx-auto max-w-4xl">
                 <div class="text-center mb-20">
                     <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Help Center</span>
@@ -402,7 +464,7 @@
         </section>
 
         <!-- Founder Section -->
-        <section id="about" class="py-32 px-4 bg-slate-50">
+        <section id="about" class="min-h-screen flex flex-col justify-center py-20 px-4 lg:px-[120px] bg-slate-50">
             <div class="container mx-auto max-w-6xl">
                 <div class="bg-white p-10 md:p-20 rounded-[4rem] shadow-2xl shadow-slate-200 border border-slate-100 grid lg:grid-cols-5 gap-16 items-center">
                     <div class="lg:col-span-3 space-y-8">
@@ -441,7 +503,7 @@
 
     <!-- Footer -->
     <footer class="bg-dark text-white pt-24 pb-32 border-t border-white/5 no-scrollbar">
-        <div class="container mx-auto px-6 max-w-6xl">
+        <div class="container mx-auto px-6 lg:px-[120px] max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 text-center md:text-left">
                 <div>
                     <a href="#" class="flex items-center gap-3 justify-center md:justify-start mb-8">
@@ -463,10 +525,10 @@
                 <div> 
                     <h4 class="font-bold mb-8 font-poppins text-xs uppercase tracking-[0.3em] text-slate-500">Support</h4>
                     <ul class="space-y-4 text-sm text-slate-400 font-bold">
-                        <li><a href="#" @click.prevent="privacyOpen = true" class="hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" @click.prevent="termsOpen = true" class="hover:text-white transition-colors">Terms & Conditions</a></li>
-                        <li><a href="#" @click.prevent="refundOpen = true" class="hover:text-white transition-colors">Refund & Cancellation</a></li>
-                        <li><a href="#" @click.prevent="shippingOpen = true" class="hover:text-white transition-colors">Shipping & Delivery</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html" class="hover:text-white transition-colors">Terms & Conditions</a></li>
+                        <li><a href="refund-cancellation.html" class="hover:text-white transition-colors">Refund & Cancellation</a></li>
+                        <li><a href="shipping-delivery.html" class="hover:text-white transition-colors">Shipping & Delivery</a></li>
                         <li><a href="#" @click.prevent="safetyOpen = true" class="text-red-400 hover:text-red-300 transition-colors"><i class="fas fa-shield-alt mr-2"></i> Cyber Safety</a></li>
                     </ul>
                 </div> 
@@ -474,6 +536,7 @@
                 <div>
                     <h4 class="font-bold mb-8 font-poppins text-xs uppercase tracking-[0.3em] text-slate-500">Connect</h4>
                     <div class="flex justify-center md:justify-start space-x-6">
+                        <a href="https://www.facebook.com/share/1B9heWv9tu/" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                         <a href="https://instagram.com/club_of_competition" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://youtube.com/@clubofcompetition" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                         <a href="https://twitter.com/clubofcompete" target="_blank" class="text-slate-500 hover:text-white text-2xl transition-all" aria-label="X Twitter"><i class="fab fa-x-twitter"></i></a>
@@ -495,88 +558,71 @@
         </div>
     </footer>
 
-    <!-- Taskbar (Visible on both Desktop and Mobile, matching glassmorphism theme) -->
-    <div class="taskbar bg-white/80 backdrop-blur-xl border border-white shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)]">
-        <a href="#" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors group">
-            <i class="fa-solid fa-wand-magic-sparkles text-xl text-primary group-hover:-translate-y-1 transition-transform"></i>
-            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">AI<br>Learn</span>
-        </a>
-        <a href="#pricing" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-secondary transition-colors group">
-            <i class="fa-solid fa-ranking-star text-xl text-secondary group-hover:-translate-y-1 transition-transform"></i>
-            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Weekly<br>Test</span>
-        </a>
-
-        <!-- Floating Login Button -->
-        <a href="https://app.clubofcompetition.in" target="_blank" class="flex-1 flex flex-col items-center justify-center group text-slate-500 transition-colors relative z-10">
-            <div class="absolute -top-5 w-14 h-14 sm:w-[60px] sm:h-[60px] bg-green-100 rounded-full flex items-center justify-center text-green-600 shadow-[0_10px_20px_-5px_rgba(34,197,94,0.4)] border-4 border-white group-hover:bg-green-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                <i class="fa-solid fa-user-graduate text-xl sm:text-2xl"></i>
+    <!-- Taskbar and Up Arrow Wrapper (Visible on both Desktop and Mobile, matching glassmorphism theme) -->
+    <div class="taskbar-wrapper">
+        
+        <!-- Main Taskbar -->
+        <div class="taskbar bg-white/80 backdrop-blur-xl border border-slate-200 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] lg:px-4 lg:justify-between">
+            
+            <!-- Socials (Left side on Desktop) -->
+            <div class="hidden lg:flex items-center justify-center gap-4 w-[200px] border-r border-slate-200/60 h-10">
+                <a href="https://www.facebook.com/share/1B9heWv9tu/" target="_blank" class="text-slate-400 hover:text-[#1877F2] hover:scale-110 transition-all">
+                    <i class="fab fa-facebook text-xl"></i>
+                </a>
+                <a href="https://instagram.com/club_of_competition" target="_blank" class="text-slate-400 hover:text-instagram hover:scale-110 transition-all">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="https://youtube.com/@clubofcompetition" target="_blank" class="text-slate-400 hover:text-youtube hover:scale-110 transition-all">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+                <a href="https://twitter.com/clubofcompete" target="_blank" class="text-slate-400 hover:text-black hover:scale-110 transition-all">
+                    <i class="fab fa-x-twitter text-xl"></i>
+                </a>
+                <a href="https://t.me/club_of_competition" target="_blank" class="text-slate-400 hover:text-telegram hover:scale-110 transition-all">
+                    <i class="fab fa-telegram-plane text-xl"></i>
+                </a>
             </div>
-            <span class="absolute bottom-1.5 text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-green-600 text-center leading-[1.1]">Student<br>Login</span>
-        </a>
 
-        <a href="https://clubofcompetition.in/studyplan" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-accent transition-colors group">
-            <i class="fa-solid fa-route text-xl text-accent group-hover:-translate-y-1 transition-transform"></i>
-            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Study<br>Map</span>
-        </a>
-        <a href="#" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-purple-600 transition-colors group">
-            <i class="fa-solid fa-file-pen text-xl text-purple-600 group-hover:-translate-y-1 transition-transform"></i>
-            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">COC<br>CAT</span>
-        </a>
+            <a href="#" class="flex-1 lg:flex-none lg:w-[76px] flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors group">
+                <i class="fa-solid fa-wand-magic-sparkles text-xl text-primary group-hover:-translate-y-1 transition-transform"></i>
+                <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">AI<br>Learn</span>
+            </a>
+            <a href="#pricing" class="flex-1 lg:flex-none lg:w-[76px] flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-yellow-500 transition-colors group">
+                <i class="fa-solid fa-ranking-star text-xl text-yellow-500 group-hover:-translate-y-1 transition-transform"></i>
+                <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Weekly<br>Test</span>
+            </a>
+
+            <!-- Login Button -->
+            <a href="https://app.clubofcompetition.in" target="_blank" class="flex-1 lg:flex-none lg:w-[76px] flex flex-col items-center justify-center gap-1 group text-slate-500 transition-colors relative z-10">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-14 h-14 sm:w-[56px] sm:h-[56px] bg-green-100 rounded-full flex items-center justify-center text-green-600 shadow-[0_10px_20px_-5px_rgba(34,197,94,0.4)] border-[3px] border-white group-hover:bg-green-500 group-hover:text-white group-hover:-translate-y-1 transition-all duration-300">
+                    <i class="fa-solid fa-user-graduate text-xl sm:text-2xl"></i>
+                </div>
+                <!-- Invisible placeholder icon to perfectly align the text with the rest of the taskbar items -->
+                <i class="fa-solid fa-user-graduate text-xl opacity-0 pointer-events-none"></i>
+                <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-green-600 text-center leading-[1.1] mt-1">Student<br>Login</span>
+            </a>
+
+            <!-- Study Map -->
+            <a href="https://clubofcompetition.in/studyplan" class="flex-1 lg:flex-none lg:w-[76px] flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-accent transition-colors group">
+                <i class="fa-solid fa-map-marked-alt text-xl text-accent group-hover:-translate-y-1 transition-transform"></i>
+                <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Study<br>Map</span>
+            </a>
+            <a href="#coc-cat" class="flex-1 lg:flex-none lg:w-[76px] flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-purple-600 transition-colors group">
+                <i class="fa-solid fa-file-pen text-xl text-purple-600 group-hover:-translate-y-1 transition-transform"></i>
+                <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">COC<br>CAT</span>
+            </a>
+
+            <!-- Spacer (Right side on Desktop) -->
+            <div class="hidden lg:block w-[200px] border-l border-transparent"></div>
+        </div>
     </div>
 
-    <!-- Floating Buttons -->
-    <a href="https://wa.me/919491700443?text=Hi%20CoC,%20I%20want%20the%20100-weeks%20Mastery%20Plan" 
-        target="_blank" 
-        class="fixed bottom-24 right-6 bg-whatsapp text-white w-16 h-16 rounded-[1.5rem] flex items-center justify-center shadow-2xl z-40 animate-float hover:scale-110 transition-transform">
-        <i class="fab fa-whatsapp text-4xl"></i>
-    </a>
-
-    <button id="scrollTopBtn" 
-            class="fixed bottom-44 right-6 bg-dark text-white w-16 h-16 rounded-[1.5rem] shadow-2xl transition-all duration-500 opacity-0 translate-y-10 pointer-events-none z-40 flex items-center justify-center hover:bg-primary">
+    <!-- Floating Buttons (Up Arrow) -->
+    <button class="scroll-top-btn fixed bottom-28 right-6 lg:bottom-10 lg:right-10 bg-white/80 backdrop-blur-sm border border-slate-200 text-slate-600 w-14 h-14 lg:w-16 lg:h-16 rounded-[1.2rem] lg:rounded-[1.5rem] shadow-lg transition-all duration-500 opacity-0 translate-y-10 pointer-events-none z-40 flex items-center justify-center hover:border-primary hover:text-primary">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <!-- Modals (Reused with updated styling) -->
-    <!-- Privacy Policy Modal -->
-    <div x-show="privacyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
-        <div class="absolute inset-0 bg-dark/80 backdrop-blur-md" @click="privacyOpen = false"></div>
-        <div class="relative bg-white rounded-[3rem] w-full max-w-2xl max-h-[85vh] overflow-y-auto p-10 md:p-14 shadow-2xl">
-            <button @click="privacyOpen = false" class="absolute top-8 right-8 w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-dark hover:rotate-90 transition-all">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <h3 class="text-3xl font-bold font-poppins mb-8 text-dark border-b border-slate-100 pb-6">Privacy Policy</h3>
-            <div class="prose prose-slate text-slate-600 font-medium space-y-6">
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Last Updated: October 2024</p>
-                <p>Welcome to <strong>Club of Competition</strong>, operated by <strong>COC NINE SOLUTIONS PRIVATE LIMITED</strong>. Your privacy is critically important to us.</p>
-                <h4 class="font-bold text-dark text-xl">1. Information We Collect</h4>
-                <p>We collect minimal information necessary to provide our educational services:</p>
-                <ul class="list-disc pl-5 space-y-2">
-                    <li><strong>Personal Details:</strong> Name, Email Address, and Phone Number (for WhatsApp integration).</li>
-                    <li><strong>Performance Data:</strong> Quiz scores and progress tracking within our apps.</li>
-                </ul>
-                <h4 class="font-bold text-dark text-xl">2. How We Use Your Data</h4>
-                <p>We use your data solely for delivering daily study schedules and PDF materials via WhatsApp and generating performance reports.</p>
-            </div>
-            <div class="mt-12 pt-8 border-t border-slate-100 text-center">
-                <button @click="privacyOpen = false" class="w-full md:w-auto bg-primary text-white px-12 py-4 rounded-2xl font-bold hover:bg-indigo-700 transition-colors shadow-xl shadow-indigo-100">Close Policy</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms Modal -->
-    <div x-show="termsOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
-        <div class="absolute inset-0 bg-dark/80 backdrop-blur-md" @click="termsOpen = false"></div>
-        <div class="relative bg-white rounded-[3rem] w-full max-w-2xl max-h-[85vh] overflow-y-auto p-10 shadow-2xl">
-            <button @click="termsOpen = false" class="absolute top-8 right-8 w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center"><i class="fas fa-times"></i></button>
-            <h3 class="text-3xl font-bold font-poppins mb-8 text-dark">Terms & Conditions</h3>
-            <div class="text-slate-600 font-medium space-y-4">
-                <p>By enrolling in the 100-Weeks Course, you agree to the terms set by <strong>COC NINE SOLUTIONS PRIVATE LIMITED</strong>.</p>
-                <p>Content is for personal use only. Sharing or reselling proprietary content is strictly prohibited.</p>
-            </div>
-            <div class="mt-10 border-t pt-8 text-center"><button @click="termsOpen = false" class="bg-primary text-white px-10 py-4 rounded-2xl font-bold">I Agree</button></div>
-        </div>
-    </div>
-
     <!-- Safety Modal -->
     <div x-show="safetyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
         <div class="absolute inset-0 bg-red-950/80 backdrop-blur-md" @click="safetyOpen = false"></div>
@@ -588,12 +634,31 @@
                 </div>
                 <h3 class="text-3xl font-bold font-poppins text-dark">Cyber Safety Alert</h3>
             </div>
-            <div class="space-y-6 text-slate-600 font-medium">
-                <p class="font-bold text-red-600 bg-red-50 p-6 rounded-[1.5rem] border border-red-100">
-                    Warning: Club of Competition (COC) will NEVER ask you for OTPs or banking details.
+            
+            <div class="space-y-4 text-slate-600 font-medium">
+                <p class="font-bold text-red-600 bg-red-50 p-5 rounded-2xl border border-red-100">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> Warning: Club of Competition (COC) will NEVER ask you for OTPs, PINs, or sensitive banking details.
                 </p>
-                <p>All payments must be made through links provided on this official website (clubofcompetition.in) or direct account transfer to "COC NINE SOLUTIONS PRIVATE LIMITED".</p>
+                <ul class="space-y-4 mt-4">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                        <span><strong>Official Payments Only:</strong> All payments must be made strictly through links provided on our official website (clubofcompetition.in) or direct transfer to "COC NINE SOLUTIONS PRIVATE LIMITED".</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-user-shield text-blue-500 mt-1"></i>
+                        <span><strong>Beware of Impersonators:</strong> Do not engage with fake WhatsApp numbers, Telegram channels, or social media pages promising leaked materials or massive unverified discounts.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-link text-purple-500 mt-1"></i>
+                        <span><strong>Verify Links:</strong> Never click on suspicious links sent via SMS, random emails, or direct messages claiming to be from COC support.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-headset text-orange-500 mt-1"></i>
+                        <span><strong>Report Suspicious Activity:</strong> If someone contacts you claiming to be from COC and asks for money directly, block them and report it to our official help desk immediately at +91 9491700443.</span>
+                    </li>
+                </ul>
             </div>
+
             <div class="mt-12 text-center"><button @click="safetyOpen = false" class="w-full bg-red-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-red-200">I Understand</button></div>
         </div>
     </div>
@@ -638,26 +703,41 @@
 
             /* Scroll & Navbar Logic */
             var nav = document.getElementById('navbar');
-            var btn = document.getElementById('scrollTopBtn');
+            var scrollBtns = document.querySelectorAll('.scroll-top-btn');
             var sections = document.querySelectorAll('section');
             var links = document.querySelectorAll('#desktop-nav .nav-link');
+            
+            var lastScrollTop = 0; /* Tracking scroll position */
 
             window.addEventListener('scroll', function() {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
                 if (nav) {
-                    if (window.scrollY > 80) {
+                    if (scrollTop > 80) {
                         nav.classList.add('header-scrolled');
                     } else {
                         nav.classList.remove('header-scrolled');
                     }
+
+                    /* Hide navbar on mobile when scrolling down, show when scrolling up */
+                    if (window.innerWidth < 1024) {
+                        if (scrollTop > lastScrollTop && scrollTop > 80) {
+                            nav.style.transform = 'translateY(-100%)';
+                        } else {
+                            nav.style.transform = 'translateY(0)';
+                        }
+                    } else {
+                        nav.style.transform = 'translateY(0)';
+                    }
                 }
                 
-                if (btn) {
-                    if (window.scrollY > 80) {
+                scrollBtns.forEach(function(btn) {
+                    if (scrollTop > 80) {
                         btn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
                     } else {
                         btn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
                     }
-                }
+                });
 
                 var current = '';
                 sections.forEach(function(s) {
@@ -672,13 +752,22 @@
                         l.classList.add('text-primary');
                     }
                 });
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; /* For Mobile or negative scrolling */
             });
 
-            if (btn) {
+            /* Fix navigation if window resized mid-scroll */
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024 && nav) {
+                    nav.style.transform = 'translateY(0)';
+                }
+            });
+
+            scrollBtns.forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
-            }
+            });
 
             /* Mobile Menu logic */
             var menuBtn = document.getElementById('menuBtn');
