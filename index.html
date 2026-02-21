@@ -12,16 +12,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        
+    
     <title>100-Weeks Govt Exam Course | Club of Competition</title>
     <link rel="icon" type="image/png" href="logo.png" />
     <meta name="description" content="Join India's most structured 100-weeks government exam Foundation course. Daily WhatsApp lessons, AI-powered tracker, and proven strategy." />
-        
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
-        
+    
     <!-- Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -36,9 +36,9 @@
                         manrope: ['Manrope', 'sans-serif']
                     },
                     colors: {
-                        primary: '#4f46e5', // Modern Indigo
-                        secondary: '#10b981', // Emerald
-                        accent: '#f59e0b', // Amber
+                        primary: '#4f46e5', /* Modern Indigo */
+                        secondary: '#10b981', /* Emerald */
+                        accent: '#f59e0b', /* Amber */
                         dark: '#0f172a',
                         whatsapp: '#25D366',
                         instagram: '#E4405F',
@@ -58,7 +58,7 @@
                     }
                 }
             }
-        }
+        };
     </script>
     <style>
         /* Hide scrollbars globally */
@@ -72,40 +72,39 @@
 
         html { scroll-behavior: smooth; overflow-x: hidden; }
         body { 
-            overflow-x: hidden; 
-            width: 100%; 
-            -webkit-font-smoothing: antialiased; 
-            background-color: #f8fafc;
+             overflow-x: hidden; 
+             width: 100%; 
+             -webkit-font-smoothing: antialiased; 
+             background-color: #f8fafc;
         }
-                
+        
         [x-cloak] { display: none !important; }
-                
+        
         /* Fluid Typography */
         .text-fluid-h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.1; }
         .text-fluid-h2 { font-size: clamp(1.8rem, 5vw, 3.5rem); line-height: 1.2; }
         .text-fluid-p { font-size: clamp(1rem, 1.2vw, 1.25rem); line-height: 1.7; }
 
         .header-scrolled { 
-            padding: 0.5rem 0 !important; 
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1); 
-            background: rgba(255, 255, 255, 0.95);
+             padding: 0.5rem 0 !important; 
+             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1); 
+             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
         }
-                
+        
         .taskbar { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 70px; 
-            background: white; 
-            border-top: 1px solid #f1f5f9; 
-            display: flex; 
-            z-index: 50; 
-            padding-bottom: env(safe-area-inset-bottom);
-            box-shadow: 0 -10px 25px -5px rgba(0,0,0,0.05);
+             position: fixed; 
+             bottom: calc(1.5rem + env(safe-area-inset-bottom)); 
+             left: 50%;
+             transform: translateX(-50%);
+             width: calc(100% - 2rem);
+             max-width: 500px;
+             height: 70px; 
+             display: flex; 
+             z-index: 50; 
+             border-radius: 2rem;
         }
-                
+        
         .hero-pattern {
             background-color: #ffffff;
             background-image: radial-gradient(var(--tw-colors-indigo-100) 1px, transparent 1px);
@@ -160,7 +159,7 @@
                 <a href="#about" class="nav-link hover:text-primary transition-colors">About Us</a>
                 <a href="#testimonials" class="nav-link hover:text-primary transition-colors">Results</a>
                 <a href="#pricing" class="nav-link hover:text-primary transition-colors text-accent">Pricing</a>
-                <a href="https://app.clubofcompetition.in" target="_blank" class="bg-primary text-white px-8 py-3 rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 active:scale-95">Login</a>
+                <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="bg-primary text-white px-8 py-3 rounded-2xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 active:scale-95">Free Test</a>
             </nav>
 
             <button id="menuBtn" class="lg:hidden text-2xl p-2 text-dark" aria-label="Open Menu">
@@ -177,7 +176,7 @@
                 <button id="closeBtn" class="text-2xl p-3 bg-slate-50 rounded-full" aria-label="Close Menu"><i class="fas fa-times"></i></button>
             </div>
             <nav class="flex flex-col gap-8 text-xl font-poppins font-bold mb-12">
-                <a href="https://app.clubofcompetition.in" class="flex items-center gap-4 text-primary"><i class="fas fa-sign-in-alt opacity-50"></i> Student Login</a>
+                <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="flex items-center gap-4 text-primary"><i class="fas fa-edit opacity-50"></i> Free Test</a>
                 <a href="https://clubofcompetition.in/studyplan" class="flex items-center gap-4"><i class="fas fa-book-open opacity-50"></i> View Study Map</a>
                 <a href="#story" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-lightbulb opacity-50"></i> The Story</a>
                 <a href="#about" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-user-tie opacity-50"></i> Our Story</a>
@@ -212,7 +211,7 @@
 
     <main id="main">
         <!-- Hero Section -->
-        <section class="hero-pattern pt-40 md:pt-56 pb-24 px-4 overflow-hidden">
+        <section class="hero-pattern pt-28 md:pt-40 pb-24 px-4 overflow-hidden">
             <div class="container mx-auto max-w-6xl text-center relative">
                 <!-- Decorative background elements -->
                 <div class="absolute -top-20 -left-20 w-64 h-64 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float"></div>
@@ -249,10 +248,9 @@
                         <span class="text-base sm:text-lg">Enroll Now</span>
                     </a>
 
-                    <button onclick="sharePage()" 
-                            class="group flex-1 min-w-[160px] px-8 py-5 rounded-2xl bg-slate-900 text-white font-bold shadow-lg hover:bg-black hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
-                             <i class="fas fa-share-alt text-sm"></i>
+                    <button onclick="sharePage()" class="group flex-1 min-w-[160px] px-8 py-5 rounded-2xl bg-slate-900 text-white font-bold shadow-lg hover:bg-black hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors"> 
+                            <i class="fas fa-share-alt text-sm"></i>
                         </div>
                         <span class="text-sm sm:text-base">Share</span>
                     </button>
@@ -271,7 +269,7 @@
                 <!-- Story Text -->
                 <div class="max-w-5xl mx-auto bg-gradient-to-br from-indigo-50/50 to-blue-50/50 p-10 md:p-16 rounded-[3rem] mb-20 border border-indigo-100 relative shadow-inner">
                     <p class="text-fluid-p text-slate-700 leading-relaxed font-medium text-center italic">
-                        Once, a tiny Mango seed and a Banana sprout were planted side-by-side. The Banana plant grew super fast! It showed off big leaves in just weeks. But when a heavy wind blew, it tipped over because its roots were shallow. The Mango seed took its time. It spent months building deep, strong roots under the earth where no one could see. It didn't have big leaves right away, but years later, it became a giant tree that stood tall against every storm and gave sweet fruit to generations. <span class="text-primary font-bold not-italic">Which one will you be?</span>
+                        Once, a tiny Mango seed and a Banana sprout were planted side-by-side. The Banana plant grew super fast! It showed off big leaves in just weeks. But when a heavy wind blew, it tipped over because its roots were shallow. The Mango seed took took its time. It spent months building deep, strong roots under the earth where no one could see. It didn't have big leaves right away, but years later, it became a giant tree that stood tall against every storm and gave sweet fruit to generations. <span class="text-primary font-bold not-italic">Which one will you be?</span>
                     </p>
                     <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg border border-indigo-100">
                         <i class="fas fa-chevron-down text-primary"></i>
@@ -390,7 +388,7 @@
                         { q: 'Is this for busy people?', a: 'Yes! It only takes 2-3 hours a day. The lessons are on WhatsApp so you can study whenever you are free.' },
                         { q: 'What if I get stuck?', a: 'Just send a message! Our experts are always ready to help you understand things clearly and simply.' },
                         { q: 'Can I get my money back?', a: 'Because we give you all our study secrets immediately, we cannot offer a refund. But you will love the results!' },
-                        { q: 'What if I miss a day of study?', a: 'That\'s okay! You can catch up on the weekend. The secret to success is just not giving up.' }
+                        { q: 'What if I miss a day of study?', a: 'That is okay! You can catch up on the weekend. The secret to success is just not giving up.' }
                     ]" :key="index">
                         <div class="group border border-slate-100 rounded-3xl overflow-hidden transition-all duration-300" :class="active === index ? 'shadow-2xl shadow-indigo-100 border-indigo-200' : 'hover:border-slate-300 shadow-sm'">
                             <button @click="active = active === index ? null : index" class="w-full text-left p-8 flex justify-between items-center bg-white transition-colors">
@@ -449,7 +447,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white pt-24 pb-32 md:pb-16 border-t border-white/5 no-scrollbar">
+    <footer class="bg-dark text-white pt-24 pb-32 border-t border-white/5 no-scrollbar">
         <div class="container mx-auto px-6 max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 text-center md:text-left">
                 <div>
@@ -469,8 +467,8 @@
                     </ul>
                 </div>
 
-                <div>
-                     <h4 class="font-bold mb-8 font-poppins text-xs uppercase tracking-[0.3em] text-slate-500">Support</h4>
+                <div> 
+                    <h4 class="font-bold mb-8 font-poppins text-xs uppercase tracking-[0.3em] text-slate-500">Support</h4>
                     <ul class="space-y-4 text-sm text-slate-400 font-bold">
                         <li><a href="#" @click.prevent="privacyOpen = true" class="hover:text-white transition-colors">Privacy Policy</a></li>
                         <li><a href="#" @click.prevent="termsOpen = true" class="hover:text-white transition-colors">Terms & Conditions</a></li>
@@ -504,22 +502,33 @@
         </div>
     </footer>
 
-    <!-- Mobile Navigation Taskbar -->
-    <div class="taskbar lg:hidden bg-white">
-        <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="flex-1 flex flex-col items-center justify-center gap-1.5 text-slate-400">
-            <i class="fas fa-edit text-xl text-primary"></i>
-            <span class="text-[10px] font-black uppercase tracking-tighter">Free Test</span>
+    <!-- Taskbar (Visible on both Desktop and Mobile, matching glassmorphism theme) -->
+    <div class="taskbar bg-white/80 backdrop-blur-xl border border-white shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)]">
+        <a href="#" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors group">
+            <i class="fa-solid fa-wand-magic-sparkles text-xl text-primary group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">AI<br>Learn</span>
         </a>
-        <a href="https://app.clubofcompetition.in" target="_blank" class="flex-1 flex flex-col items-center justify-center gap-1.5 border-x border-slate-50">
-            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white shadow-lg -mt-8 border-4 border-white">
-                <i class="fas fa-user-circle text-lg"></i>
+        <a href="#pricing" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-secondary transition-colors group">
+            <i class="fa-solid fa-ranking-star text-xl text-secondary group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Weekly<br>Test</span>
+        </a>
+
+        <!-- Floating Login Button -->
+        <a href="https://app.clubofcompetition.in" target="_blank" class="flex-1 flex flex-col items-center justify-center group text-slate-500 transition-colors relative z-10">
+            <div class="absolute -top-5 w-14 h-14 sm:w-[60px] sm:h-[60px] bg-green-100 rounded-full flex items-center justify-center text-green-600 shadow-[0_10px_20px_-5px_rgba(34,197,94,0.4)] border-4 border-white group-hover:bg-green-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                <i class="fa-solid fa-user-graduate text-xl sm:text-2xl"></i>
             </div>
-            <span class="text-[10px] font-black uppercase tracking-tighter text-primary">Login</span>
+            <span class="absolute bottom-1.5 text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-green-600 text-center leading-[1.1]">Student<br>Login</span>
         </a>
-        <button onclick="sharePage()" class="flex-1 flex flex-col items-center justify-center gap-1.5 text-slate-400">
-            <i class="fas fa-share-alt text-xl text-dark"></i>
-            <span class="text-[10px] font-black uppercase tracking-tighter">Share</span>
-        </button>
+
+        <a href="https://clubofcompetition.in/studyplan" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-accent transition-colors group">
+            <i class="fa-solid fa-route text-xl text-accent group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Study<br>Map</span>
+        </a>
+        <a href="#" class="flex-1 flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-purple-600 transition-colors group">
+            <i class="fa-solid fa-file-pen text-xl text-purple-600 group-hover:-translate-y-1 transition-transform"></i>
+            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">COC<br>CAT</span>
+        </a>
     </div>
 
     <!-- Floating Buttons -->
@@ -597,80 +606,106 @@
     </div>
 
     <script>
-        // Timeline Calculation
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date();
-            const target = new Date(today);
-            target.setDate(today.getDate() + (100 * 7));
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
-            const formatted = target.toLocaleDateString('en-IN', options);
-            const display = document.getElementById('targetDateDisplay');
-            if (display) {
-                display.innerHTML = `Start today & be <span class="text-primary font-black">Exam-Ready by ${formatted}</span>`;
-            }
-        });
-
-        // Scroll & Navbar Logic
-        const nav = document.getElementById('navbar');
-        const btn = document.getElementById('scrollTopBtn');
-        const sections = document.querySelectorAll('section');
-        const links = document.querySelectorAll('#desktop-nav .nav-link');
-
-        window.onscroll = () => {
-            if (window.scrollY > 80) {
-                nav.classList.add('header-scrolled');
-                btn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-            } else {
-                nav.classList.remove('header-scrolled');
-                btn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-            }
-
-            let current = '';
-            sections.forEach(s => {
-                if (window.pageYOffset >= (s.offsetTop - s.clientHeight / 3)) {
-                    current = s.getAttribute('id');
-                }
-            });
-            links.forEach(l => {
-                l.classList.remove('text-primary');
-                if (l.getAttribute('href').includes(current)) l.classList.add('text-primary');
-            });
-        };
-
-        btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // Mobile Menu logic
-        const menuBtn = document.getElementById('menuBtn');
-        const closeBtn = document.getElementById('closeBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        if(menuBtn && closeBtn && mobileMenu) {
-            menuBtn.onclick = () => mobileMenu.classList.remove('translate-x-full');
-            closeBtn.onclick = () => mobileMenu.classList.add('translate-x-full');
-            document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                link.onclick = () => mobileMenu.classList.add('translate-x-full');
-            });
-        }
-
-        // Share function
+        /* Shared Function must be globally available */
         function sharePage() {
             if (navigator.share) {
-                navigator.share({ title: 'Club of Competition', url: window.location.href });
+                navigator.share({ title: 'Club of Competition', url: window.location.href }).catch(console.error);
             } else {
-                const el = document.createElement('textarea');
+                var el = document.createElement('textarea');
                 el.value = window.location.href;
                 document.body.appendChild(el);
                 el.select();
-                document.execCommand('copy');
+                try {
+                    document.execCommand('copy');
+                } catch (e) {
+                    console.error('Copy to clipboard failed.', e);
+                }
                 document.body.removeChild(el);
                 
-                const note = document.createElement('div');
+                var note = document.createElement('div');
                 note.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-dark text-white px-8 py-4 rounded-2xl shadow-2xl z-[100] text-sm font-bold animate-bounce";
                 note.innerText = "Link copied to clipboard!";
                 document.body.appendChild(note);
-                setTimeout(() => note.remove(), 2500);
+                setTimeout(function() { note.remove(); }, 2500);
             }
         }
+
+        /* Initialize standard UI scripts */
+        document.addEventListener('DOMContentLoaded', function() {
+            /* Timeline Calculation */
+            var today = new Date();
+            var target = new Date(today);
+            target.setDate(today.getDate() + (100 * 7));
+            var options = { day: 'numeric', month: 'long', year: 'numeric' };
+            var formatted = target.toLocaleDateString('en-IN', options);
+            var display = document.getElementById('targetDateDisplay');
+            if (display) {
+                display.innerHTML = 'Start today & be <span class="text-primary font-black">Exam-Ready by ' + formatted + '</span>';
+            }
+
+            /* Scroll & Navbar Logic */
+            var nav = document.getElementById('navbar');
+            var btn = document.getElementById('scrollTopBtn');
+            var sections = document.querySelectorAll('section');
+            var links = document.querySelectorAll('#desktop-nav .nav-link');
+
+            window.addEventListener('scroll', function() {
+                if (nav) {
+                    if (window.scrollY > 80) {
+                        nav.classList.add('header-scrolled');
+                    } else {
+                        nav.classList.remove('header-scrolled');
+                    }
+                }
+                
+                if (btn) {
+                    if (window.scrollY > 80) {
+                        btn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                    } else {
+                        btn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                    }
+                }
+
+                var current = '';
+                sections.forEach(function(s) {
+                    if (window.pageYOffset >= (s.offsetTop - s.clientHeight / 3)) {
+                        current = s.getAttribute('id');
+                    }
+                });
+
+                links.forEach(function(l) {
+                    l.classList.remove('text-primary');
+                    if (current && l.getAttribute('href') && l.getAttribute('href').includes(current)) {
+                        l.classList.add('text-primary');
+                    }
+                });
+            });
+
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            /* Mobile Menu logic */
+            var menuBtn = document.getElementById('menuBtn');
+            var closeBtn = document.getElementById('closeBtn');
+            var mobileMenu = document.getElementById('mobileMenu');
+
+            if(menuBtn && closeBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function() { 
+                    mobileMenu.classList.remove('translate-x-full');
+                });
+                closeBtn.addEventListener('click', function() {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+                document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('translate-x-full');
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>
