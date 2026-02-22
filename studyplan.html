@@ -4,292 +4,682 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>100-Week Mastery Plan | Club of Competition</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        theme: {
+                            bg: 'var(--bg)',
+                            card: 'var(--card)',
+                            text: 'var(--text)',
+                            muted: 'var(--text-muted)',
+                            border: 'var(--border)',
+                            accent: 'var(--accent)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root { 
-            --bg: #f8fafc; 
-            --card: #ffffff; 
-            --text: #020617; 
-            --text-muted: #475569; 
-            --border: #e2e8f0; 
-            --accent: #3b82f6;
-        }
-        .theme-sepia { 
-            --bg: #fdf6e3; 
-            --card: #fefcf5; 
-            --text: #433422; 
-            --text-muted: #6b5a45; 
-            --border: #eee8d5; 
-            --accent: #b58900;
-        }
-        .theme-midnight { 
-            --bg: #020617; 
-            --card: #0f172a; 
-            --text: #f8fafc; 
-            --text-muted: #94a3b8; 
-            --border: #334155; 
-            --accent: #3b82f6;
+        /* Premium Minimalist Light Theme */
+        :root {
+             --bg: #f8fafc; /* Slate 50 */
+             --card: #ffffff;
+             --text: #0f172a; /* Slate 900 */
+             --text-muted: #64748b; /* Slate 500 */
+             --border: #e2e8f0; /* Slate 200 */
+             --accent: #2563eb; /* Blue 600 */
         }
 
-        body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: var(--text); transition: all 0.3s ease; font-size: 14px; }
-        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-size: 14px; 
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
         
-        .glass-card { background: var(--card); border: 1px solid var(--border); box-shadow: 0 4px 12px -2px rgba(0,0,0,0.05); }
-        .exam-chip { background: #f1f5f9; border: 1px solid #e2e8f0; color: #020617; font-weight: 800; border-radius: 8px; }
+        .ui-card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); 
+        }
+        
+        .exam-chip { 
+            background: var(--bg); 
+            border: 1px solid var(--border); 
+            color: var(--text-muted); 
+            font-weight: 600; 
+            border-radius: 999px; 
+        }
         
         #progressBar { transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .task-checkbox {
             appearance: none; -webkit-appearance: none;
             height: 1.4rem; width: 1.4rem;
-            background-color: transparent; border: 2.5px solid #475569;
-            border-radius: 7px; cursor: pointer; transition: all 0.2s;
+            background-color: var(--card); border: 2px solid #cbd5e1;
+            border-radius: 6px; cursor: pointer; transition: all 0.2s ease;
             position: relative;
         }
-        .task-checkbox:checked { background-color: #2563eb; border-color: #2563eb; }
+        .task-checkbox:checked { background-color: var(--accent); border-color: var(--accent); }
         .task-checkbox:checked::after { content: "✓"; color: white; font-size: 0.85rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900; }
-        
-        .star-toggle { cursor: pointer; transition: all 0.2s; color: #cbd5e1; }
-        .star-toggle.active { color: #f59e0b; fill: #f59e0b; }
 
-        .modal-overlay { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: 0.3s; z-index: 100; }
+        /* Dynamic Colors for each phase's Checkbox */
+        .cb-blue:checked { background-color: #2563eb; border-color: #2563eb; }
+        .cb-green:checked { background-color: #10b981; border-color: #10b981; }
+        .cb-purple:checked { background-color: #8b5cf6; border-color: #8b5cf6; }
+        .cb-red:checked { background-color: #ef4444; border-color: #ef4444; }
+
+        /* Dynamic Colors for each phase's Topic Grid Cards */
+        .row-blue:hover { border-color: #2563eb !important; background-color: #eff6ff !important; }
+        .row-green:hover { border-color: #10b981 !important; background-color: #ecfdf5 !important; }
+        .row-purple:hover { border-color: #8b5cf6 !important; background-color: #f5f3ff !important; }
+        .row-red:hover { border-color: #ef4444 !important; background-color: #fef2f2 !important; }
+
+        /* Text colors on hover */
+        .row-blue:hover .topic-title-blue { color: #2563eb; }
+        .row-green:hover .topic-title-green { color: #10b981; }
+        .row-purple:hover .topic-title-purple { color: #8b5cf6; }
+        .row-red:hover .topic-title-red { color: #ef4444; }
+        
+        .row-blue:hover .day-num-blue { color: #60a5fa; }
+        .row-green:hover .day-num-green { color: #34d399; }
+        .row-purple:hover .day-num-purple { color: #a78bfa; }
+        .row-red:hover .day-num-red { color: #f87171; }
+
+        /* Dynamic Colors for DONE Date Labels */
+        .date-label { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; display: none; border: 1px solid transparent; }
+        .date-label-blue { color: #2563eb; background: #eff6ff; border-color: #bfdbfe; }
+        .date-label-green { color: #10b981; background: #ecfdf5; border-color: #a7f3d0; }
+        .date-label-purple { color: #8b5cf6; background: #f5f3ff; border-color: #ddd6fe; }
+        .date-label-red { color: #ef4444; background: #fef2f2; border-color: #fecaca; }
+        .task-checkbox:checked ~ .date-label { display: inline-block; }
+
+        .modal-overlay { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: 0.2s ease; z-index: 100; }
         .modal-overlay.open { opacity: 1; pointer-events: auto; }
 
-        .heatmap-square { width: 12px; height: 12px; border-radius: 3px; background: #e2e8f0; position: relative; }
-        .heatmap-square.active-1 { background: #bfdbfe; }
-        .heatmap-square.active-2 { background: #60a5fa; }
-        .heatmap-square.active-3 { background: #2563eb; }
+        .search-overlay { background: rgba(248, 250, 252, 0.8); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: 0.2s ease; z-index: 100; }
+        .search-overlay.open { opacity: 1; pointer-events: auto; }
 
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, opacity 0.3s ease; opacity: 0; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; opacity: 0; }
         .accordion-content.open { max-height: 25000px; opacity: 1; }
         .chevron-icon { transition: transform 0.3s ease; }
         .chevron-icon.rotated { transform: rotate(180deg); }
 
-        .phase-btn { border-left-width: 6px; background-color: white !important; transition: all 0.3s; }
-        .phase-btn:hover { background-color: #f8fafc !important; }
-        .phase-blue { border-left-color: #2563eb; color: #1e40af; }
-        .phase-green { border-left-color: #10b981; color: #065f46; }
-        .phase-purple { border-left-color: #8b5cf6; color: #5b21b6; }
-        .phase-red { border-left-color: #ef4444; color: #991b1b; }
+        .phase-btn { border-left-width: 4px; background-color: var(--card) !important; color: var(--text); transition: all 0.2s; border-left-color: transparent; }
+        .phase-btn:hover { background-color: var(--bg) !important; }
+        .phase-blue { border-left-color: #3b82f6; }
+        .phase-green { border-left-color: #10b981; }
+        .phase-purple { border-left-color: #8b5cf6; }
+        .phase-red { border-left-color: #ef4444; }
 
-        .date-label { font-size: 10px; font-weight: 800; color: #3b82f6; background: #eff6ff; padding: 2px 6px; border-radius: 4px; display: none; }
-        .task-checkbox:checked ~ .date-label { display: inline-block; }
-
-        .current-week-pulse { border: 2px solid #3b82f6; animation: pulse-border 2s infinite; }
-        @keyframes pulse-border {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-            70% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-        }
+        /* Hide scrollbar for horizontally scrollable elements */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         @media print { .no-print { display: none !important; } }
     </style>
 </head>
-<body class="theme-default">
+<body class="bg-theme-bg text-theme-text flex min-h-screen">
 
-    <!-- Navigator Popup -->
-    <div id="navigatorModal" class="fixed inset-0 modal-overlay flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-4xl rounded-[2rem] p-8 relative overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+    <!-- Today's Target Modal -->
+    <div id="todayModal" class="fixed inset-0 modal-overlay flex items-center justify-center p-4 z-50" onclick="if(event.target === this) closeToday()">
+        <div id="todayModalContent" class="ui-card w-full max-w-sm p-6 relative scale-95 transition-transform duration-200 shadow-2xl flex flex-col">
+            <button onclick="closeToday()" class="absolute top-4 right-4 text-theme-muted hover:text-theme-text transition-colors bg-theme-bg p-1.5 rounded-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div id="todayModalColorBand" class="w-12 h-1.5 rounded-full bg-theme-accent mb-5"></div>
+            
+            <span class="targetTypeLabel text-[11px] font-bold uppercase tracking-wider text-theme-accent mb-2 block">TODAY'S MISSION</span>
+            <h4 class="nextTopicTitle text-xl font-black leading-tight mb-2 text-theme-text pr-6">Set start date in Profile...</h4>
+            <p class="nextTopicMeta text-xs font-semibold text-theme-muted uppercase tracking-wider mb-8">Phase Tracking</p>
+            
+            <button onclick="scrollToNextFromModal()" class="w-full bg-theme-accent text-white py-3.5 rounded-xl text-sm font-bold shadow-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                Jump to Task
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Modal / Popup -->
+    <div id="searchModal" class="fixed inset-0 search-overlay flex items-start justify-center pt-24 px-4 z-50" onclick="if(event.target === this) closeSearch()">
+        <div id="searchModalContent" class="ui-card w-full max-w-3xl p-2 flex items-center gap-3 shadow-2xl scale-95 transition-transform duration-200">
+            <svg class="w-6 h-6 text-theme-muted ml-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input type="text" id="globalSearchInput" class="w-full bg-transparent border-none focus:ring-0 text-lg font-bold text-theme-text outline-none placeholder:text-slate-400 py-3" placeholder="Search syllabus topics...">
+            <button onclick="closeSearch()" class="p-2 text-theme-muted hover:text-theme-text bg-theme-bg rounded-lg mr-1 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Week Jump Modal -->
+    <div id="weekJumpModal" class="fixed inset-0 modal-overlay flex items-center justify-center p-4 z-50" onclick="if(event.target === this) closeWeekJump()">
+        <div id="weekJumpModalContent" class="ui-card w-full max-w-3xl p-6 relative scale-95 transition-transform duration-200 shadow-2xl flex flex-col max-h-[85vh]">
+            <div class="flex justify-between items-center mb-4 border-b border-theme-border pb-4 shrink-0">
                 <div>
-                    <h2 class="text-xl font-black text-slate-900 uppercase">100-Week Navigator</h2>
-                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Jump to specific week</p>
+                    <h2 class="text-xl font-black text-theme-text uppercase tracking-tight">Jump to Week</h2>
+                    <p class="text-[11px] font-bold text-theme-muted uppercase tracking-wider mt-1">Select a week to navigate instantly</p>
                 </div>
-                <button onclick="closeNavigator()" class="text-slate-400 hover:text-slate-900 transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <button onclick="closeWeekJump()" class="text-theme-muted hover:text-theme-text transition-colors bg-theme-bg p-1.5 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-            <div id="navigatorGrid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 overflow-y-auto pr-2 pb-4"></div>
+            <div id="weekJumpGrid" class="flex flex-col gap-6 overflow-y-auto pr-2 pb-2 content-start">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="profileModal" class="fixed inset-0 modal-overlay flex items-center justify-center p-4 z-50" onclick="if(event.target === this) closeUserProfile()">
+        <div id="profileModalContent" class="ui-card w-full max-w-xs p-6 flex flex-col items-center relative scale-95 transition-transform duration-200 shadow-2xl">
+            <button onclick="closeUserProfile()" class="absolute top-4 right-4 text-theme-muted hover:text-theme-text transition-colors bg-theme-bg p-1.5 rounded-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <img id="profileModalAvatar" src="" class="w-20 h-20 rounded-full border-4 border-theme-bg shadow-sm mb-4 mt-4 object-cover">
+            <h3 id="profileModalName" class="text-xl font-black text-theme-text text-center leading-tight">Name</h3>
+            <p id="profileModalEmail" class="text-xs font-bold text-theme-muted mb-4 text-center mt-1">Email</p>
+            
+            <!-- Plan Start Date Setting -->
+            <div class="w-full bg-theme-bg p-3 rounded-xl mb-5 border border-theme-border flex flex-col items-center">
+                <label class="text-[10px] font-bold text-theme-muted uppercase tracking-wider mb-1">Plan Start Date</label>
+                <input type="date" id="planStartDateProfile" onchange="setStartDate(this.value)" class="bg-white border border-theme-border rounded-lg px-3 py-1.5 text-xs font-bold focus:ring-2 focus:ring-theme-accent text-theme-text outline-none shadow-sm cursor-pointer transition-colors hover:border-theme-accent w-full text-center">
+            </div>
+
+            <!-- Dynamic Auth Actions (Sign In / Sign Out) -->
+            <div id="profileAuthActions" class="w-full border-t border-theme-border pt-5">
+                <!-- Injected via JS -->
+            </div>
         </div>
     </div>
 
     <!-- Notes Modal -->
-    <div id="focusModal" class="fixed inset-0 modal-overlay flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-lg rounded-[2.5rem] p-8 relative overflow-hidden">
-            <button onclick="closeFocus()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition-colors">
+    <div id="focusModal" class="fixed inset-0 modal-overlay flex items-center justify-center p-4 z-50">
+        <div class="ui-card w-full max-w-lg p-8 relative overflow-hidden flex flex-col max-h-[90vh]">
+            <button onclick="closeFocus()" class="absolute top-6 right-6 text-theme-muted hover:text-theme-text transition-colors">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="mb-6">
-                <span id="focusPhase" class="text-[10px] font-black uppercase tracking-widest text-blue-600">SYLLABUS DETAIL</span>
-                <h2 id="focusTitle" class="text-xl font-black mt-1 leading-tight text-slate-900">Topic</h2>
+                <span id="focusPhase" class="text-[11px] font-bold uppercase tracking-wider text-theme-accent">SYLLABUS DETAIL</span>
+                <h2 id="focusTitle" class="text-xl font-black mt-1 leading-tight text-theme-text">Topic</h2>
             </div>
-            <div class="bg-slate-50 p-6 rounded-2xl mb-6 border border-slate-100">
-                <textarea id="focusNote" class="w-full h-44 bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-100 p-4 text-sm font-bold text-slate-900 shadow-inner outline-none" placeholder="Add your learning notes here..."></textarea>
+            
+            <div class="flex gap-4 mb-4">
+                <div class="flex-1">
+                    <label class="text-[11px] font-bold text-theme-muted uppercase tracking-wider mb-1 block">Topic Score</label>
+                    <input type="number" id="focusScore" placeholder="e.g. 8" class="w-full bg-theme-bg border border-theme-border rounded-xl p-3 text-sm font-bold focus:ring-2 focus:ring-theme-accent text-theme-text outline-none">
+                </div>
+                <div class="flex-1">
+                    <label class="text-[11px] font-bold text-theme-muted uppercase tracking-wider mb-1 block">Out Of</label>
+                    <input type="number" id="focusTotal" placeholder="e.g. 10" value="10" class="w-full bg-theme-bg border border-theme-border rounded-xl p-3 text-sm font-bold focus:ring-2 focus:ring-theme-accent text-theme-text outline-none">
+                </div>
             </div>
-            <div class="flex gap-3">
+
+            <div class="bg-theme-bg p-4 rounded-xl mb-6 border border-theme-border flex-1 overflow-y-auto min-h-[150px]">
+                <textarea id="focusNote" class="w-full h-full min-h-[120px] bg-theme-card rounded-lg border border-theme-border focus:ring-2 focus:ring-theme-accent p-4 text-sm font-medium text-theme-text outline-none resize-none" placeholder="Add your learning notes here..."></textarea>
+            </div>
+            <div class="flex gap-3 mt-auto">
                 <span id="focusID" class="hidden"></span>
-                <button onclick="closeFocus()" class="flex-1 bg-slate-100 text-slate-950 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-slate-200">Save & Close</button>
-                <button onclick="markDoneInFocus()" class="flex-1 bg-blue-600 text-white py-3 rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg hover:bg-blue-700">Mark as Done</button>
+                <button onclick="closeFocus()" class="flex-1 bg-theme-bg text-theme-text border border-theme-border py-3 rounded-xl text-sm font-bold hover:bg-theme-border transition-colors">Save & Close</button>
+                <button onclick="markDoneInFocus()" class="flex-1 bg-theme-accent text-white py-3 rounded-xl text-sm font-bold shadow-md hover:opacity-90 transition-opacity">Mark as Done</button>
             </div>
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="bg-white border-b border-slate-200 pt-10 pb-16 px-4 no-print relative overflow-hidden text-center">
-        <div class="container mx-auto max-w-6xl relative z-10">
-            <div class="flex justify-center gap-3 mb-8">
-                <button onclick="setTheme('default')" class="w-7 h-7 rounded-full bg-blue-100 border-2 border-blue-200 shadow-sm hover:scale-110 transition-all"></button>
-                <button onclick="setTheme('sepia')" class="w-7 h-7 rounded-full bg-amber-100 border-2 border-amber-200 shadow-sm hover:scale-110 transition-all"></button>
-                <button onclick="setTheme('midnight')" class="w-7 h-7 rounded-full bg-slate-800 border-2 border-slate-900 shadow-sm hover:scale-110 transition-all"></button>
-            </div>
-            <h1 class="text-4xl md:text-5xl font-black text-slate-950 mb-3 tracking-tight">100-WEEK <span class="text-blue-600 uppercase">Mastery</span></h1>
-            <p class="text-slate-600 max-w-xl mx-auto text-sm font-black opacity-90 uppercase tracking-widest">
-                Curriculum Tracker • Club of Competition
-            </p>
-
-            <div class="mt-8 flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
-                <span class="exam-chip px-3 py-1.5 text-[10px] uppercase tracking-wider">SSC CGL/CHSL</span>
-                <span class="exam-chip px-3 py-1.5 text-[10px] uppercase tracking-wider">IBPS PO/Clerk</span>
-                <span class="exam-chip px-3 py-1.5 text-[10px] uppercase tracking-wider">SBI PO/Clerk</span>
-                <span class="exam-chip px-3 py-1.5 text-[10px] uppercase tracking-wider">RRB NTPC</span>
-                <span class="exam-chip px-3 py-1.5 text-[10px] uppercase tracking-wider border-slate-200">RBI/LIC</span>
-                <span class="exam-chip px-3 py-1.5 text-[10px] uppercase tracking-wider border-slate-200 text-blue-700">UPSC (F)</span>
-                <span class="exam-chip px-3 py-1.5 text-[10px] uppercase tracking-wider border-slate-200 text-red-600">State PSCs</span>
-            </div>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-4 -mt-10 max-w-7xl pb-20 relative z-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Desktop Sidebar -->
+    <aside class="hidden md:flex flex-col w-64 fixed inset-y-0 left-0 bg-white border-r border-theme-border z-40">
+        <div class="p-6 border-b border-theme-border">
+            <h1 class="text-2xl font-black text-theme-text tracking-tight">100-WEEK</h1>
+            <p class="text-[10px] font-bold text-theme-accent tracking-widest uppercase mt-1">Mastery Tracker</p>
             
-            <aside class="lg:col-span-3 space-y-6 no-print">
-                <div class="sticky top-6 space-y-6">
+            <!-- Desktop Overall Percentage -->
+            <div class="mt-5 flex items-center justify-center bg-blue-50 border border-blue-100 text-theme-accent px-4 py-2.5 rounded-xl shadow-sm">
+                <span class="top-percent-text text-sm font-black tracking-widest">0% DONE</span>
+            </div>
+        </div>
+        
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            
+            <!-- Today Quick Action -->
+            <button onclick="openToday()" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-theme-text text-white hover:bg-theme-accent transition-colors text-sm font-bold shadow-sm mb-6 mt-2 group">
+                <svg class="w-4 h-4 text-white group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Today's Target
+            </button>
+
+            <p class="text-[10px] font-bold text-theme-muted uppercase tracking-wider mb-4 px-2">Syllabus Phases</p>
+            
+            <button id="sidebar-phase-1" onclick="switchPhase('phase-1')" class="sidebar-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-theme-muted hover:text-blue-600 hover:bg-blue-50 transition-colors text-sm font-bold group">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    <div class="flex flex-col items-start leading-tight">
+                        <span>Quantitative</span>
+                        <span class="text-[9px] font-bold opacity-50 tracking-wider uppercase mt-0.5">Weeks 1-35</span>
+                    </div>
+                </div>
+                <span id="sidebar-perc-phase-1" class="text-[10px] font-black opacity-70">0%</span>
+            </button>
+            
+            <button id="sidebar-phase-2" onclick="switchPhase('phase-2')" class="sidebar-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-theme-muted hover:text-emerald-600 hover:bg-emerald-50 transition-colors text-sm font-bold group">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    <div class="flex flex-col items-start leading-tight">
+                        <span>Reasoning</span>
+                        <span class="text-[9px] font-bold opacity-50 tracking-wider uppercase mt-0.5">Weeks 36-60</span>
+                    </div>
+                </div>
+                <span id="sidebar-perc-phase-2" class="text-[10px] font-black opacity-70">0%</span>
+            </button>
+            
+            <button id="sidebar-phase-3" onclick="switchPhase('phase-3')" class="sidebar-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-theme-muted hover:text-purple-600 hover:bg-purple-50 transition-colors text-sm font-bold group">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <div class="flex flex-col items-start leading-tight">
+                        <span>English</span>
+                        <span class="text-[9px] font-bold opacity-50 tracking-wider uppercase mt-0.5">Weeks 61-73</span>
+                    </div>
+                </div>
+                <span id="sidebar-perc-phase-3" class="text-[10px] font-black opacity-70">0%</span>
+            </button>
+            
+            <button id="sidebar-phase-4" onclick="switchPhase('phase-4')" class="sidebar-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-theme-muted hover:text-red-500 hover:bg-red-50 transition-colors text-sm font-bold group">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="flex flex-col items-start leading-tight">
+                        <span>Awareness</span>
+                        <span class="text-[9px] font-bold opacity-50 tracking-wider uppercase mt-0.5">Weeks 74-100</span>
+                    </div>
+                </div>
+                <span id="sidebar-perc-phase-4" class="text-[10px] font-black opacity-70">0%</span>
+            </button>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 md:ml-64 flex flex-col min-w-0">
+        
+        <!-- Header -->
+        <header class="bg-white border-b border-theme-border px-4 py-3 md:px-6 md:py-4 no-print flex justify-between items-center z-30 sticky top-0 md:relative">
+            
+            <!-- Mobile Row 1: Logo & Percentage -->
+            <div class="md:hidden flex items-center gap-3">
+                <h1 class="text-xl font-black text-theme-text tracking-tight">100-WEEK</h1>
+                <span class="top-percent-text text-[10px] font-black tracking-widest text-theme-accent bg-blue-50 border border-blue-100 px-2 py-1 rounded-md shadow-sm">0% DONE</span>
+            </div>
+            
+            <!-- Desktop Badge -->
+            <div class="hidden md:flex items-center bg-theme-bg px-4 py-2 rounded-xl border border-theme-border shadow-sm">
+                <span class="text-[11px] font-bold text-theme-text uppercase tracking-widest">100 Weeks Topic Mastery</span>
+                <span class="mx-3 text-theme-border">|</span>
+                <span class="text-[10px] font-semibold text-theme-muted uppercase tracking-widest">From the desk of Club of Competition</span>
+            </div>
+
+            <!-- Header Right Section: Tools + Profile -->
+            <div class="flex items-center gap-2 md:gap-4">
+                
+                <!-- Open Week Jump Popup -->
+                <button onclick="openWeekJump()" class="p-2 md:p-2.5 text-theme-muted hover:text-theme-accent bg-theme-bg border border-theme-border rounded-lg shadow-sm transition-colors flex items-center gap-2" title="Jump to Week">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    <span class="hidden md:inline-block text-[10px] font-bold uppercase tracking-wider pr-1">Weeks</span>
+                </button>
+
+                <!-- Open Search Button -->
+                <button onclick="openSearch()" class="p-2 md:p-2.5 text-theme-muted hover:text-theme-accent bg-theme-bg border border-theme-border rounded-lg shadow-sm transition-colors flex items-center gap-2" title="Search Topics">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <span class="hidden md:inline-block text-[10px] font-bold uppercase tracking-wider pr-1">Search</span>
+                </button>
+                
+                <div class="hidden md:block h-8 w-px bg-theme-border ml-1 mr-1"></div>
+                
+                <!-- Auth Container -->
+                <div id="auth-profile-container" class="min-w-[32px] min-h-[32px] flex items-center justify-center"></div>
+            </div>
+
+        </header>
+
+        <main class="flex-1 p-4 md:p-8 max-w-5xl mx-auto w-full">
+            
+            <!-- Dashboard Widget: Today's Mission -->
+            <div id="smartTargetCard" onclick="window.scrollToNext()" class="ui-card p-6 mb-6 border-l-4 border-l-theme-accent cursor-pointer hover:bg-theme-bg transition-colors shadow-sm mt-2 md:mt-0" title="Jump to today's task">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="targetTypeLabel text-[11px] font-bold uppercase tracking-wider text-theme-accent mb-2 block">TODAY'S MISSION</span>
+                        <h4 class="nextTopicTitle text-lg font-black leading-tight mb-1 text-theme-text">Set start date in Profile...</h4>
+                        <p class="nextTopicMeta text-[11px] font-semibold text-theme-muted uppercase tracking-wider">Phase Tracking</p>
+                    </div>
+                    <div class="bg-theme-bg rounded-full p-2 text-theme-accent">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Mount -->
+            <div id="plan-mount" class="space-y-6 pb-24 md:pb-12"></div>
+            
+        </main>
+    </div>
+
+    <!-- Mobile Phase Navigation Taskbar -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white border-t border-theme-border pb-safe transition-colors duration-200 no-print shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+        <div class="flex justify-between items-center p-2 gap-1 max-w-md mx-auto">
+            <button id="tab-phase-1" onclick="switchPhase('phase-1')" class="taskbar-btn flex-1 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-theme-muted transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                <div class="flex flex-col items-center leading-none mt-1">
+                    <span class="text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">Quant <span id="mobile-perc-phase-1" class="opacity-70">0%</span></span>
+                    <span class="text-[7px] font-bold opacity-50 uppercase tracking-widest mt-1">W 1-35</span>
+                </div>
+            </button>
+            <button id="tab-phase-2" onclick="switchPhase('phase-2')" class="taskbar-btn flex-1 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-theme-muted transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                <div class="flex flex-col items-center leading-none mt-1">
+                    <span class="text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">Logic <span id="mobile-perc-phase-2" class="opacity-70">0%</span></span>
+                    <span class="text-[7px] font-bold opacity-50 uppercase tracking-widest mt-1">W 36-60</span>
+                </div>
+            </button>
+            
+            <!-- Mobile Today Button (Center) -->
+            <button onclick="openToday()" class="taskbar-btn flex-1 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-theme-muted hover:text-theme-accent transition-colors relative">
+                <div class="absolute -top-3 bg-white border border-theme-border p-2 rounded-full shadow-sm text-theme-accent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div class="flex flex-col items-center leading-none mt-6">
+                    <span class="text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">Today</span>
+                </div>
+            </button>
+
+            <button id="tab-phase-3" onclick="switchPhase('phase-3')" class="taskbar-btn flex-1 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-theme-muted transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                <div class="flex flex-col items-center leading-none mt-1">
+                    <span class="text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">Eng <span id="mobile-perc-phase-3" class="opacity-70">0%</span></span>
+                    <span class="text-[7px] font-bold opacity-50 uppercase tracking-widest mt-1">W 61-73</span>
+                </div>
+            </button>
+            <button id="tab-phase-4" onclick="switchPhase('phase-4')" class="taskbar-btn flex-1 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-theme-muted transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div class="flex flex-col items-center leading-none mt-1">
+                    <span class="text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">Aware <span id="mobile-perc-phase-4" class="opacity-70">0%</span></span>
+                    <span class="text-[7px] font-bold opacity-50 uppercase tracking-widest mt-1">W 74-100</span>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, signInAnonymously, signInWithCustomToken, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+        let auth;
+        let db;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : '100-week-mastery';
+        
+        // Sync State Variables
+        let syncTimeout = null;
+        let hasPendingSync = false;
+        let lastSyncedDataString = null;
+
+        // Network Listeners
+        window.addEventListener('online', () => {
+            if (hasPendingSync) {
+                window.backupToFirebase(true); // Force immediate sync upon reconnect
+            }
+        });
+
+        try {
+            const firebaseConfig = {
+                apiKey: "AIzaSyCzc0Y8XuZiXSLMMagKjP8HI4e-UfsC-8E",
+                authDomain: "weeks-tracker100.firebaseapp.com",
+                projectId: "weeks-tracker100",
+                storageBucket: "weeks-tracker100.firebasestorage.app",
+                messagingSenderId: "193093262470",
+                appId: "1:193093262470:web:b0743a772f98193f0b8507",
+                measurementId: "G-XL466EC3QB"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            auth = getAuth(app);
+            db = getFirestore(app);
+
+            const provider = new GoogleAuthProvider();
+
+            // Set explicit persistence and wait for auth state before doing anything
+            setPersistence(auth, browserLocalPersistence).then(() => {
+                onAuthStateChanged(auth, async (user) => {
+                    const isRealUser = user && !user.isAnonymous;
+                    updateProfileUI(isRealUser ? user : null);
                     
-                    <!-- Progress Card -->
-                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-200">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-4xl font-black text-slate-950 tracking-tighter" id="percentText">0%</h3>
-                                <p class="text-[10px] font-black uppercase tracking-widest text-blue-600 mt-1">Timeline Mastery</p>
-                            </div>
-                            <div class="bg-blue-50 p-3 rounded-2xl text-center border border-blue-100">
-                                <p id="streakVal" class="text-xl font-black text-blue-700">0</p>
-                                <p class="text-[8px] font-black uppercase text-blue-400">Streak</p>
-                            </div>
-                        </div>
-                        <div class="space-y-2 mb-6">
-                            <div class="flex justify-between text-[10px] font-black uppercase text-slate-400">
-                                <span>Level <span id="masteryLevel">1</span></span>
-                                <span id="xpText" class="text-blue-600">0 XP</span>
-                            </div>
-                            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                                <div id="xpBar" class="bg-blue-500 h-full rounded-full transition-all duration-1000" style="width: 0%"></div>
-                            </div>
-                        </div>
-                        <div id="heatmap" class="flex flex-wrap justify-center gap-1 pt-4 border-t border-slate-50"></div>
-                    </div>
+                    if (isRealUser) {
+                        await window.restoreFromFirebase(user);
+                    } else if (!user) {
+                        // Only sign in anonymously if NO previous user session was found
+                        try {
+                            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                                await signInWithCustomToken(auth, __initial_auth_token);
+                            } else {
+                                await signInAnonymously(auth);
+                            }
+                        } catch(err) {
+                            console.warn("Silent auth init failed", err);
+                        }
+                    }
+                });
+            });
 
-                    <!-- Today's Target -->
-                    <div id="smartTargetCard" class="bg-white p-6 rounded-[2rem] shadow-md border-2 border-blue-100">
-                        <span id="targetTypeLabel" class="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-2 block">TODAY'S MISSION</span>
-                        <h4 id="nextTopicTitle" class="text-base font-black leading-tight mb-1 text-slate-900">Set start date...</h4>
-                        <p id="nextTopicMeta" class="text-[10px] font-black text-slate-400 uppercase">Phase Tracking</p>
-                    </div>
+            window.loginWithGoogle = async () => {
+                try {
+                    await signInWithPopup(auth, provider);
+                } catch (error) {
+                    console.error("Google Sign-In Error:", error);
+                }
+            };
 
-                    <!-- Date Selection -->
-                    <div class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
-                        <div class="mb-4">
-                            <label class="text-[10px] font-black text-slate-700 uppercase mb-1 block tracking-wider">Plan Start Date</label>
-                            <input type="date" id="planStartDate" onchange="setStartDate(this.value)" class="w-full bg-slate-50 border-2 border-slate-100 rounded-lg p-2 text-xs font-black focus:ring-2 focus:ring-blue-100 text-slate-950 outline-none">
-                        </div>
-                        <div class="space-y-3" id="sidebarStats"></div>
-                        <div class="mt-6 pt-4 border-t border-slate-100 space-y-2">
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="text-slate-400 font-bold uppercase tracking-tighter">Plan Week</span>
-                                <span id="currentPlanWeek" class="font-black text-slate-900 uppercase tracking-tighter">W 1</span>
-                            </div>
-                        </div>
-                    </div>
+            window.logout = async () => {
+                try {
+                    await signOut(auth);
+                    localStorage.removeItem('coc_progress_v6');
+                    localStorage.removeItem('coc_dates_v6');
+                    localStorage.removeItem('coc_notes_v5');
+                    localStorage.removeItem('coc_start_date');
+                    localStorage.removeItem('coc_topic_scores_v1');
+                    localStorage.removeItem('coc_hidden_weeks_v1');
+                    lastSyncedDataString = null;
+                    hasPendingSync = false;
+                    clearTimeout(syncTimeout);
+                    closeUserProfile();
+                    if(typeof window.renderApp === 'function') window.renderApp();
+                    // Let onAuthStateChanged handle generating a new anonymous session natively
+                } catch (error) {
+                    console.error("Sign-Out Error:", error);
+                }
+            };
 
-                    <div class="grid grid-cols-2 gap-2">
-                        <button onclick="exportProgress()" class="bg-white p-3 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 transition-all text-center">
-                            <span class="text-[9px] font-black uppercase tracking-widest">Backup</span>
+            window.backupToFirebase = async (immediate = false) => {
+                if (!auth || !auth.currentUser || auth.currentUser.isAnonymous) return;
+                
+                const currentData = {
+                    progress: localStorage.getItem('coc_progress_v6') || '{}',
+                    dates: localStorage.getItem('coc_dates_v6') || '{}',
+                    notes: localStorage.getItem('coc_notes_v5') || '{}',
+                    start: localStorage.getItem('coc_start_date') || '',
+                    scores: localStorage.getItem('coc_topic_scores_v1') || '{}',
+                    hiddenWeeks: localStorage.getItem('coc_hidden_weeks_v1') || '{}'
+                };
+                
+                const currentDataString = JSON.stringify(currentData);
+                
+                // Prevent syncing if exact same payload was already synced successfully
+                if (currentDataString === lastSyncedDataString) {
+                    hasPendingSync = false;
+                    return;
+                }
+                
+                hasPendingSync = true;
+                clearTimeout(syncTimeout);
+                
+                // If offline, store locally, don't execute Firestore query
+                if (!navigator.onLine) {
+                    return;
+                }
+                
+                // 1 minute (60000ms) debounce, unless forced immediately (like on reconnect)
+                const delay = immediate ? 0 : 60000;
+                
+                syncTimeout = setTimeout(async () => {
+                    try {
+                        const payload = { ...currentData, timestamp: new Date().toISOString() };
+                        const docRef = doc(db, 'artifacts', appId, 'users', auth.currentUser.uid, 'backup', 'latest');
+                        await setDoc(docRef, payload);
+                        
+                        lastSyncedDataString = currentDataString;
+                        hasPendingSync = false;
+                    } catch(e) {
+                        console.error("Auto-Backup to Firebase failed", e);
+                        hasPendingSync = true; // Retain pending state to retry later
+                    }
+                }, delay);
+            };
+
+            window.restoreFromFirebase = async (user) => {
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'users', user.uid, 'backup', 'latest');
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        
+                        // Extract base data to match stringification order
+                        const baseData = {
+                            progress: data.progress || '{}',
+                            dates: data.dates || '{}',
+                            notes: data.notes || '{}',
+                            start: data.start || '',
+                            scores: data.scores || '{}',
+                            hiddenWeeks: data.hiddenWeeks || '{}'
+                        };
+                        
+                        // Set the hash so we don't immediately re-sync what we just downloaded
+                        lastSyncedDataString = JSON.stringify(baseData);
+                        
+                        if (data.progress) localStorage.setItem('coc_progress_v6', data.progress);
+                        if (data.dates) localStorage.setItem('coc_dates_v6', data.dates);
+                        if (data.notes) localStorage.setItem('coc_notes_v5', data.notes);
+                        if (data.start) localStorage.setItem('coc_start_date', data.start);
+                        if (data.scores) localStorage.setItem('coc_topic_scores_v1', data.scores);
+                        if (data.hiddenWeeks) localStorage.setItem('coc_hidden_weeks_v1', data.hiddenWeeks);
+                        
+                        if(typeof window.renderApp === 'function') window.renderApp();
+                    }
+                } catch (e) {
+                    console.error("Failed to restore from Firebase:", e);
+                }
+            };
+
+        } catch(e) {
+            console.warn("Firebase initialization skipped or failed.", e);
+            updateProfileUI(null);
+        }
+
+        window.openUserProfile = function() {
+            document.getElementById('profileModal').classList.add('open');
+            document.getElementById('profileModalContent').classList.remove('scale-95');
+            document.getElementById('profileModalContent').classList.add('scale-100');
+        };
+
+        window.closeUserProfile = function() {
+            document.getElementById('profileModal').classList.remove('open');
+            document.getElementById('profileModalContent').classList.remove('scale-100');
+            document.getElementById('profileModalContent').classList.add('scale-95');
+        };
+
+        function updateProfileUI(user) {
+            const authCont = document.getElementById('auth-profile-container');
+            const pName = document.getElementById('profileModalName');
+            const pEmail = document.getElementById('profileModalEmail');
+            const pAvatar = document.getElementById('profileModalAvatar');
+            const pActions = document.getElementById('profileAuthActions');
+            
+            const googleIcon = `<svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>`;
+            const defaultAvatar = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+
+            if (user) {
+                const name = user.displayName || 'Student';
+                const email = user.email || 'No email attached';
+                const photo = user.photoURL || defaultAvatar;
+                
+                if(pName) pName.innerText = name;
+                if(pEmail) { pEmail.innerText = email; pEmail.classList.remove('hidden'); }
+                if(pAvatar) pAvatar.src = photo;
+
+                if(pActions) {
+                    pActions.innerHTML = `
+                        <button onclick="logout()" class="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 border border-red-100 py-3 rounded-xl text-sm font-bold hover:bg-red-100 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                            Sign Out
                         </button>
-                        <button onclick="confirmReset()" class="bg-white p-3 rounded-xl border border-slate-200 text-slate-400 hover:text-red-600 transition-all text-center">
-                            <span class="text-[9px] font-black uppercase tracking-widest">Reset</span>
+                    `;
+                }
+
+                if (authCont) {
+                    authCont.innerHTML = `<img src="${photo}" alt="Profile" onclick="openUserProfile()" title="View Profile" class="w-8 h-8 md:w-9 md:h-9 rounded-full border border-theme-border shadow-sm cursor-pointer hover:opacity-80 transition-opacity object-cover">`;
+                }
+                
+            } else {
+                if(pName) pName.innerText = 'Guest Account';
+                if(pEmail) pEmail.classList.add('hidden');
+                if(pAvatar) pAvatar.src = defaultAvatar;
+
+                if(pActions) {
+                    pActions.innerHTML = `
+                        <button onclick="loginWithGoogle()" class="w-full flex items-center justify-center gap-2 bg-white border border-theme-border text-theme-text py-3 rounded-xl text-sm font-bold hover:bg-theme-bg shadow-sm transition-all">
+                            ${googleIcon} Sign in with Google
                         </button>
-                    </div>
-                </div>
-            </aside>
+                        <p class="text-[9px] text-theme-muted text-center mt-3 uppercase tracking-widest font-bold">Sign in to securely cloud-sync progress</p>
+                    `;
+                }
 
-            <div class="lg:col-span-9 space-y-6">
-                <!-- Toolbar -->
-                <div class="bg-white p-4 rounded-3xl border border-slate-200 flex flex-col md:flex-row items-center gap-4 px-6 no-print sticky top-6 z-30 shadow-sm">
-                    <button onclick="openNavigator()" class="flex items-center gap-2 bg-slate-100 text-slate-950 px-4 py-2 rounded-xl text-xs font-black hover:bg-slate-200 transition-all border border-slate-200">
-                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                        Week Jump
-                    </button>
-
-                    <div class="flex items-center flex-1 w-full md:border-r border-slate-100 pr-4">
-                        <svg class="w-4 h-4 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <input type="text" id="topicSearch" placeholder="Filter timeline topics..." 
-                            class="w-full bg-transparent border-none focus:ring-0 text-sm font-extrabold text-slate-950 py-1">
-                    </div>
-
-                    <button onclick="filterMode('starred')" id="starFilterBtn" class="px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest bg-white text-slate-600 hover:bg-amber-400 hover:text-white transition-all shadow-inner border border-slate-200">
-                        Revision
-                    </button>
-                </div>
-
-                <div id="plan-mount" class="space-y-8"></div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Benefits Section Underneath -->
-    <section class="bg-slate-50 border-t border-slate-200 py-20 no-print">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">Why This Plan Works</h2>
-                <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover:border-blue-200 transition-colors">
-                    <div class="w-10 h-10 bg-blue-50 text-blue-600 flex items-center justify-center rounded-xl mb-6 font-black">1</div>
-                    <h3 class="text-base font-black text-slate-950 mb-3 uppercase tracking-tight">Zero-Burnout Pace</h3>
-                    <p class="text-slate-600 font-bold leading-relaxed">Tackling exactly <span class="text-blue-600">one topic per day</span> eliminates the fatigue that leads to quitting. 100 weeks is a marathon, not a sprint.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover:border-green-200 transition-colors">
-                    <div class="w-10 h-10 bg-green-50 text-green-600 flex items-center justify-center rounded-xl mb-6 font-black">2</div>
-                    <h3 class="text-base font-black text-slate-950 mb-3 uppercase tracking-tight">Static Core Mastery</h3>
-                    <p class="text-slate-600 font-bold leading-relaxed">Covers the 70% of exam syllabus that <strong>never changes</strong>. Once mastered, you only need to focus on current affairs.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover:border-purple-200 transition-colors">
-                    <div class="w-10 h-10 bg-purple-50 text-purple-600 flex items-center justify-center rounded-xl mb-6 font-black">3</div>
-                    <h3 class="text-base font-black text-slate-950 mb-3 uppercase tracking-tight">Cross-Exam Synergy</h3>
-                    <p class="text-slate-600 font-bold leading-relaxed">One roadmap for <span class="text-purple-600">SSC, IBPS, Railways, and PSCs</span>. Master a concept once, and it stays relevant forever.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-white border-t border-slate-200 py-10 no-print">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-slate-400 font-black uppercase tracking-[0.3em] text-[10px]">Club of Competition • Success through Discipline</p>
-        </div>
-    </footer>
+                if (authCont) {
+                    const defaultIcon = `<svg class="w-5 h-5 text-theme-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>`;
+                    authCont.innerHTML = `
+                        <button onclick="openUserProfile()" class="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 bg-theme-bg border border-theme-border rounded-full shadow-sm hover:bg-theme-border transition-colors" title="Settings & Profile">
+                            ${defaultIcon}
+                        </button>
+                    `;
+                }
+            }
+        }
+    </script>
 
     <script>
         // FULL SYLLABUS DATA (ALL 100 WEEKS)
         const planData = [
-            { id: "phase-1", title: "Quantitative Aptitude", color: "blue", range: "Weeks 1-35", sections: [
+            { id: "phase-1", title: "Quantitative Aptitude", color: "blue", range: "Weeks 1-35", intro: "Master mathematical concepts, calculation speed, and data interpretation to build a high-scoring foundation.", sections: [
                 { name: "Basic Mathematics (Weeks 1-12)", weeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
                 { name: "Advanced Mathematics (Weeks 13-25)", weeks: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] },
                 { name: "Quantitative Applications (Weeks 26-35)", weeks: [26, 27, 28, 29, 30, 31, 32, 33, 34, 35] }
             ]},
-            { id: "phase-2", title: "Reasoning & Logic", color: "green", range: "Weeks 36-60", sections: [
+            { id: "phase-2", title: "Reasoning & Logic", color: "green", range: "Weeks 36-60", intro: "Develop logical thinking, pattern recognition, and analytical skills to confidently tackle complex puzzles and scenarios.", sections: [
                 { name: "Verbal Reasoning (Weeks 36-45)", weeks: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45] },
                 { name: "Puzzles & Arrangements (Weeks 46-60)", weeks: [46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60] }
             ]},
-            { id: "phase-3", title: "English Language", color: "purple", range: "Weeks 61-73", sections: [
+            { id: "phase-3", title: "English Language", color: "purple", range: "Weeks 61-73", intro: "Enhance your grammar, vocabulary, and reading comprehension to communicate effectively and ace the verbal sections.", sections: [
                 { name: "Grammar & Vocabulary (Weeks 61-73)", weeks: [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73] }
             ]},
-            { id: "phase-4", title: "General Awareness", color: "red", range: "Weeks 74-100", sections: [
+            { id: "phase-4", title: "General Awareness", color: "red", range: "Weeks 74-100", intro: "Build a robust foundation in static general knowledge, history, geography, polity, economics, and everyday science.", sections: [
                 { name: "GA & History (Weeks 74-100)", weeks: [74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100] }
             ]}
         ];
@@ -397,114 +787,165 @@
             100: ["Government Schemes", "Important Days", "Books & Authors", "Cultural Events", "Famous Personalities"]
         };
 
-        // UI Logic
-        function renderApp() {
+        let globalIDMap = [];
+        let currentActivePhase = 'phase-1';
+        let globalSearchQuery = "";
+
+        window.toggleWeekVisibility = function(weekID) {
+            const content = document.getElementById(`content-${weekID}`);
+            const chevron = document.getElementById(`chevron-w-${weekID}`);
+            if (content) content.classList.toggle('open');
+            if (chevron) chevron.classList.toggle('rotated');
+            
+            const hiddenWeeks = JSON.parse(localStorage.getItem('coc_hidden_weeks_v1') || '{}');
+            hiddenWeeks[weekID] = !content.classList.contains('open');
+            localStorage.setItem('coc_hidden_weeks_v1', JSON.stringify(hiddenWeeks));
+            if(typeof window.backupToFirebase === 'function') window.backupToFirebase();
+        };
+
+        // Export renderApp globally to be accessible from module
+        window.renderApp = function() {
             const mount = document.getElementById('plan-mount');
             if (!mount) return;
             mount.innerHTML = '';
             globalIDMap = [];
             let gid = 0;
 
+            const allTopicsFlat = [];
+            for (let w = 1; w <= 100; w++) {
+                if (topicsDb[w]) allTopicsFlat.push(...topicsDb[w]);
+            }
+
             planData.forEach(phase => {
                 const phaseDiv = document.createElement('div');
-                phaseDiv.className = "phase-wrapper bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden mb-8";
+                phaseDiv.className = "ui-card overflow-hidden mb-6 phase-wrapper shadow-sm";
                 phaseDiv.id = phase.id;
 
                 let html = `
                     <button onclick="toggleAccordion('body-${phase.id}', 'chevron-${phase.id}')" class="w-full text-left p-6 phase-btn phase-${phase.color} flex items-center justify-between focus:outline-none">
-                        <div class="flex items-center gap-5">
-                            <svg id="chevron-${phase.id}" class="chevron-icon w-6 h-6 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 9l-7 7-7-7"></path></svg>
+                        <div class="flex items-center gap-4">
+                            <svg id="chevron-${phase.id}" class="chevron-icon w-6 h-6 text-theme-muted rotated" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                             <div>
-                                <h2 class="text-xl font-black leading-none uppercase tracking-tight">${phase.title}</h2>
-                                <p class="text-[9px] font-black uppercase tracking-widest mt-1 opacity-60">${phase.range}</p>
+                                <h2 class="text-xl font-black uppercase tracking-tight text-theme-text">${phase.title}</h2>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-theme-muted mt-1">${phase.range}</p>
                             </div>
                         </div>
-                        <div id="badge-${phase.id}" class="bg-slate-100 text-slate-900 px-4 py-1.5 rounded-xl text-xs font-black min-w-[50px] text-center border border-slate-200">0%</div>
                     </button>
-                    <div id="body-${phase.id}" class="accordion-content p-4 space-y-6">
+                    <div id="body-${phase.id}" class="accordion-content open p-4 space-y-4 relative bg-theme-bg/30">
+                        
+                        <div class="px-4 py-3 mx-1 mb-2 bg-white border border-theme-border rounded-xl shadow-sm flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-theme-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p class="text-[13px] font-semibold text-theme-text leading-relaxed">${phase.intro}</p>
+                        </div>
                 `;
 
                 phase.sections.forEach(sec => {
-                    const secCleanID = sec.name.replace(/\s/g, '');
+                    const secCleanID = sec.name.replace(/[^a-zA-Z0-9]/g, '');
                     const secID = `${phase.id}-${secCleanID}`;
                     html += `
-                        <div class="section-container border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
-                            <button onclick="toggleAccordion('sec-body-${secID}', 'chevron-${secID}')" class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition-colors focus:outline-none">
-                                <h3 class="text-sm font-black text-slate-800 flex items-center">
-                                    <span class="w-1.5 h-4 bg-slate-400 rounded-full mr-3"></span>
+                        <div class="border border-theme-border rounded-xl overflow-hidden bg-theme-card">
+                            <button onclick="toggleAccordion('sec-body-${secID}', 'chevron-${secID}')" class="w-full flex items-center justify-between p-4 bg-theme-bg hover:bg-theme-border transition-colors focus:outline-none border-b border-theme-border">
+                                <h3 class="text-sm font-black text-theme-text flex items-center">
+                                    <span class="w-2 h-4 bg-theme-muted rounded-full mr-3"></span>
                                     ${sec.name}
                                 </h3>
-                                <div class="flex items-center gap-3">
-                                    <span id="milestone-${phase.id}-${secCleanID}" class="text-[8px] font-black uppercase text-slate-500 bg-white px-2 py-0.5 rounded-md shadow-sm border border-slate-200">Pending</span>
-                                    <svg id="chevron-${secID}" class="chevron-icon w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
+                                <svg id="chevron-${secID}" class="chevron-icon w-4 h-4 text-theme-muted rotated" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
-                            <div id="sec-body-${secID}" class="accordion-content">
-                                <table class="w-full text-left border-collapse">
-                                    <tbody class="divide-y divide-slate-100">
+                            <div id="sec-body-${secID}" class="accordion-content open p-4 bg-theme-bg/30 space-y-6">
                     `;
 
                     sec.weeks.forEach(weekNum => {
                         const weekID = `w-${phase.id}-${weekNum}`;
-                        const weekTopics = topicsDb[weekNum] || topicsDb.default;
+                        const weekTopics = topicsDb[weekNum] || [];
                         html += `
-                            <tr id="week-row-${weekNum}" class="bg-slate-50/30">
-                                <td colspan="3" class="py-3 px-6 border-b border-slate-100">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-4">
-                                            <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest bg-white px-2.5 py-1 rounded border border-slate-200">Week ${weekNum}</span>
-                                            <div class="flex gap-1.5" id="week-dots-${weekNum}">
-                                                ${Array.from({length: 5}).map(() => `<div class="w-2.5 h-2.5 rounded-full bg-slate-200"></div>`).join('')}
-                                            </div>
-                                        </div>
-                                        <button onclick="toggleWeek('${weekID}', ${weekNum})" id="btn-${weekID}" class="text-[9px] font-black text-slate-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 hover:border-blue-500 transition-all">Mark Week</button>
+                            <div id="week-row-${weekNum}" class="bg-white border border-theme-border rounded-xl p-4 shadow-sm transition-all duration-300">
+                                <div class="flex items-center justify-between mb-4 pb-3 border-b border-theme-border cursor-pointer select-none group" onclick="toggleWeekVisibility('${weekID}')">
+                                    <div class="flex items-center gap-3">
+                                        <svg id="chevron-w-${weekID}" class="chevron-icon w-5 h-5 text-theme-muted rotated group-hover:text-theme-text transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                                        <span class="text-[12px] font-black text-theme-text uppercase tracking-wider bg-theme-bg px-3 py-1 rounded-md border border-theme-border shadow-sm transition-colors">Week ${weekNum}</span>
                                     </div>
-                                </td>
-                            </tr>
+                                    <button onclick="event.stopPropagation(); toggleWeek('${weekID}', ${weekNum})" id="btn-${weekID}" class="text-[10px] font-bold text-theme-muted bg-theme-bg px-3 py-1.5 rounded-md border border-theme-border hover:border-theme-accent hover:text-theme-accent transition-colors shadow-sm">Mark Week</button>
+                                </div>
+                                <div id="content-${weekID}" class="accordion-content open">
+                                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
                         `;
+                        
                         weekTopics.forEach((topic, tidx) => {
+                            let gIdx = gid;
                             gid++;
                             globalIDMap.push({ id: gid, topic, week: weekNum, phaseTitle: phase.title, phaseID: phase.id, weekID: weekID, sectionID: `sec-body-${secID}`, secCleanID: secCleanID });
+
+                            let revs = [];
+                            if (gIdx - 1 >= 0) revs.push(`<div class="text-[9px] text-blue-600 font-bold truncate" title="${allTopicsFlat[gIdx - 1]}"><span class="font-black mr-1 text-blue-500">1D:</span>${allTopicsFlat[gIdx - 1]}</div>`);
+                            if (gIdx - 4 >= 0) revs.push(`<div class="text-[9px] text-amber-600 font-bold truncate" title="${allTopicsFlat[gIdx - 4]}"><span class="font-black mr-1 text-amber-500">4D:</span>${allTopicsFlat[gIdx - 4]}</div>`);
+                            if (gIdx - 7 >= 0) revs.push(`<div class="text-[9px] text-emerald-600 font-bold truncate" title="${allTopicsFlat[gIdx - 7]}"><span class="font-black mr-1 text-emerald-500">7D:</span>${allTopicsFlat[gIdx - 7]}</div>`);
+
+                            let revHTML = "";
+                            if (revs.length > 0) {
+                                revHTML = `
+                                <div class="md:w-5/12 lg:w-auto pt-3 md:pt-0 lg:pt-3 border-t md:border-t-0 md:border-l lg:border-t lg:border-l-0 border-theme-border flex flex-col gap-1 justify-center md:pl-4 lg:pl-0 shrink-0">
+                                    ${revs.join('')}
+                                </div>`;
+                            }
+
                             html += `
-                                <tr class="topic-row hover:bg-slate-50 transition-all group" data-id="${gid}" data-topic="${topic.toLowerCase()}">
-                                    <td class="py-4 px-6 w-12 text-[10px] font-bold text-slate-300">#${tidx+1}</td>
-                                    <td class="py-4 px-3">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-4">
-                                                <p onclick="openFocus(${gid})" class="text-slate-950 text-sm font-extrabold group-hover:text-blue-600 cursor-pointer leading-snug">${topic}</p>
-                                                <svg onclick="toggleStar(${gid}, event)" id="star-${gid}" class="star-toggle w-4 h-4 hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.976-2.888a1 1 0 00-1.175 0l-3.976 2.888c-.784.57-1.838-.197-1.539-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
-                                                <span id="date-label-${gid}" class="date-label"></span>
+                                        <div class="topic-row flex flex-col justify-start bg-white border border-theme-border rounded-xl p-4 row-${phase.color} transition-all duration-200 group relative hover:shadow-md" data-id="${gid}" data-topic="${topic.toLowerCase()}">
+                                            <div class="flex justify-between items-start mb-3">
+                                                <span class="text-[10px] font-black uppercase tracking-widest text-theme-muted day-num-${phase.color}">Day ${tidx+1}</span>
+                                                <input type="checkbox" data-id="${gid}" data-week-num="${weekNum}" data-phase="${phase.id}" data-section="${secCleanID}" data-week="${weekID}" class="task-checkbox cb-${phase.color} shadow-sm shrink-0 m-0" onchange="syncUI()">
+                                            </div>
+                                            
+                                            <div class="flex flex-col md:flex-row lg:flex-col gap-3 md:gap-4 lg:gap-3 flex-1">
+                                                <div class="flex-1 flex flex-col">
+                                                    <p onclick="openFocus(${gid})" class="text-theme-text text-sm font-bold topic-title-${phase.color} cursor-pointer transition-colors leading-snug mb-3">${topic}</p>
+                                                    
+                                                    <div class="flex flex-wrap gap-2 mt-auto empty:hidden items-center">
+                                                        <span id="score-badge-${gid}" class="text-[10px] font-bold px-2 py-0.5 rounded border hidden shrink-0 shadow-sm"></span>
+                                                        <span id="date-label-${gid}" class="date-label date-label-${phase.color} shrink-0 shadow-sm"></span>
+                                                    </div>
+                                                </div>
+                                                
+                                                ${revHTML}
                                             </div>
                                         </div>
-                                    </td>
-                                    <td class="py-4 px-6 text-center w-20">
-                                        <input type="checkbox" data-id="${gid}" data-week-num="${weekNum}" data-phase="${phase.id}" data-section="${secCleanID}" data-week="${weekID}" class="task-checkbox" onchange="syncUI()">
-                                    </td>
-                                </tr>
                             `;
                         });
+
+                        html += `
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                     });
 
-                    html += `</tbody></table></div></div>`;
+                    html += `</div></div>`;
                 });
 
-                html += `</div>`;
+                html += `</div></div>`;
                 phaseDiv.innerHTML = html;
                 mount.appendChild(phaseDiv);
             });
 
             initDashboard();
+            
+            const searchInput = document.getElementById('globalSearchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => applyFilters(e.target.value));
+            }
         }
 
         function initDashboard() {
             const progress = JSON.parse(localStorage.getItem('coc_progress_v6') || '{}');
-            const stars = JSON.parse(localStorage.getItem('coc_stars_v6') || '{}');
             const startDate = localStorage.getItem('coc_start_date');
             const dates = JSON.parse(localStorage.getItem('coc_dates_v6') || '{}');
+            const scores = JSON.parse(localStorage.getItem('coc_topic_scores_v1') || '{}');
+            const hiddenWeeks = JSON.parse(localStorage.getItem('coc_hidden_weeks_v1') || '{}');
+
+            initWeekJumpGrid();
 
             if (startDate) {
-                const dateEl = document.getElementById('planStartDate');
-                if(dateEl) dateEl.value = startDate;
+                const dateElProfile = document.getElementById('planStartDateProfile');
+                if(dateElProfile) dateElProfile.value = startDate;
             }
 
             document.querySelectorAll('.task-checkbox').forEach(cb => {
@@ -515,15 +956,66 @@
                 }
             });
 
-            Object.entries(stars).forEach(([id, active]) => {
-                const starEl = document.getElementById(`star-${id}`);
-                if (active && starEl) starEl.classList.add('active');
+            Object.keys(scores).forEach(id => updateScoreBadge(id));
+            
+            Object.keys(hiddenWeeks).forEach(weekID => {
+                if (hiddenWeeks[weekID]) {
+                    const content = document.getElementById(`content-${weekID}`);
+                    const chevron = document.getElementById(`chevron-w-${weekID}`);
+                    if (content) content.classList.remove('open');
+                    if (chevron) chevron.classList.remove('rotated');
+                }
             });
 
-            syncUI();
+            syncUI(true); // pass true to prevent loop backup on init
+            switchPhase('phase-1', true);
         }
 
-        function syncUI() {
+        function initWeekJumpGrid() {
+            const gridContainer = document.getElementById('weekJumpGrid');
+            if (!gridContainer) return;
+            gridContainer.innerHTML = '';
+            
+            const colorMapBg = {
+                'blue': 'bg-blue-500',
+                'green': 'bg-emerald-500',
+                'purple': 'bg-purple-500',
+                'red': 'bg-red-500'
+            };
+
+            planData.forEach(phase => {
+                const phaseSection = document.createElement('div');
+                phaseSection.className = "flex flex-col";
+
+                const header = document.createElement('div');
+                header.className = "flex items-center gap-2 mb-3";
+                header.innerHTML = `
+                    <div class="w-1.5 h-3.5 rounded-full ${colorMapBg[phase.color] || 'bg-theme-accent'}"></div>
+                    <h3 class="text-[11px] font-black uppercase tracking-wider text-theme-text">${phase.title} <span class="text-theme-muted font-bold ml-1 opacity-75">${phase.range}</span></h3>
+                `;
+                phaseSection.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = "grid grid-cols-5 sm:grid-cols-10 gap-2";
+                
+                let phaseWeeks = [];
+                phase.sections.forEach(sec => phaseWeeks.push(...sec.weeks));
+
+                phaseWeeks.forEach(w => {
+                    const btn = document.createElement('button');
+                    btn.id = `modal-jump-btn-${w}`;
+                    btn.onclick = () => { jumpToWeek(w); };
+                    btn.innerText = `W${w}`;
+                    btn.className = "p-3 rounded-xl text-[11px] font-bold transition-colors bg-theme-bg border border-theme-border text-theme-muted hover:text-theme-accent hover:border-theme-accent shadow-sm";
+                    grid.appendChild(btn);
+                });
+
+                phaseSection.appendChild(grid);
+                gridContainer.appendChild(phaseSection);
+            });
+        }
+
+        function syncUI(isInit = false) {
             const current = {};
             const dates = JSON.parse(localStorage.getItem('coc_dates_v6') || '{}');
             document.querySelectorAll('.task-checkbox').forEach(cb => {
@@ -539,10 +1031,11 @@
             localStorage.setItem('coc_progress_v6', JSON.stringify(current));
             localStorage.setItem('coc_dates_v6', JSON.stringify(dates));
             updateProgress();
-            updateStreak();
-            generateHeatmap();
-            checkAchievements();
-            updateWeeklyDots();
+            updateWeekJumpButtons();
+            
+            if (!isInit && typeof window.backupToFirebase === 'function') {
+                window.backupToFirebase();
+            }
         }
 
         function updateRowDate(id, dateStr) {
@@ -559,39 +1052,21 @@
             const checkedCount = checkboxes.filter(cb => cb.checked).length;
             const perc = Math.round((checkedCount / total) * 100);
 
-            if (document.getElementById('percentText')) document.getElementById('percentText').innerText = perc + '%';
-            if (document.getElementById('xpBar')) document.getElementById('xpBar').style.width = perc + '%';
-            if (document.getElementById('xpText')) document.getElementById('xpText').innerText = `${checkedCount * 100} XP`;
-            if (document.getElementById('masteryLevel')) document.getElementById('masteryLevel').innerText = Math.floor((checkedCount*100)/1000) + 1;
+            document.querySelectorAll('.top-percent-text').forEach(el => el.innerText = perc + '% DONE');
 
-            const sidebarStats = document.getElementById('sidebarStats');
-            if (sidebarStats) {
-                sidebarStats.innerHTML = '';
-                planData.forEach(p => {
-                    const pChecked = Array.from(document.querySelectorAll(`.task-checkbox[data-phase="${p.id}"]:checked`)).length;
-                    const pTotal = Array.from(document.querySelectorAll(`.task-checkbox[data-phase="${p.id}"]`)).length;
-                    const pPerc = Math.round((pChecked/pTotal)*100) || 0;
-                    const b = document.getElementById(`badge-${p.id}`);
-                    if(b) b.innerText = pPerc + '%';
-                    sidebarStats.innerHTML += `
-                        <div class="mb-3">
-                            <div class="flex justify-between text-[10px] font-black text-slate-700 uppercase mb-1 tracking-tight">
-                                <span>${p.title.split(' ')[0]}</span>
-                                <span>${pPerc}%</span>
-                            </div>
-                            <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden border border-slate-200 shadow-inner">
-                                <div class="bg-blue-600 h-full transition-all duration-1000" style="width: ${pPerc}%"></div>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
+            planData.forEach(p => {
+                const pTotal = document.querySelectorAll(`.task-checkbox[data-phase="${p.id}"]`).length;
+                const pChecked = document.querySelectorAll(`.task-checkbox[data-phase="${p.id}"]:checked`).length;
+                const pPerc = pTotal > 0 ? Math.round((pChecked / pTotal) * 100) : 0;
+                
+                const sidePerc = document.getElementById(`sidebar-perc-${p.id}`);
+                if (sidePerc) sidePerc.innerText = pPerc + '%';
+                
+                const mobPerc = document.getElementById(`mobile-perc-${p.id}`);
+                if (mobPerc) mobPerc.innerText = pPerc + '%';
+            });
 
             const startDateStr = localStorage.getItem('coc_start_date');
-            const ntTitle = document.getElementById('nextTopicTitle');
-            const ntMeta = document.getElementById('nextTopicMeta');
-            const ntLabel = document.getElementById('targetTypeLabel');
-            const targetCard = document.getElementById('smartTargetCard');
             
             let suggestedItem = null;
             let statusLabel = "TIMELINE TARGET";
@@ -601,7 +1076,6 @@
                 const diffDays = Math.floor((new Date() - startDate) / (1000 * 60 * 60 * 24));
                 const currentWeek = Math.floor(diffDays / 7) + 1;
                 const currentDayOfWeek = (diffDays % 7) + 1;
-                if(document.getElementById('currentPlanWeek')) document.getElementById('currentPlanWeek').innerText = `Week ${currentWeek > 0 ? currentWeek : 1}`;
 
                 if (currentDayOfWeek <= 5) {
                     const idxInWeek = currentDayOfWeek - 1;
@@ -625,144 +1099,274 @@
                 }
             }
 
-            if (suggestedItem && ntTitle) {
-                ntTitle.innerText = suggestedItem.topic;
-                ntMeta.innerText = `${suggestedItem.phaseTitle} • W${suggestedItem.week}`;
-                ntTitle.dataset.id = suggestedItem.id;
-                ntLabel.innerText = statusLabel;
-                targetCard.style.borderColor = statusLabel === "PENDING BACKLOG" ? "#fbbf24" : "#3b82f6";
-                ntLabel.style.color = statusLabel === "PENDING BACKLOG" ? "#d97706" : "#3b82f6";
+            if (suggestedItem) {
+                document.querySelectorAll('.nextTopicTitle').forEach(el => {
+                    el.innerText = suggestedItem.topic;
+                    el.dataset.id = suggestedItem.id;
+                });
+                document.querySelectorAll('.nextTopicMeta').forEach(el => {
+                    el.innerText = `${suggestedItem.phaseTitle} • W${suggestedItem.week}`;
+                });
+                document.querySelectorAll('.targetTypeLabel').forEach(el => {
+                    el.innerText = statusLabel;
+                    if(statusLabel === "PENDING BACKLOG") {
+                        el.style.color = "#d97706";
+                    } else {
+                        el.style.color = "var(--accent)";
+                    }
+                });
+                
+                const targetCard = document.getElementById('smartTargetCard');
+                if (targetCard) {
+                    if(statusLabel === "PENDING BACKLOG") {
+                        targetCard.style.borderColor = "#f59e0b";
+                    } else {
+                        targetCard.style.borderColor = "var(--accent)";
+                    }
+                }
+
+                const colorBand = document.getElementById('todayModalColorBand');
+                if(colorBand) {
+                    if(statusLabel === "PENDING BACKLOG") {
+                        colorBand.style.backgroundColor = "#f59e0b";
+                    } else {
+                        colorBand.style.backgroundColor = "var(--accent)";
+                    }
+                }
             }
-            updateMilestones();
         }
 
-        function openNavigator() {
-            const grid = document.getElementById('navigatorGrid');
-            if(!grid) return;
-            grid.innerHTML = '';
-            const startDateStr = localStorage.getItem('coc_start_date');
-            let currentWeekNum = 0;
-            if (startDateStr) {
-                const startDate = new Date(startDateStr);
-                currentWeekNum = Math.floor(Math.floor((new Date() - startDate) / (1000 * 60 * 60 * 24)) / 7) + 1;
+        window.scrollToNext = function() {
+            const titleEl = document.querySelector('.nextTopicTitle');
+            if (!titleEl || !titleEl.dataset.id) return;
+            const id = titleEl.dataset.id;
+            const item = globalIDMap.find(t => t.id == id);
+            if (item) {
+                jumpToWeek(item.week, true); // skip the week row scroll, go direct to topic
+                setTimeout(() => {
+                    const topicRow = document.querySelector(`.topic-row[data-id="${id}"]`);
+                    if (topicRow) {
+                        const y = topicRow.getBoundingClientRect().top + window.scrollY - 200;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                        
+                        topicRow.classList.add('ring-4', 'ring-theme-accent', 'ring-opacity-50');
+                        setTimeout(() => { 
+                            topicRow.classList.remove('ring-4', 'ring-theme-accent', 'ring-opacity-50'); 
+                        }, 2000);
+                    }
+                }, 400); // slightly longer to ensure accordions open
             }
+        };
 
+        function updateWeekJumpButtons() {
             for (let w = 1; w <= 100; w++) {
-                const checkboxes = Array.from(document.querySelectorAll(`.task-checkbox[data-week-num="${w}"]`));
-                const checkedCount = checkboxes.filter(cb => cb.checked).length;
-                let bgColor = "bg-slate-100 text-slate-400";
-                if (checkedCount === 5) bgColor = "bg-green-500 text-white shadow-md shadow-green-200";
-                else if (checkedCount > 0) bgColor = "bg-blue-500 text-white shadow-md shadow-blue-200";
-                const isCurrent = (w === currentWeekNum);
-                const btn = document.createElement('button');
-                btn.className = `p-3 rounded-xl text-xs font-black transition-all ${bgColor} ${isCurrent ? 'current-week-pulse ring-2 ring-blue-600 ring-offset-2' : ''}`;
-                btn.innerText = w;
-                btn.onclick = () => { jumpToWeek(w); closeNavigator(); };
-                grid.appendChild(btn);
+                const btn = document.getElementById(`modal-jump-btn-${w}`);
+                if (btn) {
+                    const checkboxes = Array.from(document.querySelectorAll(`.task-checkbox[data-week-num="${w}"]`));
+                    if (checkboxes.length === 0) continue;
+                    const checked = checkboxes.filter(c => c.checked).length;
+                    
+                    if (checked === checkboxes.length) {
+                        btn.className = "p-3 rounded-xl text-[11px] font-bold transition-colors bg-emerald-50 border border-emerald-200 text-emerald-600 hover:opacity-80 shadow-sm";
+                    } else if (checked > 0) {
+                        btn.className = "p-3 rounded-xl text-[11px] font-bold transition-colors bg-blue-50 border border-blue-200 text-blue-600 hover:opacity-80 shadow-sm";
+                    } else {
+                        btn.className = "p-3 rounded-xl text-[11px] font-bold transition-colors bg-theme-bg border border-theme-border text-theme-muted hover:text-theme-accent hover:border-theme-accent shadow-sm";
+                    }
+                }
             }
-            document.getElementById('navigatorModal').classList.add('open');
         }
 
-        function closeNavigator() { document.getElementById('navigatorModal').classList.remove('open'); }
+        window.openToday = function() {
+            document.getElementById('todayModal').classList.add('open');
+            document.getElementById('todayModalContent').classList.remove('scale-95');
+            document.getElementById('todayModalContent').classList.add('scale-100');
+            updateProgress(); // Ensure latest data is shown
+        };
 
-        function jumpToWeek(num) {
+        window.closeToday = function() {
+            document.getElementById('todayModal').classList.remove('open');
+            document.getElementById('todayModalContent').classList.remove('scale-100');
+            document.getElementById('todayModalContent').classList.add('scale-95');
+        };
+
+        window.scrollToNextFromModal = function() {
+            closeToday();
+            window.scrollToNext();
+        };
+
+        window.openWeekJump = function() {
+            document.getElementById('weekJumpModal').classList.add('open');
+            document.getElementById('weekJumpModalContent').classList.remove('scale-95');
+            document.getElementById('weekJumpModalContent').classList.add('scale-100');
+        };
+
+        window.closeWeekJump = function() {
+            document.getElementById('weekJumpModal').classList.remove('open');
+            document.getElementById('weekJumpModalContent').classList.remove('scale-100');
+            document.getElementById('weekJumpModalContent').classList.add('scale-95');
+        };
+
+        window.openSearch = function() {
+            document.getElementById('searchModal').classList.add('open');
+            document.getElementById('searchModalContent').classList.remove('scale-95');
+            document.getElementById('searchModalContent').classList.add('scale-100');
+            setTimeout(() => {
+                document.getElementById('globalSearchInput').focus();
+            }, 100);
+        };
+
+        window.closeSearch = function() {
+            document.getElementById('searchModal').classList.remove('open');
+            document.getElementById('searchModalContent').classList.remove('scale-100');
+            document.getElementById('searchModalContent').classList.add('scale-95');
+        };
+
+        function switchPhase(phaseId, skipScroll = false) {
+            currentActivePhase = phaseId;
+            applyFilters("");
+            
+            const phaseBody = document.getElementById(`body-${phaseId}`);
+            const phaseChevron = document.getElementById(`chevron-${phaseId}`);
+            if (phaseBody && !phaseBody.classList.contains('open')) {
+                phaseBody.classList.add('open');
+                if(phaseChevron) phaseChevron.classList.add('rotated');
+            }
+            
+            if(!skipScroll) {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
+
+        function jumpToWeek(num, skipScroll = false) {
             const item = globalIDMap.find(t => t.week == num);
             if (!item) return;
-            const phaseBody = document.getElementById(`body-${item.phaseID}`);
+            
+            switchPhase(item.phaseID, true);
+            
+            if (typeof window.closeWeekJump === 'function') {
+                window.closeWeekJump();
+            }
+            
             const secBody = document.getElementById(item.sectionID);
-            const phaseChevron = document.getElementById(`chevron-${item.phaseID}`);
             const secChevron = document.getElementById(`chevron-${item.sectionID.replace('sec-body-', '')}`);
-            if (phaseBody) { phaseBody.classList.add('open'); if(phaseChevron) phaseChevron.classList.add('rotated'); }
-            if (secBody) { secBody.classList.add('open'); if(secChevron) secChevron.classList.add('rotated'); }
-            setTimeout(() => {
-                const row = document.getElementById(`week-row-${num}`);
-                if (row) {
-                    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    row.classList.add('bg-blue-100/50');
-                    setTimeout(() => row.classList.remove('bg-blue-100/50'), 2500);
-                }
-            }, 300);
+            
+            if (secBody && !secBody.classList.contains('open')) { 
+                secBody.classList.add('open'); 
+                if(secChevron) secChevron.classList.add('rotated'); 
+            }
+
+            // Ensure the specific week is unhidden if user jumps to it
+            const weekID = item.weekID;
+            const weekContent = document.getElementById(`content-${weekID}`);
+            const weekChevron = document.getElementById(`chevron-w-${weekID}`);
+            if (weekContent && !weekContent.classList.contains('open')) {
+                weekContent.classList.add('open');
+                if (weekChevron) weekChevron.classList.add('rotated');
+                const hiddenWeeks = JSON.parse(localStorage.getItem('coc_hidden_weeks_v1') || '{}');
+                hiddenWeeks[weekID] = false;
+                localStorage.setItem('coc_hidden_weeks_v1', JSON.stringify(hiddenWeeks));
+                if(typeof window.backupToFirebase === 'function') window.backupToFirebase();
+            }
+            
+            if(!skipScroll) {
+                setTimeout(() => {
+                    const row = document.getElementById(`week-row-${num}`);
+                    if (row) {
+                        const y = row.getBoundingClientRect().top + window.scrollY - 150;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                        
+                        row.classList.add('ring-4', 'ring-theme-accent', 'ring-opacity-50');
+                        setTimeout(() => { 
+                            row.classList.remove('ring-4', 'ring-theme-accent', 'ring-opacity-50'); 
+                        }, 2000);
+                    }
+                }, 300);
+            }
         }
 
         function toggleAccordion(id, icon) {
             document.getElementById(id).classList.toggle('open');
             document.getElementById(icon).classList.toggle('rotated');
         }
-        function setTheme(t) { document.body.className = `theme-${t}`; localStorage.setItem('coc_theme', t); }
-        function setStartDate(val) { localStorage.setItem('coc_start_date', val); syncUI(); }
-        function celebrate() { confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } }); }
-        function confirmReset() { if(confirm("Wipe all history?")) { localStorage.clear(); location.reload(); } }
+        
+        function setStartDate(val) { 
+            localStorage.setItem('coc_start_date', val); 
+            const p = document.getElementById('planStartDateProfile');
+            if(p && p.value !== val) p.value = val;
+            syncUI(); 
+            if(typeof window.backupToFirebase === 'function') window.backupToFirebase();
+        }
 
-        function generateHeatmap() {
-            const cont = document.getElementById('heatmap');
-            if (!cont) return;
-            cont.innerHTML = '';
-            const dates = JSON.parse(localStorage.getItem('coc_dates_v6') || '{}');
-            const activityByDate = {};
-            Object.values(dates).forEach(d => activityByDate[new Date(d).toDateString()] = (activityByDate[new Date(d).toDateString()] || 0) + 1);
-            for(let i=13; i>=0; i--) {
-                const d = new Date(); d.setDate(d.getDate() - i);
-                const count = activityByDate[d.toDateString()] || 0;
-                const sq = document.createElement('div');
-                sq.className = `heatmap-square ${count > 2 ? 'active-3' : count > 1 ? 'active-2' : count > 0 ? 'active-1' : ''}`;
-                cont.appendChild(sq);
+        function updateScoreBadge(id) {
+            const badge = document.getElementById(`score-badge-${id}`);
+            if (!badge) return;
+            const scores = JSON.parse(localStorage.getItem('coc_topic_scores_v1') || '{}');
+            const data = scores[id];
+            if (data && data.total > 0) {
+                const perc = Math.round((data.score / data.total) * 100);
+                let colors = 'text-red-600 bg-red-50 border-red-200';
+                if (perc >= 80) colors = 'text-emerald-600 bg-emerald-50 border-emerald-200';
+                else if (perc >= 50) colors = 'text-amber-600 bg-amber-50 border-amber-200';
+                
+                badge.className = `text-[11px] font-bold px-2 py-1 rounded border shrink-0 transition-colors ${colors}`;
+                badge.innerText = `${perc}%`;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
             }
-        }
-
-        function updateStreak() {
-            const last = localStorage.getItem('coc_last_activity');
-            const today = new Date().toDateString();
-            let streak = parseInt(localStorage.getItem('coc_streak') || '0');
-            if (last === today) return;
-            const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
-            if (last === yesterday.toDateString()) streak++; else streak = 1;
-            localStorage.setItem('coc_streak', streak);
-            localStorage.setItem('coc_last_activity', today);
-            if(document.getElementById('streakVal')) document.getElementById('streakVal').innerText = streak;
-        }
-
-        function checkAchievements() {
-            const checked = document.querySelectorAll('.task-checkbox:checked').length;
-            const streak = parseInt(localStorage.getItem('coc_streak') || '0');
-            const ids = [1, 10, 50, 100, 500];
-            ids.forEach(id => {
-                const el = document.getElementById(`ach-${id}`);
-                if(el && checked >= id) el.classList.add('unlocked');
-            });
         }
 
         function openFocus(id) {
             const topic = globalIDMap.find(t => t.id == id);
             const notes = JSON.parse(localStorage.getItem('coc_notes_v5') || '{}');
+            const scores = JSON.parse(localStorage.getItem('coc_topic_scores_v1') || '{}');
+            
             document.getElementById('focusTitle').innerText = topic.topic;
             document.getElementById('focusPhase').innerText = `${topic.phaseTitle} • W${topic.week}`;
             document.getElementById('focusNote').value = notes[id] || "";
             document.getElementById('focusID').innerText = id;
+            
+            if(scores[id]) {
+                document.getElementById('focusScore').value = scores[id].score;
+                document.getElementById('focusTotal').value = scores[id].total;
+            } else {
+                document.getElementById('focusScore').value = "";
+                document.getElementById('focusTotal').value = "10";
+            }
+            
             document.getElementById('focusModal').classList.add('open');
         }
+
         function closeFocus() {
             const id = document.getElementById('focusID').innerText;
             const note = document.getElementById('focusNote').value;
+            const scoreVal = document.getElementById('focusScore').value;
+            const totalVal = document.getElementById('focusTotal').value;
+
             const notes = JSON.parse(localStorage.getItem('coc_notes_v5') || '{}');
             notes[id] = note;
             localStorage.setItem('coc_notes_v5', JSON.stringify(notes));
+
+            const scores = JSON.parse(localStorage.getItem('coc_topic_scores_v1') || '{}');
+            if (scoreVal !== "") {
+                scores[id] = { score: parseFloat(scoreVal) || 0, total: parseFloat(totalVal) || 10 };
+            } else {
+                delete scores[id];
+            }
+            localStorage.setItem('coc_topic_scores_v1', JSON.stringify(scores));
+
             document.getElementById('focusModal').classList.remove('open');
+            updateScoreBadge(id);
             syncUI();
+            if(typeof window.backupToFirebase === 'function') window.backupToFirebase();
         }
+
         function markDoneInFocus() {
             const id = document.getElementById('focusID').innerText;
             const cb = document.querySelector(`.task-checkbox[data-id="${id}"]`);
             if(cb) cb.checked = true;
-            closeFocus(); celebrate();
-        }
-
-        function toggleStar(id, e) {
-            e.stopPropagation();
-            const stars = JSON.parse(localStorage.getItem('coc_stars_v6') || '{}');
-            stars[id] = !stars[id];
-            localStorage.setItem('coc_stars_v6', JSON.stringify(stars));
-            document.getElementById(`star-${id}`).classList.toggle('active');
-            applyFilters();
+            closeFocus();
         }
 
         function toggleWeek(weekID, weekNum) {
@@ -770,72 +1374,77 @@
             const allChecked = Array.from(checkboxes).every(cb => cb.checked);
             checkboxes.forEach(cb => cb.checked = !allChecked);
             syncUI();
-            if (!allChecked) celebrate();
         }
 
-        function scrollToNext() {
-            const id = document.getElementById('nextTopicTitle').dataset.id;
-            if (id) jumpToWeek(globalIDMap.find(t => t.id == id).week);
-        }
+        function applyFilters(query) {
+            const q = query.toLowerCase();
+            let phasesWithVisibleTopics = new Set();
 
-        function filterMode() {
-            isRevisionMode = !isRevisionMode;
-            const btn = document.getElementById('starFilterBtn');
-            if (btn) {
-                btn.classList.toggle('bg-amber-400', isRevisionMode);
-                btn.classList.toggle('text-white', isRevisionMode);
-            }
-            applyFilters();
-        }
-
-        function applyFilters() {
-            const searchInput = document.getElementById('topicSearch');
-            const q = searchInput ? searchInput.value.toLowerCase() : "";
-            const stars = JSON.parse(localStorage.getItem('coc_stars_v6') || '{}');
             document.querySelectorAll('.topic-row').forEach(row => {
                 const matchesSearch = row.getAttribute('data-topic').includes(q);
-                const matchesRevision = !isRevisionMode || stars[row.dataset.id];
-                row.style.display = (matchesSearch && matchesRevision) ? 'table-row' : 'none';
-            });
-        }
+                row.style.display = matchesSearch ? 'flex' : 'none';
 
-        function updateMilestones() {
-            planData.forEach(phase => {
-                phase.sections.forEach(sec => {
-                    const secCleanID = sec.name.replace(/\s/g, '');
-                    const checkboxes = Array.from(document.querySelectorAll(`.task-checkbox[data-section="${secCleanID}"]`));
-                    const done = checkboxes.filter(c => c.checked).length;
-                    const label = document.getElementById(`milestone-${phase.id}-${secCleanID}`);
-                    if(label) {
-                        label.innerText = (done === checkboxes.length && done > 0) ? "Mastered" : (done > 0 ? `${Math.round((done/checkboxes.length)*100)}%` : "Pending");
-                        label.className = `text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md border ${done === checkboxes.length ? 'bg-green-100 text-green-700' : 'bg-white text-slate-500'}`;
+                if (matchesSearch) {
+                    const phaseId = globalIDMap.find(t => t.id == row.dataset.id)?.phaseID;
+                    if(phaseId) phasesWithVisibleTopics.add(phaseId);
+                }
+            });
+
+            const allTaskbarBtns = document.querySelectorAll('.taskbar-btn');
+            const allSidebarBtns = document.querySelectorAll('.sidebar-btn');
+
+            if (q !== "") {
+                document.querySelectorAll('.phase-wrapper').forEach(phase => {
+                    if (phasesWithVisibleTopics.has(phase.id)) {
+                        phase.style.display = 'block';
+                        const pBody = document.getElementById(`body-${phase.id}`);
+                        if(pBody) pBody.classList.add('open');
+                        const pChev = document.getElementById(`chevron-${phase.id}`);
+                        if(pChev) pChev.classList.add('rotated');
+                    } else {
+                        phase.style.display = 'none';
                     }
                 });
-            });
-        }
+                
+                [...allTaskbarBtns, ...allSidebarBtns].forEach(btn => {
+                    btn.classList.remove('text-blue-600', 'bg-blue-50', 'text-emerald-600', 'bg-emerald-50', 'text-purple-600', 'bg-purple-50', 'text-red-500', 'bg-red-50');
+                    btn.classList.add('text-theme-muted');
+                });
+            } else {
+                document.querySelectorAll('.phase-wrapper').forEach(phase => {
+                    phase.style.display = (phase.id === currentActivePhase) ? 'block' : 'none';
+                });
+                
+                [...allTaskbarBtns, ...allSidebarBtns].forEach(btn => {
+                    btn.classList.remove('text-blue-600', 'bg-blue-50', 'text-emerald-600', 'bg-emerald-50', 'text-purple-600', 'bg-purple-50', 'text-red-500', 'bg-red-50');
+                    btn.classList.add('text-theme-muted');
+                });
 
-        function updateWeeklyDots() {
-            const dotsConts = document.querySelectorAll('[id^="week-dots-"]');
-            dotsConts.forEach(cont => {
-                const weekNum = cont.id.replace('week-dots-', '');
-                const checkboxes = Array.from(document.querySelectorAll(`.task-checkbox[data-week-num="${weekNum}"]`));
-                if (checkboxes.length === 0) return;
-                const checkedCount = checkboxes.filter(cb => cb.checked).length;
-                const cbFirst = checkboxes[0];
-                const btn = document.getElementById(`btn-${cbFirst.dataset.week}`);
-                if (btn) btn.innerText = (checkedCount === 5) ? "Reset" : "Mark Week";
-                cont.innerHTML = checkboxes.map(cb => `<div class="w-2.5 h-2.5 rounded-full border ${cb.checked ? 'bg-blue-600 border-blue-700' : 'bg-slate-100 border-slate-200'}"></div>`).join('');
-            });
-        }
-
-        function exportProgress() {
-            const data = { v6_progress: localStorage.getItem('coc_progress_v6'), v6_dates: localStorage.getItem('coc_dates_v6'), stars: localStorage.getItem('coc_stars_v6'), notes: localStorage.getItem('coc_notes_v5'), streak: localStorage.getItem('coc_streak'), start: localStorage.getItem('coc_start_date') };
-            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: 'application/json' })); a.download = "Timeline_Backup.json"; a.click();
+                const activeMobile = document.getElementById(`tab-${currentActivePhase}`);
+                const activeSide = document.getElementById(`sidebar-${currentActivePhase}`);
+                
+                const colorMap = {
+                    'phase-1': ['text-blue-600', 'bg-blue-50'],
+                    'phase-2': ['text-emerald-600', 'bg-emerald-50'],
+                    'phase-3': ['text-purple-600', 'bg-purple-50'],
+                    'phase-4': ['text-red-500', 'bg-red-50']
+                };
+                
+                const activeClasses = colorMap[currentActivePhase];
+                
+                if (activeMobile) {
+                    activeMobile.classList.remove('text-theme-muted');
+                    activeMobile.classList.add(...activeClasses);
+                }
+                if (activeSide) {
+                    activeSide.classList.remove('text-theme-muted');
+                    activeSide.classList.add(...activeClasses);
+                }
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderApp();
-            document.getElementById('topicSearch').addEventListener('input', applyFilters);
+            window.renderApp();
         });
     </script>
 </body>
