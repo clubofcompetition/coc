@@ -4,11 +4,12 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XNQ800CT0"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-2XNQ800CT0');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-2XNQ800CT0');
     </script>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -52,83 +53,113 @@
                         'wiggle': 'wiggle 1s ease-in-out infinite'
                     },
                     keyframes: {
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
-                        sparkle: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.6 } },
-                        wiggle: { '0%, 100%': { transform: 'rotate(-2deg)' }, '50%': { transform: 'rotate(2deg)' } }
+                        float: { 
+                            '0%, 100%': { transform: 'translateY(0)' }, 
+                            '50%': { transform: 'translateY(-10px)' } 
+                        },
+                        sparkle: { 
+                            '0%, 100%': { opacity: 1 }, 
+                            '50%': { opacity: 0.6 } 
+                        },
+                        wiggle: { 
+                            '0%, 100%': { transform: 'rotate(-2deg)' }, 
+                            '50%': { transform: 'rotate(2deg)' } 
+                        }
                     }
                 }
             }
         };
     </script>
+    
     <style>
         /* Hide scrollbars globally */
         * {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        
         *::-webkit-scrollbar {
             display: none;
         }
-
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-        body { 
-             overflow-x: hidden; 
-             width: 100%; 
-             -webkit-font-smoothing: antialiased; 
-             background-color: #f8fafc;
+        
+        html { 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; 
         }
         
-        [x-cloak] { display: none !important; }
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            -webkit-font-smoothing: antialiased;
+            background-color: #f8fafc;
+        }
+        
+        [x-cloak] { 
+            display: none !important; 
+        }
         
         /* Fluid Typography */
-        .text-fluid-h1 { font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.1; }
-        .text-fluid-h2 { font-size: clamp(1.8rem, 5vw, 3.5rem); line-height: 1.2; }
-        .text-fluid-p { font-size: clamp(1rem, 1.2vw, 1.25rem); line-height: 1.7; }
-
-        .header-scrolled { 
-             padding: 0.5rem 0 !important; 
-             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1); 
-             background: rgba(255, 255, 255, 0.95);
+        .text-fluid-h1 { 
+            font-size: clamp(2.2rem, 6vw, 4.5rem); 
+            line-height: 1.1; 
+        }
+        .text-fluid-h2 { 
+            font-size: clamp(1.8rem, 5vw, 3.5rem); 
+            line-height: 1.2; 
+        }
+        .text-fluid-p { 
+            font-size: clamp(1rem, 1.2vw, 1.25rem); 
+            line-height: 1.7; 
+        }
+        
+        .header-scrolled {
+            padding: 0.5rem 0 !important;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
         }
         
         /* Wrapper to manage bottom Taskbar securely */
-        .taskbar-wrapper { 
-             position: fixed; 
-             bottom: calc(1.5rem + env(safe-area-inset-bottom)); 
-             left: 50%;
-             transform: translateX(-50%);
-             width: calc(100% - 2rem);
-             z-index: 40; /* Lower than top navbar to prevent overlap */
-             display: flex; 
-             pointer-events: none; /* Let clicks pass through gaps */
+        .taskbar-wrapper {
+            position: fixed;
+            bottom: calc(1.5rem + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            z-index: 40; /* Lower than top navbar to prevent overlap */
+            display: flex;
+            pointer-events: none; /* Let clicks pass through gaps */
         }
+        
         .taskbar-wrapper > * {
-             pointer-events: auto; /* Re-enable for content */
+            pointer-events: auto; /* Re-enable for content */
         }
         
         .taskbar {
-             width: 100%;
-             height: 75px; 
-             display: flex;
-             flex-direction: row;
-             justify-content: space-around;
-             align-items: center;
-             border-radius: 2rem;
-             -ms-overflow-style: none;
-             scrollbar-width: none;
+            width: 100%;
+            height: 75px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 2rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        .taskbar::-webkit-scrollbar { display: none; }
-
+        
+        .taskbar::-webkit-scrollbar { 
+            display: none; 
+        }
+        
         @media (max-width: 1023px) {
             .taskbar-wrapper {
-                 max-width: 550px;
+                max-width: 550px;
             }
         }
-
+        
         @media (min-width: 1024px) {
             .taskbar-wrapper {
-                 max-width: 1000px; /* Wider desktop taskbar to fit socials perfectly */
+                max-width: 1000px; /* Wider desktop taskbar to fit socials perfectly */
             }
         }
         
@@ -137,22 +168,23 @@
             background-image: radial-gradient(var(--tw-colors-indigo-100) 1px, transparent 1px);
             background-size: 30px 30px;
         }
-
+        
         .glass-card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
+        
         .gradient-text {
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
+        
         .nav-link {
             position: relative;
         }
+        
         .nav-link::after {
             content: '';
             position: absolute;
@@ -163,11 +195,13 @@
             background: var(--tw-colors-primary);
             transition: width 0.3s ease;
         }
+        
         .nav-link:hover::after {
             width: 100%;
         }
     </style>
 </head>
+
 <body class="text-slate-900 font-manrope antialiased" x-data="{ safetyOpen: false }">
 
     <!-- Header -->
@@ -198,13 +232,24 @@
         <div class="p-8 flex flex-col h-full overflow-y-auto no-scrollbar">
             <div class="flex justify-between items-center mb-12">
                 <span class="font-bold text-2xl gradient-text font-poppins">Menu</span>
-                <button id="closeBtn" class="text-2xl p-3 bg-slate-50 rounded-full" aria-label="Close Menu"><i class="fas fa-times"></i></button>
+                <button id="closeBtn" class="text-2xl p-3 bg-slate-50 rounded-full" aria-label="Close Menu">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
+            
             <nav class="flex flex-col gap-8 text-xl font-poppins font-bold mb-12">
-                <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="flex items-center gap-4 text-primary"><i class="fas fa-edit opacity-50"></i> Free Test</a>
-                <a href="#story" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-lightbulb opacity-50"></i> The Story</a>
-                <a href="#about" class="mobile-nav-link flex items-center gap-4"><i class="fas fa-user-tie opacity-50"></i> Our Story</a>
-                <a href="#pricing" class="mobile-nav-link flex items-center gap-4 text-accent"><i class="fas fa-tag opacity-50"></i> Start Now</a>
+                <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="flex items-center gap-4 text-primary">
+                    <i class="fas fa-edit opacity-50"></i> Free Test
+                </a>
+                <a href="#story" class="mobile-nav-link flex items-center gap-4">
+                    <i class="fas fa-lightbulb opacity-50"></i> The Story
+                </a>
+                <a href="#about" class="mobile-nav-link flex items-center gap-4">
+                    <i class="fas fa-user-tie opacity-50"></i> Our Story
+                </a>
+                <a href="#pricing" class="mobile-nav-link flex items-center gap-4 text-accent">
+                    <i class="fas fa-tag opacity-50"></i> Start Now
+                </a>
                 <hr class="border-slate-100">
                 <a href="https://wa.me/919491700443" class="text-whatsapp flex items-center gap-4 text-2xl">
                     <i class="fab fa-whatsapp"></i> Talk to a Mentor
@@ -250,6 +295,7 @@
                 <h1 class="text-fluid-h1 font-poppins font-extrabold text-dark leading-[1.1] mb-8 text-balance">
                     Your <span class="gradient-text animate-sparkle">AI powered 100-weeks</span> Foundation Course to win any Exam
                 </h1>
+                
                 <p class="text-fluid-p text-slate-600 mb-12 max-w-4xl mx-auto font-medium">
                     We turn the mountain of SSC, UPSC, and Banking exams into small, easy steps. Like following a map, we guide you every single week until you become a master of your career.
                 </p>
@@ -260,16 +306,14 @@
 
                 <!-- Action Buttons Row -->
                 <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full px-2 max-w-4xl mx-auto">
-                    <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank"
-                        class="group flex-1 min-w-[160px] px-8 py-5 rounded-2xl bg-white text-primary font-bold shadow-lg border border-slate-100 hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
+                    <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="group flex-1 min-w-[160px] px-8 py-5 rounded-2xl bg-white text-primary font-bold shadow-lg border border-slate-100 hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3">
                         <div class="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                             <i class="fas fa-edit text-sm"></i>
                         </div>
                         <span class="text-sm sm:text-base">Free Test</span>
                     </a>
 
-                    <a href="#pricing"
-                        class="flex-1 min-w-[200px] px-10 py-5 rounded-2xl bg-gradient-to-r from-primary to-indigo-700 text-white font-bold shadow-2xl shadow-indigo-300 hover:shadow-indigo-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
+                    <a href="#pricing" class="flex-1 min-w-[200px] px-10 py-5 rounded-2xl bg-gradient-to-r from-primary to-indigo-700 text-white font-bold shadow-2xl shadow-indigo-300 hover:shadow-indigo-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
                         <i class="fas fa-rocket animate-pulse"></i> 
                         <span class="text-base sm:text-lg">Enroll Now</span>
                     </a>
@@ -495,10 +539,15 @@
                     <div class="bg-white/5 backdrop-blur-2xl border border-white/10 p-10 md:p-14 rounded-[3.5rem] text-left hover:border-primary/50 transition-all relative shadow-2xl group">
                         <div class="absolute -top-5 left-10 bg-accent text-white text-[11px] font-black px-5 py-2 rounded-full uppercase tracking-[0.2em] shadow-xl shadow-accent/40 group-hover:-translate-y-1 transition-transform">Most Popular</div>
                         <h3 class="text-3xl font-bold mb-4 font-poppins text-white">Full 100-Weeks Mastery</h3>
-                        <p class="text-slate-400 text-sm mb-8">Comprehensive support from day one to exam day.</p>
+                        <p class="text-slate-400 text-sm mb-6">Comprehensive support from day one to exam day.</p>
                         
-                        <div class="flex items-baseline gap-3 my-10">
-                            <span class="text-6xl font-black text-white font-poppins">₹49,999</span>
+                        <!-- Pricing with Discount -->
+                        <div class="mb-2">
+                            <span class="text-2xl text-slate-500 line-through font-bold">₹99,999</span>
+                            <span class="ml-3 bg-red-500/20 text-red-400 text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest border border-red-500/30">60% OFF</span>
+                        </div>
+                        <div class="flex items-baseline gap-3 mb-10 mt-1">
+                            <span class="text-6xl font-black text-white font-poppins">₹39,999</span>
                             <span class="text-slate-400 text-sm font-bold bg-white/5 px-3 py-1 rounded-lg">One-time</span>
                         </div>
                         
@@ -669,10 +718,8 @@
 
     <!-- Taskbar and Up Arrow Wrapper (Visible on both Desktop and Mobile, matching glassmorphism theme) -->
     <div class="taskbar-wrapper">
-        
         <!-- Main Taskbar -->
         <div class="taskbar bg-white/80 backdrop-blur-xl border border-slate-200 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] lg:px-4 lg:justify-between">
-            
             <!-- Socials (Left side on Desktop) -->
             <div class="hidden lg:flex items-center justify-center gap-4 w-[200px] border-r border-slate-200/60 h-10">
                 <a href="https://www.facebook.com/share/1B9heWv9tu/" target="_blank" class="text-slate-400 hover:text-[#1877F2] hover:scale-110 transition-all">
@@ -696,6 +743,7 @@
                 <i class="fa-solid fa-wand-magic-sparkles text-xl text-primary group-hover:-translate-y-1 transition-transform"></i>
                 <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">AI<br>Learn</span>
             </a>
+            
             <a href="#weekly-test" class="flex-1 lg:flex-none lg:w-[76px] flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-yellow-500 transition-colors group">
                 <i class="fa-solid fa-ranking-star text-xl text-yellow-500 group-hover:-translate-y-1 transition-transform"></i>
                 <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Weekly<br>Test</span>
@@ -716,6 +764,7 @@
                 <i class="fa-solid fa-map-marked-alt text-xl text-accent group-hover:-translate-y-1 transition-transform"></i>
                 <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">Study<br>Map</span>
             </a>
+            
             <a href="#coc-cat" class="flex-1 lg:flex-none lg:w-[76px] flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-purple-600 transition-colors group">
                 <i class="fa-solid fa-file-pen text-xl text-purple-600 group-hover:-translate-y-1 transition-transform"></i>
                 <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-tighter text-center leading-[1.1] mt-1">COC<br>CAT</span>
@@ -736,7 +785,9 @@
     <div x-show="safetyOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
         <div class="absolute inset-0 bg-red-950/80 backdrop-blur-md" @click="safetyOpen = false"></div>
         <div class="relative bg-white rounded-[3rem] w-full max-w-2xl max-h-[85vh] overflow-y-auto p-10 md:p-14 shadow-2xl border-t-8 border-red-500">
-            <button @click="safetyOpen = false" class="absolute top-8 right-8 w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500"><i class="fas fa-times"></i></button>
+            <button @click="safetyOpen = false" class="absolute top-8 right-8 w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+                <i class="fas fa-times"></i>
+            </button>
             <div class="flex items-center gap-6 mb-10">
                 <div class="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center text-red-600 text-3xl shadow-inner">
                     <i class="fas fa-shield-alt"></i>
@@ -767,8 +818,9 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="mt-12 text-center"><button @click="safetyOpen = false" class="w-full bg-red-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-red-200">I Understand</button></div>
+            <div class="mt-12 text-center">
+                <button @click="safetyOpen = false" class="w-full bg-red-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-red-200">I Understand</button>
+            </div>
         </div>
     </div>
 
@@ -776,7 +828,10 @@
         /* Shared Function must be globally available */
         function sharePage() {
             if (navigator.share) {
-                navigator.share({ title: 'Club of Competition', url: window.location.href }).catch(console.error);
+                navigator.share({ 
+                    title: 'Club of Competition', 
+                    url: window.location.href 
+                }).catch(console.error);
             } else {
                 var el = document.createElement('textarea');
                 el.value = window.location.href;
@@ -806,6 +861,7 @@
             var options = { day: 'numeric', month: 'long', year: 'numeric' };
             var formatted = target.toLocaleDateString('en-IN', options);
             var display = document.getElementById('targetDateDisplay');
+            
             if (display) {
                 display.innerHTML = 'Start today & be <span class="text-primary font-black">Exam-Ready by ' + formatted + '</span>';
             }
