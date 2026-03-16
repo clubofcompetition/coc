@@ -329,6 +329,10 @@
             box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25); 
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .btn-brand-accent {
@@ -375,6 +379,12 @@
             color: var(--primary-hover);
             border-color: var(--border);
         }
+        
+        .btn-success { 
+            background: linear-gradient(135deg, var(--success), #059669); 
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25); 
+        }
+        .btn-success:hover { box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35); }
 
         .btn-google {
             background: #ffffff;
@@ -630,6 +640,16 @@
         .timeline-date { font-weight: 800; color: var(--primary); font-size: 0.85em; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;}
         .timeline-item div:last-child { color: #475569; line-height: 1.6; font-size: 0.95em;}
 
+        .spinner-inline {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
         #pwa-install-banner {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
             background: rgba(255, 255, 255, 0.9); padding: 12px 20px; 
@@ -863,10 +883,10 @@
             </label>
         </div>
 
-        <button class="btn-brand-accent" onclick="submitStage1()" style="margin-top: 20px;">Start My Free Assessment</button>
+        <button class="btn-brand-accent" onclick="submitStage1()" style="margin-top: 20px;">Proceed to Assessment</button>
     </div>
 
-    <!-- STAGE 2: PRE-TEST SETUP -->
+    <!-- STAGE 2: PRE-TEST SETUP & PAYMENT -->
     <div id="stage-2" class="stage">
         <div style="text-align:center; margin-bottom:20px;">
             <span style="color:var(--primary); font-weight:800; font-size:0.9em; letter-spacing:1px; text-transform:uppercase;">Club of Competition</span>
@@ -898,9 +918,12 @@
             </ul>
         </div>
 
-        <div style="display: flex; gap: 15px;">
-            <button class="btn-secondary" onclick="goToStage(1)" style="flex: 0.3;">Back</button>
-            <button class="btn-brand-accent" onclick="submitStage2()" style="flex: 0.7;">Begin Assessment</button>
+        <div style="display: flex; gap: 15px; flex-direction: column;">
+            <button id="pay-btn" class="btn-brand-accent" onclick="openPaymentLink()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Pay to Begin Assessment
+            </button>
+            <button class="btn-secondary" onclick="goToStage(1)">Back</button>
         </div>
     </div>
 
@@ -942,7 +965,7 @@
         <p style="color: var(--text-muted); font-size: 1.1em; max-width: 500px; margin: 0 auto 30px auto; line-height: 1.6;">
             You answered less than 30% of the questions. To generate an accurate career blueprint, we need more information about your traits and skills.
         </p>
-        <button class="btn-brand-accent" onclick="location.reload()" style="max-width: 300px;">Take the Test Again</button>
+        <button class="btn-brand-accent" onclick="submitStage2()" style="max-width: 300px;">Take the Test Again</button>
     </div>
 
     <!-- STAGE 5: PERSONALIZED REPORT -->
@@ -1014,6 +1037,34 @@
     </div>
 
 </div>
+
+<!-- Static Payment Link Logic -->
+<script>
+    // REPLACE THIS URL with your actual Cashfree Payment Link
+    const PAYMENT_LINK = "https://payments.cashfree.com/forms/COC-CATfee"; 
+
+    function openPaymentLink() {
+        if(PAYMENT_LINK === "YOUR_CASHFREE_LINK_HERE") {
+            alert("Developer Note: Please insert your actual payment link in the source code.");
+            return;
+        }
+
+        // Save current form data before leaving the page
+        window.saveFormData();
+        
+        // SECURITY: Mark payment as initiated to prevent URL copy-pasting
+        localStorage.setItem('coc_payment_initiated', 'true');
+        
+        // IMPORTANT DASHBOARD CONFIGURATION NOTE:
+        // To automatically skip the Cashfree "Receipt / Go Back" screen, you MUST enable 
+        // "Auto Redirect" inside your Cashfree Merchant Dashboard settings for this specific payment link.
+        // Cashfree's security rules prevent us from clicking the button using code from our app.
+        
+        // Open payment link in the same tab so the Cashfree redirect works seamlessly
+        document.getElementById('pay-btn').innerHTML = '<span class="spinner-inline"></span> Redirecting...';
+        window.location.href = PAYMENT_LINK;
+    }
+</script>
 
 <!-- Anti-Cheating Logic -->
 <script>
@@ -1344,6 +1395,61 @@
         }
         
         loadFormData(); // Load any previously entered auto-saved data
+
+        // --- AUTOMATIC PAYMENT REDIRECT DETECTION ---
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('payment') === 'success') {
+            // Clean up the URL so refreshing doesn't restart the test again
+            window.history.replaceState({}, document.title, window.location.pathname);
+            
+            // SECURITY: Check if test was already completed on this device
+            if (localStorage.getItem('coc_test_completed') === 'true') {
+                alert("You have already completed a test with this payment. Please register and pay again to take a new test.");
+                return;
+            }
+            
+            // SECURITY: Verify the user actually clicked the pay button recently
+            if (localStorage.getItem('coc_payment_initiated') !== 'true') {
+                alert("Invalid payment session detected. Please click 'Pay to Begin Assessment' to verify your payment.");
+                return;
+            }
+            
+            // Re-build the studentData object from the loaded form data
+            const dob = document.getElementById('dob').value;
+            let calculatedAge = "";
+            if (dob) {
+                const birthDate = new Date(dob);
+                const today = new Date();
+                calculatedAge = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    calculatedAge--;
+                }
+            }
+
+            studentData = { 
+                name: document.getElementById('name').value, 
+                phone: (document.getElementById('countryCode').getAttribute('data-value') || "+91") + " " + document.getElementById('phone').value, 
+                email: document.getElementById('email').value, 
+                educationCourse: document.getElementById('educationCourse').value, 
+                sportsInterest: document.getElementById('sportsInterest').value, 
+                dob: dob, 
+                age: calculatedAge, 
+                gender: document.getElementById('gender').value, 
+                address: document.getElementById('address').value, 
+                pincode: document.getElementById('pincode').value, 
+                state: document.getElementById('state').value, 
+                district: document.getElementById('district').value, 
+                motherLanguage: document.getElementById('motherLanguage').value, 
+                pwd: document.getElementById('pwd').value, 
+                caste: document.getElementById('caste').value, 
+                community: document.getElementById('community').value,
+                height: document.getElementById('height').value
+            };
+
+            // Automatically start the assessment
+            submitStage2();
+        }
     });
 
     // Custom Picker Logic
@@ -1584,6 +1690,9 @@
             height: document.getElementById('height').value
         };
 
+        // Reset the completion flag so they can take a new test
+        localStorage.removeItem('coc_test_completed');
+
         // Auto-save lead data to Google Sheets immediately after clicking "Start Assessment"
         sendDataToGoogleSheets("Lead Captured");
         
@@ -1790,6 +1899,10 @@
 
         setTimeout(() => {
             clearInterval(statusInterval);
+            
+            // SECURITY: Mark test as completed so payment link cannot be reused
+            localStorage.setItem('coc_test_completed', 'true');
+            localStorage.removeItem('coc_payment_initiated');
             
             govtJobDatabase.forEach(job => {
                 let totalMatch = 0;
