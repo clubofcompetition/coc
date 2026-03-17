@@ -642,18 +642,6 @@
             animation: spin 1s linear infinite;
         }
 
-        #pwa-install-banner {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-            background: rgba(255, 255, 255, 0.9); padding: 12px 20px; 
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15); display: flex; justify-content: space-between; 
-            align-items: center; z-index: 1000; border: 1px solid rgba(255,255,255,0.5);
-            border-radius: 100px; width: 90%; max-width: 400px; gap: 15px;
-        }
-        #pwa-install-banner div { font-weight: 700; font-size: 0.9em; color: var(--primary); white-space: nowrap; }
-        #pwa-install-banner button { margin: 0; width: auto; padding: 10px 20px; border-radius: 99px; font-size: 0.9em;}
-        #pwa-install-banner .btn-secondary { padding: 10px 15px; background: #e2e8f0; color: #475569;}
-
         @media (max-width: 768px) {
             body { padding: 15px 10px 80px 10px; }
             .app-container { padding: 30px 20px; border-radius: 20px; }
@@ -724,15 +712,6 @@
         <div id="legal-body" class="legal-content">
             <!-- Legal content injected here -->
         </div>
-    </div>
-</div>
-
-<!-- PWA Install Banner -->
-<div id="pwa-install-banner" class="hidden no-print">
-    <div>📲 Install app for 1-Tap Access</div>
-    <div style="display: flex; gap: 8px;">
-        <button id="btn-install-pwa" class="btn-brand-accent" style="margin:0; width:auto;">Install</button>
-        <button onclick="dismissBanner()" class="btn-secondary">✕</button>
     </div>
 </div>
 
@@ -910,9 +889,6 @@
             <button id="pay-btn" class="btn-brand-accent" onclick="openPaymentLink()">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 Pay to Begin Test
-            </button>
-            <button id="start-test-btn" class="btn-success hidden" onclick="verifyAndStart()">
-                ✅ I have completed the payment - Start Test
             </button>
             <button class="btn-secondary" onclick="goToStage(1)">Back</button>
         </div>
@@ -1092,23 +1068,10 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
 
+<!-- Load External Firebase Configuration -->
+<script src="firebase-config.js"></script>
+
 <script>
-    const firebaseConfig = {
-        apiKey: "AIzaSyBWCmDysQ-oTPK48ukm3HlxZV4XLsVckwk",
-        authDomain: "coc-cat.firebaseapp.com",
-        projectId: "coc-cat",
-        storageBucket: "coc-cat.firebasestorage.app",
-        messagingSenderId: "152265934196",
-        appId: "1:152265934196:web:d799d62c8aeafca011d821",
-        measurementId: "G-CDWJVT35XC"
-    };
-
-    // Initialize Firebase using compat libraries to fix the URL protocol error
-    const app = firebase.initializeApp(firebaseConfig);
-    const analytics = firebase.analytics();
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-
     window.loginWithGoogle = async () => {
         try {
             const result = await auth.signInWithPopup(provider);
@@ -1168,24 +1131,6 @@
             }
         });
     }
-
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        if(!isSandbox) document.getElementById('pwa-install-banner').classList.remove('hidden');
-    });
-
-    document.getElementById('btn-install-pwa').addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') document.getElementById('pwa-install-banner').classList.add('hidden');
-            deferredPrompt = null;
-        }
-    });
-
-    function dismissBanner() { document.getElementById('pwa-install-banner').classList.add('hidden'); }
 </script>
 
 <script>
