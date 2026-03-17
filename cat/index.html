@@ -124,14 +124,6 @@
             border-bottom: 2px dashed #e2e8f0;
         }
         
-        .brand-logo-icon {
-            width: 64px;
-            height: 64px;
-            fill: var(--primary);
-            margin-bottom: 12px;
-            filter: drop-shadow(0 4px 6px rgba(30,58,138,0.2));
-        }
-        
         .brand-title {
             font-size: 2.2em;
             font-weight: 900;
@@ -750,17 +742,13 @@
     <div id="stage-1" class="stage active-stage">
         <!-- BRAND HEADER -->
         <div class="brand-header">
-            <svg class="brand-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <!-- A sophisticated layered graduation/growth symbol -->
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
             <h1 class="brand-title">Club of Competition</h1>
-            <p class="brand-subtitle">Career Advisory Assessment</p>
+            <p class="brand-subtitle">Career Advise Test</p>
         </div>
         
         <div class="info-box">
             <span style="font-size: 1.5em;">👋</span>
-            <div>Welcome to the official <strong>Club of Competition</strong> career assessment. Enter your details below to access your evaluation. Your custom report will be securely emailed and sent to your WhatsApp.</div>
+            <div>Welcome to the official <strong>Club of Competition</strong> Career Advise Test. Enter your details below to access your evaluation. Your custom report will be available for print only at the end of the test.</div>
         </div>
 
         <!-- Google Login Button -->
@@ -883,7 +871,7 @@
             </label>
         </div>
 
-        <button class="btn-brand-accent" onclick="submitStage1()" style="margin-top: 20px;">Proceed to Assessment</button>
+        <button class="btn-brand-accent" onclick="submitStage1()" style="margin-top: 20px;">Proceed to Test</button>
     </div>
 
     <!-- STAGE 2: PRE-TEST SETUP & PAYMENT -->
@@ -904,7 +892,7 @@
             <h3 style="margin-top: 0; font-size: 1.1em; color: var(--primary);">💡 Suggestions for Best Results</h3>
             <ul style="color: var(--text-muted); line-height: 1.6; margin-bottom: 0; padding-left: 20px;">
                 <li><strong>Environment:</strong> Find a quiet, distraction-free space to focus for the next 45 minutes.</li>
-                <li><strong>Format:</strong> You will face exactly <strong>90 dynamically balanced questions</strong> on Aptitude and Personality.</li>
+                <li><strong>Test Format:</strong> You will face exactly <strong>90 dynamically balanced questions</strong> on Aptitude and Personality.</li>
                 <li><strong>Pacing:</strong> You have a strict 30-second timer per question. Do not overthink; trust your intuition!</li>
             </ul>
         </div>
@@ -921,13 +909,16 @@
         <div style="display: flex; gap: 15px; flex-direction: column;">
             <button id="pay-btn" class="btn-brand-accent" onclick="openPaymentLink()">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                Pay to Begin Assessment
+                Pay to Begin Test
+            </button>
+            <button id="start-test-btn" class="btn-success hidden" onclick="verifyAndStart()">
+                ✅ I have completed the payment - Start Test
             </button>
             <button class="btn-secondary" onclick="goToStage(1)">Back</button>
         </div>
     </div>
 
-    <!-- STAGE 3: ASSESSMENT ENGINE -->
+    <!-- STAGE 3: TEST ENGINE -->
     <div id="stage-3" class="stage no-select">
         <div class="progress-header">
             <h2 id="module-title" style="margin-bottom: 0; border: none; padding: 0; font-size: 1.2em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Module Loading...</h2>
@@ -961,7 +952,7 @@
     <!-- STAGE FAIL: INCOMPLETE TEST -->
     <div id="stage-fail" class="stage" style="text-align: center; padding: 80px 20px;">
         <div style="font-size: 4em; margin-bottom: 20px;">⚠️</div>
-        <h2 style="border: none; color: var(--primary);">Assessment Incomplete</h2>
+        <h2 style="border: none; color: var(--primary);">Test Incomplete</h2>
         <p style="color: var(--text-muted); font-size: 1.1em; max-width: 500px; margin: 0 auto 30px auto; line-height: 1.6;">
             You answered less than 30% of the questions. To generate an accurate career blueprint, we need more information about your traits and skills.
         </p>
@@ -972,9 +963,6 @@
     <div id="stage-5" class="stage">
         <!-- BRAND HEADER FOR PRINT/REPORT -->
         <div class="brand-header" style="padding-bottom: 15px; border-bottom: none;">
-            <svg class="brand-logo-icon" style="width:48px; height:48px; margin-bottom:5px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
             <h1 class="brand-title" style="font-size: 1.6em;">Club of Competition</h1>
             <p class="brand-subtitle" style="font-size: 0.8em;">Official Career Blueprint</p>
         </div>
@@ -1018,7 +1006,7 @@
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-date">Today</div>
-                <div><strong>Assessment Complete.</strong> Review the official syllabus for your top matched jobs.</div>
+                <div><strong>Test Complete.</strong> Review the official syllabus for your top matched jobs.</div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date" id="date-1-month">Loading...</div>
@@ -1094,7 +1082,7 @@
     document.addEventListener("copy", (e) => {
         if (isTestActive) {
             e.preventDefault();
-            alert("Copying text is disabled during the assessment.");
+            alert("Copying text is disabled during the test.");
         }
     });
 </script>
@@ -1291,20 +1279,20 @@
             title: "Terms of Service",
             body: `
                 <h3>1. Introduction</h3>
-                <p>Welcome to the Club of Competition Career Advise Test. By taking this assessment, you agree to comply with and be bound by the following terms and conditions of use.</p>
+                <p>Welcome to the Club of Competition Career Advise Test. By taking this test, you agree to comply with and be bound by the following terms and conditions of use.</p>
                 <h3>2. Purpose of the Test</h3>
                 <p>This test is designed to evaluate numerical aptitude, logical reasoning, and personality traits to suggest potential career matches in government sectors. It is an educational tool and does not guarantee job placement.</p>
                 <h3>3. Data Accuracy</h3>
                 <p>You agree to provide accurate and truthful information during the registration and testing process. Inaccurate information may result in flawed career suggestions.</p>
                 <h3>4. Intellectual Property</h3>
-                <p>All questions, logic, and design elements within this assessment are the intellectual property of Club of Competition. Unauthorized reproduction or distribution is strictly prohibited.</p>
+                <p>All questions, logic, and design elements within this test are the intellectual property of Club of Competition. Unauthorized reproduction or distribution is strictly prohibited.</p>
             `
         },
         privacy: {
             title: "Privacy Statement",
             body: `
                 <h3>1. Information We Collect</h3>
-                <p>We collect personal information such as your name, email, phone number, date of birth, education, and demographic details. We also collect the answers you provide during the assessment.</p>
+                <p>We collect personal information such as your name, email, phone number, date of birth, education, and demographic details. We also collect the answers you provide during the test.</p>
                 <h3>2. How We Use Your Information</h3>
                 <p>Your data is used solely to calculate your career compatibility scores, generate your personalized blueprint, and contact you with relevant educational opportunities or counseling regarding your results.</p>
                 <h3>3. Google Authentication</h3>
@@ -1317,11 +1305,11 @@
             title: "Disclaimer",
             body: `
                 <h3>Not Professional Guarantee</h3>
-                <p>The career recommendations provided by this assessment are generated by an algorithm based on your self-reported answers. They are for informational and guidance purposes only.</p>
+                <p>The career recommendations provided by this test are generated by an algorithm based on your self-reported answers. They are for informational and guidance purposes only.</p>
                 <h3>Subject to Change</h3>
                 <p>Government job requirements, syllabus, and eligibility criteria are subject to change. Always verify official government notifications before making career decisions.</p>
                 <h3>Limitation of Liability</h3>
-                <p>Club of Competition shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the information provided in this assessment.</p>
+                <p>Club of Competition shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the information provided in this test.</p>
             `
         }
     };
@@ -1405,12 +1393,6 @@
             // SECURITY: Check if test was already completed on this device
             if (localStorage.getItem('coc_test_completed') === 'true') {
                 alert("You have already completed a test with this payment. Please register and pay again to take a new test.");
-                return;
-            }
-            
-            // SECURITY: Verify the user actually clicked the pay button recently
-            if (localStorage.getItem('coc_payment_initiated') !== 'true') {
-                alert("Invalid payment session detected. Please click 'Pay to Begin Assessment' to verify your payment.");
                 return;
             }
             
@@ -1693,7 +1675,7 @@
         // Reset the completion flag so they can take a new test
         localStorage.removeItem('coc_test_completed');
 
-        // Auto-save lead data to Google Sheets immediately after clicking "Start Assessment"
+        // Auto-save lead data to Google Sheets immediately after clicking "Start Test"
         sendDataToGoogleSheets("Lead Captured");
         
         document.getElementById('welcome-message').innerText = `Hi ${name.split(' ')[0]}, let's find your path.`;
@@ -1816,7 +1798,7 @@
                     nextBtn.innerText = `Please wait ${minWaitTime}s...`;
                 } else {
                     nextBtn.disabled = false;
-                    nextBtn.innerText = (currentQuestionIndex === activeQuestions.length - 1) ? "Submit Assessment" : "Next Question";
+                    nextBtn.innerText = (currentQuestionIndex === activeQuestions.length - 1) ? "Submit Test" : "Next Question";
                 }
             }
             
@@ -1902,7 +1884,6 @@
             
             // SECURITY: Mark test as completed so payment link cannot be reused
             localStorage.setItem('coc_test_completed', 'true');
-            localStorage.removeItem('coc_payment_initiated');
             
             govtJobDatabase.forEach(job => {
                 let totalMatch = 0;
