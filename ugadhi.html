@@ -218,6 +218,7 @@
 <body class="text-slate-900 font-manrope antialiased" x-data="{ 
     showCurtain: true,
     giftOpen: false, 
+    catOpen: false,
     isPlaying: false,
     startMusic() {
         if(!this.isPlaying) {
@@ -252,7 +253,7 @@
          x-transition:leave-start="opacity-100 transform scale-100"
          x-transition:leave-end="opacity-0 transform scale-105"
          class="fixed inset-0 z-[200] bg-gradient-to-br from-green-900 via-green-800 to-dark flex flex-col items-center justify-center cursor-pointer overflow-hidden" 
-         @click="startMusic(); showCurtain = false">
+         @click="startMusic(); showCurtain = false; setTimeout(() => catOpen = true, 600)">
         
         <!-- Decorative background elements -->
         <div class="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] pointer-events-none"></div>
@@ -283,7 +284,7 @@
             </a>
             
             <nav class="hidden lg:flex items-center gap-8 font-poppins text-sm font-bold text-slate-500" id="desktop-nav">
-                <a href="#wishes" class="nav-link hover:text-primary transition-colors">Wishes</a>
+                <a href="#wishes" @click.prevent="catOpen = true; document.getElementById('wishes').scrollIntoView({behavior: 'smooth'})" class="nav-link hover:text-primary transition-colors">Wishes</a>
                 <a href="#shadruchu" class="nav-link hover:text-primary transition-colors">6 Tastes</a>
                 <a href="#offers" class="nav-link hover:text-primary transition-colors text-accent">Offers</a>
                 
@@ -318,7 +319,7 @@
             </div>
             
             <nav class="flex flex-col gap-3 text-base font-poppins font-bold mb-8">
-                <a href="#wishes" class="mobile-nav-link flex items-center gap-4 px-4 py-3.5 rounded-2xl hover:bg-green-50 transition-colors text-slate-700">
+                <a href="#wishes" @click.prevent="catOpen = true; document.getElementById('closeBtn').click(); document.getElementById('wishes').scrollIntoView({behavior: 'smooth'})" class="mobile-nav-link flex items-center gap-4 px-4 py-3.5 rounded-2xl hover:bg-green-50 transition-colors text-slate-700">
                     <div class="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-primary shadow-sm border border-green-100">
                         <i class="fas fa-om text-sm"></i>
                     </div>
@@ -658,7 +659,7 @@
     <div class="taskbar-wrapper">
         <div class="taskbar bg-white/90 backdrop-blur-xl border border-green-100 shadow-[0_20px_40px_-10px_rgba(22,163,74,0.15)] lg:px-4 lg:justify-center gap-8 md:gap-16">
             
-            <a href="#wishes" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors group">
+            <a href="#wishes" @click.prevent="catOpen = true; document.getElementById('wishes').scrollIntoView({behavior: 'smooth'})" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-primary transition-colors group">
                 <i class="fa-solid fa-om text-xl text-primary group-hover:-translate-y-1 transition-transform"></i>
                 <span class="text-[9px] font-black uppercase tracking-tighter text-center mt-0.5">Wishes</span>
             </a>
@@ -699,6 +700,47 @@
             <source src="music.mp3" type="audio/mpeg">
             <source src="music.mp3" type="audio/mpeg">
         </audio>
+    </div>
+
+    <!-- CAT Assessment Modal -->
+    <div x-show="catOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4" x-transition.opacity x-cloak>
+        <div class="absolute inset-0 bg-dark/80 backdrop-blur-md" @click="catOpen = false"></div>
+        <div class="relative bg-white rounded-[2.5rem] w-full max-w-md overflow-hidden shadow-2xl border-t-8 border-primary transform transition-all">
+            
+            <!-- Festive Header BG -->
+            <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-green-100 to-yellow-50 -z-10"></div>
+            
+            <button @click="catOpen = false" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center text-slate-500 hover:bg-slate-100 transition-colors shadow-sm">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+            
+            <div class="p-8 text-center pt-12">
+                <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-primary to-green-600 flex items-center justify-center text-white text-3xl shadow-lg shadow-green-200 mb-6 border-4 border-white animate-bounce">
+                    <i class="fas fa-brain"></i>
+                </div>
+                
+                <h3 class="text-2xl font-bold font-poppins text-dark mb-2">Happy Ugadi! 🌿</h3>
+                <p class="text-slate-600 font-medium text-sm mb-6">Before checking out all our festive offers, uncover your hidden talent this New Year with our Career Advice Test (CAT).</p>
+                
+                <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 mb-6 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-yellow-100 text-6xl opacity-50"><i class="fas fa-compass"></i></div>
+                    <p class="text-xs text-yellow-700 font-bold uppercase tracking-widest mb-2">Discover Your Path</p>
+                    <div class="text-lg font-black font-poppins text-secondary tracking-wide bg-white rounded-xl py-3 border-2 border-dashed border-yellow-400 shadow-inner uppercase">
+                        Know Your Hidden Talent
+                    </div>
+                    <p class="text-xs text-yellow-600 mt-3 font-medium">Find which Government Job matches your true potential!</p>
+                </div>
+                
+                <div class="flex flex-col gap-3">
+                    <a href="cat/catsignup.html" class="w-full block text-center bg-primary text-white py-3.5 rounded-xl font-bold text-base shadow-lg shadow-green-200 hover:bg-green-700 active:scale-95 transition-all">
+                        Take CAT Assessment
+                    </a>
+                    <button @click="catOpen = false; document.getElementById('wishes').scrollIntoView({behavior: 'smooth'})" class="w-full block text-center bg-slate-50 text-slate-600 py-3.5 rounded-xl font-bold text-sm hover:bg-slate-100 active:scale-95 transition-all">
+                        Continue to Wishes
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Festive Gift Modal -->
