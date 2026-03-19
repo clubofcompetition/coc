@@ -758,12 +758,10 @@
                 
                 // Use html2canvas to capture the hero section
                 const canvas = await html2canvas(wishesSection, {
-                    scale: 2, // High resolution image
+                    scale: window.devicePixelRatio > 1 ? 2 : 1, // High resolution image but optimize for mobile
                     useCORS: true,
                     allowTaint: true,
                     backgroundColor: '#ffffff',
-                    windowWidth: window.innerWidth,
-                    windowHeight: window.innerHeight,
                     onclone: (clonedDoc) => {
                         const clonedWishes = clonedDoc.getElementById('wishes');
                         const clonedBtns = clonedDoc.getElementById('hero-buttons');
@@ -776,6 +774,18 @@
                         
                         // Hide buttons in the generated image
                         if (clonedBtns) clonedBtns.style.display = 'none';
+
+                        // CRITICAL ANDROID FIX: Stop animations that cause canvas tearing
+                        const allElements = clonedWishes.querySelectorAll('*');
+                        allElements.forEach(el => {
+                            el.style.animation = 'none'; 
+                        });
+
+                        // CRITICAL ANDROID FIX: Hide complex background filters/blends that crash the canvas rendering
+                        const complexBackgrounds = clonedWishes.querySelectorAll('.blur-3xl, .mix-blend-multiply');
+                        complexBackgrounds.forEach(el => {
+                            el.style.display = 'none';
+                        });
                         
                         // Fix for gradient text over-spreading (html2canvas issue with background-clip)
                         const gradientElements = clonedWishes.querySelectorAll('.gradient-text');
@@ -828,7 +838,10 @@
                 });
 
                 canvas.toBlob(async (blob) => {
+                    if (!blob) throw new Error("Canvas Blob generation failed");
                     const file = new File([blob], 'Happy-Ugadi-Wishes.png', { type: 'image/png' });
+                    
+                    let shared = false;
                     
                     if (navigator.canShare && navigator.canShare({ files: [file] })) {
                         try {
@@ -838,11 +851,20 @@
                                 url: shareUrl,
                                 files: [file] // Share the generated image!
                             });
+                            shared = true;
                         } catch (err) {
-                            console.log('Share was cancelled or failed.');
+                            console.log('Share was cancelled or failed.', err);
+                            // If the share failed (but user didn't explicitly abort the sheet), trigger fallback
+                            if (err.name !== 'AbortError') {
+                                shared = false; 
+                            } else {
+                                shared = true; // User manually dismissed the share sheet, don't download.
+                            }
                         }
-                    } else {
-                        // Fallback: download the image and copy text (for Desktop / unsupported browsers)
+                    }
+                    
+                    // Fallback to Download if native sharing the File failed/isn't supported
+                    if (!shared) {
                         const link = document.createElement('a');
                         link.href = URL.createObjectURL(blob);
                         link.download = 'Happy-Ugadi-Wishes.png';
@@ -866,7 +888,7 @@
             } catch (error) {
                 console.error('Error generating image:', error);
                 
-                // Ultimate Fallback if html2canvas fails (e.g. strict browser policies)
+                // Ultimate Fallback if html2canvas totally fails
                 if (navigator.share) {
                     navigator.share({
                         title: 'Happy Ugadi',
