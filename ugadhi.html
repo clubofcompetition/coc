@@ -26,8 +26,9 @@
     <!-- Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <!-- Alpine.js -->
+    <!-- Alpine.js & html2canvas -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -282,9 +283,9 @@
             </a>
             
             <nav class="hidden lg:flex items-center gap-8 font-poppins text-sm font-bold text-slate-500" id="desktop-nav">
-                <a href="#wishes" class="nav-link hover:text-primary transition-colors">Ugadi Wishes</a>
-                <a href="#shadruchu" class="nav-link hover:text-primary transition-colors">6 Tastes of Life</a>
-                <a href="#offers" class="nav-link hover:text-primary transition-colors text-accent">Festive Offers</a>
+                <a href="#wishes" class="nav-link hover:text-primary transition-colors">Wishes</a>
+                <a href="#shadruchu" class="nav-link hover:text-primary transition-colors">6 Tastes</a>
+                <a href="#offers" class="nav-link hover:text-primary transition-colors text-accent">Offers</a>
                 
                 <button @click="giftOpen = true" class="bg-primary text-white px-6 py-2.5 rounded-xl hover:bg-green-700 transition-all shadow-md shadow-green-200 active:scale-95 flex items-center gap-2">
                     <i class="fas fa-gift text-xs"></i> Open Gift
@@ -351,7 +352,7 @@
             <div class="mt-auto bg-green-50 rounded-[2rem] p-6 text-center border border-green-100">
                 <p class="text-primary text-[10px] uppercase tracking-[0.2em] font-black mb-4">Share The Joy</p>
                 <div class="flex justify-center items-center gap-3">
-                    <a href="javascript:void(0)" onclick="sharePage()" class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm border border-green-100">
+                    <a href="javascript:void(0)" onclick="sharePage(this)" class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm border border-green-100">
                         <i class="fas fa-share-nodes text-lg"></i>
                     </a>
                 </div>
@@ -363,11 +364,13 @@
         <!-- Hero Section -->
         <section id="wishes" class="hero-pattern min-h-screen flex flex-col justify-center pt-24 pb-16 px-4 lg:px-[120px] overflow-hidden relative">
             
-            <!-- Festive Floating Elements -->
+            <!-- Festive Floating Elements (Positioned with TOP to prevent overlapping issues in image export) -->
             <div class="absolute top-32 left-10 md:left-24 text-4xl animate-float opacity-80 z-0">🥭</div>
-            <div class="absolute top-48 right-12 md:right-32 text-3xl animate-float-delayed opacity-70 z-0">🌿</div>
-            <div class="absolute bottom-40 left-16 md:left-40 text-3xl animate-float-delayed opacity-60 z-0">🌼</div>
-            <div class="absolute bottom-32 right-20 md:right-48 text-4xl animate-float opacity-80 z-0">✨</div>
+            <div class="absolute top-20 right-20 md:right-40 text-4xl animate-float-delayed opacity-70 z-0">🌺</div>
+            <div class="absolute top-48 right-12 md:right-24 text-3xl animate-float-delayed opacity-70 z-0">🌿</div>
+            <div class="absolute top-[60%] left-8 md:left-40 text-3xl animate-float-delayed opacity-60 z-0">🌼</div>
+            <div class="absolute top-[75%] left-24 md:left-32 text-4xl animate-float opacity-80 z-0">🥥</div>
+            <div class="absolute top-[70%] right-16 md:right-48 text-4xl animate-float opacity-80 z-0">✨</div>
             
             <div class="container mx-auto max-w-5xl text-center relative z-10">
                 
@@ -416,22 +419,55 @@
                 
                 <div class="text-sm md:text-base font-bold text-slate-800 mb-10 p-4 glass-card rounded-2xl shadow-lg shadow-green-100/50 border border-white inline-block relative overflow-hidden group">
                     <div class="absolute inset-0 bg-gradient-to-r from-green-50 to-yellow-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
-                    May this Festival bring a <span class="text-primary font-black">Government Job</span> into your life! 🎯
+                    Club of Competition helps you to achieve a <span class="text-primary font-black">Government Job</span> this New Year! 🎯
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex flex-wrap items-center justify-center gap-4 w-full px-2 max-w-2xl mx-auto">
-                    <button onclick="sharePage()" class="group flex-1 min-w-[140px] px-6 py-3.5 rounded-xl bg-white text-primary font-bold shadow-md border border-green-100 hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                <div id="hero-buttons" class="flex flex-wrap items-center justify-center gap-4 w-full px-2 max-w-2xl mx-auto">
+                    <button onclick="sharePage(this)" class="group flex-1 min-w-[140px] px-6 py-3.5 rounded-xl bg-white text-primary font-bold shadow-md border border-green-100 hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                         <div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                             <i class="fas fa-share text-xs"></i>
                         </div>
-                        <span class="text-sm">Share Wishes</span>
+                        <span class="text-sm font-poppins">Share Wishes</span>
                     </button>
 
                     <button @click="giftOpen = true" class="flex-1 min-w-[160px] px-8 py-3.5 rounded-xl bg-gradient-to-r from-primary to-green-700 text-white font-bold shadow-xl shadow-green-300 hover:shadow-green-500 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
                         <i class="fas fa-gift animate-pulse text-sm"></i> 
                         <span class="text-sm sm:text-base">Claim Festive Gift</span>
                     </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Auspicious Beginnings Section -->
+        <section id="auspicious" class="py-16 bg-green-50/50 px-4 lg:px-[120px] relative overflow-hidden border-t border-green-100">
+            <div class="container mx-auto max-w-5xl text-center">
+                <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-3 block">New Beginnings</span>
+                <h2 class="font-poppins text-fluid-h2 font-bold text-dark mb-6">Why Start Your Prep on Ugadi?</h2>
+                
+                <div class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl shadow-green-100/50 border border-green-50 max-w-3xl mx-auto relative group hover:shadow-2xl transition-shadow duration-500">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center text-white text-xl shadow-lg border-4 border-white group-hover:scale-110 transition-transform">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    
+                    <p class="text-slate-600 font-medium text-base md:text-lg leading-relaxed mt-4">
+                        In our culture, Ugadi is not just a change of calendar; it represents the infinite possibilities of a new cycle. It is highly auspicious to initiate learning (<strong class="text-primary">Vidyarambham</strong>) on this exact day. The determination of a New Year's resolution, combined with the blessings of this auspicious muhurtham, creates the perfect spiritual and mental foundation for cracking the toughest exams.
+                    </p>
+                    
+                    <div class="mt-8 flex justify-center gap-6">
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-primary text-lg mb-2"><i class="fas fa-seedling"></i></div>
+                            <span class="text-xs font-bold text-slate-500">Plant a Goal</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center text-secondary text-lg mb-2"><i class="fas fa-sun"></i></div>
+                            <span class="text-xs font-bold text-slate-500">Nurture Daily</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-accent text-lg mb-2"><i class="fas fa-tree"></i></div>
+                            <span class="text-xs font-bold text-slate-500">Reap Success</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -635,7 +671,7 @@
                 <span class="text-[10px] font-black uppercase tracking-tighter text-accent text-center mt-1">Open Gift</span>
             </button>
             
-            <button onclick="sharePage()" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-secondary transition-colors group">
+            <button onclick="sharePage(this)" class="flex flex-col items-center justify-center gap-1 text-slate-500 hover:text-secondary transition-colors group">
                 <i class="fa-solid fa-share-nodes text-xl text-secondary group-hover:-translate-y-1 transition-transform"></i>
                 <span class="text-[9px] font-black uppercase tracking-tighter text-center mt-0.5">Share</span>
             </button>
@@ -703,34 +739,159 @@
     </div>
 
     <script>
-        function sharePage() {
+        async function sharePage(btnElement) {
             const shareText = "Wishing you a Happy Ugadi & Prosperous New Year! May this new year bring success to your exam preparations. Check out this special festive gift from Club of Competition!";
             const shareUrl = window.location.href;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Happy Ugadi from Club of Competition',
-                    text: shareText,
-                    url: shareUrl
-                }).catch(console.error);
-            } else {
-                var el = document.createElement('textarea');
-                el.value = shareText + " " + shareUrl;
-                document.body.appendChild(el);
-                el.select();
-                try {
-                    document.execCommand('copy');
-                } catch (e) {
-                    console.error('Copy to clipboard failed.', e);
-                }
-                document.body.removeChild(el);
-                
-                var note = document.createElement('div');
-                note.className = "fixed bottom-24 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-xl shadow-2xl z-[100] text-sm font-bold animate-bounce";
-                note.innerHTML = "<i class='fas fa-check-circle mr-2'></i> Festive Wishes Copied to Clipboard!";
-                document.body.appendChild(note);
-                setTimeout(function() { note.remove(); }, 3000);
+            
+            let btn = btnElement;
+            let originalBtnContent = "";
+            
+            // Show loading state to provide instant feedback
+            if (btn) {
+                originalBtnContent = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl lg:text-sm"></i>';
+                btn.style.pointerEvents = 'none';
             }
+
+            try {
+                const wishesSection = document.getElementById('wishes');
+                
+                // Use html2canvas to capture the hero section
+                const canvas = await html2canvas(wishesSection, {
+                    scale: 2, // High resolution image
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    windowWidth: window.innerWidth,
+                    windowHeight: window.innerHeight,
+                    onclone: (clonedDoc) => {
+                        const clonedWishes = clonedDoc.getElementById('wishes');
+                        const clonedBtns = clonedDoc.getElementById('hero-buttons');
+                        
+                        // Adjust height so it has an ideal proportion for sharing and doesn't squish elements
+                        clonedWishes.style.minHeight = 'auto';
+                        clonedWishes.style.height = 'auto';
+                        clonedWishes.style.paddingBottom = '40px';
+                        clonedWishes.style.paddingTop = '60px';
+                        
+                        // Hide buttons in the generated image
+                        if (clonedBtns) clonedBtns.style.display = 'none';
+                        
+                        // Fix for gradient text over-spreading (html2canvas issue with background-clip)
+                        const gradientElements = clonedWishes.querySelectorAll('.gradient-text');
+                        gradientElements.forEach(el => {
+                            el.classList.remove('gradient-text'); // Remove problematic CSS class
+                            el.style.background = 'transparent';
+                            el.style.webkitBackgroundClip = 'initial';
+                            el.style.webkitTextFillColor = 'initial';
+                            el.style.color = '#16a34a'; // Fallback to solid primary green for the capture
+                        });
+                        
+                        // Fix overlapping multiple languages by making it static
+                        const langContainer = clonedWishes.querySelector('.lang-container');
+                        if (langContainer) {
+                            let activeText = 'Happy Ugadi!';
+                            // Find the currently visible language
+                            const visibleContainers = document.querySelectorAll('.lang-container div');
+                            visibleContainers.forEach(div => {
+                                if (window.getComputedStyle(div).display !== 'none') {
+                                    const h2 = div.querySelector('h2');
+                                    if (h2) activeText = h2.innerText;
+                                }
+                            });
+                            
+                            // Re-insert just the active text statically to prevent overlap
+                            langContainer.innerHTML = `<h2 class="text-xl md:text-2xl font-black text-accent tracking-wide">${activeText}</h2>`;
+                            langContainer.style.display = 'flex';
+                            langContainer.style.alignItems = 'center';
+                            langContainer.style.justifyContent = 'center';
+                        }
+                        
+                        // Inject Logo and URL Branding into the image dynamically
+                        const branding = clonedDoc.createElement('div');
+                        branding.style.cssText = 'width: 100%; display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 30px; position: relative; z-index: 50; padding-bottom: 20px;';
+                        branding.innerHTML = `
+                            <div style="padding: 4px; background: linear-gradient(to top right, #16a34a, #eab308); border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                                <img src="logo.png" style="height: 36px; width: 36px; object-fit: contain; background: white; border-radius: 4px; padding: 2px;" onerror="this.onerror=null; this.src='https://placehold.co/40x40/16a34a/ffffff?text=C'">
+                            </div>
+                            <div style="text-align: left; font-family: 'Poppins', sans-serif;">
+                                <div style="font-weight: 800; color: #1e293b; font-size: 1.25rem; line-height: 1;">Club of Competition</div>
+                                <div style="font-weight: 700; color: #16a34a; font-size: 0.85rem; margin-top: 2px;">clubofcompetition.in</div>
+                            </div>
+                        `;
+                        
+                        const container = clonedWishes.querySelector('.container');
+                        if (container) {
+                            container.appendChild(branding);
+                        }
+                    }
+                });
+
+                canvas.toBlob(async (blob) => {
+                    const file = new File([blob], 'Happy-Ugadi-Wishes.png', { type: 'image/png' });
+                    
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        try {
+                            await navigator.share({
+                                title: 'Happy Ugadi from Club of Competition',
+                                text: shareText,
+                                url: shareUrl,
+                                files: [file] // Share the generated image!
+                            });
+                        } catch (err) {
+                            console.log('Share was cancelled or failed.');
+                        }
+                    } else {
+                        // Fallback: download the image and copy text (for Desktop / unsupported browsers)
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = 'Happy-Ugadi-Wishes.png';
+                        link.click();
+                        
+                        try {
+                            await navigator.clipboard.writeText(shareText + "\n" + shareUrl);
+                            showNotification("<i class='fas fa-check-circle mr-2'></i> Card Downloaded & Text Copied!");
+                        } catch (err) {
+                            showNotification("<i class='fas fa-check-circle mr-2'></i> Festive Card Downloaded!");
+                        }
+                    }
+                    
+                    // Restore button UI
+                    if (btn) {
+                        btn.innerHTML = originalBtnContent;
+                        btn.style.pointerEvents = 'auto';
+                    }
+                }, 'image/png');
+
+            } catch (error) {
+                console.error('Error generating image:', error);
+                
+                // Ultimate Fallback if html2canvas fails (e.g. strict browser policies)
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Happy Ugadi',
+                        text: shareText,
+                        url: shareUrl
+                    }).catch(console.error);
+                } else {
+                    navigator.clipboard.writeText(shareText + "\n" + shareUrl);
+                    showNotification("<i class='fas fa-check-circle mr-2'></i> Wishes Copied to Clipboard!");
+                }
+                
+                // Restore button UI
+                if (btn) {
+                    btn.innerHTML = originalBtnContent;
+                    btn.style.pointerEvents = 'auto';
+                }
+            }
+        }
+
+        function showNotification(htmlMsg) {
+            var note = document.createElement('div');
+            note.className = "fixed bottom-24 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-xl shadow-2xl z-[100] text-sm font-bold animate-bounce whitespace-nowrap text-center";
+            note.innerHTML = htmlMsg;
+            document.body.appendChild(note);
+            setTimeout(function() { note.remove(); }, 3500);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
