@@ -19,7 +19,7 @@
     <!-- Chart.js for the Radar Chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Load all 10 Original RIASEC/Personality Database Parts -->
+    <!-- Load 10 RIASEC/Personality Database Parts -->
     <script src="questions_part1.js"></script>
     <script src="questions_part2.js"></script>
     <script src="questions_part3.js"></script>
@@ -31,7 +31,7 @@
     <script src="questions_part9.js"></script>
     <script src="questions_part10.js"></script>
     
-    <!-- Load 1 Academic/Subject Specific Database Part -->
+    <!-- Load Academic Specific Database Parts -->
     <script src="academic_part1.js"></script>
     
     <!-- Firebase Libraries -->
@@ -651,6 +651,12 @@
 <!-- Single Main Application Script -->
 <script>
     // ==========================================
+    // Global Payload Variables
+    // ==========================================
+    let currentScoreOutOf50 = 0;
+    let currentDiscountAmount = 0;
+
+    // ==========================================
     // 1. PWA & SERVICE WORKER SETUP (Encapsulated)
     // ==========================================
     (function initPWA() {
@@ -719,18 +725,12 @@
         }
     }
 
-    // Detect Tab Switch
     document.addEventListener("visibilitychange", () => {
-        if (isTestActive && document.visibilityState === "hidden") {
-            handleCheatWarning("tab switching detected");
-        }
+        if (isTestActive && document.visibilityState === "hidden") handleCheatWarning("tab switching detected");
     });
 
-    // Detect Window Focus Loss (Catches clicks on external overlays, floating apps, or secondary monitors)
     window.addEventListener("blur", () => {
-        if (isTestActive) {
-            handleCheatWarning("window focus lost");
-        }
+        if (isTestActive) handleCheatWarning("window focus lost");
     });
 
     document.addEventListener("contextmenu", (e) => { if (isTestActive) e.preventDefault(); });
@@ -756,7 +756,7 @@
         }
     };
 
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQg5L1qJwzd4TFLEb_Yq-XQqiO5EUE0DDIsmPYBs1AKwMCe1Yg-gdb9F0MAoUHivTB/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcQnUo18Uv9H6e0mU1Kz-g7K0Y_vP_i8m7u5P_G78K_k7m_o2T_a9kZ/exec";
 
     async function sendDataToGoogleSheets(statusType) {
         if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PASTE_URL")) return;
@@ -773,7 +773,11 @@
             pwd: studentData.pwd, caste: studentData.caste, community: studentData.community,
             pincode: studentData.pincode, state: studentData.state, district: studentData.district, 
             address: studentData.address,
-            topJob: topJobMatch, matchPercent: topJobPercent, scores: userScores
+            topJob: topJobMatch, 
+            matchPercent: topJobPercent, 
+            scoreOutOf50: currentScoreOutOf50,
+            discountAmount: currentDiscountAmount,
+            scores: userScores
         };
 
         try {
@@ -789,11 +793,8 @@
         const inputs = document.querySelectorAll('#stage-1 input');
         inputs.forEach(el => {
             if (el.id && el.id !== 'picker-search') {
-                if (el.type === 'checkbox') {
-                    dataToSave[el.id] = { checked: el.checked };
-                } else {
-                    dataToSave[el.id] = { value: el.value, dataValue: el.getAttribute('data-value') };
-                }
+                if (el.type === 'checkbox') dataToSave[el.id] = { checked: el.checked };
+                else dataToSave[el.id] = { value: el.value, dataValue: el.getAttribute('data-value') };
             }
         });
         localStorage.setItem('coc_form_data', JSON.stringify(dataToSave));
@@ -948,7 +949,7 @@
         sportsInterest: ["Professional / National Level", "State / District Level", "School / College Team", "Casual Player / Hobby", "Not Interested"],
         motherLanguage: ["Hindi", "English", "Bengali", "Marathi", "Telugu", "Tamil", "Gujarati", "Urdu", "Kannada", "Odia", "Malayalam", "Punjabi", "Assamese", "Other"],
         gender: ["Male", "Female", "Other"],
-        height: [], // dynamically populated on load
+        height: [], 
         pwd: [
             "None", "Visual Impairment (Eye Sight / Blindness)", "Hearing Impairment", 
             "Locomotor Disability", "Speech & Language Disability", "Intellectual / Learning Disability", 
@@ -1135,6 +1136,7 @@
     let currentQuestionIndex = 0;    
     let answeredCount = 0;    
     let chartInstance = null;    
+    let activeQuestions = [];    
     
     let userScores = {
         aptitude: { numerical: 0, logical: 0, verbal: 0, general_awareness: 0 },
@@ -1147,19 +1149,6 @@
         big5: { conscientiousness: 0, extraversion: 0, agreeableness: 0, openness: 0, emotional_stability: 0 }
     };
 
-    const allQuestions = [
-        {
-            module: "Logic", 
-            text: "Sample Question for specific groups?", 
-            trait: "logical", 
-            traitType: "aptitude", 
-            type: "mcq", 
-            qualifications: ["10th Level", "12th Science", "B.Tech / B.E.", "All"],
-            options: [{text: "Option A", val: 5}, {text: "Option B", val: 0}]
-        }
-    ];
-
-    let activeQuestions = [];    
     const govtJobDatabase = [
         { title: "UPSC Civil Services (IAS/IPS)", desc: "Top-tier administrative and police roles.", reqs: { logical: 80, conscientiousness: 90, enterprising: 85, verbal: 80 } },
         { title: "Statistical Investigator (SSC)", desc: "Analyze government data, conduct surveys.", reqs: { numerical: 90, investigative: 85, conventional: 80 } },
@@ -1289,8 +1278,6 @@
             academicPool = academicPoolRaw.filter(q => {
                 if (!q.qualifications || q.qualifications.length === 0) return true;
                 if (q.qualifications.includes("All")) return true;
-                
-                // Only include questions mapped to their exact level
                 return q.qualifications.includes(mappedLevel);
             });
         } else {
@@ -1339,7 +1326,7 @@
         // Trigger UI Slide Animation
         const wrapper = document.getElementById('question-wrapper');
         wrapper.classList.remove('animate');
-        void wrapper.offsetWidth; // Trigger reflow to restart animation
+        void wrapper.offsetWidth; 
         wrapper.classList.add('animate');
         
         document.getElementById('question-text').innerText = q.text;
@@ -1356,7 +1343,6 @@
             let labels = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
             let html = '<div class="likert-container">';
             for (let i = 1; i <= 5; i++) {
-                // UI UPGRADE: Apply dynamic color classes likert-1 through likert-5
                 html += `<label class="likert-option likert-${i}"><input type="radio" name="answer" value="${i}"><span>${labels[i-1]}</span></label>`;
             }
             area.innerHTML = html + '</div>';
@@ -1395,10 +1381,7 @@
                 }
             }
             
-            if (timeRemaining <= 5) {
-                // UI UPGRADE: Add intense pulse animation
-                timerDisplay.classList.add('timer-alert');
-            }
+            if (timeRemaining <= 5) timerDisplay.classList.add('timer-alert');
             
             if (timeRemaining <= 0) {
                 clearInterval(questionTimerInterval);
@@ -1427,7 +1410,6 @@
     }
 
     function nextQuestion(event) {
-        // Anti-Bot: Ensure the click was made by a real human input device, not a script calling .click()
         if (event && !event.isTrusted) {
             alert("Security Alert: Automated script interaction detected!");
             return;
@@ -1501,8 +1483,9 @@
             });
 
             finalRankedJobs = govtJobDatabase.sort((a,b) => b.matchPercent - a.matchPercent);
+            
+            generateReportUI(); // Set scoreOutOf50 and discountAmount before sending
             sendDataToGoogleSheets("Assessment Complete");
-            generateReportUI();
             goToStage(5);
         }, 5000);
     }
@@ -1536,17 +1519,17 @@
         }
         
         // Scale their academic score to a strict maximum of 50
-        let scoreOutOf50 = totalMax > 0 ? Math.round((totalUser / totalMax) * 50) : 0;
-        document.getElementById('final-score').innerText = scoreOutOf50;
+        currentScoreOutOf50 = totalMax > 0 ? Math.round((totalUser / totalMax) * 50) : 0;
+        document.getElementById('final-score').innerText = currentScoreOutOf50;
         
         // Calculate Discount (1 Point = 1000 Rs)
-        let discountAmount = scoreOutOf50 * 1000;
-        let formattedDiscount = '₹' + discountAmount.toLocaleString('en-IN');
+        currentDiscountAmount = currentScoreOutOf50 * 1000;
+        let formattedDiscount = '₹' + currentDiscountAmount.toLocaleString('en-IN');
         document.getElementById('discount-amount').innerText = formattedDiscount;
         
         // Update Stage 6 Call to Action
         document.getElementById('claim-discount-amount').innerText = formattedDiscount;
-        document.getElementById('claim-score-amount').innerText = scoreOutOf50;
+        document.getElementById('claim-score-amount').innerText = currentScoreOutOf50;
         // ---------------------------------------------
         
         let numPct = maxScores.aptitude.numerical ? Math.round((userScores.aptitude.numerical / maxScores.aptitude.numerical) * 100) : 0;
