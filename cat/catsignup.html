@@ -1,25 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-scrollbar">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XNQ800CT0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-2XNQ800CT0');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CLUB OF COMPETITION CAREER ADVISE TEST</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#1e3a8a">
+    <meta name="theme-color" content="#4f46e5">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="CoC Test">
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Poppins & Manrope -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Chart.js for the Radar Chart -->
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- html2canvas for capturing exact result screenshots -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-    <!-- Load 10 RIASEC/Personality Database Parts -->
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        manrope: ['Manrope', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#10b981',
+                        accent: '#f59e0b',
+                        dark: '#0f172a',
+                        whatsapp: '#25D366',
+                        instagram: '#E4405F',
+                        youtube: '#FF0000',
+                        telegram: '#0088cc'
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'sparkle': 'sparkle 2s infinite linear',
+                        'wiggle': 'wiggle 1s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        sparkle: {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.6 }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-2deg)' },
+                            '50%': { transform: 'rotate(2deg)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Load Databases -->
     <script src="questions_part1.js"></script>
     <script src="questions_part2.js"></script>
     <script src="questions_part3.js"></script>
@@ -30,24 +87,21 @@
     <script src="questions_part8.js"></script>
     <script src="questions_part9.js"></script>
     <script src="questions_part10.js"></script>
-    
-    <!-- Load Academic Specific Database Parts -->
     <script src="academic_part1.js"></script>
     
     <!-- Firebase Libraries -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
-    
-    <!-- External Firebase Config -->
     <script src="firebase-config.js"></script>
 
     <style>
         /* --- CLUB OF COMPETITION BRAND DESIGN SYSTEM --- */
         :root {
-            --primary: #1e3a8a;
-            --primary-light: #eff6ff;
-            --primary-hover: #1e40af;
+            /* Mapped strictly to modern Tailwind Theme colors */
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --primary-hover: #4338ca;
             --accent: #f59e0b;
             --accent-light: #fffbeb;
             --accent-hover: #d97706;
@@ -60,112 +114,100 @@
             --warning-light: #fef3c7;
             --warning-hover: #d97706;
             --text-main: #0f172a;
-            --text-muted: #475569;
-            --border: #cbd5e1;
-            --border-focus: #bfdbfe;
-            --bg-body: #f1f5f9;
-            --bg-card: #ffffff;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --border-focus: #c7d2fe;
+            --bg-body: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.9);
             
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 24px;
+            --radius-sm: 0.75rem;
+            --radius-md: 1rem;
+            --radius-lg: 2.5rem; 
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-            --shadow-md: 0 12px 30px -8px rgba(30, 58, 138, 0.15), 0 4px 12px -3px rgba(30, 58, 138, 0.08);
-            --shadow-float: 0 24px 50px -12px rgba(30, 58, 138, 0.25);
+            --shadow-md: 0 10px 25px -5px rgba(79, 70, 229, 0.1);
+            --shadow-float: 0 20px 40px -10px rgba(79, 70, 229, 0.2);
             --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { box-sizing: border-box; }
+        /* Base Resets & Typography */
+        * { box-sizing: border-box; -ms-overflow-style: none; scrollbar-width: none; }
+        *::-webkit-scrollbar { display: none; }
 
         body { 
-            font-family: 'Inter', sans-serif; 
-            background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 50%, #e2e8f0 100%);
+            font-family: 'Manrope', sans-serif; 
+            background-color: var(--bg-body);
             margin: 0; 
-            padding: 20px 15px 80px 15px; 
+            padding: 20px 15px 120px 15px; 
             color: var(--text-main); 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-            max-width: 100vw;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
         }
 
-        body::-webkit-scrollbar { display: none; }
-
+        [x-cloak] { display: none !important; }
         .no-select { user-select: none; -webkit-user-select: none; -moz-user-select: none; }
+        h1, h2, .font-poppins { font-family: 'Poppins', sans-serif; }
+        
+        /* Hero Background Pattern */
+        .hero-pattern {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2;
+            background-color: var(--bg-body);
+            background-image: radial-gradient(#e0e7ff 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
 
+        /* Layout & Containers */
         .app-container { 
             background: var(--bg-card); 
+            backdrop-filter: blur(12px);
             padding: 45px 50px; 
             border-radius: var(--radius-lg); 
-            max-width: 800px; 
+            max-width: 850px; 
             width: 100%;
             margin: auto; 
-            box-shadow: var(--shadow-md); 
+            box-shadow: 0 20px 50px -12px rgba(79, 70, 229, 0.15); 
             position: relative;
-            overflow: hidden;
+            z-index: 10;
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
-        
-        .app-container::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 10px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
-        }
 
-        .brand-header { text-align: center; margin-bottom: 35px; padding-bottom: 25px; border-bottom: 2px dashed #e2e8f0; }
-        .brand-title { font-size: 2.2em; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: -0.5px; margin: 0 0 5px 0; line-height: 1.1; }
-        .brand-subtitle { font-size: 0.95em; color: var(--accent-hover); font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin: 0; }
-        .brand-footer { text-align: center; margin-top: 30px; font-size: 0.85em; color: var(--text-muted); font-weight: 500; line-height: 1.6; }
-        .brand-footer strong { color: var(--primary); }
-
-        h2 { color: var(--primary); margin-top: 0; margin-bottom: 12px; font-size: 1.8em; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
-        h3 { color: #1e293b; font-size: 1.25em; font-weight: 700; margin-top: 35px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-        
         .stage { display: none; }
         .active-stage { display: block; animation: scaleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes scaleFadeIn { from { opacity: 0; transform: translateY(15px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         .hidden { display: none !important; }
 
+        /* Typography */
+        .brand-header { text-align: center; margin-bottom: 35px; padding-bottom: 25px; border-bottom: 2px dashed var(--border); }
+        .brand-title { font-size: 2.2em; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: -0.5px; margin: 0 0 5px 0; line-height: 1.1; }
+        .brand-subtitle { font-size: 0.95em; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin: 0; }
+        .brand-footer { text-align: center; margin-top: 30px; font-size: 0.85em; color: var(--text-muted); font-weight: 600; line-height: 1.6; }
+        h2 { color: var(--text-main); margin-top: 0; margin-bottom: 12px; font-size: 1.8em; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+        h3 { color: var(--text-main); font-size: 1.25em; font-weight: 700; margin-top: 35px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; }
+        
+        /* Form Elements */
         .form-group { margin-bottom: 24px; position: relative; }
-        label { font-weight: 600; display: block; margin-bottom: 10px; color: #334155; font-size: 0.95em; }
+        label { font-weight: 700; display: block; margin-bottom: 10px; color: var(--text-main); font-size: 0.95em; }
         .required { color: #ef4444; }
         
         input[type="text"], input[type="number"], input[type="tel"], input[type="email"], input[type="date"] { 
             width: 100%; padding: 16px 20px; border: 2px solid transparent; border-radius: var(--radius-md); 
-            background: var(--bg-body); box-sizing: border-box; font-size: 16px; color: var(--text-main);
-            font-family: 'Inter', sans-serif; font-weight: 500; transition: var(--transition-smooth); 
+            background: #f1f5f9; box-sizing: border-box; font-size: 16px; color: var(--text-main);
+            font-family: 'Manrope', sans-serif; font-weight: 600; transition: var(--transition-smooth); 
             appearance: none; -webkit-appearance: none; -moz-appearance: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
         
         .input-picker {
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; cursor: pointer; user-select: none;
         }
         
-        .modal-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 0; }
-        .modal-card { background: white; width: 100%; max-width: 800px; height: 80vh; border-radius: 24px 24px 0 0; display: flex; flex-direction: column; animation: slideUpPicker 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
-        @keyframes slideUpPicker { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        
-        .picker-option { padding: 18px 20px; border-bottom: 1px solid var(--bg-body); font-weight: 600; cursor: pointer; transition: var(--transition-smooth); color: var(--text-main); display: flex; align-items: center; justify-content: space-between;}
-        .picker-option:hover, .picker-option:active { background: var(--primary-light); color: var(--primary); padding-left: 28px; }
-        .picker-optgroup { padding: 14px 20px; font-size: 0.85em; font-weight: 800; text-transform: uppercase; color: var(--primary); background: var(--primary-light); letter-spacing: 0.5px;}
-
-        .legal-content { padding: 20px; overflow-y: auto; color: var(--text-muted); font-size: 0.95em; line-height: 1.6; }
-        .legal-content h3 { color: var(--primary); font-size: 1.1em; margin-top: 20px; margin-bottom: 10px; }
-        .legal-content p { margin-bottom: 15px; }
-        .legal-link { color: var(--primary); text-decoration: none; font-weight: 600; transition: var(--transition-smooth); }
-        .legal-link:hover { text-decoration: underline; color: var(--primary-hover); }
-
         input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.6; transition: 0.2s; }
         input[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
-        input::placeholder { color: #94a3b8; font-weight: 400; }
+        input::placeholder { color: #94a3b8; font-weight: 500; }
         input:hover:not([readonly]) { background: #e2e8f0; }
         input:focus { background: #fff; border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px var(--border-focus); }
-
-        .grid-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
-        .grid-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
 
         .checkbox-wrapper { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: var(--secondary); border-radius: var(--radius-md); border: 1px solid var(--border); cursor: pointer; transition: var(--transition-smooth); margin-bottom: 12px; }
         .checkbox-wrapper:hover { border-color: var(--primary); background: var(--primary-light); }
@@ -173,117 +215,148 @@
         .checkbox-wrapper input[type="checkbox"]::before { content: ""; width: 12px; height: 12px; transform: scale(0); transition: 120ms transform ease-in-out; box-shadow: inset 1em 1em white; background-color: white; transform-origin: center; clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); }
         .checkbox-wrapper input[type="checkbox"]:checked { background-color: var(--primary); border-color: var(--primary); }
         .checkbox-wrapper input[type="checkbox"]:checked::before { transform: scale(1); }
-        .checkbox-wrapper span { color: #475569; line-height: 1.6; font-size: 0.95em; }
+        .checkbox-wrapper span { color: var(--text-muted); line-height: 1.6; font-size: 0.95em; font-weight: 600;}
 
+        /* Buttons */
         button { 
-            width: 100%; padding: 18px 24px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); 
-            color: white; border: none; border-radius: var(--radius-md); font-size: 16px; font-weight: 700; 
-            letter-spacing: 0.5px; cursor: pointer; margin-top: 10px; transition: var(--transition-smooth); 
-            box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25); position: relative; overflow: hidden; 
+            width: 100%; padding: 18px 24px; background: var(--primary); 
+            color: white; border: none; border-radius: 1rem; font-size: 16px; font-weight: 800; font-family: 'Manrope', sans-serif;
+            cursor: pointer; margin-top: 10px; transition: var(--transition-smooth); 
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25); position: relative; overflow: hidden; 
             display: flex; align-items: center; justify-content: center; gap: 10px; 
         }
         
-        .btn-brand-accent { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #ffffff; box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .btn-brand-accent:hover { box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4); }
-        button::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
-        button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(30, 58, 138, 0.35); }
-        button:hover::after { left: 100%; }
-        button:active { transform: translateY(1px); box-shadow: 0 2px 10px rgba(30, 58, 138, 0.3); }
+        .btn-brand-accent { background: linear-gradient(135deg, var(--primary), #6366f1); color: #ffffff; box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .btn-brand-accent:hover { box-shadow: 0 15px 35px -5px rgba(79, 70, 229, 0.5); transform: translateY(-2px); }
+        button:active { transform: translateY(1px); box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3); }
         button:disabled { opacity: 0.6; cursor: not-allowed; background: #94a3b8 !important; box-shadow: none !important; transform: none !important; }
-        button:disabled::after { display: none; }
         
         .btn-secondary { background: var(--bg-body); color: var(--primary); box-shadow: none; border: 2px solid transparent; }
         .btn-secondary:hover:not(:disabled) { background: #e2e8f0; color: var(--primary-hover); border-color: var(--border); }
-        .btn-success { background: linear-gradient(135deg, var(--success), #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25); }
-        .btn-success:hover { box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35); }
+        .btn-success { background: linear-gradient(135deg, var(--success), #059669); box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4); }
+        .btn-success:hover { box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.5); transform: translateY(-2px); }
+        .btn-google { background: #ffffff; color: var(--text-main); border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; font-weight: 700; }
+        .btn-google:hover { background: var(--bg-body); transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05); border-color: var(--border-focus); }
 
-        .btn-google { background: #ffffff; color: #334155; border: 1px solid var(--border); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; font-weight: 600; }
-        .btn-google:hover { background: #f8fafc; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); border-color: var(--border-focus); }
-
-        .info-box { background-color: var(--primary-light); border: 1px solid var(--border-focus); padding: 20px; margin-bottom: 30px; border-radius: var(--radius-md); font-size: 0.95em; line-height: 1.6; color: var(--primary); display: flex; gap: 15px; }
+        /* Modals & Overlays */
+        .modal-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 0; }
+        .modal-card { background: white; width: 100%; max-width: 800px; height: 80vh; border-radius: 2.5rem 2.5rem 0 0; display: flex; flex-direction: column; animation: slideUpPicker 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; box-shadow: 0 -10px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
+        @keyframes slideUpPicker { from { transform: translateY(100%); } to { transform: translateY(0); } }
         
+        .picker-option { padding: 18px 20px; border-bottom: 1px solid var(--bg-body); font-weight: 700; cursor: pointer; transition: var(--transition-smooth); color: var(--text-main); display: flex; align-items: center; justify-content: space-between;}
+        .picker-option:hover, .picker-option:active { background: var(--primary-light); color: var(--primary); padding-left: 28px; }
+        .picker-optgroup { padding: 14px 20px; font-size: 0.85em; font-weight: 800; text-transform: uppercase; color: var(--primary); background: var(--primary-light); letter-spacing: 0.5px;}
+
+        .legal-content { padding: 20px; overflow-y: auto; color: var(--text-muted); font-size: 0.95em; line-height: 1.6; }
+        .legal-content h3 { color: var(--primary); font-size: 1.1em; margin-top: 20px; margin-bottom: 10px; font-family: 'Poppins', sans-serif; font-weight: 700; }
+        .legal-content p { margin-bottom: 15px; }
+        .legal-link { color: var(--primary); text-decoration: none; font-weight: 700; transition: var(--transition-smooth); }
+        .legal-link:hover { text-decoration: underline; color: var(--primary-hover); }
+
+        /* UI Components (Info Boxes, Grids) */
+        .grid-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+        .grid-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
+        
+        .info-box { background-color: var(--primary-light); border: 1px solid var(--border-focus); padding: 20px; margin-bottom: 30px; border-radius: 1.5rem; font-size: 0.95em; line-height: 1.6; color: var(--primary); display: flex; gap: 15px; font-weight: 600;}
+        
+        /* Test Engine Styles */
         .progress-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
-        .progress-bg { background-color: var(--bg-body); border-radius: 99px; height: 10px; width: 100%; margin-bottom: 35px; overflow: hidden; }
-        .progress-fill { background: linear-gradient(90deg, var(--primary-hover), var(--primary)); height: 100%; width: 0%; border-radius: 99px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(30,58,138,0.4); }
+        .progress-bg { background-color: var(--bg-body); border-radius: 99px; height: 12px; width: 100%; margin-bottom: 35px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);}
+        .progress-fill { background: linear-gradient(90deg, var(--secondary), var(--success)); height: 100%; width: 0%; border-radius: 99px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
         
-        /* UI UPGRADE: Question Animations & Spacing */
         .question-wrapper { padding: 10px 0 20px 0; }
         .question-wrapper.animate { animation: slideInNext 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes slideInNext { 0% { opacity: 0; transform: translateX(30px); } 100% { opacity: 1; transform: translateX(0); } }
+        .question-text { font-size: 1.4em; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 35px; color: var(--text-main); line-height: 1.5; letter-spacing: -0.3px; }
         
-        .question-text { font-size: 1.4em; font-weight: 800; margin-bottom: 35px; color: var(--primary); line-height: 1.5; letter-spacing: -0.3px; }
-        
-        /* UI UPGRADE: Enhanced MCQ Options */
-        .option-label { display: flex; align-items: center; justify-content: space-between; flex-direction: row-reverse; padding: 20px 24px; border: 2px solid var(--bg-body); border-radius: 16px; cursor: pointer; transition: var(--transition-smooth); background: #fff; margin-bottom: 16px; font-size: 1.1em; font-weight: 600; color: #334155; position: relative; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .option-label:hover { border-color: var(--border-focus); background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(30,58,138,0.05); }
-        .option-label:has(input:checked) { border-color: var(--primary); background: var(--primary-light); color: var(--primary); box-shadow: 0 4px 12px rgba(30,58,138,0.1); }
-        .option-label input[type="radio"] { appearance: none; margin: 0; width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; display: grid; place-content: center; transition: var(--transition-smooth); flex-shrink: 0; }
-        .option-label input[type="radio"]::before { content: ""; width: 12px; height: 12px; border-radius: 50%; transform: scale(0); transition: 120ms transform ease-in-out; background-color: var(--primary); }
-        .option-label input[type="radio"]:checked { border-color: var(--primary); }
-        .option-label input[type="radio"]:checked::before { transform: scale(1); }
+        .option-label { display: flex; align-items: center; justify-content: flex-start; padding: 16px 20px; border: 2px solid var(--bg-body); border-radius: 1.25rem; cursor: pointer; transition: var(--transition-smooth); background: #fff; margin-bottom: 14px; font-size: 1.05em; font-weight: 700; color: var(--text-main); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); gap: 15px; }
+        .option-label:hover { border-color: var(--border-focus); background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.1); }
+        .option-label:has(input:checked) { border-color: var(--primary); background: var(--primary-light); color: var(--primary); box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.15); }
+        .option-label input[type="radio"] { position: absolute; opacity: 0; cursor: pointer; }
 
-        /* UI UPGRADE: Color-Coded Likert Scale */
-        .likert-container { display: flex; justify-content: space-between; margin-bottom: 40px; gap: 12px; background: transparent; padding: 0; }
+        .likert-container { display: flex; justify-content: space-between; margin-bottom: 40px; gap: 10px; background: transparent; padding: 0; }
         .likert-option { flex: 1; position: relative; cursor: pointer; }
         .likert-option input[type="radio"] { position: absolute; opacity: 0; cursor: pointer; }
-        .likert-option span { display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px 10px; border-radius: 16px; background: #fff; border: 2px solid var(--bg-body); color: var(--text-muted); font-weight: 700; font-size: 0.85em; line-height: 1.4; transition: var(--transition-smooth); height: 100%; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .likert-option:hover span { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.05); border-color: var(--border); color: var(--text-main); }
-        .likert-option input[type="radio"]:checked + span { color: white; box-shadow: 0 6px 16px rgba(0,0,0,0.15); transform: scale(1.03); }
+        .likert-option span { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px 8px; border-radius: 1.25rem; background: #fff; border: 2px solid var(--bg-body); color: var(--text-muted); font-weight: 700; font-size: 0.8em; line-height: 1.4; transition: var(--transition-smooth); height: 100%; box-sizing: border-box; box-shadow: var(--shadow-sm); }
+        .likert-option:hover span { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05); border-color: var(--border); color: var(--text-main); }
+        .likert-option:has(input:checked) span { color: white; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); transform: scale(1.03); }
         
-        .likert-1 input[type="radio"]:checked + span { background: #ef4444; border-color: #ef4444; }
-        .likert-2 input[type="radio"]:checked + span { background: #f97316; border-color: #f97316; }
-        .likert-3 input[type="radio"]:checked + span { background: #64748b; border-color: #64748b; }
-        .likert-4 input[type="radio"]:checked + span { background: #10b981; border-color: #10b981; }
-        .likert-5 input[type="radio"]:checked + span { background: #059669; border-color: #059669; }
+        .likert-1:has(input:checked) span { background: #ef4444; border-color: #ef4444; }
+        .likert-2:has(input:checked) span { background: #f97316; border-color: #f97316; }
+        .likert-3:has(input:checked) span { background: #64748b; border-color: #64748b; }
+        .likert-4:has(input:checked) span { background: #10b981; border-color: #10b981; }
+        .likert-5:has(input:checked) span { background: #059669; border-color: #059669; }
 
-        /* UI UPGRADE: Timer Pulse Alert */
-        @keyframes timerPulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); background: #fee2e2; color: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); border: 1px solid #fca5a5; } 100% { transform: scale(1); } }
+        @keyframes timerPulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); background: #fee2e2; color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border: 1px solid #fca5a5; } 100% { transform: scale(1); } }
         .timer-alert { animation: timerPulse 1s infinite !important; }
 
+        /* Loader & Animations */
         .spinner-container { position: relative; width: 80px; height: 80px; margin: 40px auto; }
-        .spinner { border: 4px solid var(--border); border-top: 4px solid var(--accent); border-radius: 50%; width: 100%; height: 100%; animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite; box-sizing: border-box; }
-        .spinner-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite ease-in-out; }
+        .spinner { border: 4px solid var(--border); border-top: 4px solid var(--primary); border-radius: 50%; width: 100%; height: 100%; animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite; box-sizing: border-box; }
+        .spinner-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite ease-in-out; }
+        .spinner-inline { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.5); border-top: 2px solid white; border-radius: 50%; animation: spin 1s linear infinite; }
+        
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; } }
-
         @keyframes popInRole { 0% { opacity: 0; transform: scale(0.95) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
 
-        .job-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px; margin-bottom: 24px; background: #fff; box-shadow: var(--shadow-sm); transition: var(--transition-smooth); position: relative; overflow: hidden; opacity: 0; animation: popInRole 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .job-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--primary); border-radius: 4px 0 0 4px; }
-        .job-card:nth-child(1)::before { background: var(--accent); width: 6px; }
-        .job-card:nth-child(2)::before { background: var(--primary); }
-        .job-card:nth-child(3)::before { background: var(--success); }
-        .job-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); border-color: var(--border-focus); }
+        /* Results & Jobs UI */
+        .job-card { border: 2px solid var(--border); border-radius: 2rem; padding: 28px; margin-bottom: 24px; background: #fff; box-shadow: var(--shadow-sm); transition: var(--transition-smooth); position: relative; overflow: hidden; opacity: 0; animation: popInRole 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .job-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-float); border-color: var(--secondary); }
         .job-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-        .job-title { font-size: 1.3em; font-weight: 800; color: var(--primary); }
-        .match-score { font-weight: 800; color: var(--accent-hover); background: var(--accent-light); padding: 6px 16px; border-radius: 99px; font-size: 0.9em; border: 1px solid #fef3c7; }
-        .job-card p { margin-top: 5px; color: var(--text-muted); line-height: 1.6; font-size: 0.95em; }
-        .job-card ul { margin-top: 20px; padding-left: 20px; color: #475569; }
-        .job-card li { margin-bottom: 8px; line-height: 1.5; font-size: 0.95em;}
-        .job-card li::marker { color: var(--accent); }
+        .job-title { font-size: 1.3em; font-family: 'Poppins', sans-serif; font-weight: 800; color: var(--text-main); }
+        .match-score { font-weight: 800; color: #fff; background: var(--secondary); padding: 6px 16px; border-radius: 99px; font-size: 0.9em; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
+        .job-card p { margin-top: 5px; color: var(--text-muted); line-height: 1.6; font-size: 0.95em; font-weight: 600;}
+        .job-card ul { margin-top: 20px; padding-left: 20px; color: var(--text-muted); }
+        .job-card li { margin-bottom: 8px; line-height: 1.5; font-size: 0.95em; font-weight: 600;}
+        .job-card li::marker { color: var(--secondary); }
 
-        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
-        .chart-container { position: relative; height: 350px; width: 100%; background: #fff; border-radius: var(--radius-md); padding: 20px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); box-sizing: border-box;}
-        
-        .traits-panel { background: #fff; padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-        .traits-panel h4 { margin-top: 0; margin-bottom: 20px; color: var(--primary); font-size: 1.2em; font-weight: 800;}
+        .chart-container { position: relative; height: 350px; width: 100%; background: #fff; border-radius: 2rem; padding: 20px; border: 2px solid var(--border); box-shadow: var(--shadow-sm); box-sizing: border-box;}
+        .traits-panel { background: #fff; padding: 30px; border-radius: 2rem; border: 2px solid var(--border); box-shadow: var(--shadow-sm); }
+        .traits-panel h4 { margin-top: 0; margin-bottom: 20px; color: var(--text-main); font-size: 1.2em; font-weight: 800; font-family: 'Poppins', sans-serif;}
         .traits-panel ul { list-style: none; padding: 0; margin: 0; }
-        .traits-panel li { padding: 14px 0; border-bottom: 1px solid var(--bg-body); display: flex; justify-content: space-between; align-items: center; color: #475569; font-size: 0.95em; }
+        .traits-panel li { padding: 14px 0; border-bottom: 1px solid var(--bg-body); display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.95em; font-weight: 600;}
         .traits-panel li:last-child { border-bottom: none; padding-bottom: 0; }
-        .traits-panel strong:first-child { font-weight: 600; color: #334155; }
+        .traits-panel strong:first-child { font-weight: 700; color: var(--text-main); }
         .traits-panel strong:last-child { background: var(--primary-light); padding: 4px 12px; border-radius: 8px; color: var(--primary); }
 
         .timeline { border-left: 3px solid var(--border-focus); padding-left: 30px; margin-top: 30px; margin-left: 10px;}
         .timeline-item { margin-bottom: 35px; position: relative; }
         .timeline-item::before { content: ''; position: absolute; left: -40px; top: 0px; width: 16px; height: 16px; background: var(--primary); border-radius: 50%; border: 4px solid var(--primary-light); }
         .timeline-date { font-weight: 800; color: var(--primary); font-size: 0.85em; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;}
-        .timeline-item div:last-child { color: #475569; line-height: 1.6; font-size: 0.95em;}
+        .timeline-item div:last-child { color: var(--text-muted); line-height: 1.6; font-size: 0.95em; font-weight: 600;}
 
-        .spinner-inline { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.5); border-top: 2px solid white; border-radius: 50%; animation: spin 1s linear infinite; }
+        /* Taskbar Styles */
+        .taskbar-wrapper {
+            position: fixed; bottom: calc(1rem + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
+            width: calc(100% - 2rem); z-index: 40; display: flex; pointer-events: none; max-width: 900px; transition: opacity 0.3s;
+        }
+        .taskbar-wrapper > * { pointer-events: auto; }
+        .taskbar {
+            width: 100%; display: flex; flex-direction: row; justify-content: space-around; align-items: center;
+            border-radius: 2rem; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border: 1px solid var(--border);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        .tb-opt-btn {
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s;
+            border: 2px solid transparent; flex: 1; height: 100%;
+        }
+        .tb-opt-btn.active {
+            background-color: var(--primary) !important; color: white !important;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4); transform: translateY(-2px); border-color: var(--primary-hover);
+        }
+        .hide-taskbar { display: none !important; }
+
+        /* Media Queries */
+        @media (max-width: 1023px) { 
+            .taskbar-wrapper { max-width: 500px; } 
+        }
 
         @media (max-width: 768px) {
-            body { padding: 15px 10px 80px 10px; }
-            .app-container { padding: 30px 20px; border-radius: 20px; }
+            body { padding: 15px 10px 100px 10px; }
+            .app-container { padding: 30px 20px; border-radius: 2rem; }
             .brand-title { font-size: 1.6em; }
             .profile-grid { grid-template-columns: 1fr; gap: 20px;}
             .grid-row-3 { gap: 8px; }
@@ -291,18 +364,19 @@
             .grid-row-3 input, .grid-row-2 input, .grid-row-3 select, .grid-row-2 select { padding: 12px 8px; font-size: 13px; }
             .grid-row-3 label, .grid-row-2 label { font-size: 0.75em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             .likert-container { flex-direction: column; gap: 10px;}
-            .likert-option span { padding: 18px; font-size: 1em;}
+            .likert-option span { padding: 16px; font-size: 0.9em; flex-direction: row; justify-content: flex-start; gap: 15px; }
+            .likert-option span strong { margin-bottom: 0; }
             .chart-container { height: 280px; }
-            .modal-card { height: 90vh; border-radius: 16px 16px 0 0; }
+            .modal-card { height: 90vh; border-radius: 2rem 2rem 0 0; }
         }
 
         @media print {
             @page { size: A4 portrait; margin: 15mm; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             body { background: white !important; padding: 0; min-height: auto; }
-            .app-container { box-shadow: none !important; max-width: 100% !important; border: none !important; padding: 0 !important; margin: 0 !important; border-radius: 0 !important; }
+            .hero-pattern, .no-print, .taskbar-wrapper { display: none !important; }
+            .app-container { box-shadow: none !important; max-width: 100% !important; border: none !important; padding: 0 !important; margin: 0 !important; border-radius: 0 !important; backdrop-filter: none; }
             .app-container::before { display: none; }
-            .no-print { display: none !important; }
             .stage { display: none !important; }
             #stage-5, #stage-6 { display: block !important; opacity: 1 !important; transform: none !important; animation: none !important; }
             .profile-grid { display: block; margin-top: 20px; }
@@ -311,22 +385,46 @@
             .job-card { page-break-inside: avoid; margin-bottom: 15px; border: 1px solid var(--border) !important; box-shadow: none !important; }
             h2, h3, .brand-header { page-break-after: avoid; }
             .timeline-item { page-break-inside: avoid; }
-            .brand-footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border); page-break-inside: avoid; }
         }
     </style>
 </head>
 <body>
 
+<!-- Animated Background Blobs -->
+<div class="hero-pattern"></div>
+<div class="fixed -top-10 -left-10 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-float" style="z-index: -1;"></div>
+<div class="fixed -top-10 -right-10 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-float" style="z-index: -1; animation-delay: 1.5s;"></div>
+
+<!-- Welcome Popup Modal -->
+<div id="welcome-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 hidden no-print">
+    <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-md" onclick="closeWelcomeModal()"></div>
+    <div class="relative bg-white rounded-[2.5rem] w-full max-w-lg p-8 shadow-2xl border-2 border-primary/20 text-center" style="animation: scaleFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;">
+        <button onclick="closeWelcomeModal()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="w-20 h-20 rounded-full bg-indigo-100 flex items-center justify-center text-primary text-4xl shadow-inner mx-auto mb-6 animate-float">
+            👋
+        </div>
+        <h3 class="text-2xl font-black font-poppins text-dark mb-4">Welcome to CoC</h3>
+        <p class="text-slate-600 font-medium text-base leading-relaxed mb-8">
+            Welcome to the official <strong>Club of Competition</strong> Career Advise Test. Enter your details below to access your evaluation. Your custom report will be available for print only at the end of the test.
+        </p>
+        <button onclick="closeWelcomeModal()" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-primary/30 hover:bg-indigo-700 active:scale-95 transition-all font-manrope">
+            Continue <i class="fas fa-arrow-right text-sm"></i>
+        </button>
+    </div>
+</div>
+
 <!-- Custom Picker Modal -->
 <div id="picker-modal" class="modal-overlay hidden no-print" onclick="closePickerOnOverlay(event)">
     <div class="modal-card" id="picker-card">
-        <div style="padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 15px;">
+        <div style="padding: 24px; border-bottom: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 15px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h3 id="picker-title" style="margin: 0; font-size: 1.3em;">Select Option</h3>
-                <button onclick="closePicker()" style="width: auto; padding: 8px 16px; margin: 0; background: #f1f5f9; color: #475569; box-shadow: none; border-radius: 99px;">✕</button>
+                <h3 id="picker-title" style="margin: 0; font-size: 1.3em; font-family: 'Poppins', sans-serif;">Select Option</h3>
+                <button onclick="closePicker()" style="width: auto; padding: 8px 16px; margin: 0; background: #f1f5f9; color: #475569; box-shadow: none; border-radius: 99px;"><i class="fas fa-times"></i></button>
             </div>
-            <div id="picker-hint" style="display: none; font-size: 0.9em; color: #92400e; background: #fffbeb; padding: 12px; border-radius: var(--radius-md); border: 1px solid #fde68a; line-height: 1.5;"></div>
-            <input type="text" id="picker-search" placeholder="Search options..." oninput="filterPicker()" style="display: none; padding: 12px 16px; font-size: 1em;">
+            <div id="picker-hint" style="display: none; font-size: 0.9em; color: #92400e; background: #fffbeb; padding: 12px; border-radius: var(--radius-md); border: 1px solid #fde68a; line-height: 1.5; font-weight: 600;"></div>
+            <input type="text" id="picker-search" placeholder="Search options..." oninput="filterPicker()" style="display: none; padding: 14px 18px; font-size: 1em;">
         </div>
         <div id="picker-list" style="overflow-y: auto; flex: 1; padding: 10px 0;">
             <!-- Options dynamically injected here -->
@@ -337,9 +435,9 @@
 <!-- Legal/Text Content Modal -->
 <div id="legal-modal" class="modal-overlay hidden no-print" onclick="closeLegalOnOverlay(event)">
     <div class="modal-card">
-        <div style="padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
-            <h3 id="legal-title" style="margin: 0; font-size: 1.3em; color: var(--primary);">Document Title</h3>
-            <button onclick="closeLegalModal()" style="width: auto; padding: 8px 16px; margin: 0; background: #f1f5f9; color: #475569; box-shadow: none; border-radius: 99px;">✕</button>
+        <div style="padding: 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+            <h3 id="legal-title" style="margin: 0; font-size: 1.3em; color: var(--primary); font-family: 'Poppins', sans-serif;">Document Title</h3>
+            <button onclick="closeLegalModal()" style="width: auto; padding: 8px 16px; margin: 0; background: #f1f5f9; color: #475569; box-shadow: none; border-radius: 99px;"><i class="fas fa-times"></i></button>
         </div>
         <div id="legal-body" class="legal-content">
             <!-- Legal content injected here -->
@@ -351,33 +449,25 @@
     
     <!-- STAGE 1: LEAD CAPTURE -->
     <div id="stage-1" class="stage active-stage">
-        <!-- BRAND HEADER -->
-        <div class="brand-header">
-            <h1 class="brand-title">Club of Competition</h1>
-            <p class="brand-subtitle">Career Advise Test</p>
-        </div>
         
-        <div class="info-box">
-            <span style="font-size: 1.5em;">👋</span>
-            <div>Welcome to the official <strong>Club of Competition</strong> Career Advise Test. Enter your details below to access your evaluation. Your custom report will be available for print only at the end of the test.</div>
+        <div class="flex flex-row items-center justify-center gap-4 sm:gap-6 mb-8 pb-8 border-b border-slate-200">
+            <div class="shrink-0">
+                <img src="logo.png" alt="Club of Competition Logo" class="h-16 sm:h-20 w-auto bg-white p-1.5 rounded-xl shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/100x100/4f46e5/ffffff?text=CoC'">
+            </div>
+            <div class="flex flex-col items-start text-left">
+                <div class="inline-block px-3 py-1 mb-1.5 bg-indigo-50 border border-indigo-100 rounded-full">
+                    <span class="text-primary font-bold text-[9px] sm:text-xs uppercase tracking-widest font-poppins">🇮🇳 Discover Your Path</span>
+                </div>
+                <h1 class="text-xl sm:text-3xl md:text-4xl font-poppins font-extrabold text-dark mb-1 leading-tight">
+                    Club of Competition
+                </h1>
+                <p class="text-slate-500 font-bold uppercase tracking-[0.15em] text-[9px] sm:text-xs">Career Advise Test</p>
+            </div>
         </div>
 
-        <!-- Google Login Button -->
-        <button type="button" class="btn-google" onclick="loginWithGoogle()">
-            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-            </svg>
-            Quick Fill with Google
-        </button>
-        
-        <div style="text-align: center; color: var(--border); margin-bottom: 24px; font-size: 0.85em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Or enter manually</div>
-        
-        <div class="form-group">
+        <div class="form-group" style="margin-top: 10px;">
             <label>Full Name <span class="required">*</span></label>
-            <input type="text" id="name" placeholder="E.g. Rahul Sharma">
+            <input type="text" id="name" placeholder="E.g. Rahul Sharma" oninput="this.value = this.value.replace(/[0-9]/g, '')">
         </div>
         
         <div class="profile-grid" style="margin-top: 0; margin-bottom: 0; gap: 20px;">
@@ -385,7 +475,7 @@
                 <label>WhatsApp Number <span class="required">*</span></label>
                 <div style="display: flex; gap: 8px;">
                     <input type="text" id="countryCode" class="input-picker" value="+91 (IN)" data-value="+91" readonly onclick="openPicker('countryCode', 'Select Country Code')" style="flex: 0 0 110px;">
-                    <input type="tel" id="phone" placeholder="Mobile number" maxlength="15" style="flex: 1;">
+                    <input type="tel" id="phone" inputmode="numeric" pattern="[0-9]*" placeholder="Mobile number" maxlength="15" style="flex: 1;" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
             </div>
             <div class="form-group" style="margin-bottom: 0;">
@@ -399,7 +489,6 @@
             <input type="text" id="educationCourse" class="input-picker" placeholder="Select Education / Course" readonly onclick="openPicker('educationCourse', 'Select Education & Course')">
         </div>
 
-        <!-- Row 1: DOB, Age, Height grouped together -->
         <div class="grid-row-3" style="margin-top: 20px; margin-bottom: 24px;">
             <div class="form-group" style="margin-bottom: 0;">
                 <label>Date of Birth <span class="required">*</span></label>
@@ -415,7 +504,6 @@
             </div>
         </div>
 
-        <!-- Row 2: Sports, Mother Tongue, Gender grouped together -->
         <div class="grid-row-3">
             <div class="form-group" style="margin-bottom: 0;">
                 <label>Interest in Sports <span class="required">*</span></label>
@@ -431,7 +519,6 @@
             </div>
         </div>
 
-        <!-- Row 3: Physical Disability, Caste, Community -->
         <div class="grid-row-3">
             <div class="form-group" style="margin-bottom: 0;">
                 <label>Physical Disability <span class="required">*</span></label>
@@ -447,11 +534,16 @@
             </div>
         </div>
 
-        <!-- Row 4: Pincode, State, District -->
+        <!-- Row 4: Pincode, State, District WITH AUTO-DETECT -->
         <div class="grid-row-3">
             <div class="form-group" style="margin-bottom: 0;">
                 <label>Pincode <span class="required">*</span></label>
-                <input type="text" inputmode="numeric" maxlength="6" id="pincode" placeholder="6-digits" oninput="fetchLocationByPincode()">
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" inputmode="numeric" maxlength="6" id="pincode" placeholder="6-digits" oninput="fetchLocationByPincode()" style="flex: 1;">
+                    <button type="button" onclick="autoLocatePincode(this)" class="w-[54px] h-[54px] shrink-0 m-0 rounded-xl bg-indigo-50 text-primary border border-indigo-100 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" title="Auto Detect Location" style="padding: 0; box-shadow: none;">
+                        <i class="fas fa-location-crosshairs text-xl"></i>
+                    </button>
+                </div>
             </div>
             <div class="form-group" style="margin-bottom: 0;">
                 <label>State <span class="required">*</span></label>
@@ -459,7 +551,7 @@
             </div>
             <div class="form-group" style="margin-bottom: 0;">
                 <label>District <span class="required">*</span></label>
-                <input type="text" id="district" placeholder="District">
+                <input type="text" id="district" placeholder="District" oninput="this.value = this.value.replace(/[0-9]/g, '')">
             </div>
         </div>
 
@@ -481,48 +573,39 @@
                 <span style="color: inherit;"><strong>I am under 18.</strong> My parent/guardian consents to this test.</span>
             </label>
         </div>
-
-        <button class="btn-brand-accent" onclick="submitStage1()" style="margin-top: 20px;">Proceed to Test</button>
     </div>
 
     <!-- STAGE 2: PRE-TEST SETUP & PAYMENT -->
     <div id="stage-2" class="stage">
         <div style="text-align:center; margin-bottom:20px;">
-            <span style="color:var(--primary); font-weight:800; font-size:0.9em; letter-spacing:1px; text-transform:uppercase;">Club of Competition</span>
+            <span style="color:var(--primary); font-weight:900; font-size:0.9em; letter-spacing:1.5px; text-transform:uppercase;">Club of Competition</span>
         </div>
         
         <h2>Pre-Test Setup</h2>
-        <h3 id="welcome-message" style="margin-top: 0; font-size: 1.1em; color: var(--text-muted); font-weight: 500;"></h3>
+        <h3 id="welcome-message" style="margin-top: 0; font-size: 1.1em; color: var(--text-muted); font-weight: 600;"></h3>
         
         <div class="info-box" style="background: #fffbeb; border-color: #fde68a; color: #92400e;">
             <span style="font-size: 1.5em;">🧠</span>
             <div><strong>Mindset Check:</strong> Please answer honestly. There are no right or wrong answers in the personality sections. Go with your first instinct!</div>
         </div>
 
-        <div style="background: var(--bg-body); padding: 20px 25px; border-radius: var(--radius-md); border: 1px solid var(--border); margin-bottom: 20px;">
+        <div style="background: var(--bg-body); padding: 25px; border-radius: 1.5rem; border: 1px solid var(--border); margin-bottom: 20px; box-shadow: var(--shadow-sm);">
             <h3 style="margin-top: 0; font-size: 1.1em; color: var(--primary);">💡 Suggestions for Best Results</h3>
-            <ul style="color: var(--text-muted); line-height: 1.6; margin-bottom: 0; padding-left: 20px;">
+            <ul style="color: var(--text-muted); line-height: 1.6; margin-bottom: 0; padding-left: 20px; font-weight: 600;">
                 <li><strong>Environment:</strong> Find a quiet, distraction-free space to focus for the next 45 minutes.</li>
                 <li><strong>Test Format:</strong> You will face exactly <strong>90 dynamically balanced questions</strong> on Aptitude and Personality.</li>
+                <li><strong>Answering:</strong> Answer directly using the <strong>A, B, C, D</strong> buttons in the bottom taskbar!</li>
                 <li><strong>Pacing:</strong> You have a strict 30-second timer per question. Do not overthink; trust your intuition!</li>
             </ul>
         </div>
 
-        <div style="background: #fef2f2; padding: 20px 25px; border-radius: var(--radius-md); border: 1px solid #fecaca; margin-bottom: 30px;">
+        <div style="background: #fef2f2; padding: 25px; border-radius: 1.5rem; border: 1px solid #fecaca; margin-bottom: 30px; box-shadow: var(--shadow-sm);">
             <h3 style="margin-top: 0; font-size: 1.1em; color: #b91c1c;">⚠️ Important Test Warnings</h3>
-            <ul style="color: #991b1b; line-height: 1.6; margin-bottom: 0; padding-left: 20px;">
+            <ul style="color: #991b1b; line-height: 1.6; margin-bottom: 0; padding-left: 20px; font-weight: 600;">
                 <li><strong>No Tab Switching:</strong> Our anti-cheat engine is active. Leaving this screen 3 times will automatically force-submit your test.</li>
                 <li><strong>No Refreshing:</strong> Reloading or going back will cause your progress to be lost.</li>
                 <li><strong>Minimum Answers:</strong> You must answer at least 30% of the questions for the AI to generate a valid career blueprint.</li>
             </ul>
-        </div>
-
-        <div style="display: flex; gap: 15px; flex-direction: column;">
-            <button id="pay-btn" class="btn-brand-accent" onclick="openPaymentLink()">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                Pay to Begin Test
-            </button>
-            <button class="btn-secondary" onclick="goToStage(1)">Back</button>
         </div>
     </div>
 
@@ -531,8 +614,8 @@
         <div class="progress-header">
             <h2 id="module-title" style="margin-bottom: 0; border: none; padding: 0; font-size: 1.2em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Module Loading...</h2>
             <div style="display: flex; gap: 10px; align-items: center;">
-                <span id="timer-display" style="color: var(--warning-hover); font-weight: 800; font-size: 1em; background: var(--warning-light); padding: 4px 12px; border-radius: 99px; transition: 0.3s;">⏱ 30s</span>
-                <span id="question-counter" style="color: var(--primary); font-weight: 800; font-size: 1em; background: var(--primary-light); padding: 4px 12px; border-radius: 99px;"></span>
+                <span id="timer-display" style="color: var(--warning-hover); font-weight: 800; font-size: 1em; background: var(--warning-light); padding: 6px 14px; border-radius: 99px; transition: 0.3s; box-shadow: var(--shadow-sm);">⏱ 30s</span>
+                <span id="question-counter" style="color: var(--primary); font-weight: 800; font-size: 1em; background: var(--primary-light); padding: 6px 14px; border-radius: 99px; box-shadow: var(--shadow-sm);"></span>
             </div>
         </div>
         
@@ -540,52 +623,53 @@
             <div class="progress-fill" id="progress-fill"></div>
         </div>
         
-        <!-- UI UPGRADE: Wrapper for animation -->
         <div id="question-wrapper" class="question-wrapper">
             <div class="question-text" id="question-text">Loading question...</div>
             <div id="options-area"></div>
         </div>
-
-        <button onclick="nextQuestion(event)" id="next-btn">Next Question</button>
     </div>
 
     <!-- STAGE 4: AI ANALYSIS -->
     <div id="stage-4" class="stage" style="text-align: center; padding: 80px 20px;">
-        <h2 style="border: none; font-size: 2.2em;" class="gradient-text">AI Engine Processing</h2>
+        <h2 style="border: none; font-size: 2.2em; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" class="font-poppins">AI Engine Processing</h2>
         <div class="spinner-container">
             <div class="spinner"></div>
             <div class="spinner-pulse"></div>
         </div>
         <h3 id="ai-status" style="color: var(--primary); font-size: 1.4em;">Analyzing best suitable job roles...</h3>
-        <p style="color: var(--text-muted); margin-top: 15px; font-size: 1.1em;">Based on your answers, we are calculating your precise career blueprint.</p>
+        <p style="color: var(--text-muted); margin-top: 15px; font-size: 1.1em; font-weight: 600;">Based on your answers, we are calculating your precise career blueprint.</p>
     </div>
 
     <!-- STAGE FAIL: INCOMPLETE TEST -->
     <div id="stage-fail" class="stage" style="text-align: center; padding: 80px 20px;">
         <div style="font-size: 4em; margin-bottom: 20px;">⚠️</div>
-        <h2 style="border: none; color: var(--primary);">Test Incomplete</h2>
-        <p style="color: var(--text-muted); font-size: 1.1em; max-width: 500px; margin: 0 auto 30px auto; line-height: 1.6;">
+        <h2 style="border: none; color: var(--text-main);">Test Incomplete</h2>
+        <p style="color: var(--text-muted); font-size: 1.1em; max-width: 500px; margin: 0 auto 30px auto; line-height: 1.6; font-weight: 600;">
             You answered less than 30% of the questions. To generate an accurate career blueprint, we need more information about your traits and skills.
         </p>
-        <button class="btn-brand-accent" onclick="submitStage2()" style="max-width: 300px;">Take the Test Again</button>
+        <button class="btn-brand-accent rounded-2xl mx-auto" onclick="submitStage2()" style="max-width: 300px;">Take the Test Again</button>
     </div>
 
     <!-- STAGE 5: PERSONALIZED REPORT -->
     <div id="stage-5" class="stage">
         <!-- BRAND HEADER FOR PRINT/REPORT -->
         <div class="brand-header" style="padding-bottom: 15px; border-bottom: none;">
-            <h1 class="brand-title" style="font-size: 1.6em;">Club of Competition</h1>
+            <div class="inline-flex items-center justify-center p-2 bg-gradient-to-tr from-primary to-purple-500 rounded-xl mb-4 shadow-lg shadow-indigo-200">
+                <img src="logo.png" alt="Logo" class="h-8 w-auto bg-white rounded-lg p-0.5" onerror="this.onerror=null; this.src='https://placehold.co/40x40/4f46e5/ffffff?text=C'">
+            </div>
+            <h1 class="brand-title" style="font-size: 1.8em;">Club of Competition</h1>
             <p class="brand-subtitle" style="font-size: 0.8em;">Official Career Blueprint</p>
+            <p id="report-timestamp" class="text-xs text-slate-400 font-bold mt-2 tracking-wide"></p>
         </div>
         
         <!-- NEW SCORE SECTION -->
-        <div style="background: var(--primary-light); border: 2px solid var(--border-focus); border-radius: var(--radius-md); padding: 30px; text-align: center; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
-            <p style="margin: 0; color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.95em;">Your Assessment Score</p>
-            <h2 style="margin: 10px 0 0 0; font-size: 4.5em; color: var(--primary); font-weight: 900; line-height: 1;"><span id="final-score">0</span><span style="font-size: 0.35em; color: var(--text-muted); font-weight: 600;"> / 50</span></h2>
+        <div style="background: var(--primary-light); border: 2px solid var(--border-focus); border-radius: 2rem; padding: 40px 30px; text-align: center; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+            <p style="margin: 0; color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85em;">Your Assessment Score</p>
+            <h2 style="margin: 15px 0 0 0; font-size: 5em; color: var(--text-main); font-weight: 900; line-height: 1; font-family: 'Poppins', sans-serif;"><span id="final-score">0</span><span style="font-size: 0.35em; color: var(--text-muted); font-weight: 700;"> / 50</span></h2>
             
-            <div style="margin-top: 20px; padding: 16px 20px; background: var(--success-light); color: var(--success-hover); border-radius: var(--radius-md); border: 1px solid #a7f3d0; display: inline-block; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);">
-                <div style="font-weight: 900; font-size: 1.3em;">🎉 Scholarship Unlocked: <span id="discount-amount">₹0</span></div>
-                <div style="font-size: 0.8em; font-weight: 700; margin-top: 6px; color: #059669; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.5px;">( 1 Mark = ₹1,000 Discount )</div>
+            <div style="margin-top: 30px; padding: 20px 24px; background: #fff; color: var(--success-hover); border-radius: 1.5rem; border: 2px solid var(--success); display: inline-block; box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);">
+                <div style="font-weight: 900; font-size: 1.4em; font-family: 'Poppins', sans-serif;">🎉 Scholarship Unlocked: <span id="discount-amount">₹0</span></div>
+                <div style="font-size: 0.85em; font-weight: 800; margin-top: 8px; color: var(--success); opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px;">( 1 Mark = ₹1,000 Discount )</div>
             </div>
         </div>
         
@@ -602,7 +686,7 @@
                 <ul id="traits-list"></ul>
             </div>
         </div>
-        <button class="btn-brand-accent no-print" style="margin-top: 40px; padding: 20px;" onclick="goToStage(6)">Unlock My Action Plan 🚀</button>
+        <button class="btn-brand-accent rounded-2xl no-print" style="margin-top: 40px; padding: 20px;" onclick="goToStage(6)">Unlock My Action Plan 🚀</button>
     </div>
 
     <!-- STAGE 6: ACTION PLAN -->
@@ -611,15 +695,15 @@
         <div class="profile-grid no-print" style="margin-bottom: 40px; margin-top: 10px;">
             <div class="traits-panel" style="margin-bottom: 0; border-top: 4px solid var(--primary);">
                 <h3 style="margin-top:0; color: var(--primary);">⚡ Immediate Actions</h3>
-                <p style="color: var(--text-muted); font-size: 0.95em; margin-bottom: 25px;">Download your official results and get your customized timeline.</p>
-                <button class="btn-success" style="margin-top: 0; margin-bottom: 12px;" onclick="window.print()">📄 Download Full Report (PDF)</button>
+                <p style="color: var(--text-muted); font-size: 0.95em; margin-bottom: 25px; font-weight: 600;">Download your official results and get your customized timeline.</p>
+                <button class="btn-success rounded-xl" style="margin-top: 0; margin-bottom: 12px; padding: 16px;" onclick="window.print()">📄 Download Full Report (PDF)</button>
             </div>
             <div class="traits-panel" style="margin-bottom: 0; background: #fffbeb; border-top: 4px solid var(--warning); border-color: #fde68a;">
                 <h3 style="margin-top:0; color: #b45309;">🤝 Claim Your <span id="claim-discount-amount">₹0</span> Scholarship!</h3>
-                <p style="color: #92400e; font-size: 0.95em; margin-bottom: 25px; line-height: 1.6;">You have earned a merit discount based on your score of <strong id="claim-score-amount">0</strong>/50. Talk to our senior career mentors to review your results and claim your scholarship.</p>
-                <button class="btn-brand-accent" style="margin-top: 0;" id="request-call-btn" onclick="requestCounselingCall()">📞 Request Priority Callback</button>
-                <div id="callback-success" class="hidden" style="margin-top:15px; color: var(--success-hover); font-weight:700; font-size:0.95em; background: var(--success-light); padding: 15px; border-radius: var(--radius-sm); border: 1px solid #a7f3d0; text-align: center;">
-                    ✅ Received! Our expert will call you at <br><span id="display-phone" style="font-size: 1.2em; display: inline-block; margin-top: 5px;"></span>
+                <p style="color: #92400e; font-size: 0.95em; margin-bottom: 25px; line-height: 1.6; font-weight: 600;">You have earned a merit discount based on your score of <strong id="claim-score-amount" class="text-black">0</strong>/50. Talk to our senior career mentors to review your results and claim your scholarship.</p>
+                <button class="btn-brand-accent rounded-xl" style="margin-top: 0; padding: 16px;" id="request-call-btn" onclick="requestCounselingCall()">📞 Request Priority Callback</button>
+                <div id="callback-success" class="hidden" style="margin-top:15px; color: var(--success-hover); font-weight:800; font-size:0.95em; background: var(--success-light); padding: 15px; border-radius: 1rem; border: 1px solid #a7f3d0; text-align: center;">
+                    ✅ Received! Our expert will call you at <br><span id="display-phone" style="font-size: 1.2em; display: inline-block; margin-top: 5px; color: var(--text-main);"></span>
                 </div>
             </div>
         </div>
@@ -641,189 +725,109 @@
         </div>
     </div>
     
-    <div class="brand-footer no-print">
+    <div class="brand-footer no-print mt-10">
         &copy; 2026 <strong>Club of Competition</strong>. All rights reserved.<br>
-        Empowering Future Leaders
+        <span class="text-xs uppercase tracking-widest font-bold text-slate-400 mt-2 block">Empowering Future Leaders</span>
     </div>
 
 </div>
 
-<!-- Single Main Application Script -->
+<!-- Fixed Taskbar (Stage 1 ONLY - Lead Capture & Payment) -->
+<div id="stage1-taskbar" class="taskbar-wrapper no-print">
+    <div class="taskbar px-2 sm:px-4 py-2 h-[72px] sm:h-[80px] w-full max-w-[850px] mx-auto gap-2 sm:gap-4 overflow-visible bg-white/90">
+        
+        <!-- Quick Fill -->
+        <button onclick="loginWithGoogle()" id="tb-google-btn" class="flex-1 h-[85%] my-auto m-0 rounded-xl bg-white text-slate-700 font-bold border border-slate-200 shadow-sm hover:bg-slate-50 transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm px-1">
+            <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="sm:w-5 sm:h-5">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            <span>Quick Fill</span>
+        </button>
+
+        <!-- Manual Entry -->
+        <button onclick="focusManualEntry()" id="tb-manual-btn" class="flex-1 h-[85%] my-auto m-0 rounded-xl bg-slate-100 text-slate-600 font-bold border border-transparent hover:bg-slate-200 transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm shadow-none px-1">
+            <i class="fas fa-keyboard text-lg sm:text-xl"></i>
+            <span>Manual</span>
+        </button>
+
+        <!-- Smart Pay & Proceed (Locks/Unlocks automatically) -->
+        <button onclick="initiatePayment()" id="tb-pay-btn" class="flex-[1.5] h-[85%] my-auto m-0 rounded-xl bg-slate-200 text-slate-500 font-bold border border-transparent transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm cursor-not-allowed shadow-none px-1" disabled>
+            <i class="fas fa-lock text-lg sm:text-xl mb-0.5 sm:mb-0"></i>
+            <span>Pay to Start</span>
+        </button>
+        
+    </div>
+</div>
+
+<!-- Fixed Taskbar (Stage 2 ONLY - Pre-Test Setup) -->
+<div id="stage2-taskbar" class="taskbar-wrapper no-print hidden">
+    <div class="taskbar px-2 sm:px-4 py-2 h-[72px] sm:h-[80px] w-full max-w-[850px] mx-auto gap-2 sm:gap-4 overflow-visible bg-white/90">
+        
+        <!-- Start Test Now -->
+        <button onclick="submitStage2()" class="w-full h-[85%] my-auto m-0 rounded-xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold border border-transparent shadow-lg shadow-primary/30 transition-all flex flex-col sm:flex-row items-center justify-center gap-2 text-sm sm:text-base hover:-translate-y-1 active:scale-95 px-1">
+            <span>Start Test Now</span>
+            <i class="fas fa-play text-lg sm:text-xl mb-0.5 sm:mb-0"></i>
+        </button>
+        
+    </div>
+</div>
+
+<!-- Fixed Taskbar (Stage 5 & 6 ONLY - Results & Sharing) -->
+<div id="result-taskbar" class="taskbar-wrapper no-print hidden">
+    <div class="taskbar px-2 sm:px-4 py-2 h-[72px] sm:h-[80px] w-full max-w-[850px] mx-auto gap-3 sm:gap-6 overflow-visible bg-white/90">
+        
+        <!-- Download PDF -->
+        <button onclick="window.print()" class="flex-1 h-[85%] my-auto m-0 rounded-xl bg-red-50 text-red-600 font-bold border border-red-100 hover:bg-red-100 transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm shadow-sm px-1">
+            <i class="fas fa-file-pdf text-lg sm:text-xl"></i>
+            <span>Download PDF</span>
+        </button>
+
+        <!-- Share Result -->
+        <button id="share-result-btn" onclick="shareResultScreenshot()" class="flex-[1.5] h-[85%] my-auto m-0 rounded-xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold border border-transparent shadow-lg shadow-primary/30 transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm hover:-translate-y-1 active:scale-95 px-1">
+            <i class="fas fa-share-nodes text-lg sm:text-xl mb-0.5 sm:mb-0"></i>
+            <span>Share Result</span>
+        </button>
+        
+    </div>
+</div>
+
+<!-- Fixed Taskbar (Test Mode ONLY - Answers & Submit) -->
+<div id="test-taskbar" class="taskbar-wrapper no-print hidden">
+    <div class="taskbar px-2 sm:px-4 py-2 h-[72px] sm:h-[80px] w-full max-w-[850px] mx-auto gap-2 sm:gap-4 overflow-visible bg-white/90">
+        <!-- Dynamic Answer Options (A B C D E) injected here -->
+        <div id="taskbar-options" class="flex-1 flex justify-around gap-1 sm:gap-2 h-full items-center">
+        </div>
+        
+        <!-- Taskbar Submit Button -->
+        <button id="taskbar-next-btn" onclick="nextQuestion(event)" class="h-[85%] my-auto m-0 rounded-xl px-3 sm:px-6 w-auto text-xs sm:text-base bg-primary text-white font-bold flex items-center justify-center gap-1 shadow-md border-0" disabled>
+            Wait...
+        </button>
+    </div>
+</div>
+
+<!-- Custom Scripts -->
 <script>
     // ==========================================
-    // Global Payload Variables
+    // Configuration & Helpers
     // ==========================================
-    let currentScoreOutOf50 = 0;
-    let currentDiscountAmount = 0;
-
-    // ==========================================
-    // 1. PWA & SERVICE WORKER SETUP (Encapsulated)
-    // ==========================================
-    (function initPWA() {
-        const isSandbox = window.location.protocol === 'blob:' || window.location.hostname.includes('usercontent');
-        const manifestSVG = `data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%231e3a8a' rx='40'/%3E%3Ctext x='96' y='130' font-family='Arial' font-size='110' font-weight='bold' fill='white' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E`;
-        const manifestJSON = {
-            "name": "Club of Competition Career Advise Test",
-            "short_name": "CoC Test",
-            "start_url": window.location.href,
-            "display": "standalone",
-            "background_color": "#f8fafc",
-            "theme_color": "#1e3a8a",
-            "icons": [
-                { "src": manifestSVG, "sizes": "192x192", "type": "image/svg+xml", "purpose": "any maskable" },
-                { "src": manifestSVG, "sizes": "512x512", "type": "image/svg+xml" }
-            ]
-        };
-        
-        try {
-            const manifestBlob = new Blob([JSON.stringify(manifestJSON)], { type: 'application/manifest+json' });
-            document.querySelector('head').insertAdjacentHTML('beforeend', `<link rel="manifest" href="${URL.createObjectURL(manifestBlob)}">`);
-        } catch(e) { console.log("Could not create manifest blob", e); }
-
-        if ('serviceWorker' in navigator && !isSandbox) {
-            const swCode = `
-                self.addEventListener('install', (e) => { self.skipWaiting(); });
-                self.addEventListener('fetch', (e) => {
-                    e.respondWith(fetch(e.request).catch(() => new Response('<h3>You are offline.</h3>', {headers: {'Content-Type': 'text/html'}})));
-                });
-            `;
-            window.addEventListener('load', () => {
-                try {
-                    navigator.serviceWorker.register(URL.createObjectURL(new Blob([swCode], { type: 'application/javascript' })));
-                } catch(e) { console.log("Service Worker registration blocked by environment", e); }
-            });
-        }
-    })();
-
-    // ==========================================
-    // 2. PAYMENT, SECURITY & ANTI-CHEAT
-    // ==========================================
-    const PAYMENT_LINK = "https://payments.cashfree.com/forms/COC-CATfee"; 
-
-    function openPaymentLink() {
-        if(PAYMENT_LINK === "YOUR_CASHFREE_LINK_HERE") {
-            alert("Developer Note: Please insert your actual payment link in the source code.");
-            return;
-        }
-        window.saveFormData();
-        localStorage.setItem('coc_payment_initiated', 'true');
-        document.getElementById('pay-btn').innerHTML = '<span class="spinner-inline"></span> Redirecting...';
-        window.location.href = PAYMENT_LINK;
-    }
-
-    let isTestActive = false;
-    let cheatWarnings = 0;
-    const MAX_WARNINGS = 3;
-
-    function handleCheatWarning(reason) {
-        cheatWarnings++;
-        if (cheatWarnings >= MAX_WARNINGS) {
-            alert(`Test submitted automatically due to suspicious activity (${reason}).`);
-            runAIAnalysis();
-        } else {
-            alert(`Warning ${cheatWarnings}/${MAX_WARNINGS}: ${reason}. Using overlays, splitting the screen, or leaving this window is strictly prohibited.`);
-        }
-    }
-
-    document.addEventListener("visibilitychange", () => {
-        if (isTestActive && document.visibilityState === "hidden") handleCheatWarning("tab switching detected");
-    });
-
-    window.addEventListener("blur", () => {
-        if (isTestActive) handleCheatWarning("window focus lost");
-    });
-
-    document.addEventListener("contextmenu", (e) => { if (isTestActive) e.preventDefault(); });
-    document.addEventListener("copy", (e) => { 
-        if (isTestActive) { e.preventDefault(); alert("Copying text is disabled during the test."); }
-    });
-
-    // ==========================================
-    // 3. GOOGLE LOGIN & CRM
-    // ==========================================
-    window.loginWithGoogle = async () => {
-        try {
-            const result = await auth.signInWithPopup(provider);
-            const user = result.user;
-            if (user.email) document.getElementById('email').value = user.email;
-            if (user.displayName && !document.getElementById('name').value) {
-                document.getElementById('name').value = user.displayName;
-            }
-            if(typeof window.saveFormData === 'function') window.saveFormData();
-        } catch (error) {
-            console.error("Error during Google Login:", error);
-            alert("Failed to login with Google. You can still enter your details manually.");
-        }
+    const CONFIG = {
+        PAYMENT_LINK: "https://payments.cashfree.com/forms/COC-CATfee",
+        GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwcQnUo18Uv9H6e0mU1Kz-g7K0Y_vP_i8m7u5P_G78K_k7m_o2T_a9kZ/exec",
+        TIMER_SECONDS: 30,
+        MIN_WAIT_SECONDS: 5,
+        MAX_CHEAT_WARNINGS: 3,
+        DISCOUNT_PER_MARK: 1000,
+        PASS_THRESHOLD: 0.3
     };
 
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcQnUo18Uv9H6e0mU1Kz-g7K0Y_vP_i8m7u5P_G78K_k7m_o2T_a9kZ/exec";
-
-    async function sendDataToGoogleSheets(statusType) {
-        if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PASTE_URL")) return;
-
-        const topJobMatch = finalRankedJobs && finalRankedJobs.length > 0 ? finalRankedJobs[0].title : "N/A";
-        const topJobPercent = finalRankedJobs && finalRankedJobs.length > 0 ? finalRankedJobs[0].matchPercent + "%" : "N/A";
-
-        const payload = {
-            type: statusType, 
-            name: studentData.name, phone: studentData.phone, email: studentData.email,
-            age: studentData.age, dob: studentData.dob, gender: studentData.gender, height: studentData.height,
-            motherLanguage: studentData.motherLanguage, educationCourse: studentData.educationCourse,
-            sportsInterest: studentData.sportsInterest,
-            pwd: studentData.pwd, caste: studentData.caste, community: studentData.community,
-            pincode: studentData.pincode, state: studentData.state, district: studentData.district, 
-            address: studentData.address,
-            topJob: topJobMatch, 
-            matchPercent: topJobPercent, 
-            scoreOutOf50: currentScoreOutOf50,
-            discountAmount: currentDiscountAmount,
-            scores: userScores
-        };
-
-        try {
-            await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: 'no-cors', body: JSON.stringify(payload) });
-        } catch (error) { console.error("CRM Sync error:", error); }
-    }
+    const $id = id => document.getElementById(id);
 
     // ==========================================
-    // 4. FORM DATA, PICKER AND LEGAL MODALS
+    // Data Assets (Modals, Pickers, Constants)
     // ==========================================
-    window.saveFormData = function() {
-        const dataToSave = {};
-        const inputs = document.querySelectorAll('#stage-1 input');
-        inputs.forEach(el => {
-            if (el.id && el.id !== 'picker-search') {
-                if (el.type === 'checkbox') dataToSave[el.id] = { checked: el.checked };
-                else dataToSave[el.id] = { value: el.value, dataValue: el.getAttribute('data-value') };
-            }
-        });
-        localStorage.setItem('coc_form_data', JSON.stringify(dataToSave));
-    };
-
-    function loadFormData() {
-        const saved = localStorage.getItem('coc_form_data');
-        if (saved) {
-            try {
-                const data = JSON.parse(saved);
-                Object.keys(data).forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) {
-                        if (el.type === 'checkbox') el.checked = data[id].checked;
-                        else {
-                            el.value = data[id].value || '';
-                            if (data[id].dataValue) el.setAttribute('data-value', data[id].dataValue);
-                        }
-                    }
-                });
-                if(data['dob'] && data['dob'].value) checkAge();
-            } catch(e) { console.error("Error loading saved form data", e); }
-        }
-    }
-
-    document.getElementById('stage-1').addEventListener('input', (e) => {
-        if (e.target.tagName === 'INPUT' && e.target.id !== 'picker-search') window.saveFormData();
-    });
-
     const legalContent = {
         terms: {
             title: "Terms of Service",
@@ -838,14 +842,6 @@
             body: `<h3>Not Professional Guarantee</h3><p>The career recommendations provided by this test are generated by an algorithm based on your self-reported answers. They are for informational and guidance purposes only.</p><h3>Subject to Change</h3><p>Government job requirements, syllabus, and eligibility criteria are subject to change. Always verify official government notifications before making career decisions.</p><h3>Limitation of Liability</h3><p>Club of Competition shall not be held liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the information provided in this test.</p>`
         }
     };
-
-    window.openLegalModal = function(type) {
-        document.getElementById('legal-title').innerText = legalContent[type].title;
-        document.getElementById('legal-body').innerHTML = legalContent[type].body;
-        document.getElementById('legal-modal').classList.remove('hidden');
-    };
-    window.closeLegalModal = function() { document.getElementById('legal-modal').classList.add('hidden'); };
-    window.closeLegalOnOverlay = function(e) { if(e.target.id === 'legal-modal') window.closeLegalModal(); };
 
     const statePincodes = {
         "Andaman and Nicobar Islands": ["744101"], "Andhra Pradesh": ["520001", "530001"], "Arunachal Pradesh": ["791111"], 
@@ -960,10 +956,39 @@
         state: Object.keys(statePincodes)
     };
 
-    let currentPickerTarget = null;    
-    let currentPickerOptions = [];
+    // ==========================================
+    // Global State Variables
+    // ==========================================
+    let currentScoreOutOf50 = 0;
+    let currentDiscountAmount = 0;
+    let isTestActive = false;
+    let cheatWarnings = 0;
+    let studentData = {};    
+    let currentQuestionIndex = 0;    
+    let answeredCount = 0;    
+    let chartInstance = null;    
+    let activeQuestions = [];    
+    let finalRankedJobs = [];    
+    let questionTimerInterval;    
+    let timeRemaining = CONFIG.TIMER_SECONDS;
+    let userMapsLink = "Not Provided"; // Stores the GPS generated Maps Link
 
+    let userScores = {
+        aptitude: { numerical: 0, logical: 0, verbal: 0, general_awareness: 0 },
+        riasec: { realistic: 0, investigative: 0, artistic: 0, social: 0, enterprising: 0, conventional: 0 },
+        big5: { conscientiousness: 0, extraversion: 0, agreeableness: 0, openness: 0, emotional_stability: 0 }
+    };    
+    let maxScores = {
+        aptitude: { numerical: 0, logical: 0, verbal: 0, general_awareness: 0 },
+        riasec: { realistic: 0, investigative: 0, artistic: 0, social: 0, enterprising: 0, conventional: 0 },
+        big5: { conscientiousness: 0, extraversion: 0, agreeableness: 0, openness: 0, emotional_stability: 0 }
+    };
+
+    // ==========================================
+    // Initialization & Event Listeners
+    // ==========================================
     document.addEventListener("DOMContentLoaded", () => {
+        // Populate Height options
         for(let cm = 120; cm <= 220; cm++) {
             let feet = Math.floor((cm / 2.54) / 12);
             let inches = Math.round((cm / 2.54) % 12);
@@ -981,7 +1006,7 @@
                 return;
             }
             
-            const dob = document.getElementById('dob').value;
+            const dob = $id('dob').value;
             let calculatedAge = "";
             if (dob) {
                 const birthDate = new Date(dob);
@@ -994,36 +1019,84 @@
             }
 
             studentData = { 
-                name: document.getElementById('name').value, 
-                phone: (document.getElementById('countryCode').getAttribute('data-value') || "+91") + " " + document.getElementById('phone').value, 
-                email: document.getElementById('email').value, 
-                educationCourse: document.getElementById('educationCourse').value, 
-                sportsInterest: document.getElementById('sportsInterest').value, 
+                name: $id('name').value, 
+                phone: ($id('countryCode').getAttribute('data-value') || "+91") + " " + $id('phone').value, 
+                email: $id('email').value, 
+                educationCourse: $id('educationCourse').value, 
+                sportsInterest: $id('sportsInterest').value, 
                 dob: dob, 
                 age: calculatedAge, 
-                gender: document.getElementById('gender').value, 
-                address: document.getElementById('address').value, 
-                pincode: document.getElementById('pincode').value, 
-                state: document.getElementById('state').value, 
-                district: document.getElementById('district').value, 
-                motherLanguage: document.getElementById('motherLanguage').value, 
-                pwd: document.getElementById('pwd').value, 
-                caste: document.getElementById('caste').value, 
-                community: document.getElementById('community').value,
-                height: document.getElementById('height').value
+                gender: $id('gender').value, 
+                address: $id('address').value, 
+                pincode: $id('pincode').value, 
+                state: $id('state').value, 
+                district: $id('district').value, 
+                motherLanguage: $id('motherLanguage').value, 
+                pwd: $id('pwd').value, 
+                caste: $id('caste').value, 
+                community: $id('community').value,
+                height: $id('height').value
             };
-            submitStage2();
+            
+            $id('welcome-message').innerText = `Hi ${studentData.name ? studentData.name.split(' ')[0] : ''}, let's begin your test.`;
+            goToStage(2);
+        } else {
+            // Show welcome modal on fresh load
+            setTimeout(() => {
+                const welcomeModal = $id('welcome-modal');
+                if(welcomeModal) welcomeModal.classList.remove('hidden');
+            }, 300);
         }
     });
+
+    window.closeWelcomeModal = function() {
+        $id('welcome-modal').classList.add('hidden');
+    };
+
+    // Stage Navigation
+    function goToStage(stageNum) {
+        document.querySelectorAll('.stage').forEach(el => el.classList.remove('active-stage'));
+        const targetStage = $id(`stage-${stageNum}`);
+        if(targetStage) targetStage.classList.add('active-stage');
+        
+        // Taskbar Visibility Logic
+        const stage1Taskbar = $id('stage1-taskbar');
+        const stage2Taskbar = $id('stage2-taskbar');
+        const testTaskbar = $id('test-taskbar');
+        const resultTaskbar = $id('result-taskbar');
+        
+        if(stage1Taskbar) stage1Taskbar.classList.add('hidden');
+        if(stage2Taskbar) stage2Taskbar.classList.add('hidden');
+        if(testTaskbar) testTaskbar.classList.add('hidden');
+        if(resultTaskbar) resultTaskbar.classList.add('hidden');
+
+        if (stageNum === 1) {
+            if(stage1Taskbar) stage1Taskbar.classList.remove('hidden');
+        } else if (stageNum === 2) {
+            if(stage2Taskbar) stage2Taskbar.classList.remove('hidden');
+        } else if (stageNum === 3) {
+            if(testTaskbar) testTaskbar.classList.remove('hidden');
+        } else if (stageNum === 5 || stageNum === 6) {
+            if(resultTaskbar) resultTaskbar.classList.remove('hidden');
+        }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // Data Pickers & Modals
+    // ==========================================
+    let currentPickerTarget = null;    
+    let currentPickerOptions = [];
 
     function openPicker(targetId, title) {
         currentPickerTarget = targetId;
         currentPickerOptions = pickerData[targetId] || [];
-        document.getElementById('picker-title').innerText = title;
-        document.getElementById('picker-modal').classList.remove('hidden');
+        $id('picker-title').innerText = title;
+        $id('picker-modal').classList.remove('hidden');
         
-        const searchInput = document.getElementById('picker-search');
-        const hintDiv = document.getElementById('picker-hint');
+        const searchInput = $id('picker-search');
+        const hintDiv = $id('picker-hint');
         
         if(['countryCode', 'motherLanguage', 'state', 'height', 'educationCourse'].includes(targetId)) {
             searchInput.style.display = "block";
@@ -1042,15 +1115,15 @@
         renderPickerOptions(currentPickerOptions);
     }
 
-    function closePicker() { document.getElementById('picker-modal').classList.add('hidden'); }
+    function closePicker() { $id('picker-modal').classList.add('hidden'); }
     function closePickerOnOverlay(e) { if(e.target.id === 'picker-modal') closePicker(); }
 
     function renderPickerOptions(options) {
-        const listDiv = document.getElementById('picker-list');
+        const listDiv = $id('picker-list');
         listDiv.innerHTML = '';
         
         if(options.length === 0) {
-            listDiv.innerHTML = '<div style="padding: 20px; text-align: center; color: #94a3b8;">No options found</div>';
+            listDiv.innerHTML = '<div style="padding: 20px; text-align: center; color: #94a3b8; font-weight: 600;">No options found</div>';
             return;
         }
 
@@ -1079,7 +1152,7 @@
     }
 
     function filterPicker() {
-        const query = document.getElementById('picker-search').value.toLowerCase();
+        const query = $id('picker-search').value.toLowerCase();
         const filtered = currentPickerOptions.map(opt => {
             if (opt.group) {
                 const filteredItems = opt.items.filter(item => item.toLowerCase().includes(query));
@@ -1095,87 +1168,92 @@
     }
 
     function selectOption(val, label) {
-        const inputField = document.getElementById(currentPickerTarget);
+        const inputField = $id(currentPickerTarget);
         inputField.value = label;
         inputField.setAttribute('data-value', val);
         window.saveFormData();
+        checkFormValidity();
         closePicker();
     }
 
-    async function fetchLocationByPincode() {
-        const pinInput = document.getElementById('pincode');
-        const districtInput = document.getElementById('district');
-        const stateInput = document.getElementById('state');
-        
-        pinInput.value = pinInput.value.replace(/\D/g, '');
-        if (pinInput.value.length === 6) {
-            districtInput.value = "Fetching..."; 
-            try {
-                const response = await fetch(`https://api.postalpincode.in/pincode/${pinInput.value}`);
-                const data = await response.json();
-                if (data && data[0] && data[0].Status === 'Success') {
-                    const po = data[0].PostOffice[0];
-                    districtInput.value = po.District;
-                    stateInput.value = po.State;
-                    stateInput.setAttribute('data-value', po.State);
-                    window.saveFormData();
-                } else {
-                    districtInput.value = ""; 
-                }
-            } catch (e) { 
-                console.error("Pincode fetch error:", e);
-                districtInput.value = ""; 
+    // ==========================================
+    // Form Handling & Logic
+    // ==========================================
+    window.saveFormData = function() {
+        const dataToSave = {};
+        const inputs = document.querySelectorAll('#stage-1 input');
+        inputs.forEach(el => {
+            if (el.id && el.id !== 'picker-search') {
+                if (el.type === 'checkbox') dataToSave[el.id] = { checked: el.checked };
+                else dataToSave[el.id] = { value: el.value, dataValue: el.getAttribute('data-value') };
             }
+        });
+        localStorage.setItem('coc_form_data', JSON.stringify(dataToSave));
+    };
+
+    function loadFormData() {
+        const saved = localStorage.getItem('coc_form_data');
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(id => {
+                    const el = $id(id);
+                    if (el) {
+                        if (el.type === 'checkbox') el.checked = data[id].checked;
+                        else {
+                            el.value = data[id].value || '';
+                            if (data[id].dataValue) el.setAttribute('data-value', data[id].dataValue);
+                        }
+                    }
+                });
+                if(data['dob'] && data['dob'].value) checkAge();
+                checkFormValidity();
+            } catch(e) { console.error("Error loading saved form data", e); }
         }
     }
 
-    // ==========================================
-    // 5. CORE TEST ENGINE & AI
-    // ==========================================
-    let studentData = {};    
-    let currentQuestionIndex = 0;    
-    let answeredCount = 0;    
-    let chartInstance = null;    
-    let activeQuestions = [];    
-    
-    let userScores = {
-        aptitude: { numerical: 0, logical: 0, verbal: 0, general_awareness: 0 },
-        riasec: { realistic: 0, investigative: 0, artistic: 0, social: 0, enterprising: 0, conventional: 0 },
-        big5: { conscientiousness: 0, extraversion: 0, agreeableness: 0, openness: 0, emotional_stability: 0 }
-    };    
-    let maxScores = {
-        aptitude: { numerical: 0, logical: 0, verbal: 0, general_awareness: 0 },
-        riasec: { realistic: 0, investigative: 0, artistic: 0, social: 0, enterprising: 0, conventional: 0 },
-        big5: { conscientiousness: 0, extraversion: 0, agreeableness: 0, openness: 0, emotional_stability: 0 }
-    };
+    $id('stage-1').addEventListener('input', (e) => {
+        if (e.target.tagName === 'INPUT' && e.target.id !== 'picker-search') {
+            window.saveFormData();
+            checkFormValidity();
+        }
+    });
 
-    const govtJobDatabase = [
-        { title: "UPSC Civil Services (IAS/IPS)", desc: "Top-tier administrative and police roles.", reqs: { logical: 80, conscientiousness: 90, enterprising: 85, verbal: 80 } },
-        { title: "Statistical Investigator (SSC)", desc: "Analyze government data, conduct surveys.", reqs: { numerical: 90, investigative: 85, conventional: 80 } },
-        { title: "Revenue/Administrative Officer", desc: "Handle local administration and tax collection.", reqs: { logical: 75, conventional: 90, conscientiousness: 85 } },
-        { title: "Social Welfare Officer", desc: "Manage government welfare programs.", reqs: { social: 90, agreeableness: 85, verbal: 70 } },
-        { title: "Police Sub-Inspector", desc: "Maintain law and order.", reqs: { realistic: 85, logical: 70, emotional_stability: 90 } },
-        { title: "Bank Probationary Officer (PO)", desc: "Manage banking operations and customer service.", reqs: { numerical: 85, logical: 85, conventional: 80 } },
-        { title: "Defense Services (NDA/CDS)", desc: "Serve in the Armed Forces.", reqs: { realistic: 90, conscientiousness: 90, emotional_stability: 95 } },
-        { title: "Railway Station Master", desc: "Oversee railway station operations.", reqs: { conventional: 85, logical: 75, conscientiousness: 80 } },
-        { title: "Income Tax Inspector", desc: "Investigate and assess tax collections.", reqs: { numerical: 85, investigative: 90, logical: 80 } },
-        { title: "Foreign Service Officer (IFS)", desc: "Represent the nation internationally.", reqs: { verbal: 90, enterprising: 85, social: 80, openness: 85 } }
-    ];    
-    
-    let finalRankedJobs = [];    
-    let questionTimerInterval;    
-    let timeRemaining = 30;
+    $id('stage-1').addEventListener('change', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') {
+            window.saveFormData();
+            checkFormValidity();
+        }
+    });
 
-    function goToStage(stageNum) {
-        document.querySelectorAll('.stage').forEach(el => el.classList.remove('active-stage'));
-        document.getElementById(`stage-${stageNum}`).classList.add('active-stage');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    function checkFormValidity() {
+        const isValid = 
+            $id('name').value.trim() !== "" &&
+            $id('phone').value.trim().length >= 10 &&
+            $id('email').value.trim().includes('@') &&
+            $id('educationCourse').value.trim() !== "" &&
+            $id('sportsInterest').value.trim() !== "" &&
+            $id('dob').value !== "" &&
+            $id('dataConsent').checked;
+
+        const payBtn = $id('tb-pay-btn');
+        if(!payBtn) return;
+
+        if (isValid) {
+            payBtn.disabled = false;
+            payBtn.className = "flex-[1.5] h-[85%] my-auto m-0 rounded-xl bg-green-600 text-white font-bold border border-transparent shadow-lg shadow-green-600/30 transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm hover:bg-green-700 hover:-translate-y-1 active:scale-95 cursor-pointer px-1";
+            payBtn.innerHTML = '<i class="fas fa-check-circle text-lg sm:text-xl mb-0.5 sm:mb-0"></i><span>Pay to Start</span>';
+        } else {
+            payBtn.disabled = true;
+            payBtn.className = "flex-[1.5] h-[85%] my-auto m-0 rounded-xl bg-slate-200 text-slate-500 font-bold border border-transparent transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-[10px] sm:text-sm cursor-not-allowed shadow-none px-1";
+            payBtn.innerHTML = '<i class="fas fa-lock text-lg sm:text-xl mb-0.5 sm:mb-0"></i><span>Pay to Start</span>';
+        }
     }
 
     function checkAge() {
-        const dobStr = document.getElementById('dob').value;
-        const pg = document.getElementById('parental-consent-group');
-        const ageInput = document.getElementById('age');
+        const dobStr = $id('dob').value;
+        const pg = $id('parental-consent-group');
+        const ageInput = $id('age');
         
         if (dobStr) {
             const birthDate = new Date(dobStr);
@@ -1192,19 +1270,175 @@
             pg.classList.add('hidden');
             ageInput.value = '';
         }
+        checkFormValidity();
     }
 
-    function submitStage1() {
-        const name = document.getElementById('name').value.trim();
-        const countryCodeElement = document.getElementById('countryCode');
+    async function fetchLocationByPincode() {
+        const pinInput = $id('pincode');
+        const districtInput = $id('district');
+        const stateInput = $id('state');
+        
+        const pincode = pinInput.value.replace(/\D/g, '');
+        pinInput.value = pincode;
+
+        if (pincode.length === 6) {
+            districtInput.value = "Fetching..."; 
+            try {
+                const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                if (!response.ok) throw new Error('Network response not ok');
+                const data = await response.json();
+
+                if (data?.[0]?.Status === 'Success') {
+                    const po = data[0].PostOffice[0];
+                    districtInput.value = po.District;
+                    stateInput.value = po.State;
+                    stateInput.setAttribute('data-value', po.State);
+                    window.saveFormData();
+                    checkFormValidity();
+                } else {
+                    districtInput.value = ""; 
+                }
+            } catch (e) { 
+                console.error("Pincode fetch error:", e);
+                districtInput.value = ""; 
+            }
+        }
+    }
+
+    // Auto-Locate using GPS & Reverse Geocoding
+    window.autoLocatePincode = function(btnElement) {
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser.");
+            return;
+        }
+
+        const originalHtml = btnElement.innerHTML;
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i>';
+        btnElement.disabled = true;
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            // Save the exact Google Maps link to the global state
+            userMapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+            
+            try {
+                // Free Reverse Geocoding API to get Postal Code
+                const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                const data = await res.json();
+                
+                if (data.postcode) {
+                    $id('pincode').value = data.postcode;
+                    await fetchLocationByPincode(); 
+                } else {
+                    alert("Could not detect precise Pincode. Please enter it manually.");
+                }
+            } catch(e) {
+                console.error("Reverse Geocoding Error:", e);
+                alert("Network error fetching location. Please enter pincode manually.");
+            }
+            
+            btnElement.innerHTML = originalHtml;
+            btnElement.disabled = false;
+        }, (error) => {
+            console.error(error);
+            alert("Location access denied or unavailable. Please enter your pincode manually.");
+            btnElement.innerHTML = originalHtml;
+            btnElement.disabled = false;
+        }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
+    };
+
+    window.focusManualEntry = function() {
+        const nameInput = $id('name');
+        if(nameInput) {
+            nameInput.focus();
+            nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+
+    window.openLegalModal = function(type) {
+        $id('legal-title').innerText = legalContent[type].title;
+        $id('legal-body').innerHTML = legalContent[type].body;
+        $id('legal-modal').classList.remove('hidden');
+    };
+    window.closeLegalModal = function() { $id('legal-modal').classList.add('hidden'); };
+    window.closeLegalOnOverlay = function(e) { if(e.target.id === 'legal-modal') window.closeLegalModal(); };
+
+
+    // ==========================================
+    // Auth & Google Services
+    // ==========================================
+    window.loginWithGoogle = async () => {
+        try {
+            const result = await auth.signInWithPopup(provider);
+            const user = result.user;
+            if (user.email) $id('email').value = user.email;
+            if (user.displayName && !$id('name').value) {
+                $id('name').value = user.displayName;
+            }
+            if(typeof window.saveFormData === 'function') window.saveFormData();
+            checkFormValidity();
+        } catch (error) {
+            console.error("Error during Google Login:", error);
+            alert("Failed to login with Google. You can still enter your details manually.");
+        }
+    };
+
+    async function sendDataToGoogleSheets(statusType) {
+        if (!CONFIG.GOOGLE_SCRIPT_URL || CONFIG.GOOGLE_SCRIPT_URL.includes("PASTE_URL")) return;
+
+        const topJobMatch = finalRankedJobs && finalRankedJobs.length > 0 ? finalRankedJobs[0].title : "N/A";
+        const topJobPercent = finalRankedJobs && finalRankedJobs.length > 0 ? finalRankedJobs[0].matchPercent + "%" : "N/A";
+
+        const payload = {
+            type: statusType, 
+            name: studentData.name, phone: studentData.phone, email: studentData.email,
+            age: studentData.age, dob: studentData.dob, gender: studentData.gender, height: studentData.height,
+            motherLanguage: studentData.motherLanguage, educationCourse: studentData.educationCourse,
+            sportsInterest: studentData.sportsInterest,
+            pwd: studentData.pwd, caste: studentData.caste, community: studentData.community,
+            pincode: studentData.pincode, state: studentData.state, district: studentData.district, 
+            address: studentData.address,
+            mapsLink: userMapsLink,      // Added Maps Link to Payload
+            topJob: topJobMatch, 
+            matchPercent: topJobPercent, 
+            scoreOutOf50: currentScoreOutOf50,
+            discountAmount: currentDiscountAmount,
+            scores: userScores
+        };
+
+        try {
+            await fetch(CONFIG.GOOGLE_SCRIPT_URL, { method: "POST", mode: 'no-cors', body: JSON.stringify(payload) });
+        } catch (error) { console.error("CRM Sync error:", error); }
+    }
+
+    // ==========================================
+    // Payment Processing
+    // ==========================================
+    function openPaymentLink() {
+        if(CONFIG.PAYMENT_LINK === "YOUR_CASHFREE_LINK_HERE") {
+            alert("Developer Note: Please insert your actual payment link in the source code.");
+            return;
+        }
+        window.saveFormData();
+        localStorage.setItem('coc_payment_initiated', 'true');
+        const btn = $id('tb-pay-btn');
+        if(btn) btn.innerHTML = '<span class="spinner-inline"></span> Redirecting...';
+        window.location.href = CONFIG.PAYMENT_LINK;
+    }
+
+    window.initiatePayment = function() {
+        const name = $id('name').value.trim();
+        const countryCodeElement = $id('countryCode');
         const countryCode = countryCodeElement.getAttribute('data-value') || "+91"; 
-        const phoneRaw = document.getElementById('phone').value.trim();
-        const email = document.getElementById('email').value.trim();
-        let rawEducation = document.getElementById('educationCourse').value.trim();
+        const phoneRaw = $id('phone').value.trim();
+        const email = $id('email').value.trim();
+        let rawEducation = $id('educationCourse').value.trim();
         const educationCourse = rawEducation.includes(" (") ? rawEducation.split(" (")[0] : rawEducation;
-        const sportsInterest = document.getElementById('sportsInterest').value.trim();
-        const dob = document.getElementById('dob').value;
-        const dataConsent = document.getElementById('dataConsent').checked;
+        const sportsInterest = $id('sportsInterest').value.trim();
+        const dob = $id('dob').value;
+        const dataConsent = $id('dataConsent').checked;
         
         if (!name || !phoneRaw || !email || !educationCourse || !sportsInterest || !dob) { alert("Please fill all required fields."); return; }
         if (!dataConsent) { alert("Please accept the Data Privacy Policy & Terms of Service to proceed."); return; }
@@ -1215,40 +1449,56 @@
         const m = today.getMonth() - birthDate.getMonth();
         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) calculatedAge--;
 
-        const phone = countryCode + " " + phoneRaw;
-
         studentData = { 
-            name, phone, email, educationCourse: educationCourse, sportsInterest: sportsInterest, dob: dob, age: calculatedAge, 
-            gender: document.getElementById('gender').value, 
-            address: document.getElementById('address').value, 
-            pincode: document.getElementById('pincode').value, 
-            state: document.getElementById('state').value, 
-            district: document.getElementById('district').value, 
-            motherLanguage: document.getElementById('motherLanguage').value, 
-            pwd: document.getElementById('pwd').value, 
-            caste: document.getElementById('caste').value, 
-            community: document.getElementById('community').value,
-            height: document.getElementById('height').value
+            name, phone: countryCode + " " + phoneRaw, email, educationCourse, sportsInterest, dob, age: calculatedAge, 
+            gender: $id('gender').value, address: $id('address').value, pincode: $id('pincode').value, 
+            state: $id('state').value, district: $id('district').value, motherLanguage: $id('motherLanguage').value, 
+            pwd: $id('pwd').value, caste: $id('caste').value, community: $id('community').value, height: $id('height').value
         };
 
         localStorage.removeItem('coc_test_completed');
         sendDataToGoogleSheets("Lead Captured");
-        document.getElementById('welcome-message').innerText = `Hi ${name.split(' ')[0]}, let's find your path.`;
-        goToStage(2);
+        openPaymentLink();
     }
 
-    function submitStage2() {
-        // Anti-Bot: Prevent headless browsers and automated script environments
+    // ==========================================
+    // Anti-Cheat & Security
+    // ==========================================
+    function handleCheatWarning(reason) {
+        cheatWarnings++;
+        if (cheatWarnings >= CONFIG.MAX_CHEAT_WARNINGS) {
+            alert(`Test submitted automatically due to suspicious activity (${reason}).`);
+            runAIAnalysis();
+        } else {
+            alert(`Warning ${cheatWarnings}/${CONFIG.MAX_CHEAT_WARNINGS}: ${reason}. Using overlays, splitting the screen, or leaving this window is strictly prohibited.`);
+        }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+        if (isTestActive && document.visibilityState === "hidden") handleCheatWarning("tab switching detected");
+    });
+
+    window.addEventListener("blur", () => {
+        if (isTestActive) handleCheatWarning("window focus lost");
+    });
+
+    document.addEventListener("contextmenu", (e) => { if (isTestActive) e.preventDefault(); });
+    document.addEventListener("copy", (e) => { 
+        if (isTestActive) { e.preventDefault(); alert("Copying text is disabled during the test."); }
+    });
+
+    // ==========================================
+    // Core Test Engine
+    // ==========================================
+    window.submitStage2 = function() {
         if (navigator.webdriver) {
             alert("Security Alert: Automated browser tool detected. Test cannot be started.");
             return;
         }
 
-        // Segregate pools for 50/50 split
         let riasecPool = [];
         let academicPoolRaw = [];
         
-        // 1. Load the 10 parts (RIASEC / All)
         for(let i=1; i<=10; i++) {
             const partName = `questionsPart${i}`;
             if(typeof window[partName] !== 'undefined' && Array.isArray(window[partName])) {
@@ -1256,47 +1506,37 @@
             }
         }
         
-        // 2. Load the 1 academic part (Aptitude/Subject specific)
         if(typeof window.academicPart1 !== 'undefined' && Array.isArray(window.academicPart1)) {
             academicPoolRaw.push(...window.academicPart1);
         }
 
-        const userQualification = studentData.educationCourse;
+        const userQualification = studentData.educationCourse || "";
         let academicPool = [];
 
         if (userQualification) {
-            // --- Determine broad Education Level ---
-            let mappedLevel = "Graduation Level"; // Default for all UG/PG/Degrees
+            let mappedLevel = "Graduation Level";
             const c = userQualification.toLowerCase();
             
-            if (c.includes("10th") || c.includes("iti")) {
-                mappedLevel = "10th Level";
-            } else if (c.includes("12th") || c.includes("diploma")) {
-                mappedLevel = "Intermediate Level";
-            }
+            if (c.includes("10th") || c.includes("iti")) mappedLevel = "10th Level";
+            else if (c.includes("12th") || c.includes("diploma")) mappedLevel = "Intermediate Level";
             
             academicPool = academicPoolRaw.filter(q => {
-                if (!q.qualifications || q.qualifications.length === 0) return true;
-                if (q.qualifications.includes("All")) return true;
+                if (!q.qualifications || q.qualifications.length === 0 || q.qualifications.includes("All")) return true;
                 return q.qualifications.includes(mappedLevel);
             });
         } else {
             academicPool = [...academicPoolRaw];
         }
 
-        // --- 50/50 SPLIT LOGIC ---
-        const targetTotal = 90; // Total questions in the test
-        const halfTarget = Math.floor(targetTotal / 2); // Exactly 45 questions each
+        const targetTotal = 90;
+        const halfTarget = Math.floor(targetTotal / 2);
         
-        // Shuffle both pools to ensure randomness
         riasecPool = riasecPool.sort(() => 0.5 - Math.random());
         academicPool = academicPool.sort(() => 0.5 - Math.random());
         
-        // Take exactly 50% from each (or the maximum available if less)
         const selectedRiasec = riasecPool.slice(0, halfTarget);
         const selectedAcademic = academicPool.slice(0, halfTarget);
         
-        // Combine into the final test array and shuffle them together so they are mixed
         activeQuestions = [...selectedRiasec, ...selectedAcademic].sort(() => 0.5 - Math.random());
         
         for (let cat in userScores) for (let tr in userScores[cat]) { userScores[cat][tr] = 0; maxScores[cat][tr] = 0; }
@@ -1318,54 +1558,77 @@
         renderQuestion();
     }
 
+    window.syncTaskbar = function(idx) {
+        document.querySelectorAll('.tb-opt-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = $id(`tb-opt-${idx}`);
+        if(activeBtn) activeBtn.classList.add('active');
+    };
+
+    window.selectOptionIndex = function(idx) {
+        const radios = document.querySelectorAll('input[name="answer"]');
+        if(radios[idx]) {
+            radios[idx].checked = true;
+            syncTaskbar(idx);
+        }
+    };
+
     function renderQuestion() {
         const q = activeQuestions[currentQuestionIndex];
-        document.getElementById('module-title').innerText = q.module || "General";
-        document.getElementById('question-counter').innerText = `${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+        $id('module-title').innerText = q.module || "General";
+        $id('question-counter').innerText = `${currentQuestionIndex + 1} / ${activeQuestions.length}`;
         
-        // Trigger UI Slide Animation
-        const wrapper = document.getElementById('question-wrapper');
+        const wrapper = $id('question-wrapper');
         wrapper.classList.remove('animate');
         void wrapper.offsetWidth; 
         wrapper.classList.add('animate');
         
-        document.getElementById('question-text').innerText = q.text;
-        document.getElementById('progress-fill').style.width = `${((currentQuestionIndex) / activeQuestions.length) * 100}%`;
+        $id('question-text').innerText = q.text;
+        $id('progress-fill').style.width = `${((currentQuestionIndex) / activeQuestions.length) * 100}%`;
         
-        const area = document.getElementById('options-area');
+        const area = $id('options-area');
+        const tbOptionsArea = $id('taskbar-options');
         area.innerHTML = '';
+        let tbHtml = '';
         
         if (q.type === 'mcq') {
-            q.options.forEach(opt => {
-                area.innerHTML += `<label class="option-label"><input type="radio" name="answer" value="${opt.val}"><span>${opt.text}</span></label>`;
+            q.options.forEach((opt, idx) => {
+                let letter = String.fromCharCode(65 + idx);
+                area.innerHTML += `<label class="option-label" id="label-${idx}"><input type="radio" name="answer" value="${opt.val}" onchange="syncTaskbar(${idx})"><span><strong class="mr-3 text-primary bg-indigo-50 px-3 py-1 rounded-lg shadow-sm border border-indigo-100">${letter}</strong>${opt.text}</span></label>`;
+                tbHtml += `<button id="tb-opt-${idx}" onclick="selectOptionIndex(${idx})" class="tb-opt-btn flex-1 py-2 sm:py-3 rounded-xl bg-slate-100 text-slate-600 font-bold hover:bg-indigo-50 hover:text-primary transition-all text-lg sm:text-xl border-2 border-transparent">${letter}</button>`;
             });
         } else {
             let labels = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
             let html = '<div class="likert-container">';
             for (let i = 1; i <= 5; i++) {
-                html += `<label class="likert-option likert-${i}"><input type="radio" name="answer" value="${i}"><span>${labels[i-1]}</span></label>`;
+                let letter = String.fromCharCode(64 + i);
+                html += `<label class="likert-option likert-${i}" id="label-${i-1}"><input type="radio" name="answer" value="${i}" onchange="syncTaskbar(${i-1})"><span><strong class="block mb-2 text-primary text-xl bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-100">${letter}</strong>${labels[i-1]}</span></label>`;
+                tbHtml += `<button id="tb-opt-${i-1}" onclick="selectOptionIndex(${i-1})" class="tb-opt-btn flex-1 py-2 sm:py-3 rounded-xl bg-slate-100 text-slate-600 font-bold hover:bg-indigo-50 hover:text-primary transition-all text-lg sm:text-xl border-2 border-transparent">${letter}</button>`;
             }
             area.innerHTML = html + '</div>';
         }
+        tbOptionsArea.innerHTML = tbHtml;
         
-        const nextBtn = document.getElementById('next-btn');
-        nextBtn.disabled = true;
-        nextBtn.innerText = "Please wait 5s...";
+        const tbNextBtn = $id('taskbar-next-btn');
+        tbNextBtn.disabled = true;
+        tbNextBtn.innerHTML = `Wait... <i class="fas fa-hourglass-half ml-1"></i>`;
         startTimer();
     }
 
     function startTimer() {
         clearInterval(questionTimerInterval);
-        timeRemaining = 30;
-        let minWaitTime = 5;
+        timeRemaining = CONFIG.TIMER_SECONDS;
+        let minWaitTime = CONFIG.MIN_WAIT_SECONDS;
         
-        const timerDisplay = document.getElementById('timer-display');
+        const timerDisplay = $id('timer-display');
         timerDisplay.classList.remove('timer-alert');
         timerDisplay.innerText = `⏱ ${timeRemaining}s`;
         timerDisplay.style.color = 'var(--warning-hover)';
         timerDisplay.style.background = 'var(--warning-light)';
         timerDisplay.style.border = 'none';
-        const nextBtn = document.getElementById('next-btn');
+        
+        const tbNextBtn = $id('taskbar-next-btn');
+        tbNextBtn.disabled = true;
+        tbNextBtn.innerHTML = `Wait ${minWaitTime}s <i class="fas fa-hourglass-half ml-1"></i>`;
         
         questionTimerInterval = setInterval(() => {
             timeRemaining--;
@@ -1374,10 +1637,10 @@
             if (minWaitTime > 0) {
                 minWaitTime--;
                 if (minWaitTime > 0) {
-                    nextBtn.innerText = `Please wait ${minWaitTime}s...`;
+                    tbNextBtn.innerHTML = `Wait ${minWaitTime}s <i class="fas fa-hourglass-half ml-1"></i>`;
                 } else {
-                    nextBtn.disabled = false;
-                    nextBtn.innerText = (currentQuestionIndex === activeQuestions.length - 1) ? "Submit Test" : "Next Question";
+                    tbNextBtn.disabled = false;
+                    tbNextBtn.innerHTML = (currentQuestionIndex === activeQuestions.length - 1) ? `Submit <i class="fas fa-check-circle ml-1"></i>` : `Submit <i class="fas fa-arrow-right ml-1"></i>`;
                 }
             }
             
@@ -1409,14 +1672,14 @@
         }
     }
 
-    function nextQuestion(event) {
+    window.nextQuestion = function(event) {
         if (event && !event.isTrusted) {
             alert("Security Alert: Automated script interaction detected!");
             return;
         }
 
         const sel = document.querySelector('input[name="answer"]:checked');
-        if (!sel) { alert("Please select an answer."); return; }
+        if (!sel) { alert("Please select an answer (A, B, C, D) first."); return; }
         
         clearInterval(questionTimerInterval);
         
@@ -1431,16 +1694,19 @@
         else { goToStage(4); runAIAnalysis(); }
     }
 
+    // ==========================================
+    // Analysis & Results
+    // ==========================================
     function runAIAnalysis() {
         isTestActive = false;
 
-        const threshold = activeQuestions.length * 0.3;
+        const threshold = activeQuestions.length * CONFIG.PASS_THRESHOLD;
         if (answeredCount < threshold) {
             goToStage('fail');
             return;
         }
 
-        const statusEl = document.getElementById('ai-status');
+        const statusEl = $id('ai-status');
         const statuses = [
             "Analyzing best suitable job roles...",
             "Cross-referencing your aptitude scores...",
@@ -1484,31 +1750,31 @@
 
             finalRankedJobs = govtJobDatabase.sort((a,b) => b.matchPercent - a.matchPercent);
             
-            generateReportUI(); // Set scoreOutOf50 and discountAmount before sending
+            generateReportUI();
             sendDataToGoogleSheets("Assessment Complete");
             goToStage(5);
         }, 5000);
     }
 
     function generateReportUI() {
-        const container = document.getElementById('jobs-container');
+        const now = new Date();
+        $id('report-timestamp').innerText = `Generated on: ${now.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}`;
+
+        const container = $id('jobs-container');
         container.innerHTML = '';
         finalRankedJobs.slice(0, 3).forEach((job, index) => {
             const delay = index * 0.15;
             container.innerHTML += `<div class="job-card" style="animation-delay: ${delay}s"><div class="job-header"><span class="job-title">${job.title}</span><span class="match-score">${job.matchPercent}%</span></div><p>${job.desc}</p></div>`;
         });
         
-        // --- LOGIC: Calculate Score out of 50 & Discount ---
         let totalUser = 0;
         let totalMax = 0;
         
-        // Scholarship is strictly based on Academic questions (Aptitude/General Awareness)
         for (let trait in userScores.aptitude) {
             totalUser += userScores.aptitude[trait];
             totalMax += maxScores.aptitude[trait];
         }
         
-        // Fallback safety just in case
         if (totalMax === 0) {
             for (let cat in userScores) {
                 for (let trait in userScores[cat]) {
@@ -1518,35 +1784,31 @@
             }
         }
         
-        // Scale their academic score to a strict maximum of 50
         currentScoreOutOf50 = totalMax > 0 ? Math.round((totalUser / totalMax) * 50) : 0;
-        document.getElementById('final-score').innerText = currentScoreOutOf50;
+        $id('final-score').innerText = currentScoreOutOf50;
         
-        // Calculate Discount (1 Point = 1000 Rs)
-        currentDiscountAmount = currentScoreOutOf50 * 1000;
-        let formattedDiscount = '₹' + currentDiscountAmount.toLocaleString('en-IN');
-        document.getElementById('discount-amount').innerText = formattedDiscount;
+        currentDiscountAmount = currentScoreOutOf50 * CONFIG.DISCOUNT_PER_MARK;
+        const formattedDiscount = `₹${currentDiscountAmount.toLocaleString('en-IN')}`;
+        $id('discount-amount').innerText = formattedDiscount;
         
-        // Update Stage 6 Call to Action
-        document.getElementById('claim-discount-amount').innerText = formattedDiscount;
-        document.getElementById('claim-score-amount').innerText = currentScoreOutOf50;
-        // ---------------------------------------------
+        $id('claim-discount-amount').innerText = formattedDiscount;
+        $id('claim-score-amount').innerText = currentScoreOutOf50;
         
-        let numPct = maxScores.aptitude.numerical ? Math.round((userScores.aptitude.numerical / maxScores.aptitude.numerical) * 100) : 0;
-        let logPct = maxScores.aptitude.logical ? Math.round((userScores.aptitude.logical / maxScores.aptitude.logical) * 100) : 0;
-        let genPct = maxScores.aptitude.general_awareness ? Math.round((userScores.aptitude.general_awareness / maxScores.aptitude.general_awareness) * 100) : 0;
+        const numPct = maxScores.aptitude.numerical ? Math.round((userScores.aptitude.numerical / maxScores.aptitude.numerical) * 100) : 0;
+        const logPct = maxScores.aptitude.logical ? Math.round((userScores.aptitude.logical / maxScores.aptitude.logical) * 100) : 0;
+        const genPct = maxScores.aptitude.general_awareness ? Math.round((userScores.aptitude.general_awareness / maxScores.aptitude.general_awareness) * 100) : 0;
         
-        document.getElementById('traits-list').innerHTML = `
-            <li><strong>Numerical Aptitude</strong> <strong>${numPct}%</strong></li>
-            <li><strong>Logical Reasoning</strong> <strong>${logPct}%</strong></li>
-            <li><strong>General Awareness</strong> <strong>${genPct}%</strong></li>
-            <li style="background: var(--success-light); padding: 14px 15px; border-radius: 8px; margin-top: 15px; border: 2px dashed #10b981;">
+        $id('traits-list').innerHTML = `
+            <li><strong>Numerical Aptitude</strong> <strong class="text-primary bg-indigo-50 px-3 py-1 rounded-lg">${numPct}%</strong></li>
+            <li><strong>Logical Reasoning</strong> <strong class="text-primary bg-indigo-50 px-3 py-1 rounded-lg">${logPct}%</strong></li>
+            <li><strong>General Awareness</strong> <strong class="text-primary bg-indigo-50 px-3 py-1 rounded-lg">${genPct}%</strong></li>
+            <li style="background: var(--success-light); padding: 16px; border-radius: 1rem; margin-top: 20px; border: 2px dashed #10b981;">
                 <strong style="color: var(--success-hover); text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.5px;">Approved Scholarship</strong> 
-                <strong style="color: var(--success-hover); font-size: 1.3em; background: #fff; padding: 4px 12px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">${formattedDiscount}</strong>
+                <strong style="color: var(--success-hover); font-size: 1.4em; font-family: 'Poppins', sans-serif; background: #fff; padding: 6px 14px; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">${formattedDiscount}</strong>
             </li>
         `;
         
-        const ctx = document.getElementById('riasecChart').getContext('2d');
+        const ctx = $id('riasecChart').getContext('2d');
         if (chartInstance) chartInstance.destroy();
         
         const riasecData = [
@@ -1565,9 +1827,9 @@
                 datasets: [{ 
                     label: 'Trait Score',
                     data: riasecData, 
-                    backgroundColor: 'rgba(30,58,138,0.2)', 
-                    borderColor: '#1e3a8a',
-                    pointBackgroundColor: '#1e3a8a',
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)', 
+                    borderColor: '#4f46e5',
+                    pointBackgroundColor: '#4f46e5',
                     borderWidth: 2
                 }] 
             },
@@ -1578,16 +1840,69 @@
         });
 
         const today = new Date();
-        document.getElementById('date-1-month').innerText = new Date(today.setMonth(today.getMonth() + 1)).toDateString();
-        document.getElementById('date-3-months').innerText = new Date(today.setMonth(today.getMonth() + 2)).toDateString();
+        $id('date-1-month').innerText = new Date(today.setMonth(today.getMonth() + 1)).toLocaleDateString('en-IN', {day: 'numeric', month: 'short', year: 'numeric'});
+        $id('date-3-months').innerText = new Date(today.setMonth(today.getMonth() + 2)).toLocaleDateString('en-IN', {day: 'numeric', month: 'short', year: 'numeric'});
     }
 
-    function requestCounselingCall() {
-        document.getElementById('request-call-btn').classList.add('hidden');
-        document.getElementById('display-phone').innerText = studentData.phone;
-        document.getElementById('callback-success').classList.remove('hidden');
+    window.requestCounselingCall = function() {
+        $id('request-call-btn').classList.add('hidden');
+        $id('display-phone').innerText = studentData.phone;
+        $id('callback-success').classList.remove('hidden');
         sendDataToGoogleSheets("HOT LEAD - Callback Requested");
     }
+
+    window.shareResultScreenshot = async function() {
+        const shareBtn = $id('share-result-btn');
+        const originalHtml = shareBtn.innerHTML;
+        
+        shareBtn.innerHTML = '<i class="fas fa-spinner fa-spin text-lg sm:text-xl mb-0.5 sm:mb-0"></i><span>Capturing...</span>';
+        shareBtn.disabled = true;
+
+        try {
+            const actionBtn = document.querySelector('#stage-5 .btn-brand-accent');
+            if (actionBtn) actionBtn.style.display = 'none';
+
+            const targetEl = $id('stage-5');
+            const canvas = await html2canvas(targetEl, {
+                scale: 2, 
+                useCORS: true,
+                backgroundColor: '#f8fafc' 
+            });
+
+            if (actionBtn) actionBtn.style.display = '';
+
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], "COC_Career_Blueprint.png", { type: "image/png" });
+                
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: 'My COC Career Blueprint',
+                            text: 'Check out my recommended career path and scholarship from Club of Competition! 🚀',
+                            files: [file]
+                        });
+                    } catch (err) {
+                        console.log("Share cancelled by user.");
+                    }
+                } else {
+                    const link = document.createElement('a');
+                    link.download = 'COC_Career_Blueprint.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    alert("Screenshot downloaded successfully! You can now share it.");
+                }
+                
+                shareBtn.innerHTML = originalHtml;
+                shareBtn.disabled = false;
+            }, 'image/png');
+
+        } catch (error) {
+            console.error("Screenshot error:", error);
+            alert("Failed to capture screenshot. Please try downloading the PDF instead.");
+            shareBtn.innerHTML = originalHtml;
+            shareBtn.disabled = false;
+        }
+    };
 </script>
 </body>
 </html>
