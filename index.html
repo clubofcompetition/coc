@@ -149,7 +149,29 @@
 
         @media (max-width: 767px) { .taskbar-wrapper { max-width: 420px; } }
         @media (min-width: 768px) and (max-width: 1023px) { .taskbar-wrapper { max-width: 580px; } }
-        @media (min-width: 1024px) { .taskbar-wrapper { max-width: 700px; } }
+        @media (min-width: 1024px) { 
+            .taskbar-wrapper { 
+                max-width: none; 
+                width: auto; 
+                left: 1.5rem; 
+                top: auto; 
+                bottom: 3rem; 
+                transform: none; 
+            } 
+            .taskbar { 
+                width: 80px; 
+                height: auto; 
+                flex-direction: column; 
+                padding: 1.5rem 0; 
+                background: transparent !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border: none !important;
+                box-shadow: none !important;
+            } 
+            .taskbar-item { width: 100%; padding: 0.5rem 0; }
+            .taskbar-item::before { width: 64px; height: 64px; }
+        }
 
         .hero-pattern {
             background-color: #F5F5F7;
@@ -353,7 +375,8 @@
                     <a href="https://www.facebook.com/share/1B9heWv9tu/" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#1877F2] shadow-sm hover:scale-110 transition-transform"><i class="fab fa-facebook-f text-lg"></i></a>
                     <a href="https://instagram.com/club_of_competition" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-instagram shadow-sm hover:scale-110 transition-transform"><i class="fab fa-instagram text-lg"></i></a>
                     <a href="https://youtube.com/@clubofcompetition" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-youtube shadow-sm hover:scale-110 transition-transform"><i class="fab fa-youtube text-lg"></i></a>
-                    <a href="https://twitter.com/clubofcompete" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black shadow-sm hover:scale-110 transition-transform"><i class="fab fa-x-twitter text-lg"></i></a>
+                    <a href="https://twitter.com/coc_xupdates" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black shadow-sm hover:scale-110 transition-transform"><i class="fab fa-x-twitter text-lg"></i></a>
+                    <a href="https://t.me/club_of_competition" target="_blank" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-telegram shadow-sm hover:scale-110 transition-transform"><i class="fab fa-telegram-plane text-lg"></i></a>
                 </div>
             </div>
         </div>
@@ -910,7 +933,7 @@
                         <a href="https://www.facebook.com/share/1B9heWv9tu/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-[#1877F2] transition-colors"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://instagram.com/club_of_competition" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-instagram transition-colors"><i class="fab fa-instagram"></i></a>
                         <a href="https://youtube.com/@clubofcompetition" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-youtube transition-colors"><i class="fab fa-youtube"></i></a>
-                        <a href="https://twitter.com/clubofcompete" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://twitter.com/coc_xupdates" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"><i class="fab fa-x-twitter"></i></a>
                     </div>
                     <div class="mt-8 p-5 rounded-2xl bg-white/5 border border-white/5 inline-block text-left w-full">
                         <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Help Desk</p>
@@ -928,51 +951,39 @@
 
     <!-- Taskbar -->
     <div class="taskbar-wrapper">
-        <div class="taskbar bg-white shadow-neat lg:px-6 lg:justify-between border border-slate-100">
+        <div class="taskbar bg-white shadow-neat border border-slate-100">
             
-            <!-- Desktop Socials Left Side -->
-            <div class="hidden lg:flex items-center justify-start gap-5 w-[240px] border-r border-slate-100 h-10 pl-2">
-                <a href="https://www.facebook.com/share/1B9heWv9tu/" target="_blank" class="text-slate-400 hover:text-[#1877F2] hover:-translate-y-1 transition-all"><i class="fab fa-facebook text-xl"></i></a>
-                <a href="https://instagram.com/club_of_competition" target="_blank" class="text-slate-400 hover:text-instagram hover:-translate-y-1 transition-all"><i class="fab fa-instagram text-xl"></i></a>
-                <a href="https://youtube.com/@clubofcompetition" target="_blank" class="text-slate-400 hover:text-youtube hover:-translate-y-1 transition-all"><i class="fab fa-youtube text-xl"></i></a>
-                <a href="https://twitter.com/clubofcompete" target="_blank" class="text-slate-400 hover:text-black hover:-translate-y-1 transition-all"><i class="fab fa-x-twitter text-xl"></i></a>
-                <a href="https://t.me/club_of_competition" target="_blank" class="text-slate-400 hover:text-telegram hover:-translate-y-1 transition-all"><i class="fab fa-telegram-plane text-xl"></i></a>
-            </div>
-
-            <!-- Centered Nav Icons Container -->
-            <div class="flex-1 lg:flex-none flex justify-around lg:justify-center lg:gap-4 h-full w-full lg:w-auto">
-                <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="taskbar-item h-full flex-1 lg:flex-none lg:w-[80px] flex flex-col items-center justify-center gap-1.5 text-slate-500 hover:text-primary group">
+            <!-- Nav Icons Container -->
+            <div class="flex-1 lg:flex-none flex flex-row lg:flex-col justify-around lg:justify-center lg:gap-6 h-full w-full lg:h-auto">
+                <a href="https://clubofcompetition.in/FREE/maths/priops" target="_blank" class="taskbar-item h-full lg:h-auto flex-1 lg:flex-none lg:w-full flex flex-col items-center justify-center gap-1.5 text-primary group">
                     <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
                     <span class="text-[10px] font-bold uppercase tracking-wide text-center">Free Test</span>
                 </a>
                 
-                <a href="#weekly-test" class="taskbar-item h-full flex-1 lg:flex-none lg:w-[80px] flex flex-col items-center justify-center gap-1.5 text-slate-500 hover:text-yellow-500 group">
+                <a href="#weekly-test" class="taskbar-item h-full lg:h-auto flex-1 lg:flex-none lg:w-full flex flex-col items-center justify-center gap-1.5 text-yellow-500 group">
                     <i class="fa-solid fa-ranking-star text-xl"></i>
                     <span class="text-[10px] font-bold uppercase tracking-wide text-center">UWT</span>
                 </a>
                 
                 <!-- Login Button -->
-                <a href="https://app.clubofcompetition.in" target="_blank" class="taskbar-item h-full flex-1 lg:flex-none lg:w-[80px] flex flex-col items-center justify-end pb-2 lg:justify-center gap-1.5 text-slate-500 hover:text-green-600 relative group">
+                <a href="https://app.clubofcompetition.in" target="_blank" class="taskbar-item h-full lg:h-auto flex-1 lg:flex-none lg:w-full flex flex-col items-center justify-end pb-2 lg:pb-0 lg:justify-center gap-1.5 text-green-600 relative group">
                     <div class="mobile-login-btn lg:hidden absolute -top-5 left-1/2 -translate-x-1/2 w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-green-600 border-[3px] border-white z-20">
                         <i class="fa-solid fa-user-graduate text-xl"></i>
                     </div>
                     <i class="hidden lg:block fa-solid fa-user-graduate text-xl text-green-600 relative z-10"></i>
-                    <span class="text-[10px] font-bold uppercase tracking-wide text-green-600 text-center relative z-20">Login</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wide text-green-600 text-center relative z-20 mt-1 lg:mt-0">Login</span>
                 </a>
                 
-                <a href="#study-map" class="taskbar-item h-full flex-1 lg:flex-none lg:w-[80px] flex flex-col items-center justify-center gap-1.5 text-slate-500 hover:text-accent group">
+                <a href="#study-map" class="taskbar-item h-full lg:h-auto flex-1 lg:flex-none lg:w-full flex flex-col items-center justify-center gap-1.5 text-accent group">
                     <i class="fa-solid fa-map-marked-alt text-xl"></i>
                     <span class="text-[10px] font-bold uppercase tracking-wide text-center">Map</span>
                 </a>
                 
-                <a href="#coc-cat" class="taskbar-item h-full flex-1 lg:flex-none lg:w-[80px] flex flex-col items-center justify-center gap-1.5 text-slate-500 hover:text-purple-600 group">
+                <a href="#coc-cat" class="taskbar-item h-full lg:h-auto flex-1 lg:flex-none lg:w-full flex flex-col items-center justify-center gap-1.5 text-purple-600 group">
                     <i class="fa-solid fa-file-pen text-xl"></i>
                     <span class="text-[10px] font-bold uppercase tracking-wide text-center">CAT</span>
                 </a>
             </div>
-
-            <!-- Right Spacer for Desktop Balance -->
-            <div class="hidden lg:block w-[240px] border-l border-transparent"></div>
         </div>
     </div>
 
@@ -1059,6 +1070,25 @@
                 observer.observe(el);
             });
         });
+
+        /* Shared Function must be globally available */
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({ title: 'Club of Competition', url: window.location.href }).catch(console.error);
+            } else {
+                var el = document.createElement('textarea');
+                el.value = window.location.href;
+                document.body.appendChild(el);
+                el.select();
+                try { document.execCommand('copy'); } catch (e) { console.error('Copy to clipboard failed.', e); }
+                document.body.removeChild(el);
+                var note = document.createElement('div');
+                note.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-dark text-white px-6 py-3 rounded-xl shadow-2xl z-[100] text-xs font-bold animate-bounce";
+                note.innerText = "Link copied to clipboard!";
+                document.body.appendChild(note);
+                setTimeout(function() { note.remove(); }, 2500);
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             /* Timeline Calculation */
