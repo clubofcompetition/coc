@@ -523,6 +523,11 @@
                 <div id="progress-bar" class="bg-exam-header h-1.5 w-0 transition-all duration-200 ease-out"></div>
             </div>
 
+            <!-- Mobile Keyboard Toast -->
+            <div id="mobile-keyboard-toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-5 py-2 rounded shadow-lg text-sm font-bold opacity-0 transition-opacity duration-300 pointer-events-none z-[10005] flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-keyboard"></i> Use physical keyboard to type
+            </div>
+
             <!-- Typing Area -->
             <div class="flex-grow flex flex-col relative typing-box p-6 border-t-0" id="typing-container">
                 
@@ -1487,8 +1492,22 @@
         typingContainer.addEventListener('click', () => {
             if(!hasFinished) {
                 typingInput.focus();
+                showMobileKeyboardToast();
             }
         });
+
+        let toastTimeout;
+        function showMobileKeyboardToast() {
+            if (window.innerWidth > 896) return;
+            const toast = document.getElementById('mobile-keyboard-toast');
+            if (toast) {
+                toast.style.opacity = '1';
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.style.opacity = '0';
+                }, 3000);
+            }
+        }
 
         typingInput.addEventListener('focus', () => {
             if(!hasFinished) {
@@ -1496,6 +1515,7 @@
                 setTimeout(() => focusOverlay.classList.add('hidden'), 200);
                 if (window.innerWidth <= 896) {
                     document.body.classList.add('test-running-mobile');
+                    showMobileKeyboardToast();
                 }
             }
         });
