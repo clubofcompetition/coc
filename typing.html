@@ -424,15 +424,8 @@
         </div>
     </div>
 
-    <!-- Portrait Mode Overlay -->
-    <div id="portrait-overlay" class="fixed inset-0 bg-gray-900 z-[100] flex-col items-center justify-center text-white text-center px-6">
-        <i class="fa-solid fa-mobile-screen text-7xl mb-8 text-blue-400 animate-phone-rotate"></i>
-        <h2 class="text-3xl font-bold mb-3 tracking-wide">Rotate Device</h2>
-        <p class="text-gray-300 text-sm max-w-sm mx-auto leading-relaxed">This official typing assessment requires a wider screen. Please turn your phone to landscape mode to continue.</p>
-    </div>
-
     <!-- Topmost System Status Bar -->
-    <div class="bg-gray-800 text-gray-200 text-xs px-4 py-1 flex justify-between items-center border-b border-gray-900">
+    <div class="bg-gray-800 text-gray-200 text-xs px-4 py-1 flex justify-between items-center border-b border-gray-900 hide-on-mobile-test">
         <div class="flex items-center gap-4">
             <span><strong>System Name:</strong> COC-T1-042</span>
             <span><strong>Session:</strong> Typing Skill Test 2026</span>
@@ -443,7 +436,7 @@
     </div>
 
     <!-- Main Exam Header -->
-    <header class="bg-exam-header text-white p-3 flex justify-between items-center shadow-md z-10 relative">
+    <header class="bg-exam-header text-white p-3 flex justify-between items-center shadow-md z-10 relative hide-on-mobile-test">
         <a href="https://clubofcompetition.in" target="_blank" class="flex items-center gap-4 pl-2 hover:opacity-90 transition-opacity" title="Visit Club of Competition Homepage">
             <div class="bg-white p-1 rounded shadow-sm flex items-center justify-center">
                 <img src="logo.png" alt="COC Logo" class="h-10 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/40x40/1e88e5/ffffff?text=COC'">
@@ -476,6 +469,16 @@
 
             <!-- Instructions & Toolbar -->
             <div class="bg-white border border-exam-border p-3 mb-4 flex justify-between items-center shadow-sm z-10 relative settings-toolbar">
+                <div class="flex items-center gap-4 flex-wrap">
+                    <div>
+                        <label class="text-xs text-gray-500 font-bold uppercase block mb-1">Select Exam Pattern</label>
+                        <select id="stage-select" class="border border-gray-300 text-sm p-1.5 focus:outline-none focus:border-exam-header bg-gray-50 w-56 font-bold text-gray-700 cursor-pointer">
+                            <optgroup label="Skill Practice Modules">
+                                <option value="practice_home">Module 1: Home Row Practice</option>
+                                <option value="practice_top">Module 2: Top Row Practice</option>
+                                <option value="practice_bottom">Module 3: Bottom Row Practice</option>
+                                <option value="practice_numbers">Module 4: Numbers & Symbols</option>
+                            </optgroup>
                             <optgroup label="Full Length Exams">
                                 <option value="beginner">SSC CHSL (Basic)</option>
                                 <option value="intermediate">Bank PO (Intermediate)</option>
@@ -511,12 +514,12 @@
             </div>
 
             <!-- Warning Banner -->
-            <div class="bg-blue-50 border-l-4 border-exam-header p-3 mb-2 text-sm text-gray-700 shadow-sm z-10 relative">
+            <div class="bg-blue-50 border-l-4 border-exam-header p-3 mb-2 text-sm text-gray-700 shadow-sm z-10 relative warning-banner">
                 <strong>Instructions:</strong> Click inside the typing box below to begin. The timer starts automatically upon your first keystroke. Do not use the Backspace key excessively.
             </div>
 
             <!-- Live Progress Bar -->
-            <div class="w-full bg-gray-300 h-1.5 z-10 relative">
+            <div class="w-full bg-gray-300 h-1.5 z-10 relative hidden md:block">
                 <div id="progress-bar" class="bg-exam-header h-1.5 w-0 transition-all duration-200 ease-out"></div>
             </div>
 
